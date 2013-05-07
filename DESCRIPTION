@@ -1,0 +1,24 @@
+Package: polyCub
+Type: Package
+Title: Cubature (Numerical Integration) over Polygonal Domains
+Version: 0.2
+Date: 2013-05-02
+Authors@R: c(person("Sebastian", "Meyer",
+                    email = "Sebastian.Meyer@ifspm.uzh.ch",
+                    role = c("aut","cre","trl")),
+             person("Michael", "Hoehle",
+                    email = "Michael.Hoehle@stat.uni-muenchen.de",
+                    role = c("ths")))
+Description: A package providing methods for cubature (numerical integration)
+             over polygonal domains. For cubature over simple hypercubes, the
+             packages "cubature" and "R2cuba" are more appropriate.
+             Currently, three (non-adaptive) cubature methods are implemented:
+             the two-dimensional midpoint rule (a simple wrapper around
+             spatstat::as.im.function), the product Gauss cubature proposed by
+             Sommariva and Vianello (2007), and a quasi-exact method specific
+             to the integration of the bivariate Gaussian density over
+             polygonal domains.
+License: GPL (>=2)
+Depends: R (>= 2.14.0), methods
+Imports: spatstat
+Suggests: sp, gpclib, statmod, mvtnorm, maptools
