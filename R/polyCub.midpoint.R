@@ -39,6 +39,7 @@
 #' @family polyCub
 #' @importFrom spatstat as.im.function plot.im plot.owin
 #' @examples # see example(polyCub)
+#' @export
 
 polyCub.midpoint <- function (polyregion, f, ...,
                               eps = NULL, dimyx = NULL, plot = FALSE)

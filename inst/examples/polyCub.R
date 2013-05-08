@@ -1,12 +1,4 @@
-################################################################################
-### Part of the R package "polyCub".
-### Free software under the terms of the GNU General Public License, version 2,
-### a copy of which is available at http://www.r-project.org/Licenses/.
-###
-### Copyright (C) 2009-2013 Sebastian Meyer
-### $Revision$
-### $Date$
-################################################################################
+### Example application and comparison of the different cubature methods
 
 ## 2D-function to integrate (here: isotropic zero-mean Gaussian density)
 f <- function (s, sigma = 5) exp(-rowSums(s^2)/2/sigma^2) / (2*pi*sigma^2)
@@ -47,8 +39,7 @@ for (nGQ in c(1:5,10,20,60)) {
 
 ## Quasi-exact cubature by triangulation and using mvtnorm::pmvnorm()
 if (require("mvtnorm") && require("gpclib")) {
-    ##oopt <- surveillance.options(gpclib=TRUE)
+    gpclibPermit()
     print(polyCub.exact.Gauss(disc.owin, mean=c(0,0), Sigma=5^2*diag(2),
                               plot=TRUE), digits=16)
-    ##surveillance.options(oopt)
 }

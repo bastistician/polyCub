@@ -53,6 +53,7 @@
 #' @keywords math spatial
 #' @family polyCub
 #' @examples # see example(polyCub)
+#' @export
 
 polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
                                  plot = FALSE)

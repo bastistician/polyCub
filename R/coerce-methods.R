@@ -74,6 +74,7 @@
 ##' @importMethodsFrom rgeos coerce
 ##' @exportMethod coerce
 ##' @keywords spatial methods
+##' @export xylist
 xylist <- function (object, ...) UseMethod("xylist")
 
 ##' @method xylist owin

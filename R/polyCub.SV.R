@@ -46,6 +46,7 @@
 #' @importFrom statmod gauss.quad
 #' @importMethodsFrom rgeos plot
 #' @examples # see example(polyCub)
+#' @export
 
 polyCub.SV <- function (polyregion, f, ...,
                         nGQ = 20, alpha = NULL, rotation = FALSE,

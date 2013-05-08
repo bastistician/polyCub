@@ -16,6 +16,7 @@
 ##' @param coords numeric coordinate matrix. It is interpreted by
 ##' \code{\link{xy.coords}}.
 ##' @return logical
+##' @keywords spatial internal
 isClosed <- function (coords)
 {
     xycoords <- xy.coords(coords)[c("x","y")]
@@ -30,17 +31,19 @@ isClosed <- function (coords)
 ##' This is nothing else than \code{sum(x*y)}.
 ##' @param x,y numeric vectors (of compatible lengths).
 ##' @return \code{sum(x*y)}
+##' @keywords math internal
 dotprod <- function (x,y)
 {
     sum(x*y)
 }
 
 
-##' isScalar
+##' Checks if Argument is Scalar
 ##' 
 ##' Check if the argument is scalar, i.e. a numeric vector of length 1.
 ##' @param x any object
 ##' @return logical
+##' @keywords internal
 isScalar <- function (x) {
     length(x) == 1L && is.vector(x, mode = "numeric")
 }

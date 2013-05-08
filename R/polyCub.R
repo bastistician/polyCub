@@ -32,8 +32,10 @@
 #' integration should be produced.
 #' @return The approximated value of the integral of \code{f} over
 #' \code{polyregion}.
+#' @example inst/examples/polyCub.R
 #' @keywords math spatial
 #' @family polyCub
+#' @export
 
 polyCub <- function (polyregion, f,
                      method = c("SV", "midpoint", "exact.Gauss"), ...,
