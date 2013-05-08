@@ -15,8 +15,9 @@
 #' Sommariva and Vianello (2007).
 #' 
 #' @param polyregion a polygonal integration domain.
-#' Supported classes are \code{"\link[spatstat]{owin}"},
-#' \code{"\link[gpclib:gpc.poly-class]{gpc.poly}"},
+#' Supported are all classes for which we have defined a \code{\link{xylist}}
+#' method: \code{"\link[spatstat]{owin}"},
+#' \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"},
 #' \code{"\linkS4class{SpatialPolygons}"}, \code{"\linkS4class{Polygons}"},
 #' and \code{"\linkS4class{Polygon}"}.
 #' @param f two-dimensional function to be integrated.
@@ -43,6 +44,7 @@
 #' @keywords math spatial
 #' @family polyCub
 #' @importFrom statmod gauss.quad
+#' @importMethodsFrom rgeos plot
 #' @examples # see example(polyCub)
 
 polyCub.SV <- function (polyregion, f, ...,
@@ -58,9 +60,9 @@ polyCub.SV <- function (polyregion, f, ...,
 
     ## COMPUTE NODES AND WEIGHTS OF 1D GAUSS QUADRATURE RULE.
     ## DEGREE "N" (as requested) (ORDER GAUSS PRIMITIVE)
-    nw_N <- statmod::gauss.quad(n = nGQ, kind = "legendre")
+    nw_N <- gauss.quad(n = nGQ, kind = "legendre")
     ## DEGREE "M" = N+1 (ORDER GAUSS INTEGRATION)
-    nw_M <- statmod::gauss.quad(n = nGQ + 1, kind = "legendre")
+    nw_M <- gauss.quad(n = nGQ + 1, kind = "legendre")
 
     ## Cubature of every single polygon of the "polys" list
     int1 <- function (poly) {
@@ -83,7 +85,6 @@ polyCub.SV <- function (polyregion, f, ...,
         if (inherits(polyregion, "Polygons"))
             polyregion <- SpatialPolygons(list(polyregion))
         if (inherits(polyregion, "gpc.poly")) {
-            gpclibCheck()
             plot(polyregion, poly.args=list(lwd=2), ann=FALSE)
         } else plot(polyregion, lwd=2, axes=TRUE, main="")
         for (i in seq_along(polys)) {
@@ -146,8 +147,10 @@ polygauss <- function (xy, nw_N, nw_M, alpha = NULL, rotation = FALSE)
             Q <- QP[1L,,drop=TRUE]
             P <- QP[2L,,drop=TRUE]
         } else if (is.list(rotation)) {  # predefined rotation
-            stopifnot(is.vector(P <- rotation$P, mode="numeric") && length(P) == 2L,
-                      is.vector(Q <- rotation$Q, mode="numeric") && length(Q) == 2L)
+            P <- rotation$P
+            Q <- rotation$Q
+            stopifnot(is.vector(P, mode="numeric") && length(P) == 2L,
+                      is.vector(Q, mode="numeric") && length(Q) == 2L)
             stopifnot(any(P != Q))
             rotation <- TRUE
         } else {

@@ -15,16 +15,16 @@
 #' Abramowitz & Stegun handbook (Section 26.9, Example 9, pp. 956f.).
 #' This method is quite cumbersome because the A&S formula is only for triangles
 #' where one vertex is the origin (0,0). For each triangle of the
-#' \code{\link[gpclib]{tristrip}} we have to check in which of the 6 outer regions
-#' of the triangle the origin (0,0) lies and adapt the signs in the formula
-#' appropriately. (AOB+BOC-AOC) or (AOB-AOC-BOC) or (AOB+AOC-BOC) or
+#' \code{\link[gpclib]{tristrip}} we have to check in which of the 6 outer 
+#' regions of the triangle the origin (0,0) lies and adapt the signs in the 
+#' formula appropriately. (AOB+BOC-AOC) or (AOB-AOC-BOC) or (AOB+AOC-BOC) or
 #' (AOC+BOC-AOB) or \ldots. However, the most time consuming step is the
 #' evaluation of \code{\link[mvtnorm]{pmvnorm}}.
 #' 
-#' @note The package \pkg{gpclib} (which is used for triangulation) has a
-#' restricted license. It has to be accepted explicitly via setting
-#' \code{\link{polyCub.options}(gpclib=TRUE)} prior to 
-#' using \code{polyCub.exact.Gauss}.
+#' @note The package \pkg{gpclib} (which is used to produce the \code{tristrip})
+#' has a restricted license (commercial use prohibited).
+#' It has to be accepted explicitly via
+#' \code{\link{gpclibPermit}()} prior to using \code{polyCub.exact.Gauss}.
 #'
 #' @param polyregion anything coercible to a
 #' \code{"\link[gpclib:gpc.poly-class]{gpc.poly}"} polygon.

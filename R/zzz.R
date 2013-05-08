@@ -13,8 +13,6 @@
 #'
 #' The \R package \pkg{polyCub} provides methods for cubature (numerical 
 #' integration) over polygonal domains.
-#' For cubature over hypercubes, the packages
-#' \pkg{cubature} and \pkg{R2cuba} are more appropriate.
 #' The function \code{polyCub} is the main entry point of the package. It is a
 #' wrapper around the specific cubature methods available in the package.
 #'
@@ -37,6 +35,7 @@
 #' polygonal domain and appropriate evaluations of
 #' \code{\link[mvtnorm]{pmvnorm}} from package \pkg{mvtnorm}.
 #' }
+#' }
 #' See Section 3.2 of Meyer (2010) for a more detailed description and benchmark
 #' experiment of those three (among others).
 #'
@@ -51,7 +50,7 @@
 #'
 #' S. Meyer (2010).
 #' Spatio-Temporal Infectious Disease Epidemiology based on Point Processes.
-#' Master's Thesis, Ludwig-Maximilians-Universit\enc{ä}{ae}t M\enc{ü}{ue}nchen.
+#' Master's Thesis, LMU Munich.
 #' Available as \url{http://epub.ub.uni-muenchen.de/11703/}.
 #' 
 #' A. Sommariva and M. Vianello (2007).
@@ -59,5 +58,42 @@
 #' Bit Numerical Mathematics, 47 (2), 441-453.
 #' @docType package
 #' @name polyCub-package
-#' @seealso packages \pkg{cubature} and \pkg{R2cuba}.
+#' @seealso the packages \pkg{cubature} and \pkg{R2cuba}, which are more
+#' appropriate for cubature over simple hypercubes.
 NULL
+
+
+.Options <- new.env()
+
+.onLoad <- function (libname, pkgname)
+{
+    .Options$gpclib <- FALSE
+}
+
+gpclibCheck <- function (fatal = TRUE)
+{
+    gpclibOK <- .Options$gpclib
+    if (!gpclibOK && fatal) {
+        message("Note: The gpclib license is accepted by ",
+                sQuote("gpclibPermit()"), ".")
+        stop("acceptance of the gpclib license is required")
+    }
+    gpclibOK
+}
+
+##' \pkg{gpclib} Licence Acceptance
+##'
+##' Similar to the handling in package \pkg{maptools}, these functions
+##' explicitly accept the restricted \pkg{gpclib} licence (commercial use
+##' prohibited) and report its acceptance status, respectively.
+##' \pkg{gpclib} functionality is only required for
+##' \code{\link{polyCub.exact.Gauss}}.
+##' @export
+gpclibPermit <- function ()
+{
+    if (requireNamespace("gpclib")) .Options$gpclib <- TRUE
+    gpclibPermitStatus()
+}
+##' @rdname gpclibPermit
+##' @export
+gpclibPermitStatus <- function () gpclibCheck(fatal=FALSE)

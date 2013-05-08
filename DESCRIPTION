@@ -2,7 +2,7 @@ Package: polyCub
 Type: Package
 Title: Cubature (Numerical Integration) over Polygonal Domains
 Version: 0.2
-Date: 2013-05-02
+Date: 2013-05-09
 Authors@R: c(person("Sebastian", "Meyer",
                     email = "Sebastian.Meyer@ifspm.uzh.ch",
                     role = c("aut","cre","trl")),
@@ -19,6 +19,6 @@ Description: A package providing methods for cubature (numerical integration)
              to the integration of the bivariate Gaussian density over
              polygonal domains.
 License: GPL (>=2)
-Depends: R (>= 2.14.0), methods
-Imports: spatstat
-Suggests: sp, gpclib, statmod, mvtnorm, maptools
+Depends: R (>= 2.14.0), methods, sp
+Imports: rgeos, spatstat, statmod
+Suggests: mvtnorm, gpclib

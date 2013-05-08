@@ -16,15 +16,17 @@
 ##' Different packages concerned with spatial data use different polygon
 ##' specifications. 
 ##' The package \pkg{polyCub} offers S4-style coerce-methods to convert
-##' \code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"} and
 ##' \code{"\link[sp:Polygons-class]{Polygons}"} of the \pkg{sp} package,
 ##' and \code{"\link[spatstat:owin.object]{owin}"} objects of the
-##' \pkg{spatstat} package to
-##' the \code{"\link[gpclib:gpc.poly-class]{gpc.poly}"} class of the
-##' \pkg{gpclib} package. It also defines conversion from \code{"gpc.poly"}
-##' to \code{"Polygons"}. Note that conversions from and to the \code{"owin"}
+##' \pkg{spatstat} package to and from
+##' the \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} class of the
+##' \pkg{rgeos} package (originally from \pkg{gpclib}).
+##' Note that conversions from and to the \code{"owin"}
 ##' class are also available as functions \code{\link[spatstat]{owin2gpc}} and
-##' \code{\link[spatstat]{gpc2owin}} in package \pkg{spatstat}.
+##' \code{\link[spatstat]{gpc2owin}} in package \pkg{spatstat},
+##' and conversions from and to the
+##' \code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"} class are included
+##' in the \pkg{rgeos} package.
 ##' Furthermore, the (rather internal) \code{xylist} methods break down 
 ##' (convert) polygons from these classes to their core feature,
 ##' a list of vertex coordinates.
@@ -44,10 +46,10 @@
 ##' used in \code{xylist}.}
 ##' \item{\pkg{gpclib}:}{Unfortunately, there seems to be no convention
 ##' for the specification of polygons of class \code{"gpc.poly"}.
-##' The \code{coerce}-methods defined here assume vertices
+##' The \code{coerce}-methods defined here produce vertices
 ##' ordered according to the \pkg{sp} convention, i.e. clockwise for
 ##' normal boundaries and anticlockwise for holes; however, the first vertex
-##' should \emph{not} be repeated!}
+##' is \emph{not} repeated!}
 ##' }
 ##'
 ##' @param object an object of one of the supported spatial classes.
@@ -58,11 +60,18 @@
 ##' following \pkg{spatstat}'s \code{"owin"} convention
 ##' (anticlockwise order without repeating any vertex).
 ##' Additional elements like \code{"area"} and \code{"hole"} in each
-##' component are retained. The default \code{xylist}-method does not perform
-##' any transformation but only checks that the polygons are not closed
-##' (first vertex not repeated).
+##' component are retained. The (somehow useless) default \code{xylist}-method
+##' does not perform any transformation but only checks that the polygons are
+##' not closed (first vertex not repeated).
+##' @author Sebastian Meyer;
+##' the implementation of the \code{"gpc.poly"}-method of \code{xylist} borrows
+##' large parts from \code{\link[spatstat]{gpc2owin}} and depends on
+##' functionality of the \pkg{spatstat} package
+##' authored by Adrian Baddeley and Rolf Turner.
 ##' @name coerce-methods
 ##' @aliases xylist
+##' @importClassesFrom rgeos gpc.poly
+##' @importMethodsFrom rgeos coerce
 ##' @exportMethod coerce
 ##' @keywords spatial methods
 xylist <- function (object, ...) UseMethod("xylist")
@@ -73,22 +82,38 @@ xylist.owin <- function (object, ...) object$bdry
 
 ##' @method xylist gpc.poly
 ##' @rdname coerce-methods
-xylist.gpc.poly <- function (object, ...) xylist.owin(gpc2owin(object))
+##' @importFrom spatstat area.xypolygon reverse.xypolygon
+xylist.gpc.poly <- function (object, ...)
+{
+    pts <- object@pts
+    processpolygon <- function (p) {
+        area <- area.xypolygon(p)
+        neg <- (area < 0)
+        if (p$hole != neg) {
+            p <- reverse.xypolygon(p)
+            area <- -area
+        }
+        p$area <- area
+        return(p)
+    }
+    pts <- lapply(pts, processpolygon)
+    return(pts)
+}
 
 ##' @method xylist SpatialPolygons
 ##' @rdname coerce-methods
 xylist.SpatialPolygons <- function (object, ...)
-    xylist.owin(maptools::as.owin.SpatialPolygons(object))
+    xylist.gpc.poly(as(object,"gpc.poly"))
 
 ##' @method xylist Polygons
 ##' @rdname coerce-methods
 xylist.Polygons <- function (object, ...)
-    xylist.SpatialPolygons(sp::SpatialPolygons(list(object)))
+    xylist.SpatialPolygons(SpatialPolygons(list(object)))
 
 ##' @method xylist Polygon
 ##' @rdname coerce-methods
 xylist.Polygon <- function (object, ...)
-    xylist.Polygons(sp::Polygons(list(object), "ID"))
+    xylist.Polygons(Polygons(list(object), "ID"))
 
 ##' @method xylist default
 ##' @rdname coerce-methods
@@ -114,60 +139,62 @@ xylist.default <- function (object, ...) {
 ##' @name coerce,Polygons,gpc.poly-method
 ##' @rdname coerce-methods
 setAs(from = "Polygons", to = "gpc.poly", def = function (from)
-    {
-        gpclibCheck()
-        pls <- slot(from, "Polygons")
-        pts <- lapply(pls, function (sr) {
-            coords <- coordinates(sr)
-            n <- nrow(coords) - 1   # number of vertices
-            list(x = coords[seq_len(n),1],
-                 y = coords[seq_len(n),2],
-                 hole = sr@hole)
-        })
-        new("gpc.poly", pts = pts)
-    }
-)
+  {
+      pls <- slot(from, "Polygons")
+      pts <- lapply(pls, function (sr) {
+          coords <- coordinates(sr)
+          n <- nrow(coords) - 1   # number of vertices
+          list(x = coords[seq_len(n),1],
+               y = coords[seq_len(n),2],
+               hole = sr@hole)
+      })
+      new("gpc.poly", pts = pts)
+  }
+      )
 
 ##' @name coerce,gpc.poly,Polygons-method
 ##' @rdname coerce-methods
 setAs(from = "gpc.poly", to = "Polygons", def = function (from)
-    {
-        srl <- lapply(from@pts, function (poly) {
-            if (isClosed(poly)) {
-                sp::Polygon(cbind(poly$x,poly$y), hole = poly$hole)
-            } else {
-                sp::Polygon(cbind(c(poly$x,poly$x[1]), c(poly$y,poly$y[1])),
-                            hole = poly$hole)
-            }
-        })
-        sp::Polygons(srl, ID = "1")
-    }
-)
+  {
+      srl <- lapply(from@pts, function (poly) {
+          if (isClosed(poly)) {
+              Polygon(cbind(poly$x,poly$y), hole = poly$hole)
+          } else {
+              Polygon(cbind(c(poly$x,poly$x[1]), c(poly$y,poly$y[1])),
+                      hole = poly$hole)
+          }
+      })
+      Polygons(srl, ID = "1")
+  }
+      )
 
-##' @name coerce,SpatialPolygons,gpc.poly-method
-##' @rdname coerce-methods
-## This method also applies to "SpatialPolygonsDataFrame" (inherited)
-setAs(from = "SpatialPolygons", to = "gpc.poly", def = function (from)
-    {
-        gpclibCheck()
-        polygonsList <- polygons(from)@polygons
-        gpc <- new("gpc.poly")
-        for (i in seq_along(polygonsList))
-        {
-            gpc <- gpclib::append.poly(gpc, as(polygonsList[[i]], "gpc.poly"))
-        }
-        gpc
-    }
-)
+
+setOldClass("owin")
 
 ##' @name coerce,owin,gpc.poly-method
 ##' @rdname coerce-methods
+##' @importFrom spatstat as.polygonal is.hole.xypolygon
 setAs(from = "owin", to = "gpc.poly", def = function (from)
-    {
-        gpclibCheck()
-        pts <- lapply(from$bdry, function (poly) {
-            list(x = rev(poly$x), y = rev(poly$y), hole = poly$hole)
-        })
-        new("gpc.poly", pts = pts)
-    }
-)
+  {
+      x <- as.polygonal(from)
+      pts <- lapply(x$bdry, function (poly) {
+          list(x = rev(poly$x), y = rev(poly$y),
+               hole = is.hole.xypolygon(poly))
+      })
+      new("gpc.poly", pts = pts)
+  }
+      )
+
+
+##' @name coerce,gpc.poly,owin-method
+##' @rdname coerce-methods
+##' @importFrom rgeos get.bbox
+##' @importFrom spatstat owin
+setAs(from = "gpc.poly", to = "owin", def = function (from)
+  {
+      pts <- xylist.gpc.poly(from)
+      bb <- get.bbox(from)
+      w <- owin(bb$x, bb$y, poly = pts, check = FALSE)
+      return(w)
+  }
+      )

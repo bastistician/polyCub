@@ -18,7 +18,7 @@
 #' @param polyregion a polygonal integration domain.
 #' The supported classes depend on the specific method, however, the
 #' \code{"\link[spatstat]{owin}"} class from package \pkg{spatstat} works for
-#' all methods, as well should a \code{"\link[gpclib:gpc.poly-class]{gpc.poly}"}
+#' all methods, as well should a \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"}
 #' polygon (but see the comments in \code{help("\link{coerce-methods}")}).
 #' @param f two-dimensional function to be integrated.
 #' As its first argument the function must take a coordinate matrix, i.e. a
