@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.R] by SM Don 09/05/2013 13:04 (CEST)>
+### Time-stamp: <[polyCub.R] by SM Don 09/05/2013 15:01 (CEST)>
 ################################################################################
 
 
@@ -33,7 +33,7 @@
 #' \code{polyregion}.
 #' @example inst/examples/polyCub.R
 #' @keywords math spatial
-#' @family polyCub
+#' @family polyCub-methods
 #' @export
 
 polyCub <- function (polyregion, f,

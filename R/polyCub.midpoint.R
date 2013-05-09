@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.midpoint.R] by SM Don 09/05/2013 13:05 (CEST)>
+### Time-stamp: <[polyCub.midpoint.R] by SM Don 09/05/2013 15:01 (CEST)>
 ################################################################################
 
 
@@ -35,7 +35,7 @@
 #' Spatstat: an R package for analyzing spatial point patterns.
 #' Journal of Statistical Software 12 (6), 1-42.
 #' @keywords math spatial
-#' @family polyCub
+#' @family polyCub-methods
 #' @importFrom spatstat as.im.function plot.im plot.owin
 #' @examples # see example(polyCub)
 #' @export

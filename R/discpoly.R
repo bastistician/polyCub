@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[discpoly.R] by SM Don 09/05/2013 14:43 (CEST)>
+### Time-stamp: <[discpoly.R] by SM Don 09/05/2013 14:59 (CEST)>
 ################################################################################
 
 
@@ -23,8 +23,8 @@
 ##' \code{\link[spatstat]{disc}} function.
 ##' @param hole logical. Does the resulting polygon represent a hole?
 ##' @author Sebastian Meyer\cr
-##' This function is inspired by the \code{\link{disc}} function from package
-##' \pkg{spatstat} authored by Adrian Baddeley and Rolf Turner.
+##' This function is inspired by the \code{\link[spatstat]{disc}} function from
+##' package \pkg{spatstat} authored by Adrian Baddeley and Rolf Turner.
 ##' @return A polygon of class \code{class} representing a circle/disc with
 ##' \code{npoly} edges accuracy.
 ##' @seealso \link[spatstat]{disc} in package \pkg{spatstat}.

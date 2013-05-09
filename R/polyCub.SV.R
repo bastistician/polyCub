@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] by SM Don 09/05/2013 13:05 (CEST)>
+### Time-stamp: <[polyCub.SV.R] by SM Don 09/05/2013 15:03 (CEST)>
 ################################################################################
 
 
@@ -41,7 +41,7 @@
 #' Product Gauss cubature over polygons based on Green's integration formula.
 #' Bit Numerical Mathematics, 47 (2), 441-453.
 #' @keywords math spatial
-#' @family polyCub
+#' @family polyCub-methods
 #' @importFrom statmod gauss.quad
 #' @importMethodsFrom rgeos plot
 #' @examples # see example(polyCub)
@@ -124,6 +124,7 @@ polyCub.SV <- function (polyregion, f, ...,
 ##' A. Sommariva and M. Vianello (2007):
 ##' Product Gauss cubature over polygons based on Green's integration formula.
 ##' Bit Numerical Mathematics, 47 (2), 441-453.
+##' @keywords internal
 
 polygauss <- function (xy, nw_N, nw_M, alpha = NULL, rotation = FALSE)
 {

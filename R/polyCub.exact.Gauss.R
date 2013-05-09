@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.exact.Gauss.R] by SM Don 09/05/2013 14:02 (CEST)>
+### Time-stamp: <[polyCub.exact.Gauss.R] by SM Don 09/05/2013 15:02 (CEST)>
 ################################################################################
 
 
@@ -51,7 +51,7 @@
 #' Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical
 #' Tables (9th ed.). New York: Dover Publications.
 #' @keywords math spatial
-#' @family polyCub
+#' @family polyCub-methods
 #' @examples # see example(polyCub)
 #' @export
 
