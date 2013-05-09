@@ -17,8 +17,7 @@ plot.owin(disc.owin, hatch=TRUE, add=TRUE)
 ### Quasi-exact cubature of the bivariate Gaussian density
 ### using gpclib::tristrip and mvtnorm::pmvnorm()
 
-if (require("mvtnorm") && require("gpclib")) {
-    gpclibPermit()
+if (requireNamespace("mvtnorm") && gpclibPermit()) {
     print(polyCub.exact.Gauss(disc.owin, mean=c(0,0), Sigma=5^2*diag(2),
                               plot=TRUE), digits=16)
 }
