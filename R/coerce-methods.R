@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2013 Sebastian Meyer
-### Time-stamp: <[coerce-methods.R] by SM Don 09/05/2013 13:04 (CEST)>
+### Time-stamp: <[coerce-methods.R] by SM Fre 10/05/2013 00:45 (CEST)>
 ###
 ### Some coerce-methods between different spatial classes
 ################################################################################
@@ -19,7 +19,8 @@
 ##' and \code{"\link[spatstat:owin.object]{owin}"} objects of the
 ##' \pkg{spatstat} package to and from
 ##' the \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} class of the
-##' \pkg{rgeos} package (originally from \pkg{gpclib}).
+##' \pkg{rgeos} package (originally from \pkg{gpclib}), as well as
+##' from \code{"\link[sp:Polygon-class]{Polygon}"} to \code{"gpc.poly"}.
 ##' Note that conversions from and to the \code{"owin"}
 ##' class are also available as functions \code{\link[spatstat]{owin2gpc}} and
 ##' \code{\link[spatstat]{gpc2owin}} in package \pkg{spatstat},
@@ -108,12 +109,12 @@ xylist.SpatialPolygons <- function (object, ...)
 ##' @method xylist Polygons
 ##' @rdname coerce-methods
 xylist.Polygons <- function (object, ...)
-    xylist.SpatialPolygons(SpatialPolygons(list(object)))
+    xylist.gpc.poly(as(object,"gpc.poly"))
 
 ##' @method xylist Polygon
 ##' @rdname coerce-methods
 xylist.Polygon <- function (object, ...)
-    xylist.Polygons(Polygons(list(object), "ID"))
+    xylist.gpc.poly(as(object,"gpc.poly"))
 
 ##' @method xylist default
 ##' @rdname coerce-methods
@@ -152,6 +153,15 @@ setAs(from = "Polygons", to = "gpc.poly", def = function (from)
   }
       )
 
+##' @name coerce,Polygon,gpc.poly-method
+##' @rdname coerce-methods
+setAs(from = "Polygon", to = "gpc.poly", def = function (from)
+  {
+      as(Polygons(list(from), "ID"), "gpc.poly")
+  }
+      )
+
+
 ##' @name coerce,gpc.poly,Polygons-method
 ##' @rdname coerce-methods
 setAs(from = "gpc.poly", to = "Polygons", def = function (from)
@@ -169,7 +179,16 @@ setAs(from = "gpc.poly", to = "Polygons", def = function (from)
       )
 
 
-setOldClass("owin")
+## Register "owin" as class in S4 so we can define methods for it
+setClass("owin")
+## Using setOldClass("owin") is incompatible with package "maptools", which also
+## does setClass("owin") _and_ exports this class! Specifically, loading
+## library("polyCub"); library("maptools"); library("gpclib")
+## in this order would not work (no idea why) throwing:
+## Error : package slot missing from signature for generic ‘plot’
+## and classes gpc.poly, ANY
+## cannot use with duplicate class names (the package may need to be re-installed)
+## Error: package/namespace load failed for ‘gpclib’
 
 ##' @name coerce,owin,gpc.poly-method
 ##' @rdname coerce-methods
