@@ -4,8 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### $Revision$
-### $Date$
+### Time-stamp: <[polyCub.exact.Gauss.R] by SM Don 09/05/2013 14:02 (CEST)>
 ################################################################################
 
 
@@ -31,7 +30,8 @@
 #' @param mean,Sigma mean and covariance matrix of the bivariate normal density
 #' to be integrated.
 #' @param plot logical indicating if an illustrative plot of the numerical
-#' integration should be produced.
+#' integration should be produced. Note that the \code{polyregion} will be
+#' shifted and scaled.
 #' @return The integral of the bivariate normal density over \code{polyregion}.
 #' Two attributes are appended to the integral value:
 #' \item{nEval}{

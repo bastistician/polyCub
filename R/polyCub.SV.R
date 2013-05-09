@@ -4,8 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### $Revision$
-### $Date$
+### Time-stamp: <[polyCub.SV.R] by SM Don 09/05/2013 13:05 (CEST)>
 ################################################################################
 
 
