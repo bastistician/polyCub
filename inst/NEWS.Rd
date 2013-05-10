@@ -11,10 +11,16 @@
   \itemize{
     \item This is the initial version of the \pkg{polyCub} package
     mainly built on functions previously maintained within the
-    \CRANpkg{surveillance} package.
-    \item It has more documentation and tests, and
+    \CRANpkg{surveillance} package. These methods for cubature of
+    polygonal domains have been outsourced into this separate
+    \pkg{polyCub} package since they are of general use for other
+    packages as well.
+    
+    \item The \pkg{polyCub} package has more documentation and tests,
     avoids the use of \CRANpkg{gpclib} as far as possible (using
-    \CRANpkg{rgeos} instead)
+    \CRANpkg{rgeos} instead), and solves a compatibility issue with
+    package \CRANpkg{maptools} (use \code{setClass("owin")} instead
+    of \code{setOldClass("owin")}).
   }
 }
 

@@ -4,13 +4,13 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[zzz.R] by SM Don 09/05/2013 13:07 (CEST)>
+### Time-stamp: <[zzz.R] by SM Fre 10/05/2013 01:50 (CEST)>
 ###
 ### Package administration
 ################################################################################
 
 
-#' Numerical Integration (Cubature) over Polygonal Domains
+#' Cubature over Polygonal Domains
 #'
 #' The \R package \pkg{polyCub} provides methods for cubature (numerical 
 #' integration) over polygonal domains.
@@ -59,7 +59,7 @@
 #' Bit Numerical Mathematics, 47 (2), 441-453.
 #' @docType package
 #' @name polyCub-package
-#' @seealso the packages \pkg{cubature} and \pkg{R2cuba}, which are more
+#' @seealso The packages \pkg{cubature} and \pkg{R2cuba}, which are more
 #' appropriate for cubature over simple hypercubes.
 NULL
 
