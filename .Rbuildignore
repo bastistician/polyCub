@@ -1,4 +1,5 @@
 ^polygauss
+^README.md
 
 ^polyCub_[0-9\.-]+\.tar\.gz
 ^polyCub-Ex\.R
