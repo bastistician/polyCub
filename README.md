@@ -2,10 +2,10 @@ polyCub
 =======
 
 An R package providing methods for cubature (numerical integration) over
-polygonal domains. For cubature over simple hypercubes, the packages
-[`cubature`](http://CRAN.R-project.org/package=cubature) and
-[`R2cuba`](http://CRAN.R-project.org/package=R2cuba) are
-more appropriate.
+polygonal domains. Note that for cubature over simple hypercubes, the packages
+[`cubature`](http://CRAN.R-project.org/package=cubature)
+and [`R2cuba`](http://CRAN.R-project.org/package=R2cuba)
+might be more appropriate.
 
 Currently, the following three (non-adaptive) cubature methods are implemented:
 * Two-dimensional midpoint rule (a simple wrapper around

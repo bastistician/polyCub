@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.exact.Gauss.R] by SM Don 09/05/2013 15:02 (CEST)>
+### Time-stamp: <[polyCub.exact.Gauss.R] by SM Sam 11/05/2013 16:43 (CEST)>
 ################################################################################
 
 
@@ -20,7 +20,8 @@
 #' (AOC+BOC-AOB) or \ldots. However, the most time consuming step is the
 #' evaluation of \code{\link[mvtnorm]{pmvnorm}}.
 #' 
-#' @note The package \pkg{gpclib} (which is used to produce the \code{tristrip})
+#' @note The package \pkg{gpclib} (which is required to produce the
+#' \code{tristrip}, since this is not yet implemented in \pkg{rgeos})
 #' has a restricted license (commercial use prohibited).
 #' It has to be accepted explicitly via
 #' \code{\link{gpclibPermit}()} prior to using \code{polyCub.exact.Gauss}.
@@ -91,13 +92,15 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
             res <- .intTriangleAS(triangles[i+(0:2),])
             err <- attr(res, "error")
             int <- int + res
-            if (length(err) == 1L) error <- error + err   # sometimes err==numeric(0) (probably meaning err=0)
+            if (length(err) == 1L) error <- error + err
+            ##<- sometimes err==numeric(0) (probably meaning err=0)
         }
         c(int, nTriangles, error)
     })
     int <- sum(integrals[1,])
     
-    ## number of .V() evaluations (if 'h' in .intTriangleAS0 was always different from 0)
+    ## number of .V() evaluations
+    ## (if 'h' in .intTriangleAS0 was always different from 0)
     attr(int, "nEval") <- 6 * sum(integrals[2,])
     ## approximate absolute integration error
     attr(int, "error") <- sum(integrals[3,])
@@ -110,19 +113,25 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
 ### Auxiliary Functions ###
 ###########################
 
-## calculates the integral of the standard bivariat normal
-## over a triangle bounded by y=0, y=ax, x=h (cf. formula 26.3.23)
-.V <- function(h,k) {
-    a <- k/h
-    rho <- -a/sqrt(1+a^2)
-    # V = 0.25 + L(h,0,rho) - L(0,0,rho) - Q(h) / 2
-    # L(0,0,rho) = 0.25 + asin(rho) / (2*pi)
-    # V = L(h,0,rho) - asin(rho)/(2*pi) - Q(h) / 2
-    Lh0rho <- mvtnorm::pmvnorm(
-        lower = c(h,0), upper = c(Inf,Inf), mean = c(0,0), corr = matrix(c(1,rho,rho,1),2,2)
-    )
-    Qh <- pnorm(h, mean = 0, sd = 1, lower.tail = FALSE)
-    return(Lh0rho - asin(rho)/2/pi - Qh/2)
+## calculates the integral of the standard bivariat normal over a triangle ABC
+.intTriangleAS <- function (xy)
+{
+    A <- xy[1,]
+    B <- xy[2,]
+    C <- xy[3,]
+    intAOB <- .intTriangleAS0(A, B)
+    intBOC <- .intTriangleAS0(B, C)
+    intAOC <- .intTriangleAS0(A, C)
+    
+    # determine signs of integrals
+    signAOB <- -1 + 2*.pointsOnSameSide(A,B,C)
+    signBOC <- -1 + 2*.pointsOnSameSide(B,C,A)
+    signAOC <- -1 + 2*.pointsOnSameSide(A,C,B)
+    
+    int <- signAOB*intAOB + signBOC*intBOC + signAOC*intAOC
+    attr(int, "error") <- attr(intAOB, "error") +
+        attr(intBOC, "error") + attr(intAOC, "error")
+    return(int)
 }
 
 ## calculates the integral of the standard bivariat normal over a triangle A0B
@@ -143,8 +152,8 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
     return(res)
 }
 
-## checks if point1 and point2 lie on the same side of a line through linepoint1 and linepoint2
-## see, e.g., http://www.gamedev.net/community/forums/topic.asp?topic_id=457450
+## checks if point1 and point2 lie on the same side of a line through
+## linepoint1 and linepoint2
 .pointsOnSameSide <- function (linepoint1, linepoint2, point1, point2 = c(0,0))
 {
     n <- c(-1,1) * rev(linepoint2-linepoint1)   # normal vector
@@ -152,22 +161,18 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
     return(S > 0)
 }
 
-## calculates the integral of the standard bivariat normal over a triangle ABC
-.intTriangleAS <- function (xy)
-{
-    A <- xy[1,]
-    B <- xy[2,]
-    C <- xy[3,]
-    intAOB <- .intTriangleAS0(A, B)
-    intBOC <- .intTriangleAS0(B, C)
-    intAOC <- .intTriangleAS0(A, C)
-    
-    # determine signs of integrals
-    signAOB <- -1 + 2*.pointsOnSameSide(A,B,C)
-    signBOC <- -1 + 2*.pointsOnSameSide(B,C,A)
-    signAOC <- -1 + 2*.pointsOnSameSide(A,C,B)
-    
-    int <- signAOB*intAOB + signBOC*intBOC + signAOC*intAOC
-    attr(int, "error") <- attr(intAOB, "error") + attr(intBOC, "error") + attr(intAOC, "error")
-    return(int)
+## calculates the integral of the standard bivariat normal
+## over a triangle bounded by y=0, y=ax, x=h (cf. formula 26.3.23)
+.V <- function(h,k) {
+    a <- k/h
+    rho <- -a/sqrt(1+a^2)
+    # V = 0.25 + L(h,0,rho) - L(0,0,rho) - Q(h) / 2
+    # L(0,0,rho) = 0.25 + asin(rho) / (2*pi)
+    # V = L(h,0,rho) - asin(rho)/(2*pi) - Q(h) / 2
+    Lh0rho <- mvtnorm::pmvnorm(
+        lower = c(h,0), upper = c(Inf,Inf),
+        mean = c(0,0), corr = matrix(c(1,rho,rho,1),2,2)
+    )
+    Qh <- pnorm(h, mean = 0, sd = 1, lower.tail = FALSE)
+    return(Lh0rho - asin(rho)/2/pi - Qh/2)
 }

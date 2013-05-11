@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] by SM Don 09/05/2013 15:03 (CEST)>
+### Time-stamp: <[polyCub.SV.R] by SM Sam 11/05/2013 16:47 (CEST)>
 ################################################################################
 
 
@@ -14,11 +14,11 @@
 #' Sommariva and Vianello (2007).
 #' 
 #' @param polyregion a polygonal integration domain.
-#' Supported are all classes for which we have defined a \code{\link{xylist}}
-#' method: \code{"\link[spatstat]{owin}"},
+#' The following classes are supported: \code{"\link[spatstat]{owin}"},
 #' \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"},
 #' \code{"\linkS4class{SpatialPolygons}"}, \code{"\linkS4class{Polygons}"},
-#' and \code{"\linkS4class{Polygon}"}.
+#' and \code{"\linkS4class{Polygon}"}
+#' (for these we have an internal \code{\link{xylist}} method).
 #' @param f two-dimensional function to be integrated.
 #' As its first argument the function must take a coordinate matrix, i.e. a
 #' numeric matrix with two columns.

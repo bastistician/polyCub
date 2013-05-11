@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2013 Sebastian Meyer
-### Time-stamp: <[coerce-methods.R] by SM Fre 10/05/2013 00:45 (CEST)>
+### Time-stamp: <[coerce-methods.R] by SM Sam 11/05/2013 14:27 (CEST)>
 ###
 ### Some coerce-methods between different spatial classes
 ################################################################################
@@ -27,7 +27,7 @@
 ##' and conversions from and to the
 ##' \code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"} class are included
 ##' in the \pkg{rgeos} package.
-##' Furthermore, the (rather internal) \code{xylist} methods break down 
+##' Furthermore, the (internal) \code{xylist} methods break down 
 ##' (convert) polygons from these classes to their core feature,
 ##' a list of vertex coordinates.
 ##' 
@@ -74,7 +74,6 @@
 ##' @importMethodsFrom rgeos coerce
 ##' @exportMethod coerce
 ##' @keywords spatial methods
-##' @export xylist
 xylist <- function (object, ...) UseMethod("xylist")
 
 ##' @method xylist owin
