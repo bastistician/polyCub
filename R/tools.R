@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[tools.R] by SM Don 09/05/2013 13:06 (CEST)>
+### Time-stamp: <[tools.R] by SM Mit 05/06/2013 23:43 (CEST)>
 ###
 ### Tiny toolbox
 ################################################################################
@@ -47,4 +47,19 @@ dotprod <- function (x,y)
 ##' @keywords internal
 isScalar <- function (x) {
     length(x) == 1L && is.vector(x, mode = "numeric")
+}
+
+
+##' Simply Plots a Polygon (of Various Classes)
+##'
+##' @inheritParams polyCub.SV
+plot_polyregion <- function (polyregion)
+{
+    if (inherits(polyregion, "Polygon"))
+        polyregion <- Polygons(list(polyregion), "ID")
+    if (inherits(polyregion, "Polygons"))
+        polyregion <- SpatialPolygons(list(polyregion))
+    if (inherits(polyregion, "gpc.poly")) {
+        plot(polyregion, poly.args=list(lwd=2), ann=FALSE)
+    } else plot(polyregion, lwd=2, axes=TRUE, main="")
 }
