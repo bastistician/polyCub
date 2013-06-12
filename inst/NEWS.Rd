@@ -5,9 +5,20 @@
 \title{News for Package 'polyCub'}
 
 
+\section{Changes in polyCub version 0.2-1 (2013-06-12)}{
+
+  \itemize{
+    \item New cubature method \code{polyCub.iso()} specific to isotropic
+    functions (thanks to Emil Hedevang for the idea).
+    \item We now depend on \R >= 2.15.0 (for \code{.rowSums()}).
+  }
+
+}
+
+
+
 \section{Changes in polyCub version 0.2-0 (2013-05-09)}{
 
-\subsection{SYNOPSIS}{
   \itemize{
     \item This is the initial version of the \pkg{polyCub} package
     mainly built on functions previously maintained within the
@@ -22,6 +33,5 @@
     package \CRANpkg{maptools} (use \code{setClass("owin")} instead
     of \code{setOldClass("owin")}).
   }
-}
 
 }

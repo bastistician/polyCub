@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[tools.R] by SM Mit 05/06/2013 23:43 (CEST)>
+### Time-stamp: <[tools.R] by SM Die 11/06/2013 23:48 (CEST)>
 ###
 ### Tiny toolbox
 ################################################################################
@@ -33,12 +33,16 @@ isClosed <- function (coords)
 ##' @param x,y numeric vectors (of compatible lengths).
 ##' @return \code{sum(x*y)}
 ##' @keywords math internal
-dotprod <- function (x,y)
-{
-    sum(x*y)
-}
+dotprod <- function (x,y) sum(x*y)
 
-
+##' Euclidean Vector Norm (Length)
+##'
+##' This is nothing else than \code{sqrt(sum(x^2))}.
+##' @param x numeric vector.
+##' @return \code{sqrt(sum(x^2))}
+##' @keywords math internal
+vecnorm <- function (x) sqrt(sum(x^2))
+    
 ##' Checks if Argument is Scalar
 ##' 
 ##' Check if the argument is scalar, i.e. a numeric vector of length 1.
