@@ -50,8 +50,12 @@ for (nGQ in c(1:5,10,20,60)) {
         "\n")
 }
 
-## baseline 'alpha' effects location of nodes (may fall outside the polygon)
-polyCub.SV(disc.owin, f, nGQ=2, alpha=0, plot=TRUE)
+## 'rotation' effects location of nodes
+polyCub.SV(disc.owin, f, nGQ=2, rotation=FALSE, plot=TRUE)
 op <- par(new=TRUE, col=2)
-polyCub.SV(disc.owin, f, nGQ=2, alpha=3, plot=TRUE)
+polyCub.SV(disc.owin, f, nGQ=2, rotation=TRUE, plot=TRUE)
 par(op)
+
+
+### Line integration along the boundary for isotropic functions
+polyCub.iso(disc.owin, f, center=c(0,0))
