@@ -4,13 +4,14 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.exact.Gauss.R] by SM Sam 11/05/2013 16:43 (CEST)>
+### Time-stamp: <[polyCub.exact.Gauss.R] by SM Sam 06/07/2013 13:06 (CEST)>
 ################################################################################
 
 
 #' Quasi-Exact Cubature of the Bivariate Normal Density
 #'
-#' Integration is based on triangulation and formulae from Chapter 26 of the
+#' Integration is based on triangulation of the polygonal domain and formulae
+#' from Chapter 26 of the 
 #' Abramowitz & Stegun handbook (Section 26.9, Example 9, pp. 956f.).
 #' This method is quite cumbersome because the A&S formula is only for triangles
 #' where one vertex is the origin (0,0). For each triangle of the
@@ -52,6 +53,8 @@
 #' Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical
 #' Tables (9th ed.). New York: Dover Publications.
 #' @keywords math spatial
+#' @seealso \code{\link{circleCub.Gauss}} for quasi-exact cubature of the
+#' isotropic Gaussian density over a circular domain.
 #' @family polyCub-methods
 #' @examples # see example(polyCub)
 #' @export

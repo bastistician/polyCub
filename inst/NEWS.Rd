@@ -5,12 +5,16 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.2-1 (2013-06-12)}{
+\section{Changes in polyCub version 0.3-0 (2013-07-06)}{
 
   \itemize{
     \item New cubature method \code{polyCub.iso()} specific to isotropic
-    functions (thanks to Emil Hedevang for the idea).
-    \item We now depend on \R >= 2.15.0 (for \code{.rowSums()}).
+    functions (thanks to Emil Hedevang for the basic idea).
+    \item The package now depends on \R >= 2.15.0 (for \code{.rowSums()}).
+    \item The package no longer registers \code{"owin"} as an \acronym{S4}-class
+    since we depend on the \pkg{sp} package which does the job. This
+    avoids a spurious warning (in \code{.simpleDuplicateClass()}) upon
+    package installation.
   }
 
 }

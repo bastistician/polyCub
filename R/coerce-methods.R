@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2013 Sebastian Meyer
-### Time-stamp: <[coerce-methods.R] by SM Fre 05/07/2013 11:38 (CEST)>
+### Time-stamp: <[coerce-methods.R] by SM Sam 06/07/2013 13:40 (CEST)>
 ###
 ### Some coerce-methods between different spatial classes
 ################################################################################
@@ -14,7 +14,8 @@
 ##' 
 ##' Different packages concerned with spatial data use different polygon
 ##' specifications. 
-##' The package \pkg{polyCub} offers S4-style coerce-methods to convert
+##' The package \pkg{polyCub} offers \code{coerce}-methods
+##' (\code{as(object, Class)}) to convert
 ##' \code{"\link[sp:Polygons-class]{Polygons}"} of the \pkg{sp} package,
 ##' and \code{"\link[spatstat:owin.object]{owin}"} objects of the
 ##' \pkg{spatstat} package to and from
