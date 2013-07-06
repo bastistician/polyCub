@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] by SM Sam 06/07/2013 16:09 (CEST)>
+### Time-stamp: <[polyCub.SV.R] by SM Sam 06/07/2013 17:29 (CEST)>
 ################################################################################
 
 
@@ -80,7 +80,7 @@ polyCub.SV <- function (polyregion, f, ...,
 
 ### ILLUSTRATION ###
     if (plot) {
-        plot_polyregion(polyregion)
+        plotpolyf(polys, f, ..., use.lattice=FALSE)
         for (i in seq_along(polys)) {
             nw <- polygauss(polys[[i]], nw_N, nw_M, alpha, rotation)
             points(nw$nodes, cex=0.6, pch = i) #, col=1+(nw$weights<=0)

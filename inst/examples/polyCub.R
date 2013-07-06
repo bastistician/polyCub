@@ -44,7 +44,7 @@ for (nGQ in c(1:5,10,20,60)) {
         "\n")
 }
 
-## 'rotation' effects location of nodes
+## 'rotation' affects location of nodes
 polyCub.SV(disc.owin, f, nGQ=2, rotation=FALSE, plot=TRUE)
 op <- par(new=TRUE, col=2)
 polyCub.SV(disc.owin, f, nGQ=2, rotation=TRUE, plot=TRUE)

@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] by SM Sam 06/07/2013 16:34 (CEST)>
+### Time-stamp: <[polyCub.iso.R] by SM Sam 06/07/2013 17:28 (CEST)>
 ################################################################################
 
 
@@ -92,7 +92,7 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
         stop("numerical verification of 'intrfr' requires 'f'")
     intrfr <- match.fun(intrfr)
 
-    if (plot) plotpolyf(polyregion, f, ...)
+    if (plot) plotpolyf(polys, f, ...)
     
     ## do the cubature over all polygons of the 'polys' list
     .polyCub.iso(polys, intrfr, ..., center=center,

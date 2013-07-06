@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[tools.R] by SM Sam 06/07/2013 15:59 (CEST)>
+### Time-stamp: <[tools.R] by SM Sam 06/07/2013 17:58 (CEST)>
 ###
 ### Tiny toolbox of internal function
 ################################################################################
@@ -61,13 +61,18 @@ isScalar <- function (x) {
 ##' @param add logical. Add to existing plot?
 plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
 {
-    if (inherits(polyregion, "Polygon"))
-        polyregion <- Polygons(list(polyregion), "ID")
-    if (inherits(polyregion, "Polygons"))
-        polyregion <- SpatialPolygons(list(polyregion))
-    if (inherits(polyregion, "gpc.poly")) {
+    if (is.vector(polyregion, mode="list")) { # internal xylist object
+        stopifnot(add)
+        lapply(polyregion, function(xy) polygon(xy, lwd=lwd))
+    } else if (inherits(polyregion, "gpc.poly")) {
         plot(polyregion, poly.args=list(lwd=lwd), ann=FALSE, add=add)
-    } else plot(polyregion, lwd=lwd, axes=TRUE, main="", add=add)
+    } else {
+        if (inherits(polyregion, "Polygon"))
+            polyregion <- Polygons(list(polyregion), "ID")
+        if (inherits(polyregion, "Polygons"))
+            polyregion <- SpatialPolygons(list(polyregion))
+        plot(polyregion, lwd=lwd, axes=TRUE, main="", add=add)
+    }
 }
 
 
