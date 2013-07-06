@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[plotpolyf.R] by SM Sam 06/07/2013 16:47 (CEST)>
+### Time-stamp: <[plotpolyf.R] by SM Sam 06/07/2013 17:15 (CEST)>
 ###
 ### Plot polygonal domain with image of bivariate function
 ################################################################################
@@ -23,6 +23,8 @@
 ##' The range of function values will be divided into \code{cuts+1} levels.
 ##' @param col colour vector used for the function levels.
 ##' @param lwd line width of the polygon edges.
+##' @param xlim,ylim numeric vectors of length 2 setting the axis limits.
+##' \code{NULL} means using the bounding box of \code{polyregion}.
 ##' @param use.lattice logical indicating if \pkg{lattice} graphics
 ##' (\code{\link[lattice]{levelplot}}) should be used.
 ##' @author Sebastian Meyer
@@ -32,16 +34,18 @@
 
 plotpolyf <- function (polyregion, f, ...,
                        npixel=100, cuts=15, col=rev(heat.colors(cuts+1)), lwd=3,
-                       use.lattice=TRUE)
+                       xlim=NULL, ylim=NULL, use.lattice=TRUE)
 {
     polys <- xylist(polyregion)
     npixel <- rep(npixel, length.out=2)
 
     ## make two-dimensional grid
-    xrange <- extendrange(unlist(lapply(polys, "[[", "x"), use.names=FALSE))
-    yrange <- extendrange(unlist(lapply(polys, "[[", "y"), use.names=FALSE))
-    xgrid <- makegrid(xrange, npixel[1])
-    ygrid <- makegrid(yrange, npixel[2])
+    if (is.null(xlim))
+        xlim <- extendrange(unlist(lapply(polys, "[[", "x"), use.names=FALSE))
+    if (is.null(ylim))
+        ylim <- extendrange(unlist(lapply(polys, "[[", "y"), use.names=FALSE))
+    xgrid <- makegrid(xlim, npixel[1])
+    ygrid <- makegrid(ylim, npixel[2])
     xygrid <- expand.grid(x=xgrid, y=ygrid, KEEP.OUT.ATTRS=FALSE)
 
     ## compute function values on the grid
