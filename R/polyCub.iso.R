@@ -4,20 +4,22 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] by SM Fre 05/07/2013 16:22 (CEST)>
+### Time-stamp: <[polyCub.iso.R] by SM Sam 06/07/2013 13:42 (CEST)>
 ################################################################################
 
 
 #' Cubature of Isotropic Functions over Polygonal Domains
 #'
 #' Conducts numerical integration of a two-dimensional isotropic function
-#' \eqn{f(x,y) = f_r(||(x,y)-\boldsymbol{mu}||)} with \eqn{mu} being the
-#' center of isotropy, over a polygonal domain. 
+#' \eqn{f(x,y) = f_r(||(x,y)-\boldsymbol{\mu}||)}{f(x,y) = f_r(||(x,y)-\mu||)}
+#' with \eqn{\mu} being the center of isotropy,
+#' over a polygonal domain. 
 #' It internally solves a line integral along the polygon boundary using
-#' \code{\link{integrate}} where the integrand contains the antiderivative of
+#' \code{\link{integrate}} where the integrand requires the antiderivative of
 #' \eqn{r f_r(r)}), which ideally is analytically available and supplied to the
 #' function as argument \code{intrfr}.
-#' The two-dimensional integration problem thereby reduces to one dimension.
+#' The two-dimensional integration problem thereby reduces to an efficient
+#' adaptive quadrature in one dimension.
 #'
 #' @inheritParams polyCub.SV
 #' @param intrfr analytical antiderivative of \eqn{r f_r(r)} from 0 to \code{R}
@@ -34,16 +36,17 @@
 #' checked against a numeric approximation. If \code{TRUE}, the set of test
 #' \code{r}'s defaults to a \code{\link{seq}} of length 20 from 1 to
 #' the maximum absolute x or y coordinate of any edge of the \code{polyregion}.
-#' @return The approximate value of the integral of the isotropic function
+#' @return The approximate integral of the isotropic function
 #' \code{f} over \code{polyregion}.\cr
 #' If the \code{intrfr} function is provided (which is assumed to be exact), an
 #' upperbound for the absolute integration error is appended to the result as
 #' attribute \code{"abs.error"}. It equals the sum of the absolute errors
 #' reported by all \code{\link{integrate}} calls
-#' (one for each edge of \code{polyregion}).
-#' @author Sebastian Meyer\cr
-#' The basic idea for this cubature rule is due to Emil Hedevang
-#' (Dept. of Mathematics, Aarhus University, Denmark)
+#' (there is one for each edge of \code{polyregion}).
+#' @author Sebastian Meyer
+#' 
+#' The basic idea for this cubature rule is due to Emil Hedevang (2013),
+#' Dept. of Mathematics, Aarhus University, Denmark
 #' @references
 #' E. Hedevang (2013). Personal communication at the Summer School on Topics in
 #' Space-Time Modeling and Inference (May 2013, Aalborg, Denmark).
@@ -53,7 +56,7 @@
 #' @export
 
 polyCub.iso <- function (polyregion, f, intrfr, ..., center,
-                         control = list(), check.intrfr = FALSE)
+                         control = list(), check.intrfr = FALSE, plot = FALSE)
 {
     polys <- xylist(polyregion) # transform to something like "owin$bdry"
                                 # which means anticlockwise vertex order with
@@ -89,6 +92,8 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
         stop("numerical verification of 'intrfr' requires 'f'")
     intrfr <- match.fun(intrfr)
 
+    if (plot) message("plotting is not implemented for polyCub.iso")
+    
     ## do the cubature over all polygons of the 'polys' list
     .polyCub.iso(polys, intrfr, ..., center=center,
                  control=control, .witherror=getError)
@@ -97,7 +102,7 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
 
 ##' \code{.polyCub.iso} is a \dQuote{bare-bone} version of \code{polyCub.iso}.
 ##' @rdname polyCub.iso
-##' @param polys something like \code{owin$bdry}.
+##' @param polys something like \code{owin$bdry}, but see \code{\link{xylist}}.
 ##' @param .witherror logical indicating if an upperbound for the absolute
 ##' integration error should be attached as an attribute to the result?
 ##' @export

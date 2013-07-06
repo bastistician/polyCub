@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.R] by SM Don 09/05/2013 15:01 (CEST)>
+### Time-stamp: <[polyCub.R] by SM Sam 06/07/2013 12:52 (CEST)>
 ################################################################################
 
 
@@ -24,20 +24,20 @@
 #' numeric matrix with two columns. For the \code{"exact.Gauss"} \code{method},
 #' \code{f} is ignored since it is specific to the bivariate normal density.
 #' @param method choose one of the implemented cubature methods (partial
-#' argument matching is applied). Defaults to using the product Gauss cubature
+#' argument matching is applied), see \code{help("\link{polyCub-package}")}
+#' for an overview. Defaults to using the product Gauss cubature
 #' implemented in \code{\link{polyCub.SV}}.
 #' @param ... arguments of \code{f} or of the specific \code{method}.
 #' @param plot logical indicating if an illustrative plot of the numerical
 #' integration should be produced.
-#' @return The approximated value of the integral of \code{f} over
-#' \code{polyregion}.
+#' @return The approximated integral of \code{f} over \code{polyregion}.
 #' @example inst/examples/polyCub.R
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @export
 
 polyCub <- function (polyregion, f,
-                     method = c("SV", "midpoint", "exact.Gauss"), ...,
+                     method = c("SV", "midpoint", "iso", "exact.Gauss"), ...,
                      plot = FALSE)
 {
 	method <- match.arg(method)
