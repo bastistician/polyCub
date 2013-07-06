@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] by SM Mit 05/06/2013 23:28 (CEST)>
+### Time-stamp: <[polyCub.SV.R] by SM Sam 06/07/2013 16:09 (CEST)>
 ################################################################################
 
 
@@ -19,8 +19,8 @@
 #' \code{"\linkS4class{SpatialPolygons}"}, \code{"\linkS4class{Polygons}"},
 #' and \code{"\linkS4class{Polygon}"}
 #' (for these we have an internal \code{\link{xylist}} method).
-#' @param f two-dimensional function to be integrated.
-#' As its first argument the function must take a coordinate matrix, i.e. a
+#' @param f two-dimensional function.
+#' As its first argument it must take a coordinate matrix, i.e. a
 #' numeric matrix with two columns.
 #' @param ... further arguments for \code{f}.
 #' @param nGQ degree of the one-dimensional Gauss-Legendre quadrature rule

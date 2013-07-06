@@ -4,9 +4,9 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[tools.R] by SM Die 11/06/2013 23:48 (CEST)>
+### Time-stamp: <[tools.R] by SM Sam 06/07/2013 15:59 (CEST)>
 ###
-### Tiny toolbox
+### Tiny toolbox of internal function
 ################################################################################
 
 
@@ -54,16 +54,31 @@ isScalar <- function (x) {
 }
 
 
-##' Simply Plots a Polygon (of Various Classes)
+##' Plots a Polygon (of Various Classes)
 ##'
 ##' @inheritParams polyCub.SV
-plot_polyregion <- function (polyregion)
+##' @param lwd line width.
+##' @param add logical. Add to existing plot?
+plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
 {
     if (inherits(polyregion, "Polygon"))
         polyregion <- Polygons(list(polyregion), "ID")
     if (inherits(polyregion, "Polygons"))
         polyregion <- SpatialPolygons(list(polyregion))
     if (inherits(polyregion, "gpc.poly")) {
-        plot(polyregion, poly.args=list(lwd=2), ann=FALSE)
-    } else plot(polyregion, lwd=2, axes=TRUE, main="")
+        plot(polyregion, poly.args=list(lwd=lwd), ann=FALSE, add=add)
+    } else plot(polyregion, lwd=lwd, axes=TRUE, main="", add=add)
 }
+
+
+##' Constructs Equally-Spaced Grid
+##' 
+##' Construct an equally-spaced grid given a range and the number of cut points
+##' (one more than the number of resulting bins).
+##' This is nothing else than \code{seq(range[1], range[2], length.out=n)}.
+##' @param range numeric vector of length 2.
+##' @param n length of the desired grid, i.e. number of bins + 1.
+##' @return the desired grid, a numeric vector of length \code{n} covering
+##' \code{range}.
+##' @keywords internal
+makegrid <- function(range, n) seq(range[1], range[2], length.out=n)
