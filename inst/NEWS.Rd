@@ -10,11 +10,16 @@
   \itemize{
     \item New cubature method \code{polyCub.iso()} specific to isotropic
     functions (thanks to Emil Hedevang for the basic idea).
+    \item New function \code{plotpolyf()} to plot a polygonal domain on
+    top of an image of a bivariate function.
     \item The package now depends on \R >= 2.15.0 (for \code{.rowSums()}).
     \item The package no longer registers \code{"owin"} as an \acronym{S4}-class
     since we depend on the \pkg{sp} package which does the job. This
     avoids a spurious warning (in \code{.simpleDuplicateClass()}) upon
     package installation.
+    \item In \code{discpoly()}, the argument \code{r} has been renamed
+    to \code{radius}. This is backward compatible by partial argument
+    matching in old code.
   }
 
 }

@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] by SM Sam 06/07/2013 13:42 (CEST)>
+### Time-stamp: <[polyCub.iso.R] by SM Sam 06/07/2013 16:34 (CEST)>
 ################################################################################
 
 
@@ -24,7 +24,7 @@
 #' @inheritParams polyCub.SV
 #' @param intrfr analytical antiderivative of \eqn{r f_r(r)} from 0 to \code{R}
 #' (first argument, not necessarily named \code{"R"}, must be vectorized).
-#' If given, \code{f} is not required!
+#' If given, \code{f} is not required (except for plotting)!
 #' If missing, \code{intrfr} is approximated numerically, again using
 #' \code{\link{integrate}}.
 #' @param ... further arguments for \code{f} or \code{intrfr}.
@@ -52,7 +52,7 @@
 #' Space-Time Modeling and Inference (May 2013, Aalborg, Denmark).
 #' @keywords math spatial
 #' @family polyCub-methods
-#' @examples # see example(polyCub)
+#' @example inst/examples/polyCub.iso.R
 #' @export
 
 polyCub.iso <- function (polyregion, f, intrfr, ..., center,
@@ -92,7 +92,7 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
         stop("numerical verification of 'intrfr' requires 'f'")
     intrfr <- match.fun(intrfr)
 
-    if (plot) message("plotting is not implemented for polyCub.iso")
+    if (plot) plotpolyf(polyregion, f, ...)
     
     ## do the cubature over all polygons of the 'polys' list
     .polyCub.iso(polys, intrfr, ..., center=center,
