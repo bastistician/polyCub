@@ -8,10 +8,7 @@ library("spatstat")
 disc.owin <- disc(radius=5, centre=c(3,2), npoly=8)
 
 ## plot image of the function and integration domain
-gr <- seq(-8, 8, by=0.2)
-vals <- matrix(f(expand.grid(gr,gr)), nrow=length(gr))
-image(x=gr, y=gr, z=vals)
-plot.owin(disc.owin, hatch=TRUE, add=TRUE)
+plotpolyf(disc.owin, f, xlim=c(-8,8), ylim=c(-8,8))
 
 
 ### Quasi-exact cubature of the bivariate Gaussian density
@@ -27,10 +24,7 @@ if (requireNamespace("mvtnorm") && gpclibPermit()) {
 
 testmidpoint <- function (eps, main=paste("2D midpoint rule with eps =",eps))
 {
-    image(x=gr, y=gr, z=vals, main=main)
-    plot.owin(disc.owin, hatch=TRUE, add=TRUE)
-    ## add binary mask to plot
-    #plot(as.mask(disc.owin, eps=eps), add=TRUE, box=FALSE)
+    plotpolyf(disc.owin, f, xlim=c(-8,8), ylim=c(-8,8), use.lattice=FALSE)    
     ## add evaluation points to plot
     with(as.mask(disc.owin, eps=eps),
          points(expand.grid(xcol, yrow), col=m, pch=20))
