@@ -7,16 +7,16 @@ polygonal domains**. Note that for cubature over simple hypercubes, the packages
 and [`R2cuba`](http://CRAN.R-project.org/package=R2cuba)
 might be more appropriate.
 
-The function `polyCub` is the main entry point of the package. It is a
+The function `polyCub()` is the main entry point of the package. It is a
 wrapper around the following specific cubature methods.
 
-### General-purpose rules:
+#### General-purpose cubature rules:
 * Two-dimensional midpoint rule (a simple wrapper around
 `spatstat::as.im.function`) 
 * Product Gauss cubature as proposed by [Sommariva and Vianello (2007,
 *Bit Numerical Mathematics*, **47** (2), 441-453)](http://dx.doi.org/10.1007/s10543-007-0131-2)
 
-### Rules for specific types of functions:
+#### Cubature rules for specific types of functions:
 * Efficient adaptive cubature for *isotropic* functions via line `integrate()`
 along the polygon boundary
 * Quasi-exact methods specific to the integration of the

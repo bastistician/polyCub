@@ -15,8 +15,8 @@ Description: A package providing methods for cubature (numerical integration)
              spatstat::as.im.function), the product Gauss cubature proposed
              by Sommariva and Vianello (2007), an adaptive cubature for
              isotropic functions via line integrate() along the boundary,
-	     and quasi-exact methods specific to the integration of the
-	     bivariate Gaussian density over polygonal and circular domains.
+             and quasi-exact methods specific to the integration of the
+             bivariate Gaussian density over polygonal and circular domains.
              For cubature over simple hypercubes, the
              packages "cubature" and "R2cuba" are more appropriate.
 License: GPL-2
