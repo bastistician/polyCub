@@ -4,7 +4,7 @@ polyCub
 An `R` package providing methods for **cubature** (numerical integration) **over
 polygonal domains**. Note that for cubature over simple hypercubes, the packages
 [`cubature`](http://CRAN.R-project.org/package=cubature)
-and [`R2cuba`](http://CRAN.R-project.org/package=R2cuba)
+and [`R2Cuba`](http://CRAN.R-project.org/package=R2Cuba)
 might be more appropriate.
 
 The function `polyCub()` is the main entry point of the package. It is a

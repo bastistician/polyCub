@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[zzz.R] by SM Sam 06/07/2013 13:30 (CEST)>
+### Time-stamp: <[zzz.R] by SM Sam 06/07/2013 19:11 (CEST)>
 ###
 ### Package administration
 ################################################################################
@@ -65,7 +65,7 @@
 #' Bit Numerical Mathematics, 47 (2), 441-453.
 #' @docType package
 #' @name polyCub-package
-#' @seealso The packages \pkg{cubature} and \pkg{R2cuba}, which are more
+#' @seealso The packages \pkg{cubature} and \pkg{R2Cuba}, which are more
 #' appropriate for cubature over simple hypercubes.
 NULL
 

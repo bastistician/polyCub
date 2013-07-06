@@ -5,6 +5,16 @@
 \title{News for Package 'polyCub'}
 
 
+\section{Changes in polyCub version 0.3-1 (2013-07-06)}{
+
+  \itemize{
+    \item ...
+  }
+
+}
+
+
+
 \section{Changes in polyCub version 0.3-0 (2013-07-06)}{
 
   \itemize{
