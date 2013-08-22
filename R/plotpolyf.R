@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[plotpolyf.R] by SM Sam 06/07/2013 17:15 (CEST)>
+### Time-stamp: <[plotpolyf.R] by SM Don 22/08/2013 16:33 (CEST)>
 ###
 ### Plot polygonal domain with image of bivariate function
 ################################################################################
@@ -57,11 +57,11 @@ plotpolyf <- function (polyregion, f, ...,
             panel.levelplot(...)
             lapply(polys, function(xy) panel.polygon(xy, lwd=lwd))
         }
-        print(levelplot(fval ~ x*y, data=xygrid,
+        print(levelplot(fval ~ x*y, data=xygrid, aspect="iso",
                         cuts=cuts, col.regions=col, panel=mypanel))
     } else {
         image(xgrid, ygrid, matrix(xygrid$fval, npixel[1], npixel[2]), col=col,
-              xlab="x", ylab="y")
+              xlab="x", ylab="y", asp=1)
         plot_polyregion(polyregion, lwd=lwd, add=TRUE)
     }
 }

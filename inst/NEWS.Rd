@@ -5,6 +5,16 @@
 \title{News for Package 'polyCub'}
 
 
+\section{Changes in polyCub version 0.3-2 (2013-08-22)}{
+
+  \itemize{
+    \item Use aspect ratio of 1 in \code{plotpolyf()}.
+  }
+
+}
+
+
+
 \section{Changes in polyCub version 0.3-1 (2013-08-22)}{
 
   \itemize{
