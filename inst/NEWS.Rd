@@ -5,10 +5,13 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.3-1 (2013-07-06)}{
+\section{Changes in polyCub version 0.3-1 (2013-08-22)}{
 
   \itemize{
-    \item ...
+    \item This version solely fixes a few typos and a technical note
+    from \command{R CMD check} in the current R development version
+    (also import packages into the \file{NAMESPACE} which are listed
+    in the \dQuote{Depends:} field).
   }
 
 }
