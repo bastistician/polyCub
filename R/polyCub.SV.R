@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] by SM Fre 30/08/2013 15:54 (CEST)>
+### Time-stamp: <[polyCub.SV.R] by SM Fre 30/08/2013 17:14 (CEST)>
 ################################################################################
 
 
@@ -174,6 +174,9 @@ polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE)
                      MoreArgs = c(nw_MN, alpha),
                      SIMPLIFY = FALSE, USE.NAMES = FALSE)
 
+    ## nodes <- c(subListExtract(nwlist, "x", use.names=FALSE),
+    ##            subListExtract(nwlist, "y", use.names=FALSE),
+    ##            recursive=TRUE)
     nodes <- c(lapply(nwlist, "[[", 1L),
                lapply(nwlist, "[[", 2L),
                recursive=TRUE)
@@ -187,6 +190,7 @@ polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE)
     ## back-transform rotated nodes by t(t(rotmat) %*% t(nodes))
     ## (inverse of rotation matrix is its transpose)
     list(nodes = if (rotation) nodes %*% rotmat else nodes,
+         #weights = unlist(subListExtract(nwlist, "w", use.names=FALSE), recursive=FALSE, use.names=FALSE),
          weights = unlist(lapply(nwlist, "[[", 3L), recursive=FALSE, use.names=FALSE),
          angle = angle, alpha = alpha)
 }
@@ -226,7 +230,7 @@ polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE)
     ## Return in an unnamed list of nodes_x, nodes_y, weights
     ## (there is no need for c(nodes_x) and c(weights))
     list(alpha + tcrossprod(scaling_fact_minus, s_N + 1), # degree_loc x N
-         rep.int(y_gauss_side, length(s_N)),                        # length: degree_loc*N
+         rep.int(y_gauss_side, length(s_N)),              # length: degree_loc*N
          tcrossprod(half_length_y*scaling_fact_minus*w_loc, w_N)) # degree_loc x N
 }
 
