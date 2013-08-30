@@ -5,9 +5,17 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.3-2 (2013-08-22)}{
+\section{Changes in polyCub version 0.3-2 (2013-08-30)}{
 
   \itemize{
+    \item thorough optimization of \code{polyCub.SV()}-related code
+    resulted in about 27\% speed-up:
+    \itemize{
+      \item use \code{mapply()} instead of a \code{for}-loop
+      \item avoid \code{cbind()}
+      \item use \code{tcrossprod()}
+      \item less object copying
+    }
     \item Use aspect ratio of 1 in \code{plotpolyf()}.
   }
 
