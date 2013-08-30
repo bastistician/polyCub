@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] by SM Sam 06/07/2013 17:29 (CEST)>
+### Time-stamp: <[polyCub.SV.R] by SM Fre 30/08/2013 15:54 (CEST)>
 ################################################################################
 
 
@@ -63,10 +63,12 @@ polyCub.SV <- function (polyregion, f, ...,
     nw_N <- gauss.quad(n = nGQ, kind = "legendre")
     ## DEGREE "M" = N+1 (ORDER GAUSS INTEGRATION)
     nw_M <- gauss.quad(n = nGQ + 1, kind = "legendre")
-
+    ## in one list
+    nw_MN <- unname(c(nw_M, nw_N))
+    
     ## Cubature of every single polygon of the "polys" list
     int1 <- function (poly) {
-        nw <- polygauss(poly, nw_N, nw_M, alpha, rotation)
+        nw <- polygauss(poly, nw_MN, alpha, rotation)
         fvals <- f(nw$nodes, ...)
         cubature_val <- sum(nw$weights * fvals)
         ## if (!isTRUE(all.equal(0, cubature_val))) {
@@ -82,7 +84,7 @@ polyCub.SV <- function (polyregion, f, ...,
     if (plot) {
         plotpolyf(polys, f, ..., use.lattice=FALSE)
         for (i in seq_along(polys)) {
-            nw <- polygauss(polys[[i]], nw_N, nw_M, alpha, rotation)
+            nw <- polygauss(polys[[i]], nw_MN, alpha, rotation)
             points(nw$nodes, cex=0.6, pch = i) #, col=1+(nw$weights<=0)
         }
     }
@@ -98,9 +100,9 @@ polyCub.SV <- function (polyregion, f, ...,
 ##' polygon vertices in \emph{anticlockwise} order (otherwise the result of the
 ##' cubature will have a negative sign) with first vertex not repeated at the
 ##' end (like \code{owin.object$bdry}).
-##' @param nw_N,nw_M lists of nodes and weights of one-dimensional Gauss
+##' @param nw_MN unnamed list of nodes and weights of one-dimensional Gauss
 ##' quadrature rules of degrees \eqn{N} and \eqn{M=N+1} (as returned by
-##' \code{\link[statmod]{gauss.quad}})
+##' \code{\link[statmod]{gauss.quad}}): \code{list(s_M, w_M, s_N, w_N)}.
 ##' @param alpha base-line of the (rotated) polygon at \eqn{x = \alpha} (see
 ##' Sommariva and Vianello (2007) for an explication). If \code{NULL} (default),
 ##' the midpoint of the x-range of the polygon is chosen if no \code{rotation}
@@ -120,10 +122,10 @@ polyCub.SV <- function (polyregion, f, ...,
 ##' Bit Numerical Mathematics, 47 (2), 441-453.
 ##' @keywords internal
 
-polygauss <- function (xy, nw_N, nw_M, alpha = NULL, rotation = FALSE)
+polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE)
 {
     ## convert to coordinate matrix
-    xy <- cbind(x=xy[["x"]], y=xy[["y"]], deparse.level=0)
+    xy <- cbind(xy[["x"]], xy[["y"]], deparse.level=0)
 
     
     ## POLYGON ROTATION
@@ -163,10 +165,20 @@ polygauss <- function (xy, nw_N, nw_M, alpha = NULL, rotation = FALSE)
     
     ## COMPUTE 2D NODES AND WEIGHTS.
 
-    xbd <- xyrot[,1L,drop=TRUE]
-    ybd <- xyrot[,2L,drop=TRUE]
-    nw <- .polygauss(c(xbd,xbd[1L]), c(ybd,ybd[1L]), alpha,
-                     nw_N$nodes, nw_N$weights, nw_M$nodes, nw_M$weights)
+    sides <- cbind(xyrot,
+                   xyrot[c(2:nrow(xyrot),1L),,drop=FALSE],
+                   deparse.level=0) # (x1,y1,x2,y2)
+    
+    nwlist <- mapply(.polygauss.side,
+                     sides[,1L], sides[,2L], sides[,3L], sides[,4L],
+                     MoreArgs = c(nw_MN, alpha),
+                     SIMPLIFY = FALSE, USE.NAMES = FALSE)
+
+    nodes <- c(lapply(nwlist, "[[", 1L),
+               lapply(nwlist, "[[", 2L),
+               recursive=TRUE)
+    dim(nodes) <- c(length(nodes)/2, 2L)
+    
     #nw <- .Call("polygauss",
     #            xyrot[,1L],xyrot[,2L],alpha,
     #            nw_N$nodes,nw_N$weights,nw_M$nodes,nw_M$weights,
@@ -174,104 +186,48 @@ polygauss <- function (xy, nw_N, nw_M, alpha = NULL, rotation = FALSE)
 
     ## back-transform rotated nodes by t(t(rotmat) %*% t(nodes))
     ## (inverse of rotation matrix is its transpose)
-    nodes <- if (rotation) nw$nodes %*% rotmat else nw$nodes
-    
-    ## Done.
-    list(nodes=nodes, weights=nw$weights, angle = angle, alpha = alpha)
+    list(nodes = if (rotation) nodes %*% rotmat else nodes,
+         weights = unlist(lapply(nwlist, "[[", 3L), recursive=FALSE, use.names=FALSE),
+         angle = angle, alpha = alpha)
 }
 
 
-## The working horses .polygauss and .polygauss.side below are R translations
+## The working horse .polygauss.side below is an R translation
 ## of the original MATLAB implementation by Sommariva and Vianello (2007).
-## TODO: efficient implementation of these functions in C
-##       would increase the speed of the cubature
-## Parameters:
-## x, y: coordinates of the polygon's vertices in _anticlockwise_ order
-##       (otherwise the result of the cubature will have a negative sign)
-##       with _REPEATED FIRST VERTEX_ at the end
-## alpha: "base-line"
-## s/w_N/M: nodes and weights of univariate Gauss rules of orders N and M=N+1
-
-.polygauss <- function (x, y, alpha, s_N, w_N, s_M, w_M)
-{
-    L <- length(x) - 1L                 # number of sides of the polygon
-    N <- length(s_N)
-    M <- length(s_M)
-    maxNodes <- L*M*N
-    nodes <- matrix(0, nrow=maxNodes, ncol=2L)
-    weights <- numeric(maxNodes)
-    K <- 0L
-
-    for (side in seq_len(L))
-    {
-        x1 <- x[side];  x2 <- x[side+1L]
-        y1 <- y[side];  y2 <- y[side+1L]
-
-        if ((x1 == alpha && x2 == alpha) || (y2 == y1)) {
-            ## skip: side lies on base-line or is orthogonal to it
-            next
-        }
-
-        if (x2 == x1) { # side is parallel to base-line => degree N
-            degree_loc <- N
-            s_loc <- s_N
-            w_loc <- w_N
-        } else { # degree M=N+1
-            degree_loc <- M
-            s_loc <- s_M
-            w_loc <- w_M
-        }
-
-        nw_loc <- .polygauss.side(x1, y1, x2, y2, s_loc, w_loc, s_N, w_N, alpha)
-
-        ## add nodes and weights for this side of the polygon
-        nNodes_loc <- degree_loc * N
-        rowidx <- K + seq_len(nNodes_loc)
-        nodes[rowidx,] <- nw_loc$nodes
-        weights[rowidx] <- nw_loc$weights
-        K <- K + nNodes_loc
-    }
-        
-    # only the first K entries of 'weights' and rows of 'nodes_x' and 'nodes_y'
-    # have been filled, the remainder until 'maxRows', contains the zeros
-    # from initialisation.
-    seqK <- seq_len(K)
-    weights <- weights[seqK]
-    nodes <- nodes[seqK,,drop=FALSE]
-
-    ## Done
-    ret <- list(nodes = nodes, weights = weights)
-    ret
-}
+## TODO: efficient implementation of this function in C
+##       might increase the speed of the cubature (although this is already
+##       highly efficient R code)
 
 .polygauss.side <- function (x1, y1, x2, y2, s_loc, w_loc, s_N, w_N, alpha)
 {
-    degree_loc <- length(s_loc)
-    N <- length(s_N)
+    if ((x1 == alpha && x2 == alpha) || (y2 == y1))
+        ## side lies on base-line or is orthogonal to it -> skip
+        return(NULL)
     
-    half_pt_x <- (x1+x2)/2;  half_length_x <- (x2-x1)/2;
-    half_pt_y <- (y1+y2)/2;  half_length_y <- (y2-y1)/2;
+    if (x2 == x1) { # side is parallel to base-line => degree N
+        s_loc <- s_N
+        w_loc <- w_N
+    }
+    
+    half_pt_x <- (x1+x2)/2
+    half_length_x <- (x2-x1)/2
+    
+    half_pt_y <- (y1+y2)/2
+    half_length_y <- (y2-y1)/2
     
     ## GAUSSIAN POINTS ON THE SIDE.
     x_gauss_side <- half_pt_x + half_length_x * s_loc
     y_gauss_side <- half_pt_y + half_length_y * s_loc
 
-    ## construct weights
     scaling_fact_minus <- (x_gauss_side - alpha) / 2
-    weights1 <- (half_length_y * scaling_fact_minus) * w_loc # length=degree_loc
-    weights <- tcrossprod(weights1, w_N) # degree_loc x N
-    #weights <- rep(w_N, each=degree_loc) * rep.int(weights1, N)  # lenth=degree_loc*N
-    
-    ## construct nodes: x and y coordinates ARE STORED IN MATRICES.
+
+    ## construct nodes and weights: x and y coordinates ARE STORED IN MATRICES.
     ## A COUPLE WITH THE SAME INDEX IS A POINT, i.e. P_i=(x(k),y(k)).
-    term_2 <- matrix(scaling_fact_minus, nrow = degree_loc, ncol = N)
-    rep_n_Np1 <- matrix(s_N + 1, nrow = degree_loc, ncol = N, byrow = TRUE)
-    nodes_x <- rep_n_Np1 * term_2 + alpha # degree_loc x N
-    #nodes_y <- matrix(y_gauss_side, nrow = degree_loc, ncol = N)
-    nodes_y <- rep.int(y_gauss_side, N)   # no matrix dimensions
-    
-    ## Done (return as 2-column matrix, and weights vector)
-    list(nodes = cbind(x=c(nodes_x), y=nodes_y), weights = c(weights))
+    ## Return in an unnamed list of nodes_x, nodes_y, weights
+    ## (there is no need for c(nodes_x) and c(weights))
+    list(alpha + tcrossprod(scaling_fact_minus, s_N + 1), # degree_loc x N
+         rep.int(y_gauss_side, length(s_N)),                        # length: degree_loc*N
+         tcrossprod(half_length_y*scaling_fact_minus*w_loc, w_N)) # degree_loc x N
 }
 
 vertexpairmaxdist <- function (xy)
