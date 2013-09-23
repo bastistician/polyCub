@@ -1,5 +1,5 @@
-polyCub
-=======
+polyCub [`@CRAN`](http://CRAN.R-project.org/package=polyCub)
+============================================================
 
 An `R` package providing methods for **cubature** (numerical integration) **over
 polygonal domains**. Note that for cubature over simple hypercubes, the packages
