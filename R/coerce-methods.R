@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2013 Sebastian Meyer
-### Time-stamp: <[coerce-methods.R] by SM Sam 06/07/2013 13:40 (CEST)>
+### Time-stamp: <[coerce-methods.R] by SM Fre 25/10/2013 09:36 (CEST)>
 ###
 ### Some coerce-methods between different spatial classes
 ################################################################################
@@ -22,12 +22,9 @@
 ##' the \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} class of the
 ##' \pkg{rgeos} package (originally from \pkg{gpclib}), as well as
 ##' from \code{"\link[sp:Polygon-class]{Polygon}"} to \code{"gpc.poly"}.
-##' Note that conversions from and to the \code{"owin"}
-##' class are also available as functions \code{\link[spatstat]{owin2gpc}} and
-##' \code{\link[spatstat]{gpc2owin}} in package \pkg{spatstat},
-##' and conversions from and to the
-##' \code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"} class are included
-##' in the \pkg{rgeos} package.
+##' Note that conversions of \code{"gpc.poly"} objects from and to the
+##' \code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"} class are
+##' available in the \pkg{rgeos} package itself.
 ##' Furthermore, the (internal) \code{xylist} methods break down 
 ##' (convert) polygons from these classes to their core feature,
 ##' a list of vertex coordinates.
@@ -65,10 +62,11 @@
 ##' does not perform any transformation but only checks that the polygons are
 ##' not closed (first vertex not repeated).
 ##' @author Sebastian Meyer;
-##' the implementation of the \code{"gpc.poly"}-method of \code{xylist} borrows
-##' large parts from \code{\link[spatstat]{gpc2owin}} and depends on
-##' functionality of the \pkg{spatstat} package
-##' authored by Adrian Baddeley and Rolf Turner.
+##' the implementation of the \code{"gpc.poly"}-method of \code{xylist}
+##' depends on functionality of the \pkg{spatstat} package and borrows
+##' large parts from the function \code{gpc2owin} (as implemented in package
+##' \pkg{spatstat} before version 1.34-0, when support for \code{"gpc.poly"} was
+##' dropped) authored by Adrian Baddeley and Rolf Turner.
 ##' @name coerce-methods
 ##' @aliases xylist
 ##' @importClassesFrom rgeos gpc.poly
