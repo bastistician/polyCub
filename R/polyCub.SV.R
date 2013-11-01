@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] by SM Fre 30/08/2013 17:14 (CEST)>
+### Time-stamp: <[polyCub.SV.R] by SM Don 31/10/2013 09:50 (CET)>
 ################################################################################
 
 
@@ -43,7 +43,6 @@
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @importFrom statmod gauss.quad
-#' @importMethodsFrom rgeos plot
 #' @examples # see example(polyCub)
 #' @export
 

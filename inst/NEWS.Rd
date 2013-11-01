@@ -5,7 +5,7 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.3-2 (2013-08-30)}{
+\section{Changes in polyCub version 0.4-0 (2013-11-01)}{
 
   \itemize{
     \item thorough optimization of \code{polyCub.SV()}-related code
@@ -16,6 +16,20 @@
       \item use \code{tcrossprod()}
       \item less object copying
     }
+
+    \item \CRANpkg{rgeos} (and therefore the GEOS library) is no longer
+    required (moved from Imports to Suggests).
+
+    \item \code{coerce}-methods between \code{"Polygons"} and
+    \code{"gpc.poly"} have been removed from the package.
+
+    \item \code{gpc2owin} and \code{owin2gpc} have been dropped from
+    \CRANpkg{spatstat} since version 1.34-0 and are now
+    included in \pkg{polyCub}.
+
+    \item A \code{polyregion} of class \code{"SpatialPolygons"}
+    of length more than 1 now works in \code{polyCub}-methods.
+
     \item Use aspect ratio of 1 in \code{plotpolyf()}.
   }
 

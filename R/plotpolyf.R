@@ -4,13 +4,13 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[plotpolyf.R] by SM Don 22/08/2013 16:33 (CEST)>
+### Time-stamp: <[plotpolyf.R] by SM Don 31/10/2013 09:57 (CET)>
 ###
 ### Plot polygonal domain with image of bivariate function
 ################################################################################
 
 
-##' Plot Polygonal Domain on an Image of a Bivariate Function
+##' Plot Polygonal Domain on Image of Bivariate Function
 ##'
 ##' Produces a combined plot of a polygonal domain and an image of a bivariate
 ##' function, using either \code{\link[lattice:levelplot]{lattice::levelplot}}

@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[discpoly.R] by SM Sam 06/07/2013 14:26 (CEST)>
+### Time-stamp: <[discpoly.R] by SM Fre 01/11/2013 16:02 (CET)>
 ################################################################################
 
 
@@ -12,8 +12,9 @@
 ##'
 ##' Generates a polygon representing a disc/circle (in planar coordinates)
 ##' as an object of one of three possible classes:
-##' \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"},
-##' \code{"\link[spatstat]{owin}"}, or \code{"\link[sp:Polygon-class]{Polygon}"}.
+##' \code{"\link[sp:Polygon-class]{Polygon}"},
+##' \code{"\link[spatstat]{owin}"}, or -- if \pkg{rgeos} (or \pkg{gpclib}) are
+##' available -- \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"}.
 ##'
 ##' @param center numeric vector of length 2 (center coordinates of the circle).
 ##' @param radius single numeric value (radius of the circle).
@@ -26,11 +27,12 @@
 ##' This function is inspired by the \code{\link[spatstat]{disc}} function from
 ##' package \pkg{spatstat} authored by Adrian Baddeley and Rolf Turner.
 ##' @return A polygon of class \code{class} representing a circle/disc with
-##' \code{npoly} edges accuracy.
+##' \code{npoly} edges accuracy. If \code{class="gpc.poly"} and this formal
+##' class is not available (missing \pkg{rgeos} and \pkg{gpclib}), the
+##' corresponding \code{pts} slot is returned with a warning. 
 ##' @seealso \link[spatstat]{disc} in package \pkg{spatstat}.
 ##' @keywords spatial datagen
 ##' @importFrom spatstat disc
-##' @importClassesFrom rgeos gpc.poly
 ##' @export
 ##' @example inst/examples/discpoly.R
 
@@ -56,6 +58,12 @@ discpoly <- function (center, radius, npoly = 64,
     y <- center[2] + radius * sin(theta)
     switch(class,
         "Polygon" = Polygon(cbind(c(x,x[1]),c(y,y[1])), hole=hole),
-        "gpc.poly" = new("gpc.poly", pts = list(list(x=x, y=y, hole=hole)))
+        "gpc.poly" = {
+            pts <- list(list(x=x, y=y, hole=hole))
+            if (know_gpc.poly()) new("gpc.poly", pts = pts) else {
+                warning("formal class \"gpc.poly\" not available")
+                pts
+            }
+        }
     )
 }

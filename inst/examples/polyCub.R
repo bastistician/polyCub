@@ -4,8 +4,7 @@
 f <- function (s, sigma = 5) exp(-rowSums(s^2)/2/sigma^2) / (2*pi*sigma^2)
 
 ## simple polygonal integration domain
-library("spatstat")
-disc.owin <- disc(radius=5, centre=c(3,2), npoly=8)
+disc.owin <- discpoly(center=c(3,2), radius=5, npoly=8, class="owin")
 
 ## plot image of the function and integration domain
 plotpolyf(disc.owin, f, xlim=c(-8,8), ylim=c(-8,8))
@@ -26,7 +25,7 @@ testmidpoint <- function (eps, main=paste("2D midpoint rule with eps =",eps))
 {
     plotpolyf(disc.owin, f, xlim=c(-8,8), ylim=c(-8,8), use.lattice=FALSE)    
     ## add evaluation points to plot
-    with(as.mask(disc.owin, eps=eps),
+    with(spatstat::as.mask(disc.owin, eps=eps),
          points(expand.grid(xcol, yrow), col=m, pch=20))
     polyCub.midpoint(disc.owin, f, eps=eps)
 }
@@ -45,11 +44,10 @@ for (nGQ in c(1:5,10,20,60)) {
 }
 
 ## 'rotation' affects location of nodes
+opar <- par(mfrow=c(1,2))
 polyCub.SV(disc.owin, f, nGQ=2, rotation=FALSE, plot=TRUE)
-op <- par(new=TRUE, col=2)
 polyCub.SV(disc.owin, f, nGQ=2, rotation=TRUE, plot=TRUE)
-par(op)
-
+par(opar)
 
 ### Line integration along the boundary for isotropic functions
-polyCub.iso(disc.owin, f, center=c(0,0))
+polyCub.iso(disc.owin, f, center=c(0,0))   # see ?polyCub.iso
