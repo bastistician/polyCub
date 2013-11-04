@@ -5,7 +5,7 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.4-0 (2013-11-01)}{
+\section{Changes in polyCub version 0.4-0 (2013-11-04)}{
 
   \itemize{
     \item thorough optimization of \code{polyCub.SV()}-related code
@@ -22,6 +22,12 @@
 
     \item \code{coerce}-methods between \code{"Polygons"} and
     \code{"gpc.poly"} have been removed from the package.
+
+    \item Added \code{coerce}-methods from \code{"Polygons"} (or
+    \code{"SpatialPolygons"} or \code{"Polygon"}) to \code{"owin"}.
+
+    \item \code{xylist()} is now exported. It extracts
+    polygon coordinates from various spatial classes.
 
     \item \code{gpc2owin} and \code{owin2gpc} have been dropped from
     \CRANpkg{spatstat} since version 1.34-0 and are now
