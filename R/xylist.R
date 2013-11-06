@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2013 Sebastian Meyer
-### Time-stamp: <[xylist.R] by SM Mon 04/11/2013 22:06 (CET)>
+### Time-stamp: <[xylist.R] by SM Mit 06/11/2013 14:34 (CET)>
 ###
 ### Convert various polygon classes to a simple "xylist"
 ################################################################################
@@ -29,7 +29,7 @@
 ##' \code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"})}
 ##' }
 ##' The (somehow useless) default \code{xylist}-method
-##' does not perform any transformation but only checks that the polygons are
+##' does not perform any transformation but only ensures that the polygons are
 ##' not closed (first vertex not repeated).
 ##' 
 ##' Different packages concerned with spatial data use different polygon
@@ -57,8 +57,6 @@
 ##' \code{"owin"} convention (anticlockwise order without repeating any vertex).
 ##' The opposite vertex order can be retained for the \pkg{sp}-classes
 ##' by the non-default use with \code{reverse=FALSE}.\cr
-##' Additional elements like \code{"area"} and \code{"hole"} in each
-##' component are retained.
 ##' @author Sebastian Meyer\cr 
 ##' The implementation of the \code{"gpc.poly"}-method of \code{xylist}
 ##' depends on functionality of the \pkg{spatstat} package and borrows
@@ -86,19 +84,11 @@ xylist.owin <- function (object, ...) {
 ##' @importFrom spatstat area.xypolygon reverse.xypolygon
 xylist.gpc.poly <- function (object, ...)
 {
-    pts <- object@pts
-    processpolygon <- function (p) {
-        area <- area.xypolygon(p)
-        neg <- (area < 0)
-        if (p$hole != neg) {
-            p <- reverse.xypolygon(p)
-            area <- -area
-        }
-        p$area <- area
-        return(p)
-    }
-    pts <- lapply(pts, processpolygon)
-    return(pts)
+    lapply(object@pts, function (poly) {
+        if (poly$hole != (area.xypolygon(poly) < 0))
+            poly <- reverse.xypolygon(poly)
+        poly[c("x","y")]
+    })
 }
 
 ##' @method xylist SpatialPolygons
@@ -110,7 +100,7 @@ xylist.SpatialPolygons <- function (object, reverse = TRUE, ...)
     unlist(lapply(object@polygons, xylist.Polygons, reverse=reverse, ...),
            recursive=FALSE, use.names=FALSE)
 }
-    
+
 ##' @method xylist Polygons
 ##' @S3method xylist Polygons
 ##' @rdname xylist
@@ -123,8 +113,8 @@ xylist.Polygons <- function (object, reverse = TRUE, ...)
         coords <- coordinates(sr)
         n <- nrow(coords) - 1L   # number of vertices
         idxs <- if (reverse) seq.int(n,1) else seq_len(n)
-        list(x = coords[idxs,1L], y = coords[idxs,2L],
-             hole = sr@hole, area = sr@area)
+        list(x = coords[idxs,1L], y = coords[idxs,2L])
+             #area = sr@area, hole = sr@hole
     })
 }
 
@@ -138,11 +128,10 @@ xylist.Polygon <- function (object, reverse = TRUE, ...)
 ##' @S3method xylist default
 ##' @rdname xylist
 xylist.default <- function (object, ...) {
-    lapply(object, function(xy) {
+    lapply(object, function (xy) {
         poly <- xy.coords(xy)[c("x","y")]
         if (isClosed(poly)) {
-            n <- length(poly$x)
-            sel <- seq_len(n-1L)
+            sel <- seq_len(length(poly$x) - 1L)
             poly$x <- poly$x[sel]
             poly$y <- poly$y[sel]
         }
