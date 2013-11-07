@@ -4,7 +4,7 @@
 f <- function (s, sigma = 5) exp(-rowSums(s^2)/2/sigma^2) / (2*pi*sigma^2)
 
 ## simple polygonal integration domain
-disc.owin <- discpoly(center=c(3,2), radius=5, npoly=8, class="owin")
+disc.owin <- spatstat::disc(radius=5, centre=c(3,2), npoly=8)
 
 ## plot image of the function and integration domain
 plotpolyf(disc.owin, f, xlim=c(-8,8), ylim=c(-8,8))
