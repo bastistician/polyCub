@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[zzz.R] by SM Don 22/08/2013 14:23 (CEST)>
+### Time-stamp: <[zzz.R] by SM Don 07/11/2013 20:54 (CET)>
 ###
 ### Package administration
 ################################################################################
@@ -36,7 +36,8 @@
 #' Quasi-exact method specific to the integration of the \emph{bivariate Gaussian
 #' density} over polygonal domains. It is based on formulae from Chapter 26 of
 #' the Abramowitz and Stegun (1970) handbook, i.e. triangulation of the
-#' polygonal domain and appropriate evaluations of
+#' polygonal domain (using \code{\link[gpclib]{tristrip}} of package
+#' \pkg{gpclib}) and appropriate evaluations of
 #' \code{\link[mvtnorm]{pmvnorm}} from package \pkg{mvtnorm}.
 #' Note that there is also a function \code{\link{circleCub.Gauss}}
 #' to perform integration of the \emph{isotropic} Gaussian density over
@@ -67,8 +68,6 @@
 #' @name polyCub-package
 #' @seealso The packages \pkg{cubature} and \pkg{R2Cuba}, which are more
 #' appropriate for cubature over simple hypercubes.
-#' @import methods
-#' @import sp
 NULL
 
 

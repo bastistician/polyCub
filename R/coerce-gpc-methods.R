@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2013 Sebastian Meyer
-### Time-stamp: <[coerce-gpc-methods.R] by SM Fre 01/11/2013 16:50 (CET)>
+### Time-stamp: <[coerce-gpc-methods.R] by SM Don 07/11/2013 20:53 (CET)>
 ###
 ### Conversion from and to the "gpc.poly" class
 ################################################################################
@@ -40,6 +40,7 @@
 ##' @rdname coerce-gpc-methods
 ##' @keywords spatial methods
 ##' @importFrom spatstat as.polygonal is.hole.xypolygon
+##' @import methods
 ##' @export
 owin2gpc <- function (object)
 {
@@ -61,6 +62,7 @@ gpc2owin <- function (object) owin(poly = xylist.gpc.poly(object))
 
 
 ## check for the formal class "gpc.poly" (loading rgeos or gpclib if necessary)
+##' @import methods
 know_gpc.poly <- function ()
 {
     isClass("gpc.poly") ||

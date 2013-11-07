@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2013 Sebastian Meyer
-### Time-stamp: <[xylist.R] by SM Mit 06/11/2013 14:34 (CET)>
+### Time-stamp: <[xylist.R] by SM Don 07/11/2013 21:10 (CET)>
 ###
 ### Convert various polygon classes to a simple "xylist"
 ################################################################################
@@ -107,6 +107,7 @@ xylist.SpatialPolygons <- function (object, reverse = TRUE, ...)
 ##' @param reverse logical (\code{TRUE}) indicating if the vertex order of the
 ##' \pkg{sp} classes should be reversed to get the \code{xylist}/\code{owin}
 ##' convention.
+##' @import sp
 xylist.Polygons <- function (object, reverse = TRUE, ...)
 {
     lapply(object@Polygons, function (sr) {
@@ -121,12 +122,14 @@ xylist.Polygons <- function (object, reverse = TRUE, ...)
 ##' @method xylist Polygon
 ##' @S3method xylist Polygon
 ##' @rdname xylist
+##' @import methods
 xylist.Polygon <- function (object, reverse = TRUE, ...)
     xylist.Polygons(as(object,"Polygons"), reverse=reverse, ...)
 
 ##' @method xylist default
 ##' @S3method xylist default
 ##' @rdname xylist
+##' @importFrom grDevices xy.coords
 xylist.default <- function (object, ...) {
     lapply(object, function (xy) {
         poly <- xy.coords(xy)[c("x","y")]

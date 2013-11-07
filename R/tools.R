@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[tools.R] by SM Fre 01/11/2013 16:46 (CET)>
+### Time-stamp: <[tools.R] by SM Don 07/11/2013 21:07 (CET)>
 ###
 ### Tiny toolbox of internal function
 ################################################################################
@@ -18,6 +18,7 @@
 ##' \code{\link{xy.coords}}.
 ##' @return logical
 ##' @keywords spatial internal
+##' @importFrom grDevices xy.coords
 isClosed <- function (coords)
 {
     xycoords <- xy.coords(coords)[c("x","y")]
@@ -59,6 +60,9 @@ isScalar <- function (x) {
 ##' @inheritParams polyCub.SV
 ##' @param lwd line width.
 ##' @param add logical. Add to existing plot?
+##' @import methods
+##' @import sp
+##' @importFrom graphics polygon
 plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
 {
     if (is.vector(polyregion, mode="list")) { # internal xylist object

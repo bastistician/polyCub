@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[plotpolyf.R] by SM Don 31/10/2013 09:57 (CET)>
+### Time-stamp: <[plotpolyf.R] by SM Don 07/11/2013 20:57 (CET)>
 ###
 ### Plot polygonal domain with image of bivariate function
 ################################################################################
@@ -30,6 +30,8 @@
 ##' @author Sebastian Meyer
 ##' @keywords hplot
 ##' @example inst/examples/plotpolyf.R
+##' @importFrom grDevices extendrange heat.colors
+##' @importFrom graphics image
 ##' @export
 
 plotpolyf <- function (polyregion, f, ...,

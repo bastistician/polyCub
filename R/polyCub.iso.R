@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] by SM Sam 06/07/2013 17:28 (CEST)>
+### Time-stamp: <[polyCub.iso.R] by SM Don 07/11/2013 20:59 (CET)>
 ################################################################################
 
 
@@ -53,6 +53,7 @@
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @example inst/examples/polyCub.iso.R
+#' @importFrom stats integrate
 #' @export
 
 polyCub.iso <- function (polyregion, f, intrfr, ..., center,
@@ -141,6 +142,7 @@ polyCub1.iso <- function (poly, intrfr, ..., center, control, .witherror = TRUE)
 }
 
 ## line integral for one edge
+##' @importFrom stats integrate
 lineInt <- function (v0, v1, intrfr, ..., control)
 {
     d <- v1 - v0

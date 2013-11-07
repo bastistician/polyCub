@@ -5,7 +5,7 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.4-0 (2013-11-06)}{
+\section{Changes in polyCub version 0.4-0 (2013-11-07)}{
 
   \itemize{
     \item thorough optimization of \code{polyCub.SV()}-related code
@@ -18,13 +18,15 @@
     }
 
     \item \CRANpkg{rgeos} (and therefore the GEOS library) is no longer
-    required (moved from Imports to Suggests).
+    strictly required (moved from Imports to Suggests).
 
     \item Added \code{coerce}-methods from \code{"Polygons"} (or
-    \code{"SpatialPolygons"} or \code{"Polygon"}) to \code{"owin"}.
+    \code{"SpatialPolygons"} or \code{"Polygon"}) to \code{"owin"}
+    (\code{as(..., "owin")}).
 
-    \item \code{xylist()} is now exported. It extracts
-    polygon coordinates from various spatial classes.
+    \item \code{xylist()} is now exported. It simply extracts
+    polygon coordinates from various spatial classes (with same unifying
+    intention as \code{xy.coords()}).
 
     \item \acronym{S4}-style \code{coerce}-methods between
     \code{"gpc.poly"} and \code{"Polygons"}/\code{"owin"} have been
@@ -33,6 +35,9 @@
     However, there are two new functions \code{gpc2owin} and
     \code{owin2gpc} similar to those dropped from \CRANpkg{spatstat}
     since version 1.34-0.
+
+    \item Moved \code{discpoly()} back to \CRANpkg{surveillance} since
+    it is only used there.
 
     \item A \code{polyregion} of class \code{"SpatialPolygons"}
     of length more than 1 now works in \code{polyCub}-methods.

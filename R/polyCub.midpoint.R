@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.midpoint.R] by SM Don 09/05/2013 15:01 (CEST)>
+### Time-stamp: <[polyCub.midpoint.R] by SM Don 07/11/2013 21:06 (CET)>
 ################################################################################
 
 
@@ -36,7 +36,9 @@
 #' Journal of Statistical Software 12 (6), 1-42.
 #' @keywords math spatial
 #' @family polyCub-methods
-#' @importFrom spatstat as.im.function plot.im plot.owin
+#' @import sp
+#' @importFrom spatstat as.im.function plot.im
+#' @importFrom grDevices gray
 #' @examples # see example(polyCub)
 #' @export
 
@@ -61,7 +63,7 @@ polyCub.midpoint <- function (polyregion, f, ...,
     
 ### ILLUSTRATION ###
     if (plot) {
-        plot.im(IM, axes=TRUE, col=grey(31:4/35), main="")
+        plot.im(IM, axes=TRUE, col=gray(31:4/35), main="")
         ## add evaluation points (unsure about spatstat implementation of class "im")
         ## both of the following commands worked with different versions of spatstat
         #with(IM, points(expand.grid(xcol, yrow), col=!is.na(v), cex=0.5))

@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.exact.Gauss.R] by SM Fre 01/11/2013 16:38 (CET)>
+### Time-stamp: <[polyCub.exact.Gauss.R] by SM Don 07/11/2013 21:06 (CET)>
 ################################################################################
 
 
@@ -59,6 +59,9 @@
 #' isotropic Gaussian density over a circular domain.
 #' @family polyCub-methods
 #' @examples # see example(polyCub)
+#' @import methods
+#' @import sp
+#' @importFrom stats cov2cor
 #' @importFrom spatstat is.polygonal
 #' @export
 
@@ -174,6 +177,7 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
 
 ## calculates the integral of the standard bivariat normal
 ## over a triangle bounded by y=0, y=ax, x=h (cf. formula 26.3.23)
+##' @importFrom stats pnorm
 .V <- function(h,k) {
     a <- k/h
     rho <- -a/sqrt(1+a^2)

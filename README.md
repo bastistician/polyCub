@@ -5,7 +5,8 @@ An `R` package providing methods for **cubature** (numerical integration) **over
 polygonal domains**. Note that for cubature over simple hypercubes, the packages
 [`cubature`](http://CRAN.R-project.org/package=cubature)
 and [`R2Cuba`](http://CRAN.R-project.org/package=R2Cuba)
-might be more appropriate.
+might be more appropriate (cf.
+[`CRAN Task View: Numerical Mathematics`](http://CRAN.R-project.org/view=NumericalMathematics)).
 
 The function `polyCub()` is the main entry point of the package. It is a
 wrapper around the following specific cubature methods.

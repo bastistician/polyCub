@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[circleCub.R] by SM Don 07/11/2013 13:07 (CET)>
+### Time-stamp: <[circleCub.R] by SM Don 07/11/2013 20:42 (CET)>
 ###
 ### Special cases of cubature over circular domains (center, r)
 ################################################################################
@@ -34,6 +34,7 @@
 ##' \code{center}. If this becomes too large, the result becomes inaccurate, see
 ##' \code{\link{pchisq}}.
 ##' @keywords math spatial
+##' @importFrom stats pchisq
 ##' @export
 ##' @examples
 ##' circleCub.Gauss(center=c(1,2), r=3, mean=c(4,5), sd=6)
