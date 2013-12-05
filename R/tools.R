@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[tools.R] by SM Don 07/11/2013 21:07 (CET)>
+### Time-stamp: <[tools.R] by SM Don 05/12/2013 15:04 (CET)>
 ###
 ### Tiny toolbox of internal function
 ################################################################################
@@ -63,6 +63,9 @@ isScalar <- function (x) {
 ##' @import methods
 ##' @import sp
 ##' @importFrom graphics polygon
+##' @importFrom spatstat plot.owin
+## CAVE: need to import plot.owin for compatibility with spatstat <1.33-0,
+##       since plot.owin was not registered as an S3-method for plot
 plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
 {
     if (is.vector(polyregion, mode="list")) { # internal xylist object

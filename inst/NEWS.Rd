@@ -5,6 +5,18 @@
 \title{News for Package 'polyCub'}
 
 
+\section{Changes in polyCub version 0.4-1 (2013-12-05)}{
+
+  \itemize{
+    \item This version solely fixes a missing \file{NAMESPACE} import to
+    make package \pkg{polyCub} again compatible with older versions of
+    \CRANpkg{spatstat} (< 1.33-0).
+  }
+  
+}
+
+
+
 \section{Changes in polyCub version 0.4-0 (2013-11-19)}{
 
   \subsection{INFRASTRUCTURE}{
