@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] by SM Don 07/11/2013 20:59 (CET)>
+### Time-stamp: <[polyCub.iso.R] by SM Mon 09/12/2013 21:51 (CET)>
 ################################################################################
 
 
@@ -83,11 +83,10 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
             }
             ana <- intrfr(.rs, ...)
             num <- quadrfr(.rs, ...)
-            cat(comp <- all.equal(num, ana), "\n")
-            if (!isTRUE(comp)) {
-                cat("->", comp, "\n")
+            if (!isTRUE(comp <- all.equal(num, ana))) {
+                cat("\n->", comp, "\n")
                 warning("'intrfr' might be incorrect: ", comp)
-            }
+            } else cat("OK\n")
         }
     } else if (doCheck)
         stop("numerical verification of 'intrfr' requires 'f'")
