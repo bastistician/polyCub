@@ -5,6 +5,18 @@
 \title{News for Package 'polyCub'}
 
 
+\section{Changes in polyCub version 0.4-2 (2013-12-19)}{
+
+  \itemize{
+    \item \code{plotpolyf()} gained an additional argument
+    \code{print.args}, an optional list of arguments passed to
+    \code{print.trellis()} if \code{use.lattice=TRUE}.
+  }
+  
+}
+
+
+
 \section{Changes in polyCub version 0.4-1 (2013-12-05)}{
 
   \itemize{

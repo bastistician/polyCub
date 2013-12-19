@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2013 Sebastian Meyer
-### Time-stamp: <[xylist.R] by SM Don 07/11/2013 21:10 (CET)>
+### Time-stamp: <[xylist.R] by SM Don 19/12/2013 16:37 (CET)>
 ###
 ### Convert various polygon classes to a simple "xylist"
 ################################################################################
@@ -68,7 +68,6 @@
 ##' @export
 xylist <- function (object, ...) UseMethod("xylist")
 
-##' @method xylist owin
 ##' @S3method xylist owin
 ##' @rdname xylist
 ##' @importFrom spatstat is.polygonal
@@ -78,7 +77,6 @@ xylist.owin <- function (object, ...) {
     }
 }
 
-##' @method xylist gpc.poly
 ##' @S3method xylist gpc.poly
 ##' @rdname xylist
 ##' @importFrom spatstat area.xypolygon reverse.xypolygon
@@ -91,7 +89,6 @@ xylist.gpc.poly <- function (object, ...)
     })
 }
 
-##' @method xylist SpatialPolygons
 ##' @S3method xylist SpatialPolygons
 ##' @rdname xylist
 ##' @inheritParams xylist.Polygons
@@ -101,7 +98,6 @@ xylist.SpatialPolygons <- function (object, reverse = TRUE, ...)
            recursive=FALSE, use.names=FALSE)
 }
 
-##' @method xylist Polygons
 ##' @S3method xylist Polygons
 ##' @rdname xylist
 ##' @param reverse logical (\code{TRUE}) indicating if the vertex order of the
@@ -119,14 +115,12 @@ xylist.Polygons <- function (object, reverse = TRUE, ...)
     })
 }
 
-##' @method xylist Polygon
 ##' @S3method xylist Polygon
 ##' @rdname xylist
 ##' @import methods
 xylist.Polygon <- function (object, reverse = TRUE, ...)
     xylist.Polygons(as(object,"Polygons"), reverse=reverse, ...)
 
-##' @method xylist default
 ##' @S3method xylist default
 ##' @rdname xylist
 ##' @importFrom grDevices xy.coords
