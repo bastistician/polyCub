@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] by SM Mon 09/12/2013 21:51 (CET)>
+### Time-stamp: <[polyCub.iso.R] by SM Fre 20/12/2013 00:01 (CET)>
 ################################################################################
 
 
@@ -62,27 +62,40 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
     polys <- xylist(polyregion) # transform to something like "owin$bdry"
                                 # which means anticlockwise vertex order with
                                 # first vertex not repeated
-    getError <- TRUE
-    doCheck <- !identical(FALSE, check.intrfr)
+    getError <- !missing(intrfr) # can't estimate error of double approximation
+
+    ## check 'intrfr' function
+    rs <- if (isTRUE(check.intrfr)) {
+        seq(1, max(abs(unlist(lapply(polys, "[", c("x","y"))))), length.out=20L)
+    } else if (identical(check.intrfr, FALSE)) {
+        numeric(0L)
+    } else check.intrfr
+    intrfr <- checkintrfr(intrfr, f, ..., center=center, rs=rs)
+
+    ## plot polygon and function image
+    if (plot) plotpolyf(polys, f, ...)
+    
+    ## do the cubature over all polygons of the 'polys' list
+    .polyCub.iso(polys, intrfr, ..., center=center,
+                 control=control, .witherror=getError)
+}
+
+## check the supplied 'intrfr' function
+checkintrfr <- function (intrfr, f, ..., center, rs = numeric(0L))
+{
+    doCheck <- length(rs) > 0L
     if (!missing(f)) {
         f <- match.fun(f)
         rfr <- function (r, ...) r * f(cbind(center[1]+r,center[2],deparse.level=0), ...)
         quadrfr1 <- function (r, ...) integrate(rfr, 0, r, ...)$value
         quadrfr <- function (r, ...) sapply(r, quadrfr1, ..., USE.NAMES=FALSE)
         if (missing(intrfr)) {
-            intrfr <- quadrfr
-            getError <- FALSE   # can't estimate error of double approximation
+            return(quadrfr)
         } else if (doCheck) {
             cat("Checking 'intrfr' against a numeric approximation ... ")
-            .rs <- if (isTRUE(check.intrfr)) {
-                seq(1, max(abs(unlist(lapply(polys, "[", c("x","y"))))),
-                    length.out=20)
-            } else {
-                stopifnot(is.vector(check.intrfr, mode="numeric"))
-                check.intrfr
-            }
-            ana <- intrfr(.rs, ...)
-            num <- quadrfr(.rs, ...)
+            stopifnot(is.vector(rs, mode="numeric"))
+            ana <- intrfr(rs, ...)
+            num <- quadrfr(rs, ...)
             if (!isTRUE(comp <- all.equal(num, ana))) {
                 cat("\n->", comp, "\n")
                 warning("'intrfr' might be incorrect: ", comp)
@@ -90,13 +103,8 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
         }
     } else if (doCheck)
         stop("numerical verification of 'intrfr' requires 'f'")
-    intrfr <- match.fun(intrfr)
-
-    if (plot) plotpolyf(polys, f, ...)
     
-    ## do the cubature over all polygons of the 'polys' list
-    .polyCub.iso(polys, intrfr, ..., center=center,
-                 control=control, .witherror=getError)
+    match.fun(intrfr)
 }
 
 
