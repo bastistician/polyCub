@@ -3,8 +3,8 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[plotpolyf.R] by SM Don 19/12/2013 13:23 (CET)>
+### Copyright (C) 2013-2014 Sebastian Meyer
+### Time-stamp: <[plotpolyf.R] by SM Die 14/01/2014 09:57 (CET)>
 ###
 ### Plot polygonal domain with image of bivariate function
 ################################################################################
@@ -55,7 +55,7 @@ plotpolyf <- function (polyregion, f, ...,
     xygrid <- expand.grid(x=xgrid, y=ygrid, KEEP.OUT.ATTRS=FALSE)
 
     ## compute function values on the grid
-    xygrid$fval <- f(xygrid, ...)
+    xygrid$fval <- f(as.matrix(xygrid, rownames.force = FALSE), ...)
 
     ## plot
     if (use.lattice && require("lattice")) {

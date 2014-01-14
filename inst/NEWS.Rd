@@ -5,12 +5,15 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.4-2 (2013-12-19)}{
+\section{Changes in polyCub version 0.4-2 (2014-01-14)}{
 
   \itemize{
     \item \code{plotpolyf()} gained an additional argument
     \code{print.args}, an optional list of arguments passed to
     \code{print.trellis()} if \code{use.lattice=TRUE}.
+
+    \item \code{plotpolyf()} passed a \emph{data frame} of coordinates
+    to \code{f} instead of a matrix as documented.
   }
   
 }
