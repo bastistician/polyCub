@@ -1,4 +1,4 @@
-library("testthat")
-library("polyCub")
-
-test_package("polyCub")
+if (packageVersion("testthat") >= "0.7.1.99") {
+    library("testthat")
+    test_check("polyCub")
+}
