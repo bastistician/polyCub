@@ -1,0 +1,18 @@
+\name{isScalar}
+\alias{isScalar}
+\title{Checks if Argument is Scalar}
+\usage{
+isScalar(x)
+}
+\arguments{
+  \item{x}{any object}
+}
+\value{
+logical
+}
+\description{
+Check if the argument is scalar, i.e. a numeric vector of
+length 1.
+}
+\keyword{internal}
+

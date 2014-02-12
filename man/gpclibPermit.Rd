@@ -1,0 +1,17 @@
+\name{gpclibPermit}
+\alias{gpclibPermit}
+\alias{gpclibPermitStatus}
+\title{\pkg{gpclib} Licence Acceptance}
+\usage{
+gpclibPermit()
+
+gpclibPermitStatus()
+}
+\description{
+Similar to the handling in package \pkg{maptools}, these
+functions explicitly accept the restricted \pkg{gpclib}
+licence (commercial use prohibited) and report its
+acceptance status, respectively. \pkg{gpclib} functionality
+is only required for \code{\link{polyCub.exact.Gauss}}.
+}
+

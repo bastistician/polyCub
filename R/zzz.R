@@ -3,8 +3,8 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[zzz.R] by SM Don 07/11/2013 20:54 (CET)>
+### Copyright (C) 2009-2014 Sebastian Meyer
+### Time-stamp: <[zzz.R] by SM Mit 12/02/2014 13:20 (CET)>
 ###
 ### Package administration
 ################################################################################
@@ -30,7 +30,8 @@
 #' }
 #' \item{\code{\link{polyCub.iso}}:}{
 #' Efficient adaptive cubature for \emph{isotropic} functions via line
-#' \code{\link{integrate}()} along the polygon boundary.
+#' \code{\link{integrate}()} along the polygon boundary, see Meyer and Held
+#' (2014, Section 2.4 of Supplement B).
 #' }
 #' \item{\code{\link{polyCub.exact.Gauss}}:}{
 #' Quasi-exact method specific to the integration of the \emph{bivariate Gaussian
@@ -60,6 +61,12 @@
 #' Spatio-Temporal Infectious Disease Epidemiology based on Point Processes.
 #' Master's Thesis, LMU Munich.
 #' Available as \url{http://epub.ub.uni-muenchen.de/11703/}.
+#'
+#' S. Meyer and L. Held (2014).
+#' Power-law models for infectious disease spread.
+#' \href{http://arxiv.org/abs/1308.5115}{arXiv:1308.5115}.
+#' Supplements are available from
+#' \url{http://www.biostat.uzh.ch/research/manuscripts/powerlaw.html}.
 #' 
 #' A. Sommariva and M. Vianello (2007).
 #' Product Gauss cubature over polygons based on Green's integration formula.
