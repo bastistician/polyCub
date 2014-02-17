@@ -1,4 +1,4 @@
-context("correctness of cubature methods")
+context("Correctness of cubature methods")
 
 ### set up test case
 

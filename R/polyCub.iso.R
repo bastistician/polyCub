@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] by SM Mit 12/02/2014 11:48 (CET)>
+### Time-stamp: <[polyCub.iso.R] by SM Mon 17/02/2014 15:40 (CET)>
 ################################################################################
 
 
@@ -25,16 +25,17 @@
 #' @inheritParams polyCub.SV
 #' @param intrfr analytical antiderivative of \eqn{r f_r(r)} from 0 to \code{R}
 #' (first argument, not necessarily named \code{"R"}, must be vectorized).
-#' If given, \code{f} is not required (except for plotting)!
+#' If given, \code{f} is not required!
 #' If missing, \code{intrfr} is approximated numerically, again using
-#' \code{\link{integrate}}.
+#' \code{\link{integrate}} configured with \code{control}.
 #' @param ... further arguments for \code{f} or \code{intrfr}.
 #' @param center numeric vector of length 2, the center of isotropy.
 #' @param control list of arguments passed to \code{\link{integrate}}, the
 #' quadrature rule used for the line integral along the polygon boundary.
 #' @param check.intrfr logical (or numeric vector) indicating if
 #' (for which \code{r}'s) the supplied \code{intrfr} function should be
-#' checked against a numeric approximation. If \code{TRUE}, the set of test
+#' checked against a numeric approximation. This check requires \code{f}
+#' to be specified. If \code{TRUE}, the set of test
 #' \code{r}'s defaults to a \code{\link{seq}} of length 20 from 1 to
 #' the maximum absolute x or y coordinate of any edge of the \code{polyregion}.
 #' @return The approximate integral of the isotropic function
@@ -77,10 +78,17 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
     } else if (identical(check.intrfr, FALSE)) {
         numeric(0L)
     } else check.intrfr
-    intrfr <- checkintrfr(intrfr, f, ..., center=center, rs=rs)
+    intrfr <- checkintrfr(intrfr, f, ..., center=center, control=control, rs=rs)
 
     ## plot polygon and function image
-    if (plot) plotpolyf(polys, f, ...)
+    if (plot) {
+        if (missing(f))
+            f <- function (s, ...) {
+                dists <- sqrt((s[,1L]-center[1L])^2 + (s[,2L]-center[2L])^2)
+                intrfr(dists, ...)
+            }
+        plotpolyf(polys, f, ...)
+    }
     
     ## do the cubature over all polygons of the 'polys' list
     .polyCub.iso(polys, intrfr, ..., center=center,
@@ -88,22 +96,29 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
 }
 
 ## check the supplied 'intrfr' function
-checkintrfr <- function (intrfr, f, ..., center, rs = numeric(0L))
+checkintrfr <- function (intrfr, f, ..., center, control = list(),
+                         rs = numeric(0L), tolerance = control$rel.tol)
 {
     doCheck <- length(rs) > 0L
     if (!missing(f)) {
         f <- match.fun(f)
-        rfr <- function (r, ...) r * f(cbind(center[1]+r,center[2],deparse.level=0), ...)
+        rfr <- function (r, ...)
+            r * f(cbind(center[1]+r, center[2], deparse.level=0), ...)
         quadrfr1 <- function (r, ...) integrate(rfr, 0, r, ...)$value
+        if (length(control))
+            body(quadrfr1)[[2]] <- as.call(c(as.list(body(quadrfr1)[[2]]),
+                                             control))
         quadrfr <- function (r, ...) sapply(r, quadrfr1, ..., USE.NAMES=FALSE)
         if (missing(intrfr)) {
             return(quadrfr)
         } else if (doCheck) {
             cat("Checking 'intrfr' against a numeric approximation ... ")
             stopifnot(is.vector(rs, mode="numeric"))
+            if (is.null(tolerance))
+                tolerance <- eval(formals(integrate)$rel.tol)
             ana <- intrfr(rs, ...)
             num <- quadrfr(rs, ...)
-            if (!isTRUE(comp <- all.equal(num, ana))) {
+            if (!isTRUE(comp <- all.equal(num, ana, tolerance=tolerance))) {
                 cat("\n->", comp, "\n")
                 warning("'intrfr' might be incorrect: ", comp)
             } else cat("OK\n")
@@ -171,7 +186,7 @@ lineInt <- function (v0, v1, intrfr, ..., control)
         num * ints / norm2
     }
     if (length(control)) {              # use slower do.call()-construct
-        do.call("integrate", c(list(integrand, 0, 1), control=control))
+        do.call("integrate", c(list(integrand, 0, 1), control))
     } else integrate(integrand, 0, 1)
 }
 
@@ -191,5 +206,5 @@ lineInt2 <- function (v0, v1, intrfr, ..., control)
         r <- num / sin(theta+phi)
         intrfr(r, ...)
     }
-    do.call("integrate", c(list(integrand, 0, phispan, ...), control=control))
+    do.call("integrate", c(list(integrand, 0, phispan, ...), control))
 }
