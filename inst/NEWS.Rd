@@ -15,9 +15,9 @@
     
       \item applies the \code{control} arguments also
       to the numerical approximation of \code{intrfr}.
-
-      \item no longer requires \code{f} for \code{plot=TRUE}.
     }
+    
+    \item The \code{checkintrfr()} function is exported and documented.
   }
   
 }

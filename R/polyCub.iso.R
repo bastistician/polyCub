@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] by SM Mon 17/02/2014 15:40 (CET)>
+### Time-stamp: <[polyCub.iso.R] by SM Mon 17/02/2014 17:13 (CET)>
 ################################################################################
 
 
@@ -25,8 +25,7 @@
 #' @inheritParams polyCub.SV
 #' @param intrfr analytical antiderivative of \eqn{r f_r(r)} from 0 to \code{R}
 #' (first argument, not necessarily named \code{"R"}, must be vectorized).
-#' If given, \code{f} is not required!
-#' If missing, \code{intrfr} is approximated numerically, again using
+#' If missing, \code{intrfr} is approximated numerically using
 #' \code{\link{integrate}} configured with \code{control}.
 #' @param ... further arguments for \code{f} or \code{intrfr}.
 #' @param center numeric vector of length 2, the center of isotropy.
@@ -81,21 +80,32 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
     intrfr <- checkintrfr(intrfr, f, ..., center=center, control=control, rs=rs)
 
     ## plot polygon and function image
-    if (plot) {
-        if (missing(f))
-            f <- function (s, ...) {
-                dists <- sqrt((s[,1L]-center[1L])^2 + (s[,2L]-center[2L])^2)
-                intrfr(dists, ...)
-            }
-        plotpolyf(polys, f, ...)
-    }
+    if (plot) plotpolyf(polys, f, ...)
     
     ## do the cubature over all polygons of the 'polys' list
     .polyCub.iso(polys, intrfr, ..., center=center,
                  control=control, .witherror=getError)
 }
 
-## check the supplied 'intrfr' function
+
+##' Check the Integral of \eqn{r f_r(r)}
+##'
+##' This function is auxiliary to \code{\link{polyCub.iso}}.
+##' The (analytical) integral of \eqn{r f_r(r)} from 0 to \eqn{R} is checked
+##' against a numeric approximation using \code{\link{integrate}} for various
+##' values of the upper bound \eqn{R}. A warning is issued if inconsistencies
+##' are found.
+##'
+##' @inheritParams polyCub.iso
+##' @param rs numeric vector of upper bounds for which to check the validity of
+##' \code{intrfr}. If it has length 0, no checks are performed.
+##' @param tolerance of \code{\link{all.equal.numeric}} when comparing
+##' \code{intrfr} results with numerical integration. Defaults to the
+##' relative tolerance used for \code{integrate}.
+##' @return The \code{intrfr} function. If it was not supplied, its quadrature
+##' version using \code{integrate} is returned.
+##' @importFrom stats integrate
+##' @export
 checkintrfr <- function (intrfr, f, ..., center, control = list(),
                          rs = numeric(0L), tolerance = control$rel.tol)
 {

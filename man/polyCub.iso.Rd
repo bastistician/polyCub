@@ -12,10 +12,9 @@ polyCub.iso(polyregion, f, intrfr, ..., center, control = list(),
 \arguments{
   \item{intrfr}{analytical antiderivative of \eqn{r f_r(r)}
   from 0 to \code{R} (first argument, not necessarily named
-  \code{"R"}, must be vectorized). If given, \code{f} is
-  not required (except for plotting)! If missing,
-  \code{intrfr} is approximated numerically, again using
-  \code{\link{integrate}}.}
+  \code{"R"}, must be vectorized). If missing,
+  \code{intrfr} is approximated numerically using
+  \code{\link{integrate}} configured with \code{control}.}
 
   \item{...}{further arguments for \code{f} or
   \code{intrfr}.}
@@ -30,10 +29,11 @@ polyCub.iso(polyregion, f, intrfr, ..., center, control = list(),
   \item{check.intrfr}{logical (or numeric vector)
   indicating if (for which \code{r}'s) the supplied
   \code{intrfr} function should be checked against a
-  numeric approximation. If \code{TRUE}, the set of test
-  \code{r}'s defaults to a \code{\link{seq}} of length 20
-  from 1 to the maximum absolute x or y coordinate of any
-  edge of the \code{polyregion}.}
+  numeric approximation. This check requires \code{f} to be
+  specified. If \code{TRUE}, the set of test \code{r}'s
+  defaults to a \code{\link{seq}} of length 20 from 1 to
+  the maximum absolute x or y coordinate of any edge of the
+  \code{polyregion}.}
 
   \item{polys}{something like \code{owin$bdry}, but see
   \code{\link{xylist}}.}
