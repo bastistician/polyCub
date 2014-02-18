@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] by SM Mon 17/02/2014 17:13 (CET)>
+### Time-stamp: <[polyCub.iso.R] by SM Die 18/02/2014 11:21 (CET)>
 ################################################################################
 
 
@@ -160,7 +160,8 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
 }
 
 ## cubature method for a single polygon
-polyCub1.iso <- function (poly, intrfr, ..., center, control, .witherror = TRUE)
+polyCub1.iso <- function (poly, intrfr, ..., center,
+                          control = list(), .witherror = TRUE)
 {
     xy <- cbind(poly[["x"]], poly[["y"]], deparse.level=0)
     nedges <- nrow(xy)
@@ -182,7 +183,7 @@ polyCub1.iso <- function (poly, intrfr, ..., center, control, .witherror = TRUE)
 
 ## line integral for one edge
 ##' @importFrom stats integrate
-lineInt <- function (v0, v1, intrfr, ..., control)
+lineInt <- function (v0, v1, intrfr, ..., control = list())
 {
     d <- v1 - v0
     num <- v1[2]*v0[1] - v1[1]*v0[2]  # = d[2]*p[,1] - d[1]*p[,2]
@@ -202,7 +203,7 @@ lineInt <- function (v0, v1, intrfr, ..., control)
 
 ## equally fast method _only_ for convex polygonal domains including the origin
 ## (formula obtained via polar coordinate representation)
-lineInt2 <- function (v0, v1, intrfr, ..., control)
+lineInt2 <- function (v0, v1, intrfr, ..., control = list())
 {
     d <- v1 - v0
     ld <- vecnorm(d)
