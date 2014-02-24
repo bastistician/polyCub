@@ -3,8 +3,8 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2012-2013 Sebastian Meyer
-### Time-stamp: <[xylist.R] by SM Don 19/12/2013 16:37 (CET)>
+### Copyright (C) 2012-2014 Sebastian Meyer
+### Time-stamp: <[xylist.R] by SM Mon 24/02/2014 10:53 (CET)>
 ###
 ### Convert various polygon classes to a simple "xylist"
 ################################################################################
@@ -56,8 +56,8 @@
 ##' coordinates. These represent vertex coordinates following \pkg{spatstat}'s
 ##' \code{"owin"} convention (anticlockwise order without repeating any vertex).
 ##' The opposite vertex order can be retained for the \pkg{sp}-classes
-##' by the non-default use with \code{reverse=FALSE}.\cr
-##' @author Sebastian Meyer\cr 
+##' by the non-default use with \code{reverse=FALSE}.
+##' @author Sebastian Meyer\cr
 ##' The implementation of the \code{"gpc.poly"}-method of \code{xylist}
 ##' depends on functionality of the \pkg{spatstat} package and borrows
 ##' large parts from the function \code{gpc2owin} (as implemented in package
@@ -70,12 +70,8 @@ xylist <- function (object, ...) UseMethod("xylist")
 
 ##' @S3method xylist owin
 ##' @rdname xylist
-##' @importFrom spatstat is.polygonal
-xylist.owin <- function (object, ...) {
-    if (is.polygonal(object)) object$bdry else {
-        stop("object is not polygonal")
-    }
-}
+##' @importFrom spatstat as.polygonal
+xylist.owin <- function (object, ...) as.polygonal(object)$bdry
 
 ##' @S3method xylist gpc.poly
 ##' @rdname xylist

@@ -40,7 +40,7 @@ vertex coordinates following \pkg{spatstat}'s \code{"owin"}
 convention (anticlockwise order without repeating any
 vertex). The opposite vertex order can be retained for the
 \pkg{sp}-classes by the non-default use with
-\code{reverse=FALSE}.\cr
+\code{reverse=FALSE}.
 }
 \description{
 Different packages concerned with spatial data use
