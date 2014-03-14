@@ -123,7 +123,10 @@ School on Topics in Space-Time Modeling and Inference (May
 2013, Aalborg, Denmark).
 
 Meyer, S. and Held, L. (2014). Power-law models for
-infectious disease spread. Available from
+infectious disease spread. Revised for the \emph{Annals of
+Applied Statistics}.
+\href{http://arxiv.org/abs/1308.5115}{arXiv:1308.5115}.
+Supplements are available from
 \url{http://www.biostat.uzh.ch/research/manuscripts/powerlaw.html}.
 }
 \seealso{

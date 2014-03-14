@@ -33,17 +33,17 @@ The approximated value of the integral of \code{f} over
 \description{
 The surface is converted to a binary pixel image using the
 \code{\link[spatstat]{as.im.function}} method from package
-\pkg{spatstat}. The integral under the surface is then
-approximated as the sum over (pixel area * f(pixel
-midpoint)).
+\pkg{spatstat} (Baddeley and Turner, 2005). The integral
+under the surface is then approximated as the sum over
+(pixel area * f(pixel midpoint)).
 }
 \examples{
 # see example(polyCub)
 }
 \references{
-A. Baddeley and R. Turner (2005). Spatstat: an R package
-for analyzing spatial point patterns. Journal of
-Statistical Software 12 (6), 1-42.
+Baddeley, A. and Turner, R. (2005). \pkg{spatstat}: an \R
+package for analyzing spatial point patterns. \emph{Journal
+of Statistical Software}, \bold{12} (6), 1-42.
 }
 \seealso{
 Other polyCub.methods: \code{\link{.polyCub.iso}},

@@ -3,8 +3,8 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.midpoint.R] by SM Don 07/11/2013 21:06 (CET)>
+### Copyright (C) 2009-2014 Sebastian Meyer
+### Time-stamp: <[polyCub.midpoint.R] by SM Fre 14/03/2014 15:50 (CET)>
 ################################################################################
 
 
@@ -12,7 +12,8 @@
 #'
 #' The surface is converted to a binary pixel image
 #' using the \code{\link[spatstat]{as.im.function}} method from package
-#' \pkg{spatstat}. The integral under the surface is then approximated as the
+#' \pkg{spatstat} (Baddeley and Turner, 2005).
+#' The integral under the surface is then approximated as the
 #' sum over (pixel area * f(pixel midpoint)).
 #' 
 #' @param polyregion a polygonal integration domain.
@@ -31,9 +32,9 @@
 #' @return The approximated value of the integral of \code{f} over
 #' \code{polyregion}.
 #' @references
-#' A. Baddeley and R. Turner (2005).
-#' Spatstat: an R package for analyzing spatial point patterns.
-#' Journal of Statistical Software 12 (6), 1-42.
+#' Baddeley, A. and Turner, R. (2005).
+#' \pkg{spatstat}: an \R package for analyzing spatial point patterns.
+#' \emph{Journal of Statistical Software}, \bold{12} (6), 1-42.
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @import sp
@@ -41,6 +42,7 @@
 #' @importFrom grDevices gray
 #' @examples # see example(polyCub)
 #' @export
+## NOTE: we don't import graphics::plot since it is already imported via sp
 
 polyCub.midpoint <- function (polyregion, f, ...,
                               eps = NULL, dimyx = NULL, plot = FALSE)

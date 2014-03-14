@@ -14,19 +14,19 @@ the specific cubature methods listed below.
 Two-dimensional midpoint rule. Polygons are converted to
 binary pixel images using the
 \code{\link[spatstat]{as.im.function}} method from package
-\pkg{spatstat}. The integral is then obtained as the sum
-over (pixel area * f(pixel midpoint)). }
-\item{\code{\link{polyCub.SV}}:}{ Product Gauss cubature as
-proposed by Sommariva and Vianello (2007). }
-\item{\code{\link{polyCub.iso}}:}{ Efficient adaptive
-cubature for \emph{isotropic} functions via line
+\pkg{spatstat} (Baddeley and Turner, 2005). The integral is
+then obtained as the sum over (pixel area * f(pixel
+midpoint)). } \item{\code{\link{polyCub.SV}}:}{ Product
+Gauss cubature as proposed by Sommariva and Vianello
+(2007). } \item{\code{\link{polyCub.iso}}:}{ Efficient
+adaptive cubature for \emph{isotropic} functions via line
 \code{\link{integrate}()} along the polygon boundary, see
 Meyer and Held (2014, Section 2.4 of Supplement B). }
 \item{\code{\link{polyCub.exact.Gauss}}:}{ Quasi-exact
 method specific to the integration of the \emph{bivariate
 Gaussian density} over polygonal domains. It is based on
 formulae from Chapter 26 of the Abramowitz and Stegun
-(1970) handbook, i.e. triangulation of the polygonal domain
+(1972) handbook, i.e. triangulation of the polygonal domain
 (using \code{\link[gpclib]{tristrip}} of package
 \pkg{gpclib}) and appropriate evaluations of
 \code{\link[mvtnorm]{pmvnorm}} from package \pkg{mvtnorm}.
@@ -38,29 +38,30 @@ detailed description and benchmark experiment of some of
 the above cubature methods (and others).
 }
 \references{
-M. Abramowitz and I. A. Stegun (1970). Handbook of
+Abramowitz, M. and Stegun, I. A. (1972). Handbook of
 Mathematical Functions with Formulas, Graphs, and
-Mathematical Tables (9th ed.). New York: Dover
-Publications.
+Mathematical Tables. New York: Dover Publications.
 
-A. Baddeley and R. Turner (2005). Spatstat: an R package
-for analyzing spatial point patterns. Journal of
-Statistical Software 12 (6), 1-42.
+Baddeley, A. and Turner, R. (2005). \pkg{spatstat}: an \R
+package for analyzing spatial point patterns. \emph{Journal
+of Statistical Software}, \bold{12} (6), 1-42.
 
-S. Meyer (2010). Spatio-Temporal Infectious Disease
+Meyer, S. (2010). Spatio-Temporal Infectious Disease
 Epidemiology based on Point Processes. Master's Thesis, LMU
 Munich. Available as
 \url{http://epub.ub.uni-muenchen.de/11703/}.
 
-S. Meyer and L. Held (2014). Power-law models for
-infectious disease spread.
+Meyer, S. and Held, L. (2014). Power-law models for
+infectious disease spread. Revised for the \emph{Annals of
+Applied Statistics}.
 \href{http://arxiv.org/abs/1308.5115}{arXiv:1308.5115}.
 Supplements are available from
 \url{http://www.biostat.uzh.ch/research/manuscripts/powerlaw.html}.
 
-A. Sommariva and M. Vianello (2007). Product Gauss cubature
-over polygons based on Green's integration formula. Bit
-Numerical Mathematics, 47 (2), 441-453.
+Sommariva, A. and Vianello, M. (2007). Product Gauss
+cubature over polygons based on Green's integration
+formula. \emph{Bit Numerical Mathematics}, \bold{47} (2),
+441-453.
 }
 \seealso{
 The packages \pkg{cubature} and \pkg{R2Cuba}, which are

@@ -66,9 +66,10 @@ available under the GNU GPL (>=2) license from
 \url{http://www.math.unipd.it/~alvise/software.html}.
 }
 \references{
-A. Sommariva and M. Vianello (2007). Product Gauss cubature
-over polygons based on Green's integration formula. Bit
-Numerical Mathematics, 47 (2), 441-453.
+Sommariva, A. and Vianello, M. (2007). Product Gauss
+cubature over polygons based on Green's integration
+formula. \emph{Bit Numerical Mathematics}, \bold{47} (2),
+441-453.
 }
 \seealso{
 Other polyCub.methods: \code{\link{.polyCub.iso}},

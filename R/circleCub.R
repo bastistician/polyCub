@@ -3,8 +3,8 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2013 Sebastian Meyer
-### Time-stamp: <[circleCub.R] by SM Don 07/11/2013 20:42 (CET)>
+### Copyright (C) 2013-2014 Sebastian Meyer
+### Time-stamp: <[circleCub.R] by SM Fre 14/03/2014 14:36 (CET)>
 ###
 ### Special cases of cubature over circular domains (center, r)
 ################################################################################
@@ -16,12 +16,12 @@
 ##' density (i.e. \eqn{\Sigma} = \code{sd^2*diag(2)}) over circular domains via
 ##' the cumulative distribution function of the (non-central) Chi-Squared
 ##' distribution (\code{pchisq}), cp. Formula 26.3.24 in Abramowitz and Stegun
-##' (1970).
+##' (1972).
 ##' 
 ##' @references
-##' M. Abramowitz and I. A. Stegun (1970).
+##' Abramowitz, M. and Stegun, I. A. (1972).
 ##' Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical
-##' Tables (9th ed.). New York: Dover Publications.
+##' Tables. New York: Dover Publications.
 ##' @param center numeric vector of length 2 (center of the circle).
 ##' @param r numeric (radius of the circle). Several radii may be supplied. 
 ##' @param mean numeric vector of length 2

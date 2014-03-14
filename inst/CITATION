@@ -1,0 +1,31 @@
+### list of authors
+
+authors <- c(
+    SM = person("Sebastian", "Meyer"),
+    LH = person("Leonhard", "Held"),
+    MH = person("Michael", "H{\"o}hle")
+    )
+
+
+### Outer header
+
+citHeader("To cite", sQuote("polyCub"),
+          "in publications refer to Supplement B (Section 2.4) of:")
+
+
+### power-law paper
+
+bibentry(
+    bibtype = "Article", key = "Meyer+Held_2014",
+    author = authors[c("SM", "LH")],
+    title = "Power-law models for infectious disease spread",
+    journal = "Annals of Applied Statistics",
+    issn = "1932-6157",
+    year = "2014",
+    note = "Revision submitted, available as arXiv:1308.5115",
+#    volume = "",
+#    number = "",
+#    pages = "",
+#    doi = ""
+    eprint = "http://arxiv.org/abs/1308.5115"
+)

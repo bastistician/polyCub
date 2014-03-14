@@ -37,13 +37,13 @@ is the \code{pmvnorm} function). }
 }
 \description{
 Integration is based on triangulation of the polygonal
-domain and formulae from Chapter 26 of the Abramowitz &
-Stegun handbook (Section 26.9, Example 9, pp. 956f.). This
-method is quite cumbersome because the A&S formula is only
-for triangles where one vertex is the origin (0,0). For
-each triangle of the \code{\link[gpclib]{tristrip}} we have
-to check in which of the 6 outer regions of the triangle
-the origin (0,0) lies and adapt the signs in the formula
+domain and formulae from the Abramowitz and Stegun (1972)
+handbook (Section 26.9, Example 9, pp. 956f.). This method
+is quite cumbersome because the A&S formula is only for
+triangles where one vertex is the origin (0,0). For each
+triangle of the \code{\link[gpclib]{tristrip}} we have to
+check in which of the 6 outer regions of the triangle the
+origin (0,0) lies and adapt the signs in the formula
 appropriately. (AOB+BOC-AOC) or (AOB-AOC-BOC) or
 (AOB+AOC-BOC) or (AOC+BOC-AOB) or \ldots. However, the most
 time consuming step is the evaluation of
@@ -61,10 +61,9 @@ prohibited). It has to be accepted explicitly via
 # see example(polyCub)
 }
 \references{
-M. Abramowitz and I. A. Stegun (1970). Handbook of
+Abramowitz, M. and Stegun, I. A. (1972). Handbook of
 Mathematical Functions with Formulas, Graphs, and
-Mathematical Tables (9th ed.). New York: Dover
-Publications.
+Mathematical Tables. New York: Dover Publications.
 }
 \seealso{
 \code{\link{circleCub.Gauss}} for quasi-exact cubature of

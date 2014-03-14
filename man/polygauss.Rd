@@ -40,9 +40,10 @@ Calculate 2D Nodes and Weights of the Product Gauss
 Cubature
 }
 \references{
-A. Sommariva and M. Vianello (2007): Product Gauss cubature
-over polygons based on Green's integration formula. Bit
-Numerical Mathematics, 47 (2), 441-453.
+Sommariva, A. and Vianello, M. (2007): Product Gauss
+cubature over polygons based on Green's integration
+formula. \emph{Bit Numerical Mathematics}, \bold{47} (2),
+441-453.
 }
 \keyword{internal}
 

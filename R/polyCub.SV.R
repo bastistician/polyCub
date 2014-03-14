@@ -3,8 +3,8 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] by SM Don 07/11/2013 21:08 (CET)>
+### Copyright (C) 2009-2014 Sebastian Meyer
+### Time-stamp: <[polyCub.SV.R] by SM Fre 14/03/2014 14:49 (CET)>
 ################################################################################
 
 
@@ -37,9 +37,9 @@
 #' Vianello (2007), which is available under the GNU GPL (>=2) license from
 #' \url{http://www.math.unipd.it/~alvise/software.html}.
 #' @references
-#' A. Sommariva and M. Vianello (2007).
+#' Sommariva, A. and Vianello, M. (2007).
 #' Product Gauss cubature over polygons based on Green's integration formula.
-#' Bit Numerical Mathematics, 47 (2), 441-453.
+#' \emph{Bit Numerical Mathematics}, \bold{47} (2), 441-453.
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @importFrom statmod gauss.quad
@@ -117,9 +117,9 @@ polyCub.SV <- function (polyregion, f, ...,
 ##' convex polygons, this rotation guarantees that all nodes fall inside the
 ##' polygon.
 ##' @references
-##' A. Sommariva and M. Vianello (2007):
+##' Sommariva, A. and Vianello, M. (2007):
 ##' Product Gauss cubature over polygons based on Green's integration formula.
-##' Bit Numerical Mathematics, 47 (2), 441-453.
+##' \emph{Bit Numerical Mathematics}, \bold{47} (2), 441-453.
 ##' @keywords internal
 
 polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE)

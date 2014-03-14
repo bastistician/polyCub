@@ -26,7 +26,7 @@ isotropic Gaussian density (i.e. \eqn{\Sigma} =
 \code{sd^2*diag(2)}) over circular domains via the
 cumulative distribution function of the (non-central)
 Chi-Squared distribution (\code{pchisq}), cp. Formula
-26.3.24 in Abramowitz and Stegun (1970).
+26.3.24 in Abramowitz and Stegun (1972).
 }
 \note{
 The non-centrality parameter of the evaluated chi-squared
@@ -45,10 +45,9 @@ if (gpclibPermit()) {
 }
 }
 \references{
-M. Abramowitz and I. A. Stegun (1970). Handbook of
+Abramowitz, M. and Stegun, I. A. (1972). Handbook of
 Mathematical Functions with Formulas, Graphs, and
-Mathematical Tables (9th ed.). New York: Dover
-Publications.
+Mathematical Tables. New York: Dover Publications.
 }
 \keyword{math}
 \keyword{spatial}

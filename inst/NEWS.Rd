@@ -5,7 +5,7 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.4-3 (2014-02-17)}{
+\section{Changes in polyCub version 0.4-3 (2014-03-14)}{
 
   \itemize{
     \item \code{polyCub.iso()} ...
@@ -18,6 +18,8 @@
     }
     
     \item The \code{checkintrfr()} function is exported and documented.
+
+    \item Added a \file{CITATION} file.
   }
   
 }

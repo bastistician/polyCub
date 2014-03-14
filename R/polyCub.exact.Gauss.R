@@ -3,16 +3,16 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.exact.Gauss.R] by SM Don 07/11/2013 21:06 (CET)>
+### Copyright (C) 2009-2014 Sebastian Meyer
+### Time-stamp: <[polyCub.exact.Gauss.R] by SM Fre 14/03/2014 15:50 (CET)>
 ################################################################################
 
 
 #' Quasi-Exact Cubature of the Bivariate Normal Density
 #'
 #' Integration is based on triangulation of the polygonal domain and formulae
-#' from Chapter 26 of the 
-#' Abramowitz & Stegun handbook (Section 26.9, Example 9, pp. 956f.).
+#' from the 
+#' Abramowitz and Stegun (1972) handbook (Section 26.9, Example 9, pp. 956f.).
 #' This method is quite cumbersome because the A&S formula is only for triangles
 #' where one vertex is the origin (0,0). For each triangle of the
 #' \code{\link[gpclib]{tristrip}} we have to check in which of the 6 outer 
@@ -51,9 +51,9 @@
 #' quasi-exact (as is the \code{pmvnorm} function).
 #' }
 #' @references
-#' M. Abramowitz and I. A. Stegun (1970).
+#' Abramowitz, M. and Stegun, I. A. (1972).
 #' Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical
-#' Tables (9th ed.). New York: Dover Publications.
+#' Tables. New York: Dover Publications.
 #' @keywords math spatial
 #' @seealso \code{\link{circleCub.Gauss}} for quasi-exact cubature of the
 #' isotropic Gaussian density over a circular domain.
@@ -64,6 +64,7 @@
 #' @importFrom stats cov2cor
 #' @importFrom spatstat is.polygonal
 #' @export
+## NOTE: we don't import graphics::plot since it is already imported via sp
 
 polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
                                  plot = FALSE)
