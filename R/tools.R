@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[tools.R] by SM Fre 14/03/2014 15:46 (CET)>
+### Time-stamp: <[tools.R] by SM Die 06/05/2014 10:18 (CEST)>
 ###
 ### Tiny toolbox of internal function
 ################################################################################
@@ -73,7 +73,7 @@ plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
         stopifnot(add)
         lapply(polyregion, function(xy) polygon(xy, lwd=lwd))
     } else if (inherits(polyregion, "gpc.poly")) {
-        if (!isClass("gpc.poly")) library("rgeos")
+        if (!isClass("gpc.poly")) library("rgeos") # probably redundant
         plot(polyregion, poly.args=list(lwd=lwd), ann=FALSE, add=add)
     } else {
         if (inherits(polyregion, "Polygon"))

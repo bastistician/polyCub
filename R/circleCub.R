@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013-2014 Sebastian Meyer
-### Time-stamp: <[circleCub.R] by SM Fre 14/03/2014 14:36 (CET)>
+### Time-stamp: <[circleCub.R] by SM Die 06/05/2014 10:02 (CEST)>
 ###
 ### Special cases of cubature over circular domains (center, r)
 ################################################################################
@@ -39,7 +39,7 @@
 ##' @examples
 ##' circleCub.Gauss(center=c(1,2), r=3, mean=c(4,5), sd=6)
 ##'
-##' if (gpclibPermit()) {
+##' if (requireNamespace("mvtnorm") && gpclibPermit()) {
 ##'   ## compare with cubature over a polygonal approximation of a circle
 ##'   disc.poly <- spatstat::disc(radius=3, centre=c(1,2), npoly=32)
 ##'   polyCub.exact.Gauss(disc.poly, mean=c(4,5), Sigma=6^2*diag(2))

@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.exact.Gauss.R] by SM Fre 14/03/2014 15:50 (CET)>
+### Time-stamp: <[polyCub.exact.Gauss.R] by SM Die 06/05/2014 10:13 (CEST)>
 ################################################################################
 
 
@@ -69,7 +69,7 @@
 polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
                                  plot = FALSE)
 {
-    gpclibCheck()
+    gpclibCheck(fatal=TRUE)
     if (is.polygonal(polyregion)) {
         polyregion <- owin2gpc(polyregion)
     } else if (!inherits(polyregion, "gpc.poly")) {

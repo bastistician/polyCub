@@ -17,8 +17,15 @@ m <- c(1,1)
 sd <- 3
 
 ## exact value of the integral over the _polygonal_ circle
-gpclibPermit()
-intExact <- polyCub.exact.Gauss(disc.owin, mean=m, Sigma=sd^2*diag(2))
+intExact <- 0.65844436
+if (requireNamespace("mvtnorm") && gpclibPermit()) {
+    ## run this conditionally since gpclib might not be available on all
+    ## platforms (as pointed out by Uwe Ligges, 2014-04-20)
+    test_that("polyCub.exact.Gauss returns validated result", {
+        int <- polyCub.exact.Gauss(disc.owin, mean=m, Sigma=sd^2*diag(2))
+        expect_that(int, equals(intExact, tolerance=1e-8, check.attributes=FALSE))
+    })
+}
 
 
 ### perform the tests (check against each other)
