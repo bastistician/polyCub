@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] by SM Mit 07/05/2014 09:42 (CEST)>
+### Time-stamp: <[polyCub.SV.R] by SM Mit 07/05/2014 11:59 (CEST)>
 ################################################################################
 
 
@@ -25,7 +25,8 @@
 #' @param ... further arguments for \code{f}.
 #' @param nGQ degree of the one-dimensional Gauss-Legendre quadrature rule
 #' (default: 20). See \code{\link[statmod]{gauss.quad}} in package
-#' \pkg{statmod}, on which this function depends.
+#' \pkg{statmod}. The nodes and weights up to degree 60 are cached in
+#' \pkg{polyCub}, for larger degrees \pkg{statmod} is required.
 #' @param plot logical indicating if an illustrative plot of the numerical
 #' integration should be produced.
 #' @inheritParams polygauss
@@ -42,7 +43,6 @@
 #' \emph{Bit Numerical Mathematics}, \bold{47} (2), 441-453.
 #' @keywords math spatial
 #' @family polyCub-methods
-#' @importFrom statmod gauss.quad
 #' @importFrom graphics points
 #' @examples # see example(polyCub)
 #' @export
@@ -55,20 +55,18 @@ polyCub.SV <- function (polyregion, f, ...,
                                 # which means anticlockwise vertex order with
                                 # first vertex not repeated
     f <- match.fun(f)
-    stopifnot(isScalar(nGQ),
+    stopifnot(isScalar(nGQ), nGQ > 0,
               is.null(alpha) || (isScalar(alpha) && !is.na(alpha)))
 
     ## COMPUTE NODES AND WEIGHTS OF 1D GAUSS QUADRATURE RULE.
     ## DEGREE "N" (as requested) (ORDER GAUSS PRIMITIVE)
-    nw_N <- gauss.quad(n = nGQ, kind = "legendre")
+    nw_N <- gauss.quad(nGQ)
     ## DEGREE "M" = N+1 (ORDER GAUSS INTEGRATION)
-    nw_M <- gauss.quad(n = nGQ + 1, kind = "legendre")
-    ## in one list
-    nw_MN <- unname(c(nw_M, nw_N))
+    nw_M <- gauss.quad(nGQ + 1)
     
     ## Cubature of every single polygon of the "polys" list
     int1 <- function (poly) {
-        nw <- polygauss(poly, nw_MN, alpha, rotation, engine)
+        nw <- polygauss(poly, c(nw_M, nw_N), alpha, rotation, engine)
         fvals <- f(nw$nodes, ...)
         cubature_val <- sum(nw$weights * fvals)
         ## if (!isTRUE(all.equal(0, cubature_val))) {
@@ -84,13 +82,27 @@ polyCub.SV <- function (polyregion, f, ...,
     if (plot) {
         plotpolyf(polys, f, ..., use.lattice=FALSE)
         for (i in seq_along(polys)) {
-            nw <- polygauss(polys[[i]], nw_MN, alpha, rotation)
+            nw <- polygauss(polys[[i]], c(nw_M, nw_N), alpha, rotation)
             points(nw$nodes, cex=0.6, pch = i) #, col=1+(nw$weights<=0)
         }
     }
 ###################
 
     int
+}
+
+## this wrapper provides a partially memoized version of
+## unname(statmod::gauss.quad(n, kind="legendre"))
+gauss.quad <- function (n)
+{
+    if (n <= 60) { # results cached in R/sysdata.rda
+        .NWGL[[n]]
+    } else if (requireNamespace("statmod")) {
+        unname(statmod::gauss.quad(n = n, kind = "legendre"))
+    } else {
+        stop("package ", sQuote("statmod"),
+             " is required for more than 60 quadrature nodes")
+    }
 }
 
 

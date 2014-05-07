@@ -1,7 +1,7 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
 Version: 0.5-0
-Date: 2014-05-06
+Date: 2014-05-07
 Authors@R: c(person("Sebastian", "Meyer",
                     email = "Sebastian.Meyer@ifspm.uzh.ch",
                     role = c("aut","cre","trl")),
@@ -25,5 +25,5 @@ License: GPL-2
 URL: https://github.com/WastlM/polyCub
 BugReports: https://github.com/WastlM/polyCub/issues
 Depends: R (>= 2.15.0), methods, sp
-Imports: grDevices, graphics, stats, spatstat, statmod
-Suggests: lattice, testthat, mvtnorm, rgeos, gpclib
+Imports: grDevices, graphics, stats, spatstat
+Suggests: lattice, testthat, mvtnorm, statmod, rgeos, gpclib

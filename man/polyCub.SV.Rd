@@ -24,7 +24,9 @@ polyCub.SV(polyregion, f, ..., nGQ = 20, alpha = NULL, rotation = FALSE,
   \item{nGQ}{degree of the one-dimensional Gauss-Legendre
   quadrature rule (default: 20). See
   \code{\link[statmod]{gauss.quad}} in package
-  \pkg{statmod}, on which this function depends.}
+  \pkg{statmod}. The nodes and weights up to degree 60 are
+  cached in \pkg{polyCub}, for larger degrees \pkg{statmod}
+  is required.}
 
   \item{plot}{logical indicating if an illustrative plot of
   the numerical integration should be produced.}
