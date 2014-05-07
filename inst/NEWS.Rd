@@ -5,6 +5,18 @@
 \title{News for Package 'polyCub'}
 
 
+\section{Changes in polyCub version 0.5-0 (2014-05-06)}{
+
+  \itemize{
+    \item \code{polyCub.SV()} gained an argument \code{engine} to choose
+    among available implementations. The new and faster C-implementation
+    is the default.
+  }
+  
+}
+
+
+
 \section{Changes in polyCub version 0.4-3 (2014-03-14)}{
 
   \itemize{

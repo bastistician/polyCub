@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] by SM Fre 14/03/2014 14:49 (CET)>
+### Time-stamp: <[polyCub.SV.R] by SM Mit 07/05/2014 09:42 (CEST)>
 ################################################################################
 
 
@@ -48,7 +48,7 @@
 #' @export
 
 polyCub.SV <- function (polyregion, f, ...,
-                        nGQ = 20, alpha = NULL, rotation = FALSE,
+                        nGQ = 20, alpha = NULL, rotation = FALSE, engine = "C",
                         plot = FALSE)
 {
     polys <- xylist(polyregion) # transform to something like "owin$bdry"
@@ -68,7 +68,7 @@ polyCub.SV <- function (polyregion, f, ...,
     
     ## Cubature of every single polygon of the "polys" list
     int1 <- function (poly) {
-        nw <- polygauss(poly, nw_MN, alpha, rotation)
+        nw <- polygauss(poly, nw_MN, alpha, rotation, engine)
         fvals <- f(nw$nodes, ...)
         cubature_val <- sum(nw$weights * fvals)
         ## if (!isTRUE(all.equal(0, cubature_val))) {
@@ -77,7 +77,7 @@ polyCub.SV <- function (polyregion, f, ...,
         ## }
         cubature_val
     }
-    respolys <- sapply(polys, int1, simplify = TRUE, USE.NAMES = FALSE)
+    respolys <- vapply(X=polys, FUN=int1, FUN.VALUE=0, USE.NAMES=FALSE)
     int <- sum(respolys)
 
 ### ILLUSTRATION ###
@@ -116,28 +116,40 @@ polyCub.SV <- function (polyregion, f, ...,
 ##' \code{"Q"}, which are farthest apart (see Sommariva and Vianello, 2007). For
 ##' convex polygons, this rotation guarantees that all nodes fall inside the
 ##' polygon.
+##' @param engine character string specifying the implementation to use. Up to
+##' polyCub version 0.4-3, the two-dimensional nodes and weights were computed
+##' by R functions and these are still available by setting \code{engine = "R"}.
+##' The new C-implementation is now the default (\code{engine = "C"}) and 
+##' requires approximately 30\% less computation time.\cr
+##' The special setting \code{engine = "C+reduce"} will discard redundant nodes
+##' at (0,0) with zero weight resulting from edges on the base-line
+##' \eqn{x = \alpha} or orthogonal to it. 
+##' This extra cleaning is only worth its cost for computationally intensive
+##' functions \code{f} over polygons which really have some edges on the
+##' baseline or parallel to the x-axis.  Note that the old \R
+##' implementation does not return such unset zero nodes and weights.
 ##' @references
 ##' Sommariva, A. and Vianello, M. (2007):
 ##' Product Gauss cubature over polygons based on Green's integration formula.
 ##' \emph{Bit Numerical Mathematics}, \bold{47} (2), 441-453.
 ##' @keywords internal
+##' @useDynLib polyCub C_polygauss
 
-polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE)
+polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE, engine = "C")
 {
-    ## convert to coordinate matrix
-    xy <- cbind(xy[["x"]], xy[["y"]], deparse.level=0)
-
-    
     ## POLYGON ROTATION
     
     xyrot <- if (identical(FALSE, rotation)) {
         if (is.null(alpha)) { # choose midpoint of x-range
-            xrange <- range(xy[,1L])
+            xrange <- range(xy[["x"]])
             alpha <- (xrange[1L] + xrange[2L]) / 2
         }
         angle <- 0
-        xy
+        xy[c("x", "y")]
     } else {
+        ## convert to coordinate matrix
+        xy <- cbind(xy[["x"]], xy[["y"]], deparse.level=0)
+        ## determine P and Q
         if (identical(TRUE, rotation)) { # automatic choice of rotation angle
             ## such that for a convex polygon all nodes fall inside the polygon
             QP <- vertexpairmaxdist(xy)
@@ -159,48 +171,70 @@ polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE)
             Prot <- rotmat %*% P
             alpha <- Prot[1]
         }
-        xy %*% t(rotmat)   # = t(rotmat %*% t(xy))
+        xyrot <- xy %*% t(rotmat)   # = t(rotmat %*% t(xy))
+        ## convert back to list
+        list(x = xyrot[,1L,drop=TRUE], y = xyrot[,2L,drop=TRUE])
     }
 
+    ## number of vertices
+    L <- length(xyrot[[1L]])
+    
     
     ## COMPUTE 2D NODES AND WEIGHTS.
-
-    sides <- cbind(xyrot,
-                   xyrot[c(2:nrow(xyrot),1L),,drop=FALSE],
-                   deparse.level=0) # (x1,y1,x2,y2)
     
-    nwlist <- mapply(.polygauss.side,
-                     sides[,1L], sides[,2L], sides[,3L], sides[,4L],
-                     MoreArgs = c(nw_MN, alpha),
-                     SIMPLIFY = FALSE, USE.NAMES = FALSE)
+    if (engine == "R") {
+        
+        toIdx <- c(seq.int(2, L), 1L)
+        nwlist <- mapply(.polygauss.side,
+                         xyrot[[1L]], xyrot[[2L]],
+                         xyrot[[1L]][toIdx], xyrot[[2L]][toIdx],
+                         MoreArgs = c(nw_MN, alpha),
+                         SIMPLIFY = FALSE, USE.NAMES = FALSE)
 
-    ## nodes <- c(subListExtract(nwlist, "x", use.names=FALSE),
-    ##            subListExtract(nwlist, "y", use.names=FALSE),
-    ##            recursive=TRUE)
-    nodes <- c(lapply(nwlist, "[[", 1L),
-               lapply(nwlist, "[[", 2L),
-               recursive=TRUE)
-    dim(nodes) <- c(length(nodes)/2, 2L)
-    
-    #nw <- .Call("polygauss",
-    #            xyrot[,1L],xyrot[,2L],alpha,
-    #            nw_N$nodes,nw_N$weights,nw_M$nodes,nw_M$weights,
-    #            PACKAGE="surveillance")
+        nodes <- c(lapply(nwlist, "[[", 1L),
+                   lapply(nwlist, "[[", 2L),
+                   recursive=TRUE)
+        dim(nodes) <- c(length(nodes)/2, 2L)
+        weights <- unlist(lapply(nwlist, "[[", 3L),
+                          recursive=FALSE, use.names=FALSE)
+
+    } else { # use C-implementation
+
+        ## degrees of cubature and vector template for results
+        M <- length(nw_MN[[1L]])
+        N <- length(nw_MN[[3L]])
+        zerovec <- double(L*M*N)
+
+        ## rock'n'roll
+        nwlist <- .C(C_polygauss,
+                     as.double(xyrot[[1L]]), as.double(xyrot[[2L]]),
+                     as.double(nw_MN[[1L]]), as.double(nw_MN[[2L]]),
+                     as.double(nw_MN[[3L]]), as.double(nw_MN[[4L]]),
+                     as.double(alpha),
+                     as.integer(L), as.integer(M), as.integer(N),
+                     x = zerovec, y = zerovec, w = zerovec)[c("x", "y", "w")]
+        
+        nodes <- cbind(nwlist[[1L]], nwlist[[2L]], deparse.level=0)
+        weights <- nwlist[[3L]]
+
+        ## remove unset nodes from edges on baseline or orthogonal to it
+        ## (note that the R implementation does not return such redundant nodes)
+        if (engine == "C+reduce" && any(unset <- weights == 0)) {
+            nodes <- nodes[!unset,]
+            weights <- weights[!unset]
+        }
+
+    }
 
     ## back-transform rotated nodes by t(t(rotmat) %*% t(nodes))
     ## (inverse of rotation matrix is its transpose)
     list(nodes = if (rotation) nodes %*% rotmat else nodes,
-         #weights = unlist(subListExtract(nwlist, "w", use.names=FALSE), recursive=FALSE, use.names=FALSE),
-         weights = unlist(lapply(nwlist, "[[", 3L), recursive=FALSE, use.names=FALSE),
-         angle = angle, alpha = alpha)
+         weights = weights, angle = angle, alpha = alpha)
 }
 
 
 ## The working horse .polygauss.side below is an R translation
 ## of the original MATLAB implementation by Sommariva and Vianello (2007).
-## TODO: efficient implementation of this function in C
-##       might increase the speed of the cubature (although this is already
-##       highly efficient R code)
 
 .polygauss.side <- function (x1, y1, x2, y2, s_loc, w_loc, s_N, w_N, alpha)
 {
@@ -233,6 +267,32 @@ polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE)
          rep.int(y_gauss_side, length(s_N)),              # length: degree_loc*N
          tcrossprod(half_length_y*scaling_fact_minus*w_loc, w_N)) # degree_loc x N
 }
+
+## NOTE: The above .polygauss.side() function is already efficient R code.
+##       Passing via C only at this deep level (see below) turned out to be
+##       slower than staying with R! However, stepping into C already for
+##       looping over the edges in polygauss() improves the speed.
+## ## @useDynLib polyCub C_polygauss_side
+## .polygauss.side <- function (x1, y1, x2, y2, s_M, w_M, s_N, w_N, alpha)
+## {
+##     if ((x1 == alpha && x2 == alpha) || (y2 == y1))
+##         ## side lies on base-line or is orthogonal to it -> skip
+##         return(NULL)
+##
+##     parallel2baseline <- x2 == x1  # side is parallel to base-line => degree N
+##     M <- length(s_M)
+##     N <- length(s_N)
+##     loc <- if (parallel2baseline) N else M
+##     zerovec <- double(loc * N)
+##     .C(C_polygauss_side,
+##        as.double(x1), as.double(y1), as.double(x2), as.double(y2),
+##        as.double(if (parallel2baseline) s_N else s_M),
+##        as.double(if (parallel2baseline) w_N else w_M),
+##        as.double(s_N), as.double(w_N), as.double(alpha),
+##        as.integer(loc), as.integer(N),
+##        x = zerovec, y = zerovec, w = zerovec)[c("x", "y", "w")]
+## }
+
 
 ##' @importFrom stats dist
 vertexpairmaxdist <- function (xy)

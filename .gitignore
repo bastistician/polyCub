@@ -3,7 +3,8 @@
 
 dev/
 polygauss/
+polyCub.Rcheck/
 
-polyCub_*.tar.gz
-polyCub-Ex.R
-*.Rcheck
+/polyCub_*.tar.gz
+src/*.o
+src/*.so
