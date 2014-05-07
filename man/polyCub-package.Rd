@@ -52,8 +52,8 @@ Munich. Available as
 \url{http://epub.ub.uni-muenchen.de/11703/}.
 
 Meyer, S. and Held, L. (2014). Power-law models for
-infectious disease spread. Revised for the \emph{Annals of
-Applied Statistics}.
+infectious disease spread. \emph{Annals of Applied
+Statistics}. In press, available as
 \href{http://arxiv.org/abs/1308.5115}{arXiv:1308.5115}.
 Supplements are available from
 \url{http://www.biostat.uzh.ch/research/manuscripts/powerlaw.html}.

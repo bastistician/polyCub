@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[zzz.R] by SM Fre 14/03/2014 14:53 (CET)>
+### Time-stamp: <[zzz.R] by SM Mit 07/05/2014 10:29 (CEST)>
 ###
 ### Package administration
 ################################################################################
@@ -65,7 +65,7 @@
 #'
 #' Meyer, S. and Held, L. (2014).
 #' Power-law models for infectious disease spread.
-#' Revised for the \emph{Annals of Applied Statistics}.
+#' \emph{Annals of Applied Statistics}. In press, available as
 #' \href{http://arxiv.org/abs/1308.5115}{arXiv:1308.5115}.
 #' Supplements are available from
 #' \url{http://www.biostat.uzh.ch/research/manuscripts/powerlaw.html}.
