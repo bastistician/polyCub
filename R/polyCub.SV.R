@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] by SM Mit 07/05/2014 11:59 (CEST)>
+### Time-stamp: <[polyCub.SV.R] by SM Mit 07/05/2014 14:09 (CEST)>
 ################################################################################
 
 
@@ -139,7 +139,7 @@ gauss.quad <- function (n)
 ##' This extra cleaning is only worth its cost for computationally intensive
 ##' functions \code{f} over polygons which really have some edges on the
 ##' baseline or parallel to the x-axis.  Note that the old \R
-##' implementation does not return such unset zero nodes and weights.
+##' implementation does not have such unset zero nodes and weights.
 ##' @references
 ##' Sommariva, A. and Vianello, M. (2007):
 ##' Product Gauss cubature over polygons based on Green's integration formula.

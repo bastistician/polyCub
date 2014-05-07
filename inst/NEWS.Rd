@@ -10,7 +10,8 @@
   \itemize{
     \item \code{polyCub.SV()} gained an argument \code{engine} to choose
     among available implementations. The new and faster C-implementation
-    is the default.
+    is the default. There should not be any numerical differences in the
+    result of the cubature.
 
     \item Package \CRANpkg{statmod} is no longer strictly required
     (imported). Nodes and weights for Gauss-Legendre quadrature in

@@ -63,7 +63,7 @@ polyCub.SV(polyregion, f, ..., nGQ = 20, alpha = NULL, rotation = FALSE,
   intensive functions \code{f} over polygons which really
   have some edges on the baseline or parallel to the
   x-axis.  Note that the old \R implementation does not
-  return such unset zero nodes and weights.}
+  have such unset zero nodes and weights.}
 }
 \value{
 The approximated value of the integral of \code{f} over

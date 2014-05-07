@@ -49,7 +49,7 @@ polygauss(xy, nw_MN, alpha = NULL, rotation = FALSE, engine = "C")
   intensive functions \code{f} over polygons which really
   have some edges on the baseline or parallel to the
   x-axis.  Note that the old \R implementation does not
-  return such unset zero nodes and weights.}
+  have such unset zero nodes and weights.}
 }
 \description{
 Calculate 2D Nodes and Weights of the Product Gauss
