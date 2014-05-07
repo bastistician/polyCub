@@ -46,8 +46,10 @@ test_that("midpoint-cubature is correct", {
 })
 
 test_that("SV-cubature is correct", {
-    int <- polyCub.SV(disc.owin, f, mean=m, sd=sd, nGQ=3)
-    expect_that(int, equals(intExact, tolerance=0.0001, check.attributes=FALSE))
+    intC <- polyCub.SV(disc.owin, f, mean=m, sd=sd, nGQ=3, engine="C")
+    intR <- polyCub.SV(disc.owin, f, mean=m, sd=sd, nGQ=3, engine="R")
+    expect_that(intC, equals(intR))
+    expect_that(intC, equals(intExact, tolerance=0.0001, check.attributes=FALSE))
 })
 
 test_that("isotropic cubature is correct", {
