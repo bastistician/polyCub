@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[tools.R] by SM Die 06/05/2014 10:18 (CEST)>
+### Time-stamp: <[tools.R] by SM Mit 25/06/2014 11:11 (CEST)>
 ###
 ### Tiny toolbox of internal function
 ################################################################################
@@ -71,7 +71,8 @@ plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
 {
     if (is.vector(polyregion, mode="list")) { # internal xylist object
         stopifnot(add)
-        lapply(polyregion, function(xy) polygon(xy, lwd=lwd))
+        lapply(polyregion, polygon, lwd=lwd)
+        invisible()
     } else if (inherits(polyregion, "gpc.poly")) {
         if (!isClass("gpc.poly")) library("rgeos") # probably redundant
         plot(polyregion, poly.args=list(lwd=lwd), ann=FALSE, add=add)
