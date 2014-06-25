@@ -1,7 +1,7 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
-Version: 0.5-0
-Date: 2014-05-07
+Version: 0.5-1
+Date: 2014-06-25
 Authors@R: c(person("Sebastian", "Meyer",
                     email = "Sebastian.Meyer@ifspm.uzh.ch",
                     role = c("aut","cre","trl")),
@@ -19,8 +19,8 @@ Description: A package providing methods for cubature (numerical integration)
              and quasi-exact methods specific to the integration of the
              bivariate Gaussian density over polygonal and circular domains
              (based on formulae from the Abramowitz and Stegun (1972) handbook).
-             For cubature over simple hypercubes, the packages cubature and
-             R2Cuba are more appropriate.
+             For cubature over simple hypercubes, the packages "cubature" and
+             "R2Cuba" are more appropriate.
 License: GPL-2
 URL: https://github.com/WastlM/polyCub
 BugReports: https://github.com/WastlM/polyCub/issues
