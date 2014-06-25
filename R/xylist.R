@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2014 Sebastian Meyer
-### Time-stamp: <[xylist.R] by SM Mon 24/02/2014 10:53 (CET)>
+### Time-stamp: <[xylist.R] by SM Mit 25/06/2014 15:04 (CEST)>
 ###
 ### Convert various polygon classes to a simple "xylist"
 ################################################################################
@@ -68,14 +68,14 @@
 ##' @export
 xylist <- function (object, ...) UseMethod("xylist")
 
-##' @S3method xylist owin
 ##' @rdname xylist
 ##' @importFrom spatstat as.polygonal
+##' @export
 xylist.owin <- function (object, ...) as.polygonal(object)$bdry
 
-##' @S3method xylist gpc.poly
 ##' @rdname xylist
 ##' @importFrom spatstat area.xypolygon reverse.xypolygon
+##' @export
 xylist.gpc.poly <- function (object, ...)
 {
     lapply(object@pts, function (poly) {
@@ -85,21 +85,21 @@ xylist.gpc.poly <- function (object, ...)
     })
 }
 
-##' @S3method xylist SpatialPolygons
 ##' @rdname xylist
 ##' @inheritParams xylist.Polygons
+##' @export
 xylist.SpatialPolygons <- function (object, reverse = TRUE, ...)
 {
     unlist(lapply(object@polygons, xylist.Polygons, reverse=reverse, ...),
            recursive=FALSE, use.names=FALSE)
 }
 
-##' @S3method xylist Polygons
 ##' @rdname xylist
 ##' @param reverse logical (\code{TRUE}) indicating if the vertex order of the
 ##' \pkg{sp} classes should be reversed to get the \code{xylist}/\code{owin}
 ##' convention.
 ##' @import sp
+##' @export
 xylist.Polygons <- function (object, reverse = TRUE, ...)
 {
     lapply(object@Polygons, function (sr) {
@@ -111,15 +111,15 @@ xylist.Polygons <- function (object, reverse = TRUE, ...)
     })
 }
 
-##' @S3method xylist Polygon
 ##' @rdname xylist
 ##' @import methods
+##' @export
 xylist.Polygon <- function (object, reverse = TRUE, ...)
     xylist.Polygons(as(object,"Polygons"), reverse=reverse, ...)
 
-##' @S3method xylist default
 ##' @rdname xylist
 ##' @importFrom grDevices xy.coords
+##' @export
 xylist.default <- function (object, ...) {
     lapply(object, function (xy) {
         poly <- xy.coords(xy)[c("x","y")]
