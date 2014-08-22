@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013-2014 Sebastian Meyer
-### Time-stamp: <[plotpolyf.R] by SM Die 14/01/2014 09:57 (CET)>
+### Time-stamp: <[plotpolyf.R] 2014-08-22 15:36 (CEST) by SM>
 ###
 ### Plot polygonal domain with image of bivariate function
 ################################################################################
@@ -60,11 +60,11 @@ plotpolyf <- function (polyregion, f, ...,
     ## plot
     if (use.lattice && require("lattice")) {
         mypanel <- function(...) {
-            panel.levelplot(...)
-            lapply(polys, function(xy) panel.polygon(xy, lwd=lwd))
+            lattice::panel.levelplot(...)
+            lapply(polys, function(xy) lattice::panel.polygon(xy, lwd=lwd))
         }
-        trobj <- levelplot(fval ~ x*y, data=xygrid, aspect="iso",
-                           cuts=cuts, col.regions=col, panel=mypanel)
+        trobj <- lattice::levelplot(fval ~ x*y, data=xygrid, aspect="iso",
+                                    cuts=cuts, col.regions=col, panel=mypanel)
         if (is.list(print.args))
             do.call("print", c(alist(x=trobj), print.args)) else trobj
     } else {
