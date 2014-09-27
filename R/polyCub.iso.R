@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] by SM Mit 07/05/2014 10:29 (CEST)>
+### Time-stamp: <[polyCub.iso.R] 2014-09-27 10:17 (CEST) by SM>
 ################################################################################
 
 
@@ -78,7 +78,9 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
         seq(1, max(abs(unlist(lapply(polys, "[", c("x","y"))))), length.out=20L)
     } else if (identical(check.intrfr, FALSE)) {
         numeric(0L)
-    } else check.intrfr
+    } else {
+        check.intrfr
+    }
     intrfr <- checkintrfr(intrfr, f, ..., center=center, control=control, rs=rs)
 
     ## plot polygon and function image
@@ -135,8 +137,9 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
                 warning("'intrfr' might be incorrect: ", comp)
             } else cat("OK\n")
         }
-    } else if (doCheck)
+    } else if (doCheck) {
         stop("numerical verification of 'intrfr' requires 'f'")
+    }
     
     match.fun(intrfr)
 }
@@ -158,7 +161,9 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
         structure(sum(sapply(ints, "[", 1, simplify=TRUE, USE.NAMES=FALSE)),
                   abs.error=sum(sapply(ints, "[", 2,
                   simplify=TRUE, USE.NAMES=FALSE)))
-    } else sum(unlist(ints, recursive=FALSE, use.names=FALSE))
+    } else {
+        sum(unlist(ints, recursive=FALSE, use.names=FALSE))
+    }
 }
 
 ## cubature method for a single polygon
@@ -169,8 +174,8 @@ polyCub1.iso <- function (poly, intrfr, ..., center,
     nedges <- nrow(xy)
     intedges <- erredges <- numeric(nedges)
     for (i in seq_len(nedges)) {
-        v0 <- xy[i,] - center
-        v1 <- xy[if (i==nedges) 1L else i+1L,] - center
+        v0 <- xy[i, ] - center
+        v1 <- xy[if (i==nedges) 1L else i+1L, ] - center
         int <- lineInt(v0, v1, intrfr, ..., control=control)
         intedges[i] <- int$value
         erredges[i] <- int$abs.error
@@ -200,7 +205,9 @@ lineInt <- function (v0, v1, intrfr, ..., control = list())
     }
     if (length(control)) {              # use slower do.call()-construct
         do.call("integrate", c(list(integrand, 0, 1), control))
-    } else integrate(integrand, 0, 1)
+    } else {
+        integrate(integrand, 0, 1)
+    }
 }
 
 ## equally fast method _only_ for convex polygonal domains including the origin
