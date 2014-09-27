@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] 2014-09-27 10:40 (CEST) by SM>
+### Time-stamp: <[polyCub.SV.R] 2014-09-27 10:41 (CEST) by SM>
 ################################################################################
 
 
@@ -101,13 +101,12 @@ polyCub.SV <- function (polyregion, f, ...,
 ## unname(statmod::gauss.quad(n, kind="legendre"))
 gauss.quad <- function (n)
 {
-    if (n <= 60) { # results cached in R/sysdata.rda
+    if (n <= 61) { # results cached in R/sysdata.rda
         .NWGL[[n]]
     } else if (requireNamespace("statmod")) {
         unname(statmod::gauss.quad(n = n, kind = "legendre"))
     } else {
-        stop("package ", sQuote("statmod"),
-             " is required for more than 60 quadrature nodes")
+        stop("package ", sQuote("statmod"), " is required for nGQ > 60")
     }
 }
 
