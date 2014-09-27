@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] by SM Mit 07/05/2014 14:09 (CEST)>
+### Time-stamp: <[polyCub.SV.R] 2014-09-27 10:40 (CEST) by SM>
 ################################################################################
 
 
@@ -54,7 +54,6 @@ polyCub.SV <- function (polyregion, f, ...,
     polys <- xylist(polyregion) # transform to something like "owin$bdry"
                                 # which means anticlockwise vertex order with
                                 # first vertex not repeated
-    f <- match.fun(f)
     stopifnot(isScalar(nGQ), nGQ > 0,
               is.null(alpha) || (isScalar(alpha) && !is.na(alpha)))
 
@@ -63,8 +62,15 @@ polyCub.SV <- function (polyregion, f, ...,
     nw_N <- gauss.quad(nGQ)
     ## DEGREE "M" = N+1 (ORDER GAUSS INTEGRATION)
     nw_M <- gauss.quad(nGQ + 1)
+
+    ## Special case f=NULL: compute and return nodes and weights only
+    if (is.null(f)) {
+        return(lapply(X = polys, FUN = polygauss, nw_MN = c(nw_M, nw_N),
+                      alpha = alpha, rotation = rotation, engine = engine))
+    }
     
-    ## Cubature of every single polygon of the "polys" list
+    ## Cubature over every single polygon of the "polys" list
+    f <- match.fun(f)
     int1 <- function (poly) {
         nw <- polygauss(poly, c(nw_M, nw_N), alpha, rotation, engine)
         fvals <- f(nw$nodes, ...)
@@ -82,7 +88,7 @@ polyCub.SV <- function (polyregion, f, ...,
     if (plot) {
         plotpolyf(polys, f, ..., use.lattice=FALSE)
         for (i in seq_along(polys)) {
-            nw <- polygauss(polys[[i]], c(nw_M, nw_N), alpha, rotation)
+            nw <- polygauss(polys[[i]], c(nw_M, nw_N), alpha, rotation, engine)
             points(nw$nodes, cex=0.6, pch = i) #, col=1+(nw$weights<=0)
         }
     }
@@ -129,8 +135,8 @@ gauss.quad <- function (n)
 ##' convex polygons, this rotation guarantees that all nodes fall inside the
 ##' polygon.
 ##' @param engine character string specifying the implementation to use. Up to
-##' polyCub version 0.4-3, the two-dimensional nodes and weights were computed
-##' by R functions and these are still available by setting \code{engine = "R"}.
+##' \pkg{polyCub} version 0.4-3, the two-dimensional nodes and weights were computed
+##' by \R functions and these are still available by setting \code{engine = "R"}.
 ##' The new C-implementation is now the default (\code{engine = "C"}) and 
 ##' requires approximately 30\% less computation time.\cr
 ##' The special setting \code{engine = "C+reduce"} will discard redundant nodes
