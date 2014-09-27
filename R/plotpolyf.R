@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013-2014 Sebastian Meyer
-### Time-stamp: <[plotpolyf.R] 2014-08-22 15:36 (CEST) by SM>
+### Time-stamp: <[plotpolyf.R] 2014-09-27 13:35 (CEST) by SM>
 ###
 ### Plot polygonal domain with image of bivariate function
 ################################################################################
@@ -16,7 +16,17 @@
 ##' function, using either \code{\link[lattice:levelplot]{lattice::levelplot}}
 ##' or \code{\link{image}}.
 ##' 
-##' @inheritParams polyCub.SV
+##' @param polyregion a polygonal domain.
+##' The following classes are supported: \code{"\link[spatstat]{owin}"},
+##' \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"},
+##' \code{"\linkS4class{SpatialPolygons}"}, \code{"\linkS4class{Polygons}"},
+##' and \code{"\linkS4class{Polygon}"}
+##' (for these we have an internal \code{\link{xylist}} method).
+##' @param f a two-dimensional real function.
+##' As its first argument it must take a coordinate matrix, i.e., a
+##' numeric matrix with two columns, and it must return a numeric vector of
+##' length the number of coordinates.
+##' @param ... further arguments for \code{f}.
 ##' @param npixel numeric vector of length 1 or 2 setting the number of pixels
 ##' in each dimension.
 ##' @param cuts number of cut points in the \eqn{z} dimension.

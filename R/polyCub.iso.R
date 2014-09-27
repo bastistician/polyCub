@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] 2014-09-27 10:17 (CEST) by SM>
+### Time-stamp: <[polyCub.iso.R] 2014-09-27 13:47 (CEST) by SM>
 ################################################################################
 
 
@@ -22,7 +22,7 @@
 #' See Meyer and Held (2014, Section 2.4 of Supplement B) for mathematical
 #' details.
 #'
-#' @inheritParams polyCub.SV
+#' @inheritParams plotpolyf
 #' @param intrfr analytical antiderivative of \eqn{r f_r(r)} from 0 to \code{R}
 #' (first argument, not necessarily named \code{"R"}, must be vectorized).
 #' If missing, \code{intrfr} is approximated numerically using
@@ -37,6 +37,9 @@
 #' to be specified. If \code{TRUE}, the set of test
 #' \code{r}'s defaults to a \code{\link{seq}} of length 20 from 1 to
 #' the maximum absolute x or y coordinate of any edge of the \code{polyregion}.
+#' @param plot logical indicating if an image of the function should be plotted
+#' together with the polygonal domain, i.e.,
+#' \code{\link{plotpolyf}(polyregion, f, \dots)}.
 #' @return The approximate integral of the isotropic function
 #' \code{f} over \code{polyregion}.\cr
 #' If the \code{intrfr} function is provided (which is assumed to be exact), an

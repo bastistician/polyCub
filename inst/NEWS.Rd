@@ -5,12 +5,15 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.5-1 (2014-08-22)}{
+\section{Changes in polyCub version 0.5-1 (2014-09-27)}{
 
   \itemize{
     \item Nodes and weights for \code{polyCub.SV()} were only cached
     up to \code{nGQ=59}, not 60 as announced in version 0.5-0. Fixed
     that which also makes examples truly run without \pkg{statmod}.
+
+    \item In \code{polyCub.SV()}, the new special setting
+    \code{f=NULL} means to only compute nodes and weights.
   }
   
 }

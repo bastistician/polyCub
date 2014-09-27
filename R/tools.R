@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[tools.R] by SM Mit 25/06/2014 11:11 (CEST)>
+### Time-stamp: <[tools.R] 2014-09-27 10:59 (CEST) by SM>
 ###
 ### Tiny toolbox of internal function
 ################################################################################
@@ -55,10 +55,9 @@ isScalar <- function (x) {
 }
 
 
-##' Plots a Polygon (of Various Classes)
+##' Plots a Polygonal Domain (of Various Classes)
 ##'
-##' @inheritParams polyCub.SV
-##' @param lwd line width.
+##' @inheritParams plotpolyf
 ##' @param add logical. Add to existing plot?
 ##' @import methods
 ##' @import sp
@@ -81,6 +80,7 @@ plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
             polyregion <- Polygons(list(polyregion), "ID")
         if (inherits(polyregion, "Polygons"))
             polyregion <- SpatialPolygons(list(polyregion))
+        ## plot call which works for "SpatialPolygons" and "owin"
         plot(polyregion, lwd=lwd, axes=TRUE, main="", add=add)
     }
 }

@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.midpoint.R] by SM Fre 14/03/2014 15:50 (CET)>
+### Time-stamp: <[polyCub.midpoint.R] 2014-09-27 13:48 (CEST) by SM>
 ################################################################################
 
 
@@ -16,13 +16,10 @@
 #' The integral under the surface is then approximated as the
 #' sum over (pixel area * f(pixel midpoint)).
 #' 
+#' @inheritParams plotpolyf
 #' @param polyregion a polygonal integration domain.
 #' It can be any object coercible to the \pkg{spatstat} class
 #' \code{"\link[spatstat]{owin}"} (via \code{\link[spatstat]{as.owin}}).
-#' @param f two-dimensional function to be integrated.
-#' As its first argument the function must take a coordinate matrix, i.e. a
-#' numeric matrix with two columns.
-#' @param ... further arguments for \code{f}.
 #' @param eps width and height of the pixels (squares),
 #' see \code{\link[spatstat]{as.mask}}.
 #' @param dimyx number of subdivisions in each dimension,
