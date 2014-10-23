@@ -80,12 +80,7 @@ for the specification of polygons of class \code{"gpc.poly"}.}
 }
 }
 \author{
-Sebastian Meyer\cr
-The implementation of the \code{"gpc.poly"}-method of \code{xylist}
-depends on functionality of the \pkg{spatstat} package and borrows
-large parts from the function \code{gpc2owin} (as implemented in package
-\pkg{spatstat} before version 1.34-0, when support for \code{"gpc.poly"} was
-dropped) authored by Adrian Baddeley and Rolf Turner.
+Sebastian Meyer
 }
 \keyword{methods}
 \keyword{spatial}

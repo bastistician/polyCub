@@ -6,11 +6,13 @@
 \usage{
 owin2gpc(object)
 
-gpc2owin(object)
+gpc2owin(object, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"gpc.poly"} or \code{"owin"},
 respectively.}
+
+\item{...}{further arguments passed to \code{\link{owin}}.}
 }
 \value{
 The converted polygon of class \code{"gpc.poly"} or \code{"owin"},
@@ -23,26 +25,23 @@ Package \pkg{polyCub} implements converters between the classes
 \code{"\link[spatstat:owin.object]{owin}"} of package \pkg{spatstat} and
 \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} of package \pkg{rgeos}
 (originally from \pkg{gpclib}).
+Support for the \code{"gpc.poly"} class was dropped from
+\pkg{spatstat} as of version 1.34-0.
 }
 \note{
-The converter to \code{"gpc.poly"} requires the \pkg{rgeos} (or
-\pkg{gpclib}) package for the formal class definition. It will produce
-vertices ordered according to the \pkg{sp} convention, i.e. clockwise for
-normal boundaries and anticlockwise for holes, where, however, the first
-vertex is \emph{not} repeated!
+The converter \code{owin2gpc} requires the package \pkg{rgeos} (or
+\pkg{gpclib}) for the formal class definition of a \code{"gpc.poly"}.
+It will produce vertices ordered according to the \pkg{sp} convention,
+i.e. clockwise for normal boundaries and anticlockwise for holes, where,
+however, the first vertex is \emph{not} repeated!
 }
 \author{
-Sebastian Meyer\cr
-The converters are slightly modified versions of the same functions in
-\pkg{spatstat} version 1.33-0, authored by Adrian Baddeley and Rolf Turner.
-(Note that support for the \code{"gpc.poly"} class was dropped from
-\pkg{spatstat} as of version 1.34-0.)
+Sebastian Meyer
 }
 \seealso{
-\code{\link{xylist}}\cr
-Conversions of \code{"gpc.poly"} objects from and to the
-\code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"} class of package
-\pkg{sp} are available in the \pkg{rgeos} package.
+\code{\link{xylist}}, and the package \pkg{rgeos} for
+conversions of \code{"gpc.poly"} objects from and to \pkg{sp}'s
+\code{"\linkS4class{SpatialPolygons}"} class.
 }
 \keyword{methods}
 \keyword{spatial}

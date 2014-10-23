@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2014 Sebastian Meyer
-### Time-stamp: <[xylist.R] by SM Mit 25/06/2014 15:04 (CEST)>
+### Time-stamp: <[xylist.R] 2014-10-23 09:49 (CEST) by SM>
 ###
 ### Convert various polygon classes to a simple "xylist"
 ################################################################################
@@ -57,12 +57,7 @@
 ##' \code{"owin"} convention (anticlockwise order without repeating any vertex).
 ##' The opposite vertex order can be retained for the \pkg{sp}-classes
 ##' by the non-default use with \code{reverse=FALSE}.
-##' @author Sebastian Meyer\cr
-##' The implementation of the \code{"gpc.poly"}-method of \code{xylist}
-##' depends on functionality of the \pkg{spatstat} package and borrows
-##' large parts from the function \code{gpc2owin} (as implemented in package
-##' \pkg{spatstat} before version 1.34-0, when support for \code{"gpc.poly"} was
-##' dropped) authored by Adrian Baddeley and Rolf Turner.
+##' @author Sebastian Meyer
 ##' @name xylist
 ##' @keywords spatial methods
 ##' @export
@@ -71,18 +66,16 @@ xylist <- function (object, ...) UseMethod("xylist")
 ##' @rdname xylist
 ##' @importFrom spatstat as.polygonal
 ##' @export
-xylist.owin <- function (object, ...) as.polygonal(object)$bdry
+xylist.owin <- function (object, ...)
+{
+    as.polygonal(object)$bdry
+}
 
 ##' @rdname xylist
-##' @importFrom spatstat area.xypolygon reverse.xypolygon
 ##' @export
 xylist.gpc.poly <- function (object, ...)
 {
-    lapply(object@pts, function (poly) {
-        if (poly$hole != (area.xypolygon(poly) < 0))
-            poly <- reverse.xypolygon(poly)
-        poly[c("x","y")]
-    })
+    xylist.owin(gpc2owin(object, check = FALSE))
 }
 
 ##' @rdname xylist

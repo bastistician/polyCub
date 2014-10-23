@@ -5,7 +5,7 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.5-1 (2014-09-27)}{
+\section{Changes in polyCub version 0.5-1 (2014-10-23)}{
 
   \itemize{
     \item Nodes and weights for \code{polyCub.SV()} were only cached
@@ -14,6 +14,9 @@
 
     \item In \code{polyCub.SV()}, the new special setting
     \code{f=NULL} means to only compute nodes and weights.
+
+    \item Internal changes to the \code{"gpc.poly"} converters
+    to accommodate \CRANpkg{spatstat} 1.39-0.
   }
   
 }
