@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] 2014-09-27 13:47 (CEST) by SM>
+### Time-stamp: <[polyCub.iso.R] 2014-10-24 11:11 (CEST) by SM>
 ################################################################################
 
 
@@ -19,7 +19,7 @@
 #' function as argument \code{intrfr}.
 #' The two-dimensional integration problem thereby reduces to an efficient
 #' adaptive quadrature in one dimension.
-#' See Meyer and Held (2014, Section 2.4 of Supplement B) for mathematical
+#' See Meyer and Held (2014, Supplement B, Section 2.4) for mathematical
 #' details.
 #'
 #' @inheritParams plotpolyf
@@ -58,10 +58,9 @@
 #'
 #' Meyer, S. and Held, L. (2014).
 #' Power-law models for infectious disease spread.
-#' \emph{Annals of Applied Statistics}. In press, available as
-#' \href{http://arxiv.org/abs/1308.5115}{arXiv:1308.5115}.
-#' Supplements are available from
-#' \url{http://www.biostat.uzh.ch/research/manuscripts/powerlaw.html}.
+#' \emph{The Annals of Applied Statistics}, \bold{8} (3), 1612-1639.\cr
+#' DOI-Link: \url{http://dx.doi.org/10.1214/14-AOAS743},
+#' \href{http://arxiv.org/abs/1308.5115}{arXiv:1308.5115}
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @example inst/examples/polyCub.iso.R

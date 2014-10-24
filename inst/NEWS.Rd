@@ -5,7 +5,7 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.5-1 (2014-10-23)}{
+\section{Changes in polyCub version 0.5-1 (2014-10-24)}{
 
   \itemize{
     \item Nodes and weights for \code{polyCub.SV()} were only cached

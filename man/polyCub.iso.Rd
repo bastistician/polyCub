@@ -70,7 +70,7 @@ It internally solves a line integral along the polygon boundary using
 function as argument \code{intrfr}.
 The two-dimensional integration problem thereby reduces to an efficient
 adaptive quadrature in one dimension.
-See Meyer and Held (2014, Section 2.4 of Supplement B) for mathematical
+See Meyer and Held (2014, Supplement B, Section 2.4) for mathematical
 details.
 
 \code{.polyCub.iso} is a \dQuote{bare-bone} version of \code{polyCub.iso}.
@@ -112,10 +112,9 @@ Space-Time Modeling and Inference (May 2013, Aalborg, Denmark).
 
 Meyer, S. and Held, L. (2014).
 Power-law models for infectious disease spread.
-\emph{Annals of Applied Statistics}. In press, available as
-\href{http://arxiv.org/abs/1308.5115}{arXiv:1308.5115}.
-Supplements are available from
-\url{http://www.biostat.uzh.ch/research/manuscripts/powerlaw.html}.
+\emph{The Annals of Applied Statistics}, \bold{8} (3), 1612-1639.\cr
+DOI-Link: \url{http://dx.doi.org/10.1214/14-AOAS743},
+\href{http://arxiv.org/abs/1308.5115}{arXiv:1308.5115}
 }
 \seealso{
 Other polyCub.methods: \code{\link{polyCub.SV}};
