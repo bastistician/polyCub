@@ -3,8 +3,8 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.midpoint.R] 2014-09-27 13:48 (CEST) by SM>
+### Copyright (C) 2009-2015 Sebastian Meyer
+### Time-stamp: <[polyCub.midpoint.R] 2015-01-06 00:12 (CET) by SM>
 ################################################################################
 
 
@@ -35,7 +35,7 @@
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @import sp
-#' @importFrom spatstat as.im.function plot.im
+#' @importFrom spatstat as.im.function plot.im integral.im
 #' @importFrom grDevices gray
 #' @examples # see example(polyCub)
 #' @export
@@ -63,17 +63,13 @@ polyCub.midpoint <- function (polyregion, f, ...,
 ### ILLUSTRATION ###
     if (plot) {
         plot.im(IM, axes=TRUE, col=gray(31:4/35), main="")
-        ## add evaluation points (unsure about spatstat implementation of class "im")
-        ## both of the following commands worked with different versions of spatstat
+        ## add evaluation points
         #with(IM, points(expand.grid(xcol, yrow), col=!is.na(v), cex=0.5))
-        #with(IM, points(expand.grid(y=yrow, x=xcol)[2:1], col=!is.na(v), cex=0.5))
         plot(polyregion, add=TRUE, poly.args=list(lwd=2), lwd=2)
         ##<- two 'lwd'-specifications such that it works with owin and gpc.poly
     }
 ####################
     
     ## return the approximated integral
-    pixelarea <- IM$xstep * IM$ystep
-    int <- pixelarea * sum(IM$v, na.rm = TRUE)
-    int
+    integral.im(IM)
 }
