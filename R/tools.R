@@ -3,8 +3,8 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[tools.R] 2014-09-27 10:59 (CEST) by SM>
+### Copyright (C) 2009-2015 Sebastian Meyer
+### Time-stamp: <[tools.R] 2015-01-05 23:20 (CET) by SM>
 ###
 ### Tiny toolbox of internal function
 ################################################################################
@@ -73,7 +73,6 @@ plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
         lapply(polyregion, polygon, lwd=lwd)
         invisible()
     } else if (inherits(polyregion, "gpc.poly")) {
-        if (!isClass("gpc.poly")) library("rgeos") # probably redundant
         plot(polyregion, poly.args=list(lwd=lwd), ann=FALSE, add=add)
     } else {
         if (inherits(polyregion, "Polygon"))
