@@ -5,6 +5,19 @@
 \title{News for Package 'polyCub'}
 
 
+\section{Changes in polyCub version 0.5-2 (2015-02-14)}{
+
+  \itemize{
+    \item \code{polyCub.midpoint()} now works directly with input
+    polygons of class \code{"gpc.poly"}, since package \pkg{polyCub}
+    registers a corresponding \code{as.owin}-method (which just
+    calls \code{gpc2owin()}).
+  }
+  
+}
+
+
+
 \section{Changes in polyCub version 0.5-1 (2014-10-24)}{
 
   \itemize{

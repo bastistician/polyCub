@@ -3,8 +3,8 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2012-2014 Sebastian Meyer
-### Time-stamp: <[coerce-gpc-methods.R] 2014-10-23 13:41 (CEST) by SM>
+### Copyright (C) 2012-2015 Sebastian Meyer
+### Time-stamp: <[coerce-gpc-methods.R] 2015-02-14 22:43 (CET) by SM>
 ###
 ### Conversion from and to the "gpc.poly" class
 ################################################################################
@@ -34,6 +34,7 @@
 ##' @seealso \code{\link{xylist}}, and the package \pkg{rgeos} for
 ##' conversions of \code{"gpc.poly"} objects from and to \pkg{sp}'s
 ##' \code{"\linkS4class{SpatialPolygons}"} class.
+##' @name coerce-gpc-methods
 ##' @rdname coerce-gpc-methods
 ##' @keywords spatial methods
 ##' @importFrom spatstat as.polygonal summary.owin
@@ -93,6 +94,17 @@ gpc2owin <- function (object, ...)
 
     ## now really convert to owin with appropriate vertex order
     owin(poly = bdry, ...)
+}
+
+##' @inheritParams gpc2owin
+##' @param W an object of class \code{"gpc.poly"}.
+##' @rdname coerce-gpc-methods
+##' @importFrom spatstat as.owin
+##' @method as.owin gpc.poly
+##' @export
+as.owin.gpc.poly <- function (W, ...)
+{
+    gpc2owin(W, ...)
 }
 
 
