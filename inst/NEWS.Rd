@@ -15,7 +15,7 @@
     
     \item \code{polyCub.exact.Gauss()} did not work if the
     \code{tristrip} of the transformed input polygon contained
-    degenerate triangles.
+    degenerate triangles (spotted by Ignacio Quintero).
   }
   
 }

@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2015 Sebastian Meyer
-### Time-stamp: <[polyCub.exact.Gauss.R] 2015-02-15 14:45 (CET) by SM>
+### Time-stamp: <[polyCub.exact.Gauss.R] 2015-02-15 17:27 (CET) by SM>
 ################################################################################
 
 
@@ -165,18 +165,22 @@ transform_pts <- function (pts, mean, Sigma)
 ## calculates the integral of the standard bivariat normal over a triangle A0B
 .intTriangleAS0 <- function (A, B)
 {
-    d <- sqrt(sum((B-A)^2))
-    h <- abs(B[2]*A[1] - A[2]*B[1]) / d
+    BmA <- B - A
+    d <- sqrt(sum(BmA^2))
+    h <- abs(B[2L]*A[1L] - A[2L]*B[1L]) / d   # distance of AB to the origin
     if (d == 0 || h == 0) # degenerate triangle: A == B or 0, A, B on a line
         return(structure(0, error = 0))
-    k1 <- abs(A[1]*(B[1]-A[1]) + A[2]*(B[2]-A[2])) / d
-    k2 <- abs(B[1]*(B[1]-A[1]) + B[2]*(B[2]-A[2])) / d
     
-    V2 <- .V(h, k2)
-    V1 <- .V(h, k1)
-    res <- if (isTRUE(all.equal(k1+k2, d))) V2 + V1
-        else if (isTRUE(all.equal(abs(k2-k1), d))) abs(V2 - V1)
-        else stop("something went wrong...")
+    k1 <- dotprod(A, BmA) / d
+    k2 <- dotprod(B, BmA) / d
+    V2 <- .V(h, abs(k2))
+    V1 <- .V(h, abs(k1))
+    res <- if (sign(k1) == sign(k2)) {
+        ## A and B are on the same side of the normal line through 0
+        abs(V2 - V1)
+    } else {
+        V2 + V1
+    }
     attr(res, "error") <- attr(V1, "error") + attr(V2, "error")
     return(res)
 }
@@ -194,6 +198,8 @@ transform_pts <- function (pts, mean, Sigma)
 ## over a triangle bounded by y=0, y=ax, x=h (cf. formula 26.3.23)
 ##' @importFrom stats pnorm
 .V <- function(h,k) {
+    if (k == 0) # degenerate triangle
+        return(structure(0, error = 0))
     a <- k/h
     rho <- -a/sqrt(1+a^2)
     # V = 0.25 + L(h,0,rho) - L(0,0,rho) - Q(h) / 2
