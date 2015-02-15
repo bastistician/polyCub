@@ -18,7 +18,7 @@ to be integrated.}
 
 \item{plot}{logical indicating if an illustrative plot of the numerical
 integration should be produced. Note that the \code{polyregion} will be
-shifted and scaled.}
+transformed (shifted and scaled).}
 }
 \value{
 The integral of the bivariate normal density over \code{polyregion}.
@@ -37,8 +37,8 @@ quasi-exact (as is the \code{pmvnorm} function).
 }
 }
 \description{
-Integration is based on triangulation of the polygonal domain and formulae
-from the
+Integration is based on triangulation of the (transformed) polygonal domain
+and formulae from the
 Abramowitz and Stegun (1972) handbook (Section 26.9, Example 9, pp. 956f.).
 This method is quite cumbersome because the A&S formula is only for triangles
 where one vertex is the origin (0,0). For each triangle of the

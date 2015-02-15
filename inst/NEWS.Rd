@@ -5,13 +5,17 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.5-2 (2015-02-14)}{
+\section{Changes in polyCub version 0.5-2 (2015-02-15)}{
 
   \itemize{
     \item \code{polyCub.midpoint()} now works directly with input
     polygons of class \code{"gpc.poly"}, since package \pkg{polyCub}
     registers a corresponding \code{as.owin}-method (which just
     calls \code{gpc2owin()}).
+    
+    \item \code{polyCub.exact.Gauss()} did not work if the
+    \code{tristrip} of the transformed input polygon contained
+    degenerate triangles.
   }
   
 }

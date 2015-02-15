@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2015 Sebastian Meyer
-### Time-stamp: <[polyCub.exact.Gauss.R] 2015-02-15 11:15 (CET) by SM>
+### Time-stamp: <[polyCub.exact.Gauss.R] 2015-02-15 14:45 (CET) by SM>
 ################################################################################
 
 
@@ -96,23 +96,20 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
     }
 ####################
 
-    integrals <- sapply(triangleSets, function (triangles) {
+    integrals <- vapply(X = triangleSets, FUN = function (triangles) {
         int <- 0
         error <- 0
-        nTriangles <- nrow(triangles) - 2
+        nTriangles <- nrow(triangles) - 2L
         for (i in seq_len(nTriangles)) {
             res <- .intTriangleAS(triangles[i+(0:2),])
-            err <- attr(res, "error")
             int <- int + res
-            if (length(err) == 1L) error <- error + err
-            ##<- sometimes err==numeric(0) (probably meaning err=0)
+            error <- error + attr(res, "error")
         }
         c(int, nTriangles, error)
-    })
+    }, FUN.VALUE = numeric(3L), USE.NAMES = FALSE)
     int <- sum(integrals[1,])
     
-    ## number of .V() evaluations
-    ## (if 'h' in .intTriangleAS0 was always different from 0)
+    ## number of .V() evaluations (if there were no degenerate triangles)
     attr(int, "nEval") <- 6 * sum(integrals[2,])
     ## approximate absolute integration error
     attr(int, "error") <- sum(integrals[3,])
@@ -145,6 +142,8 @@ transform_pts <- function (pts, mean, Sigma)
 ## calculates the integral of the standard bivariat normal over a triangle ABC
 .intTriangleAS <- function (xy)
 {
+    if (anyDuplicated(xy)) # degenerate triangle
+        return(structure(0, error = 0))
     A <- xy[1,]
     B <- xy[2,]
     C <- xy[3,]
@@ -168,7 +167,8 @@ transform_pts <- function (pts, mean, Sigma)
 {
     d <- sqrt(sum((B-A)^2))
     h <- abs(B[2]*A[1] - A[2]*B[1]) / d
-    if (h == 0) return(0)
+    if (d == 0 || h == 0) # degenerate triangle: A == B or 0, A, B on a line
+        return(structure(0, error = 0))
     k1 <- abs(A[1]*(B[1]-A[1]) + A[2]*(B[2]-A[2])) / d
     k2 <- abs(B[1]*(B[1]-A[1]) + B[2]*(B[2]-A[2])) / d
     
@@ -201,7 +201,7 @@ transform_pts <- function (pts, mean, Sigma)
     # V = L(h,0,rho) - asin(rho)/(2*pi) - Q(h) / 2
     Lh0rho <- mvtnorm::pmvnorm(
         lower = c(h,0), upper = c(Inf,Inf),
-        mean = c(0,0), corr = matrix(c(1,rho,rho,1),2,2)
+        mean = c(0,0), corr = matrix(c(1,rho,rho,1), 2L, 2L)
     )
     Qh <- pnorm(h, mean = 0, sd = 1, lower.tail = FALSE)
     return(Lh0rho - asin(rho)/2/pi - Qh/2)
