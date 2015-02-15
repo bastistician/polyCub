@@ -3,15 +3,15 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.exact.Gauss.R] by SM Die 06/05/2014 10:13 (CEST)>
+### Copyright (C) 2009-2015 Sebastian Meyer
+### Time-stamp: <[polyCub.exact.Gauss.R] 2015-02-15 11:15 (CET) by SM>
 ################################################################################
 
 
 #' Quasi-Exact Cubature of the Bivariate Normal Density
 #'
-#' Integration is based on triangulation of the polygonal domain and formulae
-#' from the 
+#' Integration is based on triangulation of the (transformed) polygonal domain
+#' and formulae from the 
 #' Abramowitz and Stegun (1972) handbook (Section 26.9, Example 9, pp. 956f.).
 #' This method is quite cumbersome because the A&S formula is only for triangles
 #' where one vertex is the origin (0,0). For each triangle of the
@@ -35,7 +35,7 @@
 #' to be integrated.
 #' @param plot logical indicating if an illustrative plot of the numerical
 #' integration should be produced. Note that the \code{polyregion} will be
-#' shifted and scaled.
+#' transformed (shifted and scaled).
 #' @return The integral of the bivariate normal density over \code{polyregion}.
 #' Two attributes are appended to the integral value:
 #' \item{nEval}{
@@ -73,20 +73,17 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
     if (is.polygonal(polyregion)) {
         polyregion <- owin2gpc(polyregion)
     } else if (!inherits(polyregion, "gpc.poly")) {
-        loadNamespace("rgeos")
+        if (inherits(polyregion, "SpatialPolygons") &&
+            !requireNamespace("rgeos")) {
+            stop("package ", sQuote("rgeos"), " is required to handle ",
+                 "\"SpatialPolygons\" input")
+        }
         polyregion <- as(polyregion, "gpc.poly")
     }
     
     ## coordinate transformation so that the standard bivariat normal density
     ## can be used in integrations (cf. formula 26.3.22)
-    rho <- cov2cor(Sigma)[1,2]
-    sdx <- sqrt(Sigma[1,1])
-    sdy <- sqrt(Sigma[2,2])
-    polyregion@pts <- lapply(polyregion@pts, function (poly) {
-        list(x = ((poly$x-mean[1])/sdx + (poly$y-mean[2])/sdy) / sqrt(2+2*rho),
-             y = ((poly$y-mean[2])/sdy - (poly$x-mean[1])/sdx) / sqrt(2-2*rho),
-             hole = poly$hole)
-    })
+    polyregion@pts <- transform_pts(polyregion@pts, mean = mean, Sigma = Sigma)
     
     ## triangulation: tristrip() returns a list where each element is a
     ## coordinate matrix of vertices of triangles 
@@ -127,6 +124,23 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
 ###########################
 ### Auxiliary Functions ###
 ###########################
+
+## transform coordinates according to Formula 26.3.22
+transform_pts <- function (pts, mean, Sigma)
+{
+    mx <- mean[1L]
+    my <- mean[2L]
+    rho <- cov2cor(Sigma)[1L,2L]
+    sdx <- sqrt(Sigma[1L,1L])
+    sdy <- sqrt(Sigma[2L,2L])
+    lapply(pts, function (poly) {
+        x0 <- (poly[["x"]] - mx) / sdx
+        y0 <- (poly[["y"]] - my) / sdy
+        list(x = (x0 + y0) / sqrt(2 + 2*rho),
+             y = (y0 - x0) / sqrt(2 - 2*rho),
+             hole = poly[["hole"]])
+    })
+}
 
 ## calculates the integral of the standard bivariat normal over a triangle ABC
 .intTriangleAS <- function (xy)
