@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013-2015 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] 2015-02-16 11:46 (CET) by SM>
+### Time-stamp: <[polyCub.iso.R] 2015-02-16 11:54 (CET) by SM>
 ################################################################################
 
 
@@ -124,7 +124,8 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
         if (length(control))
             body(quadrfr1)[[2L]] <- as.call(c(as.list(body(quadrfr1)[[2L]]),
                                              control))
-        quadrfr <- function (R, ...) sapply(R, quadrfr1, ..., USE.NAMES=FALSE)
+        quadrfr <- function (R, ...)
+            vapply(X = R, FUN = quadrfr1, FUN.VALUE = 0, ..., USE.NAMES = FALSE)
         if (missing(intrfr)) {
             return(quadrfr)
         } else if (doCheck) {
@@ -160,9 +161,10 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
                    intrfr, ..., center=center,
                    control=control, .witherror=.witherror)
     if (.witherror) {
-        structure(sum(sapply(ints, "[", 1L, simplify=TRUE, USE.NAMES=FALSE)),
-                  abs.error=sum(sapply(ints, "[", 2L,
-                      simplify=TRUE, USE.NAMES=FALSE)))
+        res <- sum(vapply(X=ints, FUN="[", FUN.VALUE=0, 1L, USE.NAMES=FALSE))
+        attr(res, "abs.error") <-
+            sum(vapply(X=ints, FUN="[", FUN.VALUE=0, 2L, USE.NAMES=FALSE))
+        res
     } else {
         sum(unlist(ints, recursive=FALSE, use.names=FALSE))
     }
