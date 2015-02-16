@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013-2015 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] 2015-02-16 10:57 (CET) by SM>
+### Time-stamp: <[polyCub.iso.R] 2015-02-16 11:46 (CET) by SM>
 ################################################################################
 
 
@@ -119,12 +119,12 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
     if (!missing(f)) {
         f <- match.fun(f)
         rfr <- function (r, ...)
-            r * f(cbind(center[1]+r, center[2], deparse.level=0), ...)
-        quadrfr1 <- function (r, ...) integrate(rfr, 0, r, ...)$value
+            r * f(cbind(center[1L]+r, center[2L], deparse.level=0L), ...)
+        quadrfr1 <- function (R, ...) integrate(rfr, 0, R, ...)$value
         if (length(control))
-            body(quadrfr1)[[2]] <- as.call(c(as.list(body(quadrfr1)[[2]]),
+            body(quadrfr1)[[2L]] <- as.call(c(as.list(body(quadrfr1)[[2L]]),
                                              control))
-        quadrfr <- function (r, ...) sapply(r, quadrfr1, ..., USE.NAMES=FALSE)
+        quadrfr <- function (R, ...) sapply(R, quadrfr1, ..., USE.NAMES=FALSE)
         if (missing(intrfr)) {
             return(quadrfr)
         } else if (doCheck) {
@@ -160,9 +160,9 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
                    intrfr, ..., center=center,
                    control=control, .witherror=.witherror)
     if (.witherror) {
-        structure(sum(sapply(ints, "[", 1, simplify=TRUE, USE.NAMES=FALSE)),
-                  abs.error=sum(sapply(ints, "[", 2,
-                  simplify=TRUE, USE.NAMES=FALSE)))
+        structure(sum(sapply(ints, "[", 1L, simplify=TRUE, USE.NAMES=FALSE)),
+                  abs.error=sum(sapply(ints, "[", 2L,
+                      simplify=TRUE, USE.NAMES=FALSE)))
     } else {
         sum(unlist(ints, recursive=FALSE, use.names=FALSE))
     }
@@ -172,7 +172,7 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
 polyCub1.iso <- function (poly, intrfr, ..., center,
                           control = list(), .witherror = TRUE)
 {
-    xy <- cbind(poly[["x"]], poly[["y"]], deparse.level=0)
+    xy <- cbind(poly[["x"]], poly[["y"]], deparse.level=0L)
     nedges <- nrow(xy)
     intedges <- erredges <- numeric(nedges)
     for (i in seq_len(nedges)) {
@@ -187,7 +187,11 @@ polyCub1.iso <- function (poly, intrfr, ..., center,
     ##     if ((1 - 2 * as.numeric(poly$hole)) * sign(int) == -1)
     ##         warning("wrong sign if positive integral")
     ## }
-    c(int, if (.witherror) sum(erredges))
+    if (.witherror) {
+        c(int, sum(erredges))
+    } else {
+        int
+    }
 }
 
 ## line integral for one edge
@@ -195,15 +199,15 @@ polyCub1.iso <- function (poly, intrfr, ..., center,
 lineInt <- function (v0, v1, intrfr, ..., control = list())
 {
     d <- v1 - v0
-    num <- v1[2]*v0[1] - v1[1]*v0[2]  # = d[2]*p[,1] - d[1]*p[,2]
-                                      # for any point p on the edge
+    num <- v1[2L]*v0[1L] - v1[1L]*v0[2L]  # = d[2]*p[,1] - d[1]*p[,2]
+                                          # for any point p on the edge
     if (num == 0) { # i.e., if 'center' is part of this polygon edge
         return(list(value = 0, abs.error = 0))
     }
     integrand <- function (t) {
         ## get the points on the edge corresponding to t
-        p <- cbind(v0[1] + t*d[1], v0[2] + t*d[2], deparse.level=0)
-        norm2 <- .rowSums(p^2, length(t), 2)
+        p <- cbind(v0[1L] + t*d[1L], v0[2L] + t*d[2L], deparse.level=0L)
+        norm2 <- .rowSums(p^2, length(t), 2L)
         ints <- intrfr(sqrt(norm2), ...)
         ##ints[is.infinite(ints)] <- 1e300
         num * ints / norm2
