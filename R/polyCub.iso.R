@@ -3,8 +3,8 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2013-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] 2014-10-24 11:11 (CEST) by SM>
+### Copyright (C) 2013-2015 Sebastian Meyer
+### Time-stamp: <[polyCub.iso.R] 2015-02-16 10:57 (CET) by SM>
 ################################################################################
 
 
@@ -197,6 +197,9 @@ lineInt <- function (v0, v1, intrfr, ..., control = list())
     d <- v1 - v0
     num <- v1[2]*v0[1] - v1[1]*v0[2]  # = d[2]*p[,1] - d[1]*p[,2]
                                       # for any point p on the edge
+    if (num == 0) { # i.e., if 'center' is part of this polygon edge
+        return(list(value = 0, abs.error = 0))
+    }
     integrand <- function (t) {
         ## get the points on the edge corresponding to t
         p <- cbind(v0[1] + t*d[1], v0[2] + t*d[2], deparse.level=0)

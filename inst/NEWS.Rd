@@ -5,7 +5,7 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.5-2 (2015-02-15)}{
+\section{Changes in polyCub version 0.5-2 (2015-02-16)}{
 
   \itemize{
     \item \code{polyCub.midpoint()} now works directly with input
@@ -16,6 +16,10 @@
     \item \code{polyCub.exact.Gauss()} did not work if the
     \code{tristrip} of the transformed input polygon contained
     degenerate triangles (spotted by Ignacio Quintero).
+
+    \item Line integration in \code{polyCub.iso()} could break due to
+    division by zero if the \code{center} point was part of the polygon
+    boundary.
   }
   
 }
