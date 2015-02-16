@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2013-2015 Sebastian Meyer
-### Time-stamp: <[polyCub.iso.R] 2015-02-16 11:54 (CET) by SM>
+### Time-stamp: <[polyCub.iso.R] 2015-02-16 12:18 (CET) by SM>
 ################################################################################
 
 
@@ -74,6 +74,8 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
                                 # which means anticlockwise vertex order with
                                 # first vertex not repeated
     getError <- !missing(intrfr) # can't estimate error of double approximation
+    center <- as.vector(center, mode = "numeric")
+    stopifnot(length(center) == 2L, is.finite(center))
 
     ## check 'intrfr' function
     rs <- if (isTRUE(check.intrfr)) {
