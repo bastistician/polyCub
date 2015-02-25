@@ -1,11 +1,3 @@
-### list of authors
-
-authors <- c(
-    SM = person("Sebastian", "Meyer"),
-    LH = person("Leonhard", "Held"),
-    MH = person("Michael", "H{\"o}hle")
-    )
-
 
 ### Outer header
 
@@ -17,7 +9,7 @@ citHeader("To cite", sQuote("polyCub"),
 
 bibentry(
     bibtype = "Article", key = "Meyer+Held_2014",
-    author = authors[c("SM", "LH")],
+    author = "Sebastian Meyer and Leonhard Held",
     title = "Power-law models for infectious disease spread",
     journal = "The Annals of Applied Statistics",
     issn = "1932-6157",
