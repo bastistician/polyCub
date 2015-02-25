@@ -1,16 +1,18 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
 Version: 0.5-2
-Date: 2014-12-01
+Date: 2015-02-25
 Authors@R: c(person("Sebastian", "Meyer",
                     email = "Sebastian.Meyer@ifspm.uzh.ch",
                     role = c("aut","cre","trl")),
+             person("Leonhard", "Held",
+                    email = "Leonhard.Held@uzh.ch",
+                    role = "ths"),
              person("Michael", "Hoehle",
                     email = "Michael.Hoehle@stat.uni-muenchen.de",
-                    role = c("ths")))
-Description: A package providing methods for cubature (numerical integration)
-             over polygonal domains.
-             Currently, four cubature methods are implemented:
+                    role = "ths"))
+Description: The following methods for cubature (numerical integration)
+             over polygonal domains are currently implemented:
              the two-dimensional midpoint rule as a simple wrapper around
              as.im.function() from package spatstat (Baddeley and Turner, 2005),
              the product Gauss cubature by Sommariva and Vianello (2007),
