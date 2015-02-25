@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2013, 2015 Sebastian Meyer
-### Time-stamp: <[coerce-sp-methods.R] 2015-02-25 22:19 (CET) by SM>
+### Time-stamp: <[coerce-sp-methods.R] 2015-02-25 22:43 (CET) by SM>
 ################################################################################
 
 
@@ -65,11 +65,11 @@ as.owin.Polygon <- function (W, ...)
 ## does setClass("owin") _and_ exports this class! Specifically, loading
 ## library("polyCub"); library("maptools"); library("gpclib")
 ## in this order would not work (no idea why) throwing:
-## Error : package slot missing from signature for generic ‘plot’
+## Error : package slot missing from signature for generic 'plot'
 ## and classes gpc.poly, ANY
 ## cannot use with duplicate class names (the package may need to be
 ## re-installed)
-## Error: package/namespace load failed for ‘gpclib’
+## Error: package/namespace load failed for 'gpclib'
 
 ##' @name coerce,SpatialPolygons,owin-method
 ##' @rdname coerce-sp-methods
