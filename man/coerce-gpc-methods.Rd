@@ -5,7 +5,7 @@
 \alias{coerce-gpc-methods}
 \alias{gpc2owin}
 \alias{owin2gpc}
-\title{Conversion from and to the \code{"gpc.poly"} Class}
+\title{Conversion between polygonal \code{"owin"} and \code{"gpc.poly"}}
 \usage{
 owin2gpc(object)
 
@@ -29,7 +29,7 @@ respectively. If neither package \pkg{rgeos} nor \pkg{gpclib} are available,
 }
 \description{
 Package \pkg{polyCub} implements converters between the classes
-\code{"\link[spatstat:owin.object]{owin}"} of package \pkg{spatstat} and
+\code{"\link[=owin.object]{owin}"} of package \pkg{spatstat} and
 \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} of package \pkg{rgeos}
 (originally from \pkg{gpclib}).
 Support for the \code{"gpc.poly"} class was dropped from

@@ -4,16 +4,14 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2015 Sebastian Meyer
-### Time-stamp: <[coerce-gpc-methods.R] 2015-02-14 22:43 (CET) by SM>
-###
-### Conversion from and to the "gpc.poly" class
+### Time-stamp: <[coerce-gpc-methods.R] 2015-02-25 21:07 (CET) by SM>
 ################################################################################
 
 
-##' Conversion from and to the \code{"gpc.poly"} Class
+##' Conversion between polygonal \code{"owin"} and \code{"gpc.poly"}
 ##' 
 ##' Package \pkg{polyCub} implements converters between the classes 
-##' \code{"\link[spatstat:owin.object]{owin}"} of package \pkg{spatstat} and
+##' \code{"\link[=owin.object]{owin}"} of package \pkg{spatstat} and
 ##' \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} of package \pkg{rgeos}
 ##' (originally from \pkg{gpclib}).
 ##' Support for the \code{"gpc.poly"} class was dropped from

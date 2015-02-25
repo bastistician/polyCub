@@ -4,9 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2012-2014 Sebastian Meyer
-### Time-stamp: <[xylist.R] 2014-10-23 09:49 (CEST) by SM>
-###
-### Convert various polygon classes to a simple "xylist"
+### Time-stamp: <[xylist.R] 2015-02-25 21:18 (CET) by SM>
 ################################################################################
 
 
@@ -21,12 +19,12 @@
 ##' The generic function \code{xylist} can deal with the
 ##' following polygon classes:
 ##' \itemize{
-##' \item{\code{"\link[spatstat:owin.object]{owin}"} from package \pkg{spatstat}}
+##' \item{\code{"\link[=owin.object]{owin}"} from package \pkg{spatstat}}
 ##' \item{\code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from package
 ##' \pkg{rgeos} (or \pkg{gpclib})}
-##' \item{\code{"\link[sp:Polygons-class]{Polygons}"} from package \pkg{sp}
-##' (as well as \code{"\link[sp:Polygon-class]{Polygon}"} and
-##' \code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"})}
+##' \item{\code{"\linkS4class{Polygons}"} from package \pkg{sp}
+##' (as well as \code{"\linkS4class{Polygon}"} and
+##' \code{"\linkS4class{SpatialPolygons}"})}
 ##' }
 ##' The (somehow useless) default \code{xylist}-method
 ##' does not perform any transformation but only ensures that the polygons are
