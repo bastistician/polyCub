@@ -3,27 +3,55 @@
 ### Free software under the terms of the GNU General Public License, version 2,
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
-### Copyright (C) 2012-2013 Sebastian Meyer
-### Time-stamp: <[coerce-sp-methods.R] by SM Mon 04/11/2013 22:02 (CET)>
-###
-### Coerce "Polygons" to and from "owin"
+### Copyright (C) 2012-2013, 2015 Sebastian Meyer
+### Time-stamp: <[coerce-sp-methods.R] 2015-02-25 22:19 (CET) by SM>
 ################################################################################
 
 
-##' Coerce \code{"Polygons"} to \code{"owin"}
+##' Coerce \code{"SpatialPolygons"} to \code{"owin"}
 ##' 
-##' Package \pkg{polyCub} also implements \code{coerce}-methods
-##' (\code{as(object, Class)}) to convert
-##' \code{"\link[sp:Polygons-class]{Polygons}"}
-##' (or \code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"} or
-##' \code{"\link[sp:Polygon-class]{Polygon}"}) to
-##' \code{"\link[spatstat:owin.object]{owin}"}.
+##' Package \pkg{polyCub} implements \code{coerce}-methods
+##' (\code{as(object, Class)}) to convert \code{"\linkS4class{SpatialPolygons}"}
+##' (or \code{"\linkS4class{Polygons}"} or \code{"\linkS4class{Polygon}"})
+##' to \code{"\link[=owin.object]{owin}"}.
+##' They are also registered as \code{\link{as.owin}}-methods to support
+##' \code{\link{polyCub.midpoint}}.
+##' Note that the \pkg{maptools} package contains an alternative implementation
+##' of coercion from \code{"SpatialPolygons"} to \code{"owin"} (and reverse),
+##' and \R will use the S4 \code{coerce}-method that was loaded last,
+##' and prefer the \code{as.owin.SpatialPolygons} S3-method exported from
+##' \pkg{maptools} if attached.
 ##' @author Sebastian Meyer
 ##' @keywords spatial methods
 ##' @name coerce-sp-methods
 ##' @rdname coerce-sp-methods
 ##' @exportMethod coerce
 NULL
+
+##' @param W an object of class \code{"SpatialPolygons"},
+##' \code{"Polygons"}, or \code{"Polygon"}.
+##' @param ... further arguments passed to \code{\link{owin}}.
+##' @rdname coerce-sp-methods
+##' @importFrom spatstat owin
+##' @method as.owin SpatialPolygons
+##' @export
+as.owin.SpatialPolygons <- function (W, ...)
+    owin(poly = xylist.SpatialPolygons(W), ...)
+
+##' @rdname coerce-sp-methods
+##' @importFrom spatstat owin
+##' @method as.owin Polygons
+##' @export
+as.owin.Polygons <- function (W, ...)
+    owin(poly = xylist.Polygons(W), ...)
+
+##' @rdname coerce-sp-methods
+##' @importFrom spatstat owin
+##' @method as.owin Polygon
+##' @export
+as.owin.Polygon <- function (W, ...)
+    owin(poly = xylist.Polygon(W), ...)
+
 
 ## Register "owin" as class in S4 so we can define methods for it
 ##setClass("owin")
@@ -45,21 +73,18 @@ NULL
 
 ##' @name coerce,SpatialPolygons,owin-method
 ##' @rdname coerce-sp-methods
-##' @importFrom spatstat owin
 setAs(from = "SpatialPolygons", to = "owin",
-      def = function (from) owin(poly=xylist.SpatialPolygons(from)))
+      def = function (from) as.owin.SpatialPolygons(from))
 
 ##' @name coerce,Polygons,owin-method
 ##' @rdname coerce-sp-methods
-##' @importFrom spatstat owin
 setAs(from = "Polygons", to = "owin",
-      def = function (from) owin(poly=xylist.Polygons(from)))
+      def = function (from) as.owin.Polygons(from))
 
 ##' @name coerce,Polygon,owin-method
 ##' @rdname coerce-sp-methods
-##' @importFrom spatstat owin
 setAs(from = "Polygon", to = "owin",
-      def = function (from) owin(poly=xylist.Polygon(from)))
+      def = function (from) as.owin.Polygon(from))
 
 
 ##' @name coerce,Polygon,Polygons-method

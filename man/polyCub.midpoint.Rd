@@ -10,7 +10,12 @@ polyCub.midpoint(polyregion, f, ..., eps = NULL, dimyx = NULL,
 \arguments{
 \item{polyregion}{a polygonal integration domain.
 It can be any object coercible to the \pkg{spatstat} class
-\code{"\link[spatstat]{owin}"} (via \code{\link[spatstat]{as.owin}}).}
+\code{"\link[spatstat]{owin}"} via a corresponding
+\code{\link[spatstat]{as.owin}}-method.
+Note that this includes polygons of the classes \code{"gpc.poly"} and
+\code{"\linkS4class{SpatialPolygons}"}, because \pkg{polyCub} defines
+methods \code{\link{as.owin.gpc.poly}} and
+\code{\link{as.owin.SpatialPolygons}}, respectively.}
 
 \item{f}{a two-dimensional real function.
 As its first argument it must take a coordinate matrix, i.e., a

@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2015 Sebastian Meyer
-### Time-stamp: <[polyCub.midpoint.R] 2015-01-06 00:12 (CET) by SM>
+### Time-stamp: <[polyCub.midpoint.R] 2015-02-25 20:53 (CET) by SM>
 ################################################################################
 
 
@@ -19,7 +19,12 @@
 #' @inheritParams plotpolyf
 #' @param polyregion a polygonal integration domain.
 #' It can be any object coercible to the \pkg{spatstat} class
-#' \code{"\link[spatstat]{owin}"} (via \code{\link[spatstat]{as.owin}}).
+#' \code{"\link[spatstat]{owin}"} via a corresponding
+#' \code{\link[spatstat]{as.owin}}-method.
+#' Note that this includes polygons of the classes \code{"gpc.poly"} and
+#' \code{"\linkS4class{SpatialPolygons}"}, because \pkg{polyCub} defines
+#' methods \code{\link{as.owin.gpc.poly}} and
+#' \code{\link{as.owin.SpatialPolygons}}, respectively.
 #' @param eps width and height of the pixels (squares),
 #' see \code{\link[spatstat]{as.mask}}.
 #' @param dimyx number of subdivisions in each dimension,
