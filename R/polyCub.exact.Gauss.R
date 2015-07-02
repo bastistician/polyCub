@@ -4,7 +4,7 @@
 ### a copy of which is available at http://www.r-project.org/Licenses/.
 ###
 ### Copyright (C) 2009-2015 Sebastian Meyer
-### Time-stamp: <[polyCub.exact.Gauss.R] 2015-02-15 17:27 (CET) by SM>
+### Time-stamp: <[polyCub.exact.Gauss.R] 2015-07-02 15:47 (CEST) by SM>
 ################################################################################
 
 
@@ -63,6 +63,7 @@
 #' @import sp
 #' @importFrom stats cov2cor
 #' @importFrom spatstat is.polygonal
+#' @importFrom graphics lines
 #' @export
 ## NOTE: we don't import graphics::plot since it is already imported via sp
 
