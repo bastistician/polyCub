@@ -8,6 +8,17 @@
 \title{News for Package 'polyCub'}
 
 
+\section{Changes in polyCub version 0.5-3 (2015-07-02)}{
+
+  \itemize{
+    \item Added missing import from \pkg{graphics} to
+    accommodate new CRAN checks.
+  }
+
+}
+
+
+
 \section{Changes in polyCub version 0.5-2 (2015-02-25)}{
 
   \itemize{
