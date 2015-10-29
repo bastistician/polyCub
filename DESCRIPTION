@@ -2,30 +2,46 @@ Package: polyCub
 Title: Cubature over Polygonal Domains
 Version: 0.5-3
 Date: 2015-07-02
-Authors@R: c(person("Sebastian", "Meyer",
-                    email = "Sebastian.Meyer@ifspm.uzh.ch",
-                    role = c("aut","cre","trl")),
-             person("Leonhard", "Held",
-                    email = "Leonhard.Held@uzh.ch",
-                    role = "ths"),
-             person("Michael", "Hoehle",
-                    email = "Michael.Hoehle@stat.uni-muenchen.de",
-                    role = "ths"))
+Authors@R: c(
+    person("Sebastian", "Meyer",
+           email = "Sebastian.Meyer@ifspm.uzh.ch",
+           role = c("aut","cre","trl")),
+    person("Leonhard", "Held",
+           email = "Leonhard.Held@uzh.ch",
+           role = "ths"),
+    person("Michael", "Hoehle",
+           email = "Michael.Hoehle@stat.uni-muenchen.de",
+           role = "ths")
+    )
 Description: The following methods for cubature (numerical integration)
-             over polygonal domains are currently implemented:
-             the two-dimensional midpoint rule as a simple wrapper around
-             as.im.function() from package 'spatstat' (Baddeley and Turner, 2005),
-             the product Gauss cubature by Sommariva and Vianello (2007),
-             an adaptive cubature for isotropic functions via line integrate()
-             along the boundary (Meyer and Held, 2014),
-             and quasi-exact methods specific to the integration of the
-             bivariate Gaussian density over polygonal and circular domains
-             (based on formulae from the Abramowitz and Stegun (1972) handbook).
-             For cubature over simple hypercubes, the packages 'cubature' and
-             'R2Cuba' are more appropriate.
+    over polygonal domains are currently implemented:
+    the two-dimensional midpoint rule as a simple wrapper around
+    as.im.function() from package 'spatstat' (Baddeley and Turner, 2005),
+    the product Gauss cubature by Sommariva and Vianello (2007),
+    an adaptive cubature for isotropic functions via line integrate()
+    along the boundary (Meyer and Held, 2014),
+    and quasi-exact methods specific to the integration of the
+    bivariate Gaussian density over polygonal and circular domains
+    (based on formulae from the Abramowitz and Stegun (1972) handbook).
+    For cubature over simple hypercubes, the packages 'cubature' and
+    'R2Cuba' are more appropriate.
 License: GPL-2
 URL: https://github.com/WastlM/polyCub
 BugReports: https://github.com/WastlM/polyCub/issues
-Depends: R (>= 2.15.0), methods, sp
-Imports: grDevices, graphics, stats, spatstat
-Suggests: lattice, testthat, mvtnorm, statmod, rgeos, gpclib
+Depends:
+    R (>= 2.15.0),
+    methods,
+    sp
+Imports:
+    grDevices,
+    graphics,
+    stats,
+    spatstat
+Suggests:
+    lattice,
+    testthat,
+    mvtnorm,
+    statmod,
+    rgeos,
+    gpclib
+RoxygenNote: 5.0.0
