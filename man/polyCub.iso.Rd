@@ -49,14 +49,14 @@ together with the polygonal domain, i.e.,
 
 \item{polys}{something like \code{owin$bdry}, but see \code{\link{xylist}}.}
 
-\item{.witherror}{logical indicating if an upperbound for the absolute
+\item{.witherror}{logical indicating if an upper bound for the absolute
 integration error should be attached as an attribute to the result?}
 }
 \value{
 The approximate integral of the isotropic function
 \code{f} over \code{polyregion}.\cr
 If the \code{intrfr} function is provided (which is assumed to be exact), an
-upperbound for the absolute integration error is appended to the result as
+upper bound for the absolute integration error is appended to the result as
 attribute \code{"abs.error"}. It equals the sum of the absolute errors
 reported by all \code{\link{integrate}} calls
 (there is one for each edge of \code{polyregion}).

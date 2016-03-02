@@ -30,7 +30,7 @@ be integrated, i.e. number of calls to \code{\link[mvtnorm]{pmvnorm}} and
 operation.
 }
 \item{error}{
-Approximate absolute integration error steming from the error introduced by
+Approximate absolute integration error stemming from the error introduced by
 the \code{nEval} \code{\link[mvtnorm]{pmvnorm}} evaluations.
 For this reason, the cubature method is in fact only
 quasi-exact (as is the \code{pmvnorm} function).
@@ -44,8 +44,9 @@ This method is quite cumbersome because the A&S formula is only for triangles
 where one vertex is the origin (0,0). For each triangle of the
 \code{\link[gpclib]{tristrip}} we have to check in which of the 6 outer 
 regions of the triangle the origin (0,0) lies and adapt the signs in the 
-formula appropriately. (AOB+BOC-AOC) or (AOB-AOC-BOC) or (AOB+AOC-BOC) or
-(AOC+BOC-AOB) or \ldots. However, the most time consuming step is the
+formula appropriately: \eqn{(AOB+BOC-AOC)} or \eqn{(AOB-AOC-BOC)} or
+\eqn{(AOB+AOC-BOC)} or \eqn{(AOC+BOC-AOB)} or \ldots.
+However, the most time consuming step is the
 evaluation of \code{\link[mvtnorm]{pmvnorm}}.
 }
 \note{
