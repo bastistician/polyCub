@@ -1,8 +1,7 @@
 *~
 .Rhistory
 
-dev/
-polygauss/
+devel/
 polyCub.Rcheck/
 
 /polyCub_*.tar.gz
