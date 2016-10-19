@@ -1,4 +1,4 @@
-\newcommand{\CRANpkg}{\href{http://CRAN.R-project.org/package=#1}{\pkg{#1}}}
+\newcommand{\CRANpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 %% some pre-defined commands: \R, \code, \acronym, \url, \file, \pkg
 %% Since R 3.2.0, there are some additional system Rd macros available,
 %% e.g., \CRANpkg and \doi. See the definitions in the file
