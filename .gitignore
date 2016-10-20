@@ -1,9 +1,9 @@
 *~
 .Rhistory
-
 devel/
 polyCub.Rcheck/
-
 /polyCub_*.tar.gz
 src/*.o
 src/*.so
+*.Rproj
+.Rproj.user

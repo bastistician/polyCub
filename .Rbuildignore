@@ -1,3 +1,5 @@
 ^devel
 ^polyCub_[0-9\.-]+\.tar\.gz
 ^polyCub-Ex\.R
+^.*\.Rproj$
+^\.Rproj\.user$
