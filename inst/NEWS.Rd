@@ -8,11 +8,12 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.5-3 (2015-07-02)}{
+\section{Changes in polyCub version 0.5-3 (2017-05-16)}{
 
   \itemize{
-    \item Added missing import from \pkg{graphics} to
-    accommodate new CRAN checks.
+    \item Accommodate CRAN checks:
+    add missing import from \pkg{graphics},
+    register native routines and disable symbol search
   }
 
 }
