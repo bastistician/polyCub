@@ -1,10 +1,11 @@
 ################################################################################
-### Part of the R package "polyCub".
-### Free software under the terms of the GNU General Public License, version 2,
-### a copy of which is available at http://www.r-project.org/Licenses/.
+### polyCub.SV: Product Gauss Cubature over Polygonal Domains
 ###
-### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[polyCub.SV.R] 2014-09-27 14:10 (CEST) by SM>
+### Copyright (C) 2009-2014,2017 Sebastian Meyer
+###
+### This file is part of the R package "polyCub",
+### free software under the terms of the GNU General Public License, version 2,
+### a copy of which is available at http://www.R-project.org/Licenses/.
 ################################################################################
 
 
@@ -152,7 +153,7 @@ gauss.quad <- function (n)
 ##' Product Gauss cubature over polygons based on Green's integration formula.
 ##' \emph{Bit Numerical Mathematics}, \bold{47} (2), 441-453.
 ##' @keywords internal
-##' @useDynLib polyCub C_polygauss
+##' @useDynLib polyCub, .registration = TRUE
 
 polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE, engine = "C")
 {
