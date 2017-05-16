@@ -95,10 +95,9 @@ if (requireNamespace("mvtnorm") && gpclibPermit()) {
 }
 }
 \seealso{
-Other polyCub.methods: \code{\link{polyCub.SV}},
+Other polyCub-methods: \code{\link{polyCub.SV}},
   \code{\link{polyCub.exact.Gauss}},
   \code{\link{polyCub.iso}}, \code{\link{polyCub.midpoint}}
 }
 \keyword{math}
 \keyword{spatial}
-

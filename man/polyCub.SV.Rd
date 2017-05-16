@@ -76,6 +76,16 @@ Sommariva and Vianello (2007).
 \examples{
 # see example(polyCub)
 }
+\references{
+Sommariva, A. and Vianello, M. (2007).
+Product Gauss cubature over polygons based on Green's integration formula.
+\emph{Bit Numerical Mathematics}, \bold{47} (2), 441-453.
+}
+\seealso{
+Other polyCub-methods: \code{\link{polyCub.exact.Gauss}},
+  \code{\link{polyCub.iso}},
+  \code{\link{polyCub.midpoint}}, \code{\link{polyCub}}
+}
 \author{
 Sebastian Meyer\cr
 The product Gauss cubature is based on the
@@ -83,16 +93,5 @@ original \acronym{MATLAB} implementation \code{polygauss} by Sommariva and
 Vianello (2007), which is available under the GNU GPL (>=2) license from
 \url{http://www.math.unipd.it/~alvise/software.html}.
 }
-\references{
-Sommariva, A. and Vianello, M. (2007).
-Product Gauss cubature over polygons based on Green's integration formula.
-\emph{Bit Numerical Mathematics}, \bold{47} (2), 441-453.
-}
-\seealso{
-Other polyCub.methods: \code{\link{polyCub.exact.Gauss}},
-  \code{\link{polyCub.iso}},
-  \code{\link{polyCub.midpoint}}, \code{\link{polyCub}}
-}
 \keyword{math}
 \keyword{spatial}
-

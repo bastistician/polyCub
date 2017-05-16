@@ -21,4 +21,3 @@ Construct an equally-spaced grid given a range and the number of cut points
 This is nothing else than \code{seq(range[1], range[2], length.out=n)}.
 }
 \keyword{internal}
-

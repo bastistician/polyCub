@@ -2,12 +2,12 @@
 % Please edit documentation in R/xylist.R
 \name{xylist}
 \alias{xylist}
-\alias{xylist.Polygon}
-\alias{xylist.Polygons}
-\alias{xylist.SpatialPolygons}
-\alias{xylist.default}
-\alias{xylist.gpc.poly}
 \alias{xylist.owin}
+\alias{xylist.gpc.poly}
+\alias{xylist.SpatialPolygons}
+\alias{xylist.Polygons}
+\alias{xylist.Polygon}
+\alias{xylist.default}
 \title{Convert Various Polygon Classes to a Simple List of Vertices}
 \usage{
 xylist(object, ...)
@@ -85,4 +85,3 @@ Sebastian Meyer
 }
 \keyword{methods}
 \keyword{spatial}
-

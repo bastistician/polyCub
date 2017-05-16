@@ -66,4 +66,3 @@ plotpolyf(letterR, f, use.lattice=TRUE)
 Sebastian Meyer
 }
 \keyword{hplot}
-

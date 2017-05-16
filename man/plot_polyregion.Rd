@@ -21,4 +21,3 @@ and \code{"\linkS4class{Polygon}"}
 \description{
 Plots a Polygonal Domain (of Various Classes)
 }
-

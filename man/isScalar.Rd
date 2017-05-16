@@ -16,4 +16,3 @@ logical
 Check if the argument is scalar, i.e. a numeric vector of length 1.
 }
 \keyword{internal}
-

@@ -49,4 +49,3 @@ Tables. New York: Dover Publications.
 }
 \keyword{math}
 \keyword{spatial}
-

@@ -19,4 +19,3 @@ identical.
 }
 \keyword{internal}
 \keyword{spatial}
-

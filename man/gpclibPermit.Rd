@@ -16,4 +16,3 @@ prohibited) and report its acceptance status, respectively.
 \pkg{gpclib} functionality is only required for
 \code{\link{polyCub.exact.Gauss}}.
 }
-

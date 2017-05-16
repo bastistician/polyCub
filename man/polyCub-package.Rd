@@ -71,4 +71,3 @@ Product Gauss cubature over polygons based on Green's integration formula.
 The packages \pkg{cubature} and \pkg{R2Cuba}, which are more
 appropriate for cubature over simple hypercubes.
 }
-

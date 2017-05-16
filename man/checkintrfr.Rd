@@ -43,4 +43,3 @@ against a numeric approximation using \code{\link{integrate}} for various
 values of the upper bound \eqn{R}. A warning is issued if inconsistencies
 are found.
 }
-

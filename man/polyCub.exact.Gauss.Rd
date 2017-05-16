@@ -68,10 +68,9 @@ Tables. New York: Dover Publications.
 \code{\link{circleCub.Gauss}} for quasi-exact cubature of the
 isotropic Gaussian density over a circular domain.
 
-Other polyCub.methods: \code{\link{polyCub.SV}},
+Other polyCub-methods: \code{\link{polyCub.SV}},
   \code{\link{polyCub.iso}},
   \code{\link{polyCub.midpoint}}, \code{\link{polyCub}}
 }
 \keyword{math}
 \keyword{spatial}
-

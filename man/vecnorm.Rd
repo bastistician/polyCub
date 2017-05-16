@@ -17,4 +17,3 @@ This is nothing else than \code{sqrt(sum(x^2))}.
 }
 \keyword{internal}
 \keyword{math}
-

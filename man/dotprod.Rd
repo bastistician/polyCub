@@ -17,4 +17,3 @@ This is nothing else than \code{sum(x*y)}.
 }
 \keyword{internal}
 \keyword{math}
-

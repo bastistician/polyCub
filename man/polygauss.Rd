@@ -54,4 +54,3 @@ Product Gauss cubature over polygons based on Green's integration formula.
 \emph{Bit Numerical Mathematics}, \bold{47} (2), 441-453.
 }
 \keyword{internal}
-

@@ -53,10 +53,9 @@ Baddeley, A. and Turner, R. (2005).
 \emph{Journal of Statistical Software}, \bold{12} (6), 1-42.
 }
 \seealso{
-Other polyCub.methods: \code{\link{polyCub.SV}},
+Other polyCub-methods: \code{\link{polyCub.SV}},
   \code{\link{polyCub.exact.Gauss}},
   \code{\link{polyCub.iso}}, \code{\link{polyCub}}
 }
 \keyword{math}
 \keyword{spatial}
-
