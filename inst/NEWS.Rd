@@ -8,6 +8,19 @@
 \title{News for Package 'polyCub'}
 
 
+\section{Changes in polyCub version 0.6.0 (2017-05-18)}{
+
+  \itemize{
+    \item Added a C-implementation of \code{polyCub.iso()}.
+    The routine is registered as \code{"polyCub_iso"}, and can be
+    accessed by other \R packages via the \code{R_GetCCallable()}
+    interface.
+  }
+
+}
+
+
+
 \section{Changes in polyCub version 0.5-3 (2017-05-16)}{
 
   \itemize{
