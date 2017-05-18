@@ -15,6 +15,7 @@
  */
 
 #include <math.h>
+#include <R_ext/Print.h>   // Rprintf
 #include <R_ext/Memory.h>  // R_alloc
 #include <R_ext/Applic.h>  // Rdqags
 
