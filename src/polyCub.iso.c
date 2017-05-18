@@ -127,9 +127,9 @@ void polyiso(
                              &resulti, &abserri, &nevali, &ieri);
                 if (ieri > 0) {
                         if (stop_on_error == 0) {
-                                Rprintf("abnormal termination of integration routine (%i)", ieri);
+                                Rprintf("abnormal termination of integration routine (%i)\n", ieri);
                         } else {
-                                error("abnormal termination of integration routine (%i)", ieri);
+                                error("abnormal termination of integration routine (%i)\n", ieri);
                         }
                 }
                 *value += resulti;
