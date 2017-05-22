@@ -25,5 +25,5 @@ void R_init_polyCub(DllInfo *dll)
     R_registerRoutines(dll, CEntries, NULL, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 
-    R_RegisterCCallable("polyCub", "polyCub_iso", (DL_FUNC) &polyiso);
+    R_RegisterCCallable("polyCub", "polyiso", (DL_FUNC) &polyiso);
 }
