@@ -7,6 +7,6 @@ test_that("isotropic cubature can handle control list for integrate()", {
     int1 <- polyCub.iso(letterR, f, center=c(0,0), control=list(rel.tol=1e-3))
     int2 <- polyCub.iso(letterR, f, center=c(0,0), control=list(rel.tol=1e-8))
     ## results are almost identical
-    expect_that(int1, equals(int2, tolerance=1e-3))
-    expect_that(int1, not(is_identical_to(int2)))
+    expect_equal(int1, int2, tolerance=1e-3)
+    expect_false(identical(int1, int2))
 })
