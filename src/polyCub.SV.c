@@ -1,21 +1,22 @@
 /*******************************************************************************
- * Part of the R package "polyCub".
- * Free software under the terms of the GNU General Public License, version 2,
- * a copy of which is available at http://www.r-project.org/Licenses/.
- * 
- * Copyright (C) 2014 Sebastian Meyer
- * Time-stamp: <[polyCub.SV.c] by SM Die 06/05/2014 21:39 (CEST)>
- *
  * C-version of .polygauss.side()
+ *
+ * Copyright (C) 2014,2017 Sebastian Meyer
+ *
+ * This file is part of the R package "polyCub",
+ * free software under the terms of the GNU General Public License, version 2,
+ * a copy of which is available at http://www.R-project.org/Licenses/.
  ******************************************************************************/
 
+#include "polyCub.SV.h"
 
-void C_polygauss_side(double *x1, double *y1, double *x2, double *y2,
-		      double *s_loc, double *w_loc, double *s_N, double *w_N,
-		      double *alpha,
-		      int *loc, int *N, // lengths (loc is M=N+1 or N)
-		      // *loc * *N nodes and weights will be computed
-		      double *nodes_x, double *nodes_y, double *weights)
+static void C_polygauss_side(
+    double *x1, double *y1, double *x2, double *y2,
+    double *s_loc, double *w_loc, double *s_N, double *w_N,
+    double *alpha,
+    int *loc, int *N, // lengths (loc is M=N+1 or N)
+    // *loc * *N nodes and weights will be computed
+    double *nodes_x, double *nodes_y, double *weights)
 {
     double half_pt_x     = (*x1 + *x2) / 2.0;
     double half_length_x = (*x2 - *x1) / 2.0;
@@ -52,8 +53,7 @@ void C_polygauss(
     double *alpha,            // base-line
     int *L, int *M, int *N,   // L: number of edges/vertices
     // result: nodes and weights of length (<=) M*N per edge
-    double *nodes_x, double *nodes_y, double *weights
-    )
+    double *nodes_x, double *nodes_y, double *weights)
 {
     int idxTo, idxBlock;
     double x1, y1, x2, y2;
