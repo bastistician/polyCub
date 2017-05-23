@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Header file of the C-version of polyCub1.iso()
+ * Header file of polyCub.iso.c
  *
  * Copyright (C) 2017 Sebastian Meyer
  *
