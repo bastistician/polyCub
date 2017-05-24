@@ -1,3 +1,5 @@
+context("C-implementation of polyCub1.iso()")
+
 ## CAVE (as of R-3.4.0 with testthat 1.0.2):
 ## During R CMD check, tools:::.runPackageTests() sets R_TESTS=startup.Rs,
 ## a file which is created in the parent directory "tests", see
@@ -8,12 +10,19 @@
 ## file.path(R.home("library"), "base", "R", "Rprofile")
 ## for what happens. Solution: unset R_TESTS (or set to "") for sub-R processes.
 
-context("C-implementation of polyCub1.iso()")
+## function to call an R CMD
+Rcmd <- if (getRversion() >= "3.3.0") {
+    tools::Rcmd
+} else if (.Platform$OS.type == "windows") {
+    function (args, ...) system2(file.path(R.home("bin"), "Rcmd.exe"), args, ...)
+} else {
+    function (args, ...) system2(file.path(R.home("bin"), "R"), c("CMD", args), ...)
+}
 
 message("compiling polyiso_powerlaw.c using R CMD SHLIB")
-shlib_error <- tools::Rcmd(args = c("SHLIB", "--clean", "polyiso_powerlaw.c"),
-                           env = c(paste0("PKG_CPPFLAGS=-I", system.file("include", package="polyCub")),
-                                   "R_TESTS=''"))
+shlib_error <- Rcmd(args = c("SHLIB", "--clean", "polyiso_powerlaw.c"),
+                    env = c(paste0("PKG_CPPFLAGS=-I", system.file("include", package="polyCub")),
+                            "R_TESTS=''"))
 if (shlib_error)
     skip("failed to build the shared object/DLL for the polyCub_iso example")
 
