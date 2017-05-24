@@ -8,22 +8,14 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.6.0 (2017-05-18)}{
+\section{Changes in polyCub version 0.6.0 (2017-05-24)}{
 
   \itemize{
-    \item Added a C-implementation of \code{polyCub.iso()}.
-    The routine is registered as \code{"polyCub_iso"}, and can be
-    accessed by other \R packages via the \code{R_GetCCallable()}
-    interface.
-  }
-
-}
-
-
-
-\section{Changes in polyCub version 0.5-3 (2017-05-16)}{
-
-  \itemize{
+    \item Added full C-implementation of \code{polyCub.iso()},
+    which is exposed as \code{"polyCub_iso"} for use by other
+    \R packages (notably future versions of \CRANpkg{surveillance})
+    via \samp{LinkingTo: polyCub} and \samp{#include <polyCubAPI.h>}.
+    
     \item Accommodate CRAN checks:
     add missing import from \pkg{graphics},
     register native routines and disable symbol search
