@@ -1,16 +1,16 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
 Version: 0.6.0
-Date: 2017-05-18
+Date: 2017-05-24
 Authors@R: c(
     person("Sebastian", "Meyer",
-           email = "Sebastian.Meyer@ifspm.uzh.ch",
+           email = "seb.meyer@fau.de",
            role = c("aut","cre","trl")),
     person("Leonhard", "Held",
            email = "Leonhard.Held@uzh.ch",
            role = "ths"),
     person("Michael", "Hoehle",
-           email = "Michael.Hoehle@stat.uni-muenchen.de",
+           email = "hoehle@math.su.se",
            role = "ths")
     )
 Description: The following methods for cubature (numerical integration)
