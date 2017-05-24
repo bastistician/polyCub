@@ -3,3 +3,6 @@
 ^polyCub-Ex\.R
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^Makefile
+^manual.pdf
+^NEWS.html
