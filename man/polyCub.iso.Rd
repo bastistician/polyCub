@@ -64,7 +64,7 @@ reported by all \code{\link{integrate}} calls
 \description{
 Conducts numerical integration of a two-dimensional isotropic function
 \eqn{f(x,y) = f_r(||(x,y)-\boldsymbol{\mu}||)}{f(x,y) = f_r(||(x,y)-\mu||)},
-with \eqn{\mu} being the center of isotropy, over a polygonal domain. 
+with \eqn{\mu} being the center of isotropy, over a polygonal domain.
 It internally solves a line integral along the polygon boundary using
 \code{\link{integrate}} where the integrand requires the antiderivative of
 \eqn{r f_r(r)}), which ideally is analytically available and supplied to the
@@ -111,6 +111,14 @@ DOI-Link: \url{http://dx.doi.org/10.1214/14-AOAS743},
 \href{http://arxiv.org/abs/1308.5115}{arXiv:1308.5115}
 }
 \seealso{
+\code{system.file("include", "polyCubAPI.h", package = "polyCub")}
+for a full C-implementation of this cubature method (for a \emph{single}
+polygon). The corresponding C-routine \code{polyCub_iso} can be used by
+other \R packages, notably \pkg{surveillance}, via \samp{LinkingTo: polyCub}
+(in the \file{DESCRIPTION}) and \samp{#include <polyCubAPI.h>} (in suitable
+\file{/src} files). Note that the \code{intrfr} function must then also be
+supplied as a C-routine. An example can be found in the package tests.
+
 Other polyCub-methods: \code{\link{polyCub.SV}},
   \code{\link{polyCub.exact.Gauss}},
   \code{\link{polyCub.midpoint}}, \code{\link{polyCub}}

@@ -1,7 +1,7 @@
 ################################################################################
 ### polyCub.iso: Cubature of Isotropic Functions over Polygonal Domains
 ###
-### Copyright (C) 2013-2016 Sebastian Meyer
+### Copyright (C) 2013-2017 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -13,7 +13,7 @@
 #'
 #' Conducts numerical integration of a two-dimensional isotropic function
 #' \eqn{f(x,y) = f_r(||(x,y)-\boldsymbol{\mu}||)}{f(x,y) = f_r(||(x,y)-\mu||)},
-#' with \eqn{\mu} being the center of isotropy, over a polygonal domain. 
+#' with \eqn{\mu} being the center of isotropy, over a polygonal domain.
 #' It internally solves a line integral along the polygon boundary using
 #' \code{\link{integrate}} where the integrand requires the antiderivative of
 #' \eqn{r f_r(r)}), which ideally is analytically available and supplied to the
@@ -49,7 +49,7 @@
 #' reported by all \code{\link{integrate}} calls
 #' (there is one for each edge of \code{polyregion}).
 #' @author Sebastian Meyer
-#' 
+#'
 #' The basic mathematical formulation of this efficient integration for radially
 #' symmetric functions was ascertained with great support by
 #' Emil Hedevang (2013), Dept. of Mathematics, Aarhus University, Denmark.
@@ -62,6 +62,14 @@
 #' \emph{The Annals of Applied Statistics}, \bold{8} (3), 1612-1639.\cr
 #' DOI-Link: \url{http://dx.doi.org/10.1214/14-AOAS743},
 #' \href{http://arxiv.org/abs/1308.5115}{arXiv:1308.5115}
+#' @seealso
+#' \code{system.file("include", "polyCubAPI.h", package = "polyCub")}
+#' for a full C-implementation of this cubature method (for a \emph{single}
+#' polygon). The corresponding C-routine \code{polyCub_iso} can be used by
+#' other \R packages, notably \pkg{surveillance}, via \samp{LinkingTo: polyCub}
+#' (in the \file{DESCRIPTION}) and \samp{#include <polyCubAPI.h>} (in suitable
+#' \file{/src} files). Note that the \code{intrfr} function must then also be
+#' supplied as a C-routine. An example can be found in the package tests.
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @example inst/examples/polyCub.iso.R
@@ -90,7 +98,7 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
 
     ## plot polygon and function image
     if (plot) plotpolyf(polys, f, ...)
-    
+
     ## do the cubature over all polygons of the 'polys' list
     .polyCub.iso(polys, intrfr, ..., center=center,
                  control=control, .witherror=getError)
@@ -146,7 +154,7 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
     } else if (doCheck) {
         stop("numerical verification of 'intrfr' requires 'f'")
     }
-    
+
     match.fun(intrfr)
 }
 
