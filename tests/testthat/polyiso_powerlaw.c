@@ -9,7 +9,7 @@
  ******************************************************************************/
 
 #include <math.h>
-#include "polyCubAPI.h"
+#include <polyCubAPI.h>
 
 // F(R) example
 static double intrfr_powerlaw(double R, double *logpars)
