@@ -1,4 +1,4 @@
-context("C-implementation of polyCub1.iso()")
+context("polyCub_iso C-routine (API)")
 
 ## CAVE (as of R-3.4.0 with testthat 1.0.2):
 ## During R CMD check, tools:::.runPackageTests() sets R_TESTS=startup.Rs,
