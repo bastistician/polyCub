@@ -47,7 +47,7 @@ checkUsage: install
 	| $R --slave --no-save --no-restore
 
 ## make pdf manual
-manual.pdf: DESCRIPTION man/*.Rd
+manual.pdf: DESCRIPTION document
 	$R CMD Rd2pdf --batch --force --output="$@" .
 
 ## make NEWS page
