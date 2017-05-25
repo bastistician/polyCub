@@ -16,8 +16,18 @@ Rcmd <- function (args, env = character(), ...) {
     stopifnot(is.vector(env, mode = "character"),
               !is.null(names(env)))
     if (.Platform$OS.type == "windows") {
-        ## the 'env' argument of system2() is not supported on Windows
-        if (length(env)) do.call(Sys.setenv, as.list(env))
+        if (length(env)) {
+            ## the 'env' argument of system2() is not supported on Windows
+            setenv <- function (envs) {
+                old <- Sys.getenv(names(envs), unset = NA, names = TRUE)
+                set <- !is.na(envs)
+                if (any(set)) do.call(Sys.setenv, as.list(envs[set]))
+                if (any(!set)) Sys.unsetenv(names(envs)[!set])
+                invisible(old)
+            }
+            oldenv <- setenv(env)
+            on.exit(setenv(oldenv))
+        }
         system2(command = file.path(R.home("bin"), "Rcmd.exe"),
                 args = args, ...)
     } else {
