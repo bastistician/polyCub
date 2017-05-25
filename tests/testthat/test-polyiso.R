@@ -10,19 +10,27 @@ context("polyCub_iso C-routine (API)")
 ## file.path(R.home("library"), "base", "R", "Rprofile")
 ## for what happens. Solution: unset R_TESTS (or set to "") for sub-R processes.
 
-## function to call an R CMD
-Rcmd <- if (getRversion() >= "3.3.0") {
-    tools::Rcmd
-} else if (.Platform$OS.type == "windows") {
-    function (args, ...) system2(file.path(R.home("bin"), "Rcmd.exe"), args, ...)
-} else {
-    function (args, ...) system2(file.path(R.home("bin"), "R"), c("CMD", args), ...)
+## function to call an R CMD with environment variables
+## 'env' specified as a named character vector
+Rcmd <- function (args, env = character(), ...) {
+    stopifnot(is.vector(env, mode = "character"),
+              !is.null(names(env)))
+    if (.Platform$OS.type == "windows") {
+        ## the 'env' argument of system2() is not supported on Windows
+        if (length(env)) do.call(Sys.setenv, as.list(env))
+        system2(command = file.path(R.home("bin"), "Rcmd.exe"),
+                args = args, ...)
+    } else {
+        system2(command = file.path(R.home("bin"), "R"),
+                args = c("CMD", args),
+                env = paste(names(env), env, sep = "="), ...)
+    }
 }
 
 message("compiling polyiso_powerlaw.c using R CMD SHLIB")
 shlib_error <- Rcmd(args = c("SHLIB", "--clean", "polyiso_powerlaw.c"),
-                    env = c(paste0("PKG_CPPFLAGS=-I", system.file("include", package="polyCub")),
-                            "R_TESTS=''"))
+                    env = c("PKG_CPPFLAGS" = paste0("-I", system.file("include", package="polyCub")),
+                            "R_TESTS" = ""))
 if (shlib_error)
     skip("failed to build the shared object/DLL for the polyCub_iso example")
 
