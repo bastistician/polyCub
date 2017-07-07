@@ -11,9 +11,14 @@
 \section{Changes in polyCub version 0.6.1 (2017-07-07)}{
 
   \itemize{
-    \item The exported C-function \code{polyCub_iso()} did not handle
-    its \code{stop_on_error} argument correctly in that it would always
-    perform the default action of stopping upon an integration error.
+    \item The exported C-function \code{polyCub_iso()} \dots
+    \itemize{
+      \item did not handle its \code{stop_on_error} argument correctly
+      (it would always stop on error).
+      \item now detects non-finite \code{intrfr} function values
+      and gives an informative error message (rather than just reporting
+      \dQuote{abnormal termination of integration routine}).
+    }
   }
 
 }

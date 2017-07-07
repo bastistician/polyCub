@@ -14,8 +14,8 @@
  * https://doi.org/10.1214/14-AOAS743SUPPB
  */
 
-#include <math.h>
-#include <R_ext/Error.h>
+#include <R_ext/Arith.h>   // R_FINITE, otherwise math.h would suffice
+#include <R_ext/Error.h>   // error
 #include <R_ext/Memory.h>  // R_alloc
 #include <R_ext/Print.h>   // Rprintf
 #include <R_ext/Applic.h>  // Rdqags
@@ -36,6 +36,8 @@ static double lineIntegrand(
     double norm2 = px*px + py*py;
     // evaluate F(R) = int_0^R r*f(r) dr at R=||(px,py)||
     double inti = intrfr(sqrt(norm2), pars);
+    if (!R_FINITE(inti))
+        error("non-finite intrfr value at R=%f", sqrt(norm2));
     return num*inti/norm2;
 }
 
