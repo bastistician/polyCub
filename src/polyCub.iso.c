@@ -15,8 +15,9 @@
  */
 
 #include <math.h>
-#include <R_ext/Print.h>   // Rprintf
+#include <R_ext/Error.h>
 #include <R_ext/Memory.h>  // R_alloc
+#include <R_ext/Print.h>   // Rprintf
 #include <R_ext/Applic.h>  // Rdqags
 
 // header file defines the intrfr_fn type
