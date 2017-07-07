@@ -126,7 +126,7 @@ void polyiso(
                      *subdivisions, epsabs, epsrel,
                      &resulti, &abserri, &nevali, &ieri);
         if (ieri > 0) {
-            if (stop_on_error == 0) {
+            if (*stop_on_error == 0) {
                 Rprintf("abnormal termination of integration routine (%i)\n", ieri);
             } else {
                 error("abnormal termination of integration routine (%i)\n", ieri);

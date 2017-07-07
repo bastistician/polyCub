@@ -8,6 +8,18 @@
 \title{News for Package 'polyCub'}
 
 
+\section{Changes in polyCub version 0.6.1 (2017-07-07)}{
+
+  \itemize{
+    \item The exported C-function \code{polyCub_iso()} did not handle
+    its \code{stop_on_error} argument correctly in that it would always
+    perform the default action of stopping upon an integration error.
+  }
+
+}
+
+
+
 \section{Changes in polyCub version 0.6.0 (2017-05-24)}{
 
   \itemize{
