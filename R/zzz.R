@@ -1,12 +1,11 @@
 ################################################################################
-### Part of the R package "polyCub".
-### Free software under the terms of the GNU General Public License, version 2,
-### a copy of which is available at http://www.r-project.org/Licenses/.
+### Package administration
 ###
 ### Copyright (C) 2009-2014 Sebastian Meyer
-### Time-stamp: <[zzz.R] 2014-10-24 11:11 (CEST) by SM>
 ###
-### Package administration
+### This file is part of the R package "polyCub",
+### free software under the terms of the GNU General Public License, version 2,
+### a copy of which is available at http://www.R-project.org/Licenses/.
 ################################################################################
 
 
@@ -71,7 +70,7 @@
 #' 
 #' Sommariva, A. and Vianello, M. (2007).
 #' Product Gauss cubature over polygons based on Green's integration formula.
-#' \emph{Bit Numerical Mathematics}, \bold{47} (2), 441-453.
+#' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
 #' @docType package
 #' @name polyCub-package
 #' @seealso The packages \pkg{cubature} and \pkg{R2Cuba}, which are more

@@ -67,7 +67,7 @@
 ##' @references
 ##' Sommariva, A. and Vianello, M. (2007).
 ##' Product Gauss cubature over polygons based on Green's integration formula.
-##' \emph{Bit Numerical Mathematics}, \bold{47} (2), 441-453.
+##' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
 ##' @keywords math spatial
 ##' @family polyCub-methods
 ##' @importFrom graphics points
@@ -151,7 +151,7 @@ gauss.quad <- function (n)
 ##' @references
 ##' Sommariva, A. and Vianello, M. (2007):
 ##' Product Gauss cubature over polygons based on Green's integration formula.
-##' \emph{Bit Numerical Mathematics}, \bold{47} (2), 441-453.
+##' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
 ##' @keywords internal
 ##' @useDynLib polyCub, .registration = TRUE
 

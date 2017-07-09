@@ -15,7 +15,7 @@ wrapper around the following specific cubature methods.
 * `polyCub.midpoint()`: Two-dimensional midpoint rule (a simple wrapper around
   `spatstat::as.im.function`) 
 * `polyCub.SV()`: Product Gauss cubature as proposed by
-  [Sommariva and Vianello (2007, *Bit Numerical Mathematics*,
+  [Sommariva and Vianello (2007, *BIT Numerical Mathematics*,
   **47** (2), 441-453)](http://dx.doi.org/10.1007/s10543-007-0131-2)
 
 #### Cubature rules for specific types of functions:

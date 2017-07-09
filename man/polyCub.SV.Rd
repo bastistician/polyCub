@@ -79,7 +79,7 @@ Sommariva and Vianello (2007).
 \references{
 Sommariva, A. and Vianello, M. (2007).
 Product Gauss cubature over polygons based on Green's integration formula.
-\emph{Bit Numerical Mathematics}, \bold{47} (2), 441-453.
+\emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
 }
 \seealso{
 Other polyCub-methods: \code{\link{polyCub.exact.Gauss}},
