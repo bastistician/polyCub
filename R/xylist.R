@@ -1,15 +1,16 @@
 ################################################################################
-### Part of the R package "polyCub".
-### Free software under the terms of the GNU General Public License, version 2,
-### a copy of which is available at http://www.r-project.org/Licenses/.
+### xylist: Convert Various Polygon Classes to a Simple List of Vertices
 ###
 ### Copyright (C) 2012-2014 Sebastian Meyer
-### Time-stamp: <[xylist.R] 2015-02-25 21:18 (CET) by SM>
+###
+### This file is part of the R package "polyCub",
+### free software under the terms of the GNU General Public License, version 2,
+### a copy of which is available at https://www.R-project.org/Licenses/.
 ################################################################################
 
 
 ##' Convert Various Polygon Classes to a Simple List of Vertices
-##' 
+##'
 ##' Different packages concerned with spatial data use different polygon
 ##' specifications, which sometimes becomes very confusing (see Details below).
 ##' To be compatible with the various polygon classes, package \pkg{polyCub}
@@ -29,7 +30,7 @@
 ##' The (somehow useless) default \code{xylist}-method
 ##' does not perform any transformation but only ensures that the polygons are
 ##' not closed (first vertex not repeated).
-##' 
+##'
 ##' Different packages concerned with spatial data use different polygon
 ##' specifications with respect to:
 ##' \itemize{

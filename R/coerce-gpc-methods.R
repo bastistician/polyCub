@@ -1,22 +1,23 @@
 ################################################################################
-### Part of the R package "polyCub".
-### Free software under the terms of the GNU General Public License, version 2,
-### a copy of which is available at http://www.r-project.org/Licenses/.
+### Conversion between polygonal "owin" and "gpc.poly"
 ###
 ### Copyright (C) 2012-2015 Sebastian Meyer
-### Time-stamp: <[coerce-gpc-methods.R] 2015-02-25 21:07 (CET) by SM>
+###
+### This file is part of the R package "polyCub",
+### free software under the terms of the GNU General Public License, version 2,
+### a copy of which is available at https://www.R-project.org/Licenses/.
 ################################################################################
 
 
 ##' Conversion between polygonal \code{"owin"} and \code{"gpc.poly"}
-##' 
-##' Package \pkg{polyCub} implements converters between the classes 
+##'
+##' Package \pkg{polyCub} implements converters between the classes
 ##' \code{"\link[=owin.object]{owin}"} of package \pkg{spatstat} and
 ##' \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} of package \pkg{rgeos}
 ##' (originally from \pkg{gpclib}).
 ##' Support for the \code{"gpc.poly"} class was dropped from
 ##' \pkg{spatstat} as of version 1.34-0.
-##' 
+##'
 ##' @param object an object of class \code{"gpc.poly"} or \code{"owin"},
 ##' respectively.
 ##' @return The converted polygon of class \code{"gpc.poly"} or \code{"owin"},
@@ -41,7 +42,7 @@
 owin2gpc <- function (object)
 {
     object <- as.polygonal(object)
-    
+
     ## FIXME: spatstat functions to extract the areas and hole flags
     ## of the individual polygons in a polygonal "owin" would be nice
     holes <- summary.owin(object)$areas < 0
@@ -77,7 +78,7 @@ gpc2owin <- function (object, ...)
     res <- owin(poly = object@pts, check = FALSE)
     holes_owin <- summary.owin(res)$areas < 0
     ## Note: cannot rely on spatstat::Area.xypolygon since it is marked internal
-    
+
     ## now fix the vertex order
     bdry <- mapply(
         FUN = function (poly, owinhole) {

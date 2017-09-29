@@ -5,7 +5,7 @@
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
-### a copy of which is available at http://www.R-project.org/Licenses/.
+### a copy of which is available at https://www.R-project.org/Licenses/.
 ################################################################################
 
 
@@ -38,14 +38,14 @@
 ##' convex polygons, this rotation guarantees that all nodes fall inside the
 ##' polygon.
 ##' @param engine character string specifying the implementation to use.
-##' Up to \pkg{polyCub} version 0.4-3, the two-dimensional nodes and weights 
+##' Up to \pkg{polyCub} version 0.4-3, the two-dimensional nodes and weights
 ##' were computed by \R functions and these are still available by setting
 ##' \code{engine = "R"}.
-##' The new C-implementation is now the default (\code{engine = "C"}) and 
+##' The new C-implementation is now the default (\code{engine = "C"}) and
 ##' requires approximately 30\% less computation time.\cr
 ##' The special setting \code{engine = "C+reduce"} will discard redundant nodes
 ##' at (0,0) with zero weight resulting from edges on the base-line
-##' \eqn{x = \alpha} or orthogonal to it. 
+##' \eqn{x = \alpha} or orthogonal to it.
 ##' This extra cleaning is only worth its cost for computationally intensive
 ##' functions \code{f} over polygons which really have some edges on the
 ##' baseline or parallel to the x-axis.  Note that the old \R
@@ -95,7 +95,7 @@ polyCub.SV <- function (polyregion, f, ...,
         return(lapply(X = polys, FUN = polygauss, nw_MN = c(nw_M, nw_N),
                       alpha = alpha, rotation = rotation, engine = engine))
     }
-    
+
     ## Cubature over every single polygon of the "polys" list
     f <- match.fun(f)
     int1 <- function (poly) {
@@ -158,7 +158,7 @@ gauss.quad <- function (n)
 polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE, engine = "C")
 {
     ## POLYGON ROTATION
-    
+
     xyrot <- if (identical(FALSE, rotation)) {
         if (is.null(alpha)) { # choose midpoint of x-range
             xrange <- range(xy[["x"]])
@@ -198,12 +198,12 @@ polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE, engine = "C")
 
     ## number of vertices
     L <- length(xyrot[[1L]])
-    
-    
+
+
     ## COMPUTE 2D NODES AND WEIGHTS.
-    
+
     if (engine == "R") {
-        
+
         toIdx <- c(seq.int(2, L), 1L)
         nwlist <- mapply(.polygauss.side,
                          xyrot[[1L]], xyrot[[2L]],
@@ -233,7 +233,7 @@ polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE, engine = "C")
                      as.double(alpha),
                      as.integer(L), as.integer(M), as.integer(N),
                      x = zerovec, y = zerovec, w = zerovec)[c("x", "y", "w")]
-        
+
         nodes <- cbind(nwlist[[1L]], nwlist[[2L]], deparse.level=0)
         weights <- nwlist[[3L]]
 
@@ -261,18 +261,18 @@ polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE, engine = "C")
     if ((x1 == alpha && x2 == alpha) || (y2 == y1))
         ## side lies on base-line or is orthogonal to it -> skip
         return(NULL)
-    
+
     if (x2 == x1) { # side is parallel to base-line => degree N
         s_loc <- s_N
         w_loc <- w_N
     }
-    
+
     half_pt_x <- (x1+x2)/2
     half_length_x <- (x2-x1)/2
-    
+
     half_pt_y <- (y1+y2)/2
     half_length_y <- (y2-y1)/2
-    
+
     ## GAUSSIAN POINTS ON THE SIDE.
     x_gauss_side <- half_pt_x + half_length_x * s_loc
     y_gauss_side <- half_pt_y + half_length_y * s_loc
@@ -320,24 +320,24 @@ vertexpairmaxdist <- function (xy)
     ## compute euclidean distance matrix
     distances <- dist(xy)
     size <- attr(distances, "Size")
-    
+
     ## select two points with maximum distance
     maxdistidx <- which.max(distances)
     lowertri <- seq_along(distances) == maxdistidx
     mat <- matrix(FALSE, size, size)
     mat[lower.tri(mat)] <- lowertri
     QPidx <- which(mat, arr.ind=TRUE, useNames=FALSE)[1L,]
-    xy[QPidx,]    
+    xy[QPidx,]
 }
 
 rotmatPQ <- function (P, Q)
 {
     direction_axis <- (Q-P) / sqrt(sum((Q-P)^2))
-    
+
     ## determine rotation angle
     rot_angle_x <- acos(direction_axis[1L])
     rot_angle_y <- acos(direction_axis[2L])
-    
+
     rot_angle <- if (rot_angle_y <= pi/2) {
         if (rot_angle_x <= pi/2) -rot_angle_y else rot_angle_y
     } else {

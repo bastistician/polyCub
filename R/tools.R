@@ -1,12 +1,11 @@
 ################################################################################
-### Part of the R package "polyCub".
-### Free software under the terms of the GNU General Public License, version 2,
-### a copy of which is available at http://www.r-project.org/Licenses/.
+### Internal Functions
 ###
 ### Copyright (C) 2009-2015 Sebastian Meyer
-### Time-stamp: <[tools.R] 2015-01-05 23:20 (CET) by SM>
 ###
-### Tiny toolbox of internal function
+### This file is part of the R package "polyCub",
+### free software under the terms of the GNU General Public License, version 2,
+### a copy of which is available at https://www.R-project.org/Licenses/.
 ################################################################################
 
 
@@ -43,9 +42,9 @@ dotprod <- function (x,y) sum(x*y)
 ##' @return \code{sqrt(sum(x^2))}
 ##' @keywords math internal
 vecnorm <- function (x) sqrt(sum(x^2))
-    
+
 ##' Checks if Argument is Scalar
-##' 
+##'
 ##' Check if the argument is scalar, i.e. a numeric vector of length 1.
 ##' @param x any object
 ##' @return logical
@@ -86,7 +85,7 @@ plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
 
 
 ##' Constructs Equally-Spaced Grid
-##' 
+##'
 ##' Construct an equally-spaced grid given a range and the number of cut points
 ##' (one more than the number of resulting bins).
 ##' This is nothing else than \code{seq(range[1], range[2], length.out=n)}.

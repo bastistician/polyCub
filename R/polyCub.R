@@ -1,10 +1,11 @@
 ################################################################################
-### Part of the R package "polyCub".
-### Free software under the terms of the GNU General Public License, version 2,
-### a copy of which is available at http://www.r-project.org/Licenses/.
+### polyCub: Wrapper Function for the Various Cubature Methods
 ###
 ### Copyright (C) 2009-2013 Sebastian Meyer
-### Time-stamp: <[polyCub.R] by SM Sam 06/07/2013 12:52 (CEST)>
+###
+### This file is part of the R package "polyCub",
+### free software under the terms of the GNU General Public License, version 2,
+### a copy of which is available at https://www.R-project.org/Licenses/.
 ################################################################################
 
 
@@ -12,7 +13,7 @@
 #'
 #' Instead of calling one of the specific cubature methods of this package, the
 #' wrapper function \code{polyCub} may be used together with the \code{method}
-#' argument. 
+#' argument.
 #'
 #' @param polyregion a polygonal integration domain.
 #' The supported classes depend on the specific method, however, the

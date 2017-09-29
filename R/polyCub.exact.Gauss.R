@@ -5,24 +5,24 @@
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
-### a copy of which is available at http://www.r-project.org/Licenses/.
+### a copy of which is available at https://www.R-project.org/Licenses/.
 ################################################################################
 
 
 #' Quasi-Exact Cubature of the Bivariate Normal Density
 #'
 #' Integration is based on triangulation of the (transformed) polygonal domain
-#' and formulae from the 
+#' and formulae from the
 #' Abramowitz and Stegun (1972) handbook (Section 26.9, Example 9, pp. 956f.).
 #' This method is quite cumbersome because the A&S formula is only for triangles
 #' where one vertex is the origin (0,0). For each triangle of the
-#' \code{\link[gpclib]{tristrip}} we have to check in which of the 6 outer 
-#' regions of the triangle the origin (0,0) lies and adapt the signs in the 
+#' \code{\link[gpclib]{tristrip}} we have to check in which of the 6 outer
+#' regions of the triangle the origin (0,0) lies and adapt the signs in the
 #' formula appropriately: \eqn{(AOB+BOC-AOC)} or \eqn{(AOB-AOC-BOC)} or
 #' \eqn{(AOB+AOC-BOC)} or \eqn{(AOC+BOC-AOB)} or \ldots.
 #' However, the most time consuming step is the
 #' evaluation of \code{\link[mvtnorm]{pmvnorm}}.
-#' 
+#'
 #' @note The package \pkg{gpclib} (which is required to produce the
 #' \code{tristrip}, since this is not yet implemented in \pkg{rgeos})
 #' has a restricted license (commercial use prohibited).
@@ -32,7 +32,7 @@
 #' @param polyregion a \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} polygon or
 #' something that can be coerced to this class, e.g., an \code{"owin"} polygon
 #' (converted via \code{\link{owin2gpc}} and -- given \pkg{rgeos} is available
-#' -- \code{"SpatialPolygons"} also work. 
+#' -- \code{"SpatialPolygons"} also work.
 #' @param mean,Sigma mean and covariance matrix of the bivariate normal density
 #' to be integrated.
 #' @param plot logical indicating if an illustrative plot of the numerical
@@ -41,7 +41,7 @@
 #' @return The integral of the bivariate normal density over \code{polyregion}.
 #' Two attributes are appended to the integral value:
 #' \item{nEval}{
-#' number of triangles over which the standard bivariate normal density had to 
+#' number of triangles over which the standard bivariate normal density had to
 #' be integrated, i.e. number of calls to \code{\link[mvtnorm]{pmvnorm}} and
 #' \code{\link[stats]{pnorm}}, the former of which being the most time-consuming
 #' operation.
@@ -83,15 +83,15 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
         }
         polyregion <- as(polyregion, "gpc.poly")
     }
-    
+
     ## coordinate transformation so that the standard bivariat normal density
     ## can be used in integrations (cf. formula 26.3.22)
     polyregion@pts <- transform_pts(polyregion@pts, mean = mean, Sigma = Sigma)
-    
+
     ## triangulation: tristrip() returns a list where each element is a
-    ## coordinate matrix of vertices of triangles 
+    ## coordinate matrix of vertices of triangles
     triangleSets <- gpclib::tristrip(polyregion)
-    
+
 ### ILLUSTRATION ###
     if (plot) {
         plot(polyregion, poly.args=list(lwd=2), ann=FALSE)
@@ -111,7 +111,7 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
         c(int, nTriangles, error)
     }, FUN.VALUE = numeric(3L), USE.NAMES = FALSE)
     int <- sum(integrals[1,])
-    
+
     ## number of .V() evaluations (if there were no degenerate triangles)
     attr(int, "nEval") <- 6 * sum(integrals[2,])
     ## approximate absolute integration error
@@ -153,12 +153,12 @@ transform_pts <- function (pts, mean, Sigma)
     intAOB <- .intTriangleAS0(A, B)
     intBOC <- .intTriangleAS0(B, C)
     intAOC <- .intTriangleAS0(A, C)
-    
+
     # determine signs of integrals
     signAOB <- -1 + 2*.pointsOnSameSide(A,B,C)
     signBOC <- -1 + 2*.pointsOnSameSide(B,C,A)
     signAOC <- -1 + 2*.pointsOnSameSide(A,C,B)
-    
+
     int <- signAOB*intAOB + signBOC*intBOC + signAOC*intAOC
     attr(int, "error") <- attr(intAOB, "error") +
         attr(intBOC, "error") + attr(intAOC, "error")
@@ -173,7 +173,7 @@ transform_pts <- function (pts, mean, Sigma)
     h <- abs(B[2L]*A[1L] - A[2L]*B[1L]) / d   # distance of AB to the origin
     if (d == 0 || h == 0) # degenerate triangle: A == B or 0, A, B on a line
         return(structure(0, error = 0))
-    
+
     k1 <- dotprod(A, BmA) / d
     k2 <- dotprod(B, BmA) / d
     V2 <- .V(h, abs(k2))

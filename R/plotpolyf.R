@@ -1,12 +1,11 @@
 ################################################################################
-### Part of the R package "polyCub".
-### Free software under the terms of the GNU General Public License, version 2,
-### a copy of which is available at http://www.r-project.org/Licenses/.
+### plotpolyf: Plot Polygonal Domain on Image of Bivariate Function
 ###
 ### Copyright (C) 2013-2014 Sebastian Meyer
-### Time-stamp: <[plotpolyf.R] 2014-09-27 14:39 (CEST) by SM>
 ###
-### Plot polygonal domain with image of bivariate function
+### This file is part of the R package "polyCub",
+### free software under the terms of the GNU General Public License, version 2,
+### a copy of which is available at https://www.R-project.org/Licenses/.
 ################################################################################
 
 
@@ -15,7 +14,7 @@
 ##' Produces a combined plot of a polygonal domain and an image of a bivariate
 ##' function, using either \code{\link[lattice:levelplot]{lattice::levelplot}}
 ##' or \code{\link{image}}.
-##' 
+##'
 ##' @param polyregion a polygonal domain.
 ##' The following classes are supported: \code{"\link[spatstat]{owin}"},
 ##' \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"},
@@ -39,7 +38,7 @@
 ##' (\code{\link[lattice]{levelplot}}) should be used.
 ##' @param print.args a list of arguments passed to \code{\link{print.trellis}}
 ##' for plotting the produced \code{\link[=trellis.object]{"trellis"}} object
-##' (given \code{use.lattice = TRUE}). The latter will be returned without 
+##' (given \code{use.lattice = TRUE}). The latter will be returned without
 ##' explicit \code{print}ing if \code{print.args} is not a list.
 ##' @author Sebastian Meyer
 ##' @keywords hplot

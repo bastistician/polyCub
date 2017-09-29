@@ -1,10 +1,11 @@
 ################################################################################
-### Part of the R package "polyCub".
-### Free software under the terms of the GNU General Public License, version 2,
-### a copy of which is available at http://www.r-project.org/Licenses/.
+### polyCub.midpoint: Two-Dimensional Midpoint Rule
 ###
 ### Copyright (C) 2009-2015 Sebastian Meyer
-### Time-stamp: <[polyCub.midpoint.R] 2015-02-25 20:53 (CET) by SM>
+###
+### This file is part of the R package "polyCub",
+### free software under the terms of the GNU General Public License, version 2,
+### a copy of which is available at https://www.R-project.org/Licenses/.
 ################################################################################
 
 
@@ -15,7 +16,7 @@
 #' \pkg{spatstat} (Baddeley and Turner, 2005).
 #' The integral under the surface is then approximated as the
 #' sum over (pixel area * f(pixel midpoint)).
-#' 
+#'
 #' @inheritParams plotpolyf
 #' @param polyregion a polygonal integration domain.
 #' It can be any object coercible to the \pkg{spatstat} class
@@ -64,7 +65,7 @@ polyCub.midpoint <- function (polyregion, f, ...,
               stop("inapplicable choice of bandwidth (eps=", format(eps),
                    ") in midpoint rule:\n", e)
           })
-    
+
 ### ILLUSTRATION ###
     if (plot) {
         plot.im(IM, axes=TRUE, col=gray(31:4/35), main="")
@@ -74,7 +75,7 @@ polyCub.midpoint <- function (polyregion, f, ...,
         ##<- two 'lwd'-specifications such that it works with owin and gpc.poly
     }
 ####################
-    
+
     ## return the approximated integral
     integral.im(IM)
 }

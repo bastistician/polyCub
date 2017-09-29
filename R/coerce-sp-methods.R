@@ -1,15 +1,16 @@
 ################################################################################
-### Part of the R package "polyCub".
-### Free software under the terms of the GNU General Public License, version 2,
-### a copy of which is available at http://www.r-project.org/Licenses/.
+### as.owin.SpatialPolygons: Coerce "SpatialPolygons" to "owin"
 ###
 ### Copyright (C) 2012-2013, 2015 Sebastian Meyer
-### Time-stamp: <[coerce-sp-methods.R] 2015-02-25 22:43 (CET) by SM>
+###
+### This file is part of the R package "polyCub",
+### free software under the terms of the GNU General Public License, version 2,
+### a copy of which is available at https://www.R-project.org/Licenses/.
 ################################################################################
 
 
 ##' Coerce \code{"SpatialPolygons"} to \code{"owin"}
-##' 
+##'
 ##' Package \pkg{polyCub} implements \code{coerce}-methods
 ##' (\code{as(object, Class)}) to convert \code{"\linkS4class{SpatialPolygons}"}
 ##' (or \code{"\linkS4class{Polygons}"} or \code{"\linkS4class{Polygon}"})
@@ -58,9 +59,9 @@ as.owin.Polygon <- function (W, ...)
 ## -> no need to register "owin", since we depend on sp which does it !
 ## Otherwise we would get the following warning upon package installation:
 ## Warning in .simpleDuplicateClass(def, prev) :
-##   the specification for class "owin" in package 'polyCub' seems 
+##   the specification for class "owin" in package 'polyCub' seems
 ##   equivalent to one from package 'sp' and is not turning on
-##   duplicate class definitions for this class 
+##   duplicate class definitions for this class
 ## Using setOldClass("owin") is incompatible with package "maptools", which
 ## does setClass("owin") _and_ exports this class! Specifically, loading
 ## library("polyCub"); library("maptools"); library("gpclib")
