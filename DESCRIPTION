@@ -1,7 +1,7 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
 Version: 0.6.1
-Date: 2017-07-07
+Date: 2017-09-29
 Authors@R: c(
     person("Sebastian", "Meyer",
            email = "seb.meyer@fau.de",

@@ -8,7 +8,7 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.6.1 (2017-07-07)}{
+\section{Changes in polyCub version 0.6.1 (2017-09-29)}{
 
   \itemize{
     \item The exported C-function \code{polyCub_iso()} \dots
