@@ -7,7 +7,7 @@
 \description{
 The \R package \pkg{polyCub} provides methods for \strong{cubature}
 (numerical integration) \strong{over polygonal domains}.
-The function \code{\link{polyCub}()} is the main entry point of the package. 
+The function \code{\link{polyCub}()} is the main entry point of the package.
 It is a wrapper around the specific cubature methods listed below.
 }
 \details{

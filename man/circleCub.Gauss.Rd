@@ -29,7 +29,7 @@ distribution (\code{pchisq}), cp. Formula 26.3.24 in Abramowitz and Stegun
 }
 \note{
 The non-centrality parameter of the evaluated chi-squared distribution
-equals the squared distance between the \code{mean} and the 
+equals the squared distance between the \code{mean} and the
 \code{center}. If this becomes too large, the result becomes inaccurate, see
 \code{\link{pchisq}}.
 }

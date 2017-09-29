@@ -24,7 +24,7 @@ transformed (shifted and scaled).}
 The integral of the bivariate normal density over \code{polyregion}.
 Two attributes are appended to the integral value:
 \item{nEval}{
-number of triangles over which the standard bivariate normal density had to 
+number of triangles over which the standard bivariate normal density had to
 be integrated, i.e. number of calls to \code{\link[mvtnorm]{pmvnorm}} and
 \code{\link[stats]{pnorm}}, the former of which being the most time-consuming
 operation.
@@ -38,12 +38,12 @@ quasi-exact (as is the \code{pmvnorm} function).
 }
 \description{
 Integration is based on triangulation of the (transformed) polygonal domain
-and formulae from the 
+and formulae from the
 Abramowitz and Stegun (1972) handbook (Section 26.9, Example 9, pp. 956f.).
 This method is quite cumbersome because the A&S formula is only for triangles
 where one vertex is the origin (0,0). For each triangle of the
-\code{\link[gpclib]{tristrip}} we have to check in which of the 6 outer 
-regions of the triangle the origin (0,0) lies and adapt the signs in the 
+\code{\link[gpclib]{tristrip}} we have to check in which of the 6 outer
+regions of the triangle the origin (0,0) lies and adapt the signs in the
 formula appropriately: \eqn{(AOB+BOC-AOC)} or \eqn{(AOB-AOC-BOC)} or
 \eqn{(AOB+AOC-BOC)} or \eqn{(AOC+BOC-AOB)} or \ldots.
 However, the most time consuming step is the

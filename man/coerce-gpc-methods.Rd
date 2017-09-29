@@ -28,7 +28,7 @@ respectively. If neither package \pkg{rgeos} nor \pkg{gpclib} are available,
 \code{"gpc.poly"} (no formal class) with a warning.
 }
 \description{
-Package \pkg{polyCub} implements converters between the classes 
+Package \pkg{polyCub} implements converters between the classes
 \code{"\link[=owin.object]{owin}"} of package \pkg{spatstat} and
 \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} of package \pkg{rgeos}
 (originally from \pkg{gpclib}).
