@@ -5,7 +5,7 @@
  *
  * This file is part of the R package "polyCub",
  * free software under the terms of the GNU General Public License, version 2,
- * a copy of which is available at http://www.R-project.org/Licenses/.
+ * a copy of which is available at https://www.R-project.org/Licenses/.
  ******************************************************************************/
 
 #include <stdlib.h> // for NULL
