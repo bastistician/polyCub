@@ -1,7 +1,7 @@
 ################################################################################
 ### polyCub.exact.Gauss: Quasi-Exact Cubature of the Bivariate Normal Density
 ###
-### Copyright (C) 2009-2016 Sebastian Meyer
+### Copyright (C) 2009-2017 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -65,7 +65,6 @@
 #' @import methods
 #' @import sp
 #' @importFrom stats cov2cor
-#' @importFrom spatstat is.polygonal
 #' @importFrom graphics lines
 #' @export
 ## NOTE: we don't import graphics::plot since it is already imported via sp
@@ -74,7 +73,7 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
                                  plot = FALSE)
 {
     gpclibCheck(fatal=TRUE)
-    if (is.polygonal(polyregion)) {
+    if (inherits(polyregion, "owin")) {
         polyregion <- owin2gpc(polyregion)
     } else if (!inherits(polyregion, "gpc.poly")) {
         if (inherits(polyregion, "SpatialPolygons") &&
