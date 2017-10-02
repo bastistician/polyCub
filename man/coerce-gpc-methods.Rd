@@ -11,13 +11,13 @@ owin2gpc(object)
 
 gpc2owin(object, ...)
 
-\method{as.owin}{gpc.poly}(W, ...)
+as.owin.gpc.poly(W, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"gpc.poly"} or \code{"owin"},
 respectively.}
 
-\item{...}{further arguments passed to \code{\link{owin}}.}
+\item{...}{further arguments passed to \code{\link[spatstat]{owin}}.}
 
 \item{W}{an object of class \code{"gpc.poly"}.}
 }
@@ -29,7 +29,7 @@ respectively. If neither package \pkg{rgeos} nor \pkg{gpclib} are available,
 }
 \description{
 Package \pkg{polyCub} implements converters between the classes
-\code{"\link[=owin.object]{owin}"} of package \pkg{spatstat} and
+\code{"\link[spatstat:owin.object]{owin}"} of package \pkg{spatstat} and
 \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} of package \pkg{rgeos}
 (originally from \pkg{gpclib}).
 Support for the \code{"gpc.poly"} class was dropped from

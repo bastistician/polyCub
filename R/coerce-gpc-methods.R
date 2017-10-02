@@ -1,7 +1,7 @@
 ################################################################################
 ### Conversion between polygonal "owin" and "gpc.poly"
 ###
-### Copyright (C) 2012-2015 Sebastian Meyer
+### Copyright (C) 2012-2015,2017 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -12,7 +12,7 @@
 ##' Conversion between polygonal \code{"owin"} and \code{"gpc.poly"}
 ##'
 ##' Package \pkg{polyCub} implements converters between the classes
-##' \code{"\link[=owin.object]{owin}"} of package \pkg{spatstat} and
+##' \code{"\link[spatstat:owin.object]{owin}"} of package \pkg{spatstat} and
 ##' \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} of package \pkg{rgeos}
 ##' (originally from \pkg{gpclib}).
 ##' Support for the \code{"gpc.poly"} class was dropped from
@@ -36,25 +36,22 @@
 ##' @name coerce-gpc-methods
 ##' @rdname coerce-gpc-methods
 ##' @keywords spatial methods
-##' @importFrom spatstat as.polygonal summary.owin
 ##' @import methods
 ##' @export
 owin2gpc <- function (object)
 {
-    object <- as.polygonal(object)
+    object <- spatstat::as.polygonal(object)
 
-    ## FIXME: spatstat functions to extract the areas and hole flags
-    ## of the individual polygons in a polygonal "owin" would be nice
-    holes <- summary.owin(object)$areas < 0
+    ## determine hole flags of the individual polygons
+    hole <- spatstat::summary.owin(object)$areas < 0
 
     ## reverse vertices and set hole flags
     pts <- mapply(
         FUN = function (poly, hole) {
-            list(x = rev(poly$x), y = rev(poly$y), hole = hole)
-            ## or hole = area.owin(owin(poly = poly, check = FALSE)) < 0,
-            ## but spatstat::is.hole.xypolygon is marked as an internal function
+            list(x = rev.default(poly$x), y = rev.default(poly$y),
+                 hole = hole)  # or spatstat.utils::is.hole.xypolygon(poly)
         },
-        poly = object$bdry, hole = holes,
+        poly = object$bdry, hole = hole,
         SIMPLIFY = FALSE, USE.NAMES = FALSE)
 
     ## formal class
@@ -67,17 +64,16 @@ owin2gpc <- function (object)
 }
 
 ##' @inheritParams owin2gpc
-##' @param ... further arguments passed to \code{\link{owin}}.
+##' @param ... further arguments passed to \code{\link[spatstat]{owin}}.
 ##' @rdname coerce-gpc-methods
-##' @importFrom spatstat owin summary.owin
 ##' @export
 gpc2owin <- function (object, ...)
 {
     ## first convert to an "owin" without checking areas etc.
     ## to determine the hole status according to vertex order (area)
-    res <- owin(poly = object@pts, check = FALSE)
-    holes_owin <- summary.owin(res)$areas < 0
-    ## Note: cannot rely on spatstat::Area.xypolygon since it is marked internal
+    res <- spatstat::owin(poly = object@pts, check = FALSE)
+    holes_owin <- spatstat::summary.owin(res)$areas < 0
+    ## or directly lapply spatstat.utils::is.hole.xypolygon
 
     ## now fix the vertex order
     bdry <- mapply(
@@ -92,14 +88,12 @@ gpc2owin <- function (object, ...)
         SIMPLIFY = FALSE, USE.NAMES = FALSE)
 
     ## now really convert to owin with appropriate vertex order
-    owin(poly = bdry, ...)
+    spatstat::owin(poly = bdry, ...)
 }
 
 ##' @inheritParams gpc2owin
 ##' @param W an object of class \code{"gpc.poly"}.
 ##' @rdname coerce-gpc-methods
-##' @importFrom spatstat as.owin
-##' @method as.owin gpc.poly
 ##' @export
 as.owin.gpc.poly <- function (W, ...)
 {

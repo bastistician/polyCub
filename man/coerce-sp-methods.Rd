@@ -11,25 +11,27 @@
 \alias{coerce,Polygon,Polygons-method}
 \title{Coerce \code{"SpatialPolygons"} to \code{"owin"}}
 \usage{
-\method{as.owin}{SpatialPolygons}(W, ...)
+as.owin.SpatialPolygons(W, ...)
 
-\method{as.owin}{Polygons}(W, ...)
+as.owin.Polygons(W, ...)
 
-\method{as.owin}{Polygon}(W, ...)
+as.owin.Polygon(W, ...)
 }
 \arguments{
 \item{W}{an object of class \code{"SpatialPolygons"},
 \code{"Polygons"}, or \code{"Polygon"}.}
 
-\item{...}{further arguments passed to \code{\link{owin}}.}
+\item{...}{further arguments passed to \code{\link[spatstat]{owin}}.}
 }
 \description{
 Package \pkg{polyCub} implements \code{coerce}-methods
 (\code{as(object, Class)}) to convert \code{"\linkS4class{SpatialPolygons}"}
 (or \code{"\linkS4class{Polygons}"} or \code{"\linkS4class{Polygon}"})
-to \code{"\link[=owin.object]{owin}"}.
-They are also registered as \code{\link{as.owin}}-methods to support
-\code{\link{polyCub.midpoint}}.
+to \code{"\link[spatstat:owin.object]{owin}"}.
+They are also available as \code{as.owin.*} functions to support
+\code{\link{polyCub.midpoint}}. However, these are no registered S3 methods
+for \code{\link[spatstat]{as.owin}}, since package \pkg{spatstat} is
+optional.
 Note that the \pkg{maptools} package contains an alternative implementation
 of coercion from \code{"SpatialPolygons"} to \code{"owin"} (and reverse),
 and \R will use the S4 \code{coerce}-method that was loaded last,

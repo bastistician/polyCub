@@ -51,7 +51,7 @@ polygons by their core feature only, a list of lists of vertex coordinates
 The generic function \code{xylist} can deal with the
 following polygon classes:
 \itemize{
-\item{\code{"\link[=owin.object]{owin}"} from package \pkg{spatstat}}
+\item{\code{"\link[spatstat:owin.object]{owin}"} from package \pkg{spatstat}}
 \item{\code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from package
 \pkg{rgeos} (or \pkg{gpclib})}
 \item{\code{"\linkS4class{Polygons}"} from package \pkg{sp}

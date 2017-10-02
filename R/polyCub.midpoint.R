@@ -1,7 +1,7 @@
 ################################################################################
 ### polyCub.midpoint: Two-Dimensional Midpoint Rule
 ###
-### Copyright (C) 2009-2015 Sebastian Meyer
+### Copyright (C) 2009-2015,2017 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -41,7 +41,6 @@
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @import sp
-#' @importFrom spatstat as.im.function plot.im integral.im
 #' @importFrom grDevices gray
 #' @examples # see example(polyCub)
 #' @export
@@ -55,7 +54,7 @@ polyCub.midpoint <- function (polyregion, f, ...,
 
     ## calculate pixel values of fxy
     IM <- tryCatch(
-          as.im.function(X=fxy, W=polyregion, ..., eps=eps, dimyx=dimyx),
+          spatstat::as.im.function(X=fxy, W=polyregion, ..., eps=eps, dimyx=dimyx),
           error = function (e) {
               ## if eps was to small such that the dimensions of the image would
               ## be too big then the operation matrix(TRUE, nr, nc) throws an
@@ -68,7 +67,7 @@ polyCub.midpoint <- function (polyregion, f, ...,
 
 ### ILLUSTRATION ###
     if (plot) {
-        plot.im(IM, axes=TRUE, col=gray(31:4/35), main="")
+        spatstat::plot.im(IM, axes=TRUE, col=gray(31:4/35), main="")
         ## add evaluation points
         #with(IM, points(expand.grid(xcol, yrow), col=!is.na(v), cex=0.5))
         plot(polyregion, add=TRUE, poly.args=list(lwd=2), lwd=2)
@@ -77,5 +76,5 @@ polyCub.midpoint <- function (polyregion, f, ...,
 ####################
 
     ## return the approximated integral
-    integral.im(IM)
+    spatstat::integral.im(IM)
 }

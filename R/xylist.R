@@ -1,7 +1,7 @@
 ################################################################################
 ### xylist: Convert Various Polygon Classes to a Simple List of Vertices
 ###
-### Copyright (C) 2012-2014 Sebastian Meyer
+### Copyright (C) 2012-2014,2017 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -20,7 +20,7 @@
 ##' The generic function \code{xylist} can deal with the
 ##' following polygon classes:
 ##' \itemize{
-##' \item{\code{"\link[=owin.object]{owin}"} from package \pkg{spatstat}}
+##' \item{\code{"\link[spatstat:owin.object]{owin}"} from package \pkg{spatstat}}
 ##' \item{\code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from package
 ##' \pkg{rgeos} (or \pkg{gpclib})}
 ##' \item{\code{"\linkS4class{Polygons}"} from package \pkg{sp}
@@ -63,11 +63,10 @@
 xylist <- function (object, ...) UseMethod("xylist")
 
 ##' @rdname xylist
-##' @importFrom spatstat as.polygonal
 ##' @export
 xylist.owin <- function (object, ...)
 {
-    as.polygonal(object)$bdry
+    spatstat::as.polygonal(object)$bdry
 }
 
 ##' @rdname xylist

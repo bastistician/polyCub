@@ -8,7 +8,7 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.6.1 (2017-09-29)}{
+\section{Changes in polyCub version 0.6.1 (2017-10-02)}{
 
   \itemize{
     \item The exported C-function \code{polyCub_iso()} \dots
@@ -19,6 +19,9 @@
       and gives an informative error message (rather than just reporting
       \dQuote{abnormal termination of integration routine}).
     }
+
+    \item Package \pkg{polyCub} no longer strictly depends on package
+    \CRANpkg{spatstat}, which is only required for \code{polyCub.midpoint()}.
   }
 
 }

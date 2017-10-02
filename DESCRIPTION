@@ -1,7 +1,7 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
 Version: 0.6.1
-Date: 2017-09-29
+Date: 2017-10-02
 Authors@R: c(
     person("Sebastian", "Meyer",
            email = "seb.meyer@fau.de",
@@ -35,9 +35,9 @@ Depends:
 Imports:
     grDevices,
     graphics,
-    stats,
-    spatstat
+    stats
 Suggests:
+    spatstat,
     lattice,
     testthat,
     mvtnorm,
