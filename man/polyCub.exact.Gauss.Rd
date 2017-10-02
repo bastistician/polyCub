@@ -50,10 +50,11 @@ However, the most time consuming step is the
 evaluation of \code{\link[mvtnorm]{pmvnorm}}.
 }
 \note{
-The package \pkg{gpclib} (which is required to produce the
-\code{tristrip}, since this is not yet implemented in \pkg{rgeos})
-has a restricted license (commercial use prohibited).
-It has to be accepted explicitly via
+The package \pkg{gpclib} is required to produce the
+\code{tristrip}, since this is not implemented in \pkg{rgeos}
+(as of version 0.3-25).
+The restricted license of \pkg{gpclib} (commercial use prohibited)
+has to be accepted explicitly via
 \code{\link{gpclibPermit}()} prior to using \code{polyCub.exact.Gauss}.
 }
 \examples{
