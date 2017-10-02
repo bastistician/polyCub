@@ -72,6 +72,7 @@ as.owin.Polygon <- function (W, ...)
 ## re-installed)
 ## Error: package/namespace load failed for 'gpclib'
 
+##' @importClassesFrom sp owin
 ##' @name coerce,SpatialPolygons,owin-method
 ##' @rdname coerce-sp-methods
 setAs(from = "SpatialPolygons", to = "owin",

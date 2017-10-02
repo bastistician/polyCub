@@ -31,7 +31,7 @@ BugReports: https://github.com/WastlM/polyCub/issues
 Depends:
     R (>= 2.15.0),
     methods,
-    sp
+    sp (>= 1.0-11)
 Imports:
     grDevices,
     graphics,
