@@ -65,8 +65,8 @@
 #' Meyer, S. and Held, L. (2014).
 #' Power-law models for infectious disease spread.
 #' \emph{The Annals of Applied Statistics}, \bold{8} (3), 1612-1639.\cr
-#' DOI-Link: \url{http://dx.doi.org/10.1214/14-AOAS743},
-#' \href{http://arxiv.org/abs/1308.5115}{arXiv:1308.5115}
+#' DOI-Link: \url{https://doi.org/10.1214/14-AOAS743},
+#' \href{https://arxiv.org/abs/1308.5115}{arXiv:1308.5115}
 #'
 #' Sommariva, A. and Vianello, M. (2007).
 #' Product Gauss cubature over polygons based on Green's integration formula.
