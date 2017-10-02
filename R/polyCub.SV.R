@@ -60,14 +60,15 @@
 ##' two columns), \code{weights} (a numeric vector of length
 ##' \code{nrow(nodes)}), the rotation \code{angle}, and \code{alpha}.
 ##' @author Sebastian Meyer\cr
-##' The product Gauss cubature is based on the
+##' These R and C implementations of product Gauss cubature are based on the
 ##' original \acronym{MATLAB} implementation \code{polygauss} by Sommariva and
 ##' Vianello (2007), which is available under the GNU GPL (>=2) license from
 ##' \url{http://www.math.unipd.it/~alvise/software.html}.
 ##' @references
-##' Sommariva, A. and Vianello, M. (2007).
+##' Sommariva, A. and Vianello, M. (2007):
 ##' Product Gauss cubature over polygons based on Green's integration formula.
-##' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
+##' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.\cr
+##' DOI-Link: \url{https://doi.org/10.1007/s10543-007-0131-2}
 ##' @keywords math spatial
 ##' @family polyCub-methods
 ##' @importFrom graphics points
@@ -147,11 +148,7 @@ gauss.quad <- function (n)
 ##' @param nw_MN unnamed list of nodes and weights of one-dimensional Gauss
 ##' quadrature rules of degrees \eqn{N} and \eqn{M=N+1} (as returned by
 ##' \code{\link[statmod]{gauss.quad}}): \code{list(s_M, w_M, s_N, w_N)}.
-##' @inheritParams polyCub.SV
-##' @references
-##' Sommariva, A. and Vianello, M. (2007):
-##' Product Gauss cubature over polygons based on Green's integration formula.
-##' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
+##' @inherit polyCub.SV params references
 ##' @keywords internal
 ##' @useDynLib polyCub, .registration = TRUE
 

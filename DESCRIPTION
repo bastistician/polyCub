@@ -1,6 +1,6 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
-Version: 0.6.1
+Version: 0.6.2
 Date: 2017-10-02
 Authors@R: c(
     person("Sebastian", "Meyer",
@@ -15,14 +15,14 @@ Authors@R: c(
     )
 Description: The following methods for cubature (numerical integration)
     over polygonal domains are currently implemented:
-    the two-dimensional midpoint rule as a simple wrapper around
-    as.im.function() from package 'spatstat' (Baddeley and Turner, 2005),
-    the product Gauss cubature by Sommariva and Vianello (2007),
-    an adaptive cubature for isotropic functions via line integrate()
-    along the boundary (Meyer and Held, 2014),
-    and quasi-exact methods specific to the integration of the
-    bivariate Gaussian density over polygonal and circular domains
-    (based on formulae from the Abramowitz and Stegun (1972) handbook).
+    the two-dimensional midpoint rule via
+    as.im.function() from package 'spatstat' <http://spatstat.org/>,
+    product Gauss cubature following Sommariva and Vianello (2007)
+    <doi:10.1007/s10543-007-0131-2>,
+    adaptive cubature for isotropic functions via line integrate()
+    along the boundary as described in Meyer and Held (2014, Supplement B)
+    <doi:10.1214/14-AOAS743>,
+    and a method specific to the bivariate Gaussian density.
     For cubature over simple hypercubes, the packages 'cubature' and
     'R2Cuba' are more appropriate.
 License: GPL-2
