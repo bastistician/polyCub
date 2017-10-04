@@ -43,5 +43,6 @@ Suggests:
     mvtnorm,
     statmod,
     rgeos,
-    gpclib
+    gpclib,
+    cubature
 RoxygenNote: 6.0.1

@@ -66,3 +66,25 @@ if (requireNamespace("mvtnorm") && gpclibPermit()) {
     print(polyCub.exact.Gauss(hexagon.gpc, mean = c(0,0), Sigma = 5^2*diag(2),
                               plot = TRUE), digits = 16)
 }
+
+
+
+### simple *rectangular* integration domain
+### allows for comparison with "cubature" package
+
+rectangle <- list(list(x = c(-1, 7, 7, -1), y = c(-3, -3, 7, 7)))
+
+## polyCub.SV 'rotation' (may improve accuracy)
+opar <- par(mfrow = c(1,2))
+polyCub.SV(rectangle, f, nGQ = 4, rotation = FALSE, plot = TRUE)
+           title(main = "without rotation")
+polyCub.SV(rectangle, f, nGQ = 4, rotation = TRUE,  plot = TRUE)
+           title(main = "with rotation")
+par(opar)
+
+## cubature::adaptIntegrate
+if (require("cubature")) {
+    fc <- function (s, sigma = 5)
+        exp(-sum(s^2)/2/sigma^2) / (2*pi*sigma^2)
+    adaptIntegrate(f = fc, lowerLimit = c(-1, -3), upperLimit = c(7, 7))
+}
