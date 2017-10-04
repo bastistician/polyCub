@@ -28,6 +28,8 @@
 ##' @keywords spatial methods
 ##' @name coerce-sp-methods
 ##' @rdname coerce-sp-methods
+##' @import methods
+##' @importClassesFrom sp Polygon Polygons SpatialPolygons owin
 ##' @exportMethod coerce
 NULL
 
@@ -50,25 +52,6 @@ as.owin.Polygon <- function (W, ...)
     spatstat::owin(poly = xylist.Polygon(W), ...)
 
 
-## Register "owin" as class in S4 so we can define methods for it
-##setClass("owin")
-## -> no need to register "owin", since we depend on sp which does it !
-## Otherwise we would get the following warning upon package installation:
-## Warning in .simpleDuplicateClass(def, prev) :
-##   the specification for class "owin" in package 'polyCub' seems
-##   equivalent to one from package 'sp' and is not turning on
-##   duplicate class definitions for this class
-## Using setOldClass("owin") is incompatible with package "maptools", which
-## does setClass("owin") _and_ exports this class! Specifically, loading
-## library("polyCub"); library("maptools"); library("gpclib")
-## in this order would not work (no idea why) throwing:
-## Error : package slot missing from signature for generic 'plot'
-## and classes gpc.poly, ANY
-## cannot use with duplicate class names (the package may need to be
-## re-installed)
-## Error: package/namespace load failed for 'gpclib'
-
-##' @importClassesFrom sp owin
 ##' @name coerce,SpatialPolygons,owin-method
 ##' @rdname coerce-sp-methods
 setAs(from = "SpatialPolygons", to = "owin",
