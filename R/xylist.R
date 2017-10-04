@@ -89,7 +89,7 @@ xylist.SpatialPolygons <- function (object, reverse = TRUE, ...)
 ##' @param reverse logical (\code{TRUE}) indicating if the vertex order of the
 ##' \pkg{sp} classes should be reversed to get the \code{xylist}/\code{owin}
 ##' convention.
-##' @import sp
+##' @importFrom sp coordinates
 ##' @export
 xylist.Polygons <- function (object, reverse = TRUE, ...)
 {
