@@ -21,7 +21,8 @@
     }
 
     \item Package \pkg{polyCub} no longer strictly depends on package
-    \CRANpkg{spatstat}, which is only required for \code{polyCub.midpoint()}.
+    \CRANpkg{spatstat}. It is only required for \code{polyCub.midpoint()}
+    and for polygon input of class \code{"owin"}.
   }
 
 }
