@@ -1,55 +1,68 @@
-### Short comparison of the various cubature methods
+### Brief illustration of the various cubature methods
 
 ## 2D-function to integrate (here: isotropic zero-mean Gaussian density)
-f <- function (s, sigma = 5) exp(-rowSums(s^2)/2/sigma^2) / (2*pi*sigma^2)
+f <- function (s, sigma = 5)
+    exp(-rowSums(s^2)/2/sigma^2) / (2*pi*sigma^2)
 
 ## simple polygonal integration domain
-octagon <- spatstat::disc(radius = 5, centre = c(3,2), npoly = 8)
+hexagon <- list(
+    list(x = c(7.33, 7.33, 3, -1.33, -1.33, 3),
+         y = c(-0.5, 4.5, 7, 4.5, -0.5, -3))
+)
 
 ## plot image of the function and integration domain
-plotpolyf(octagon, f, xlim=c(-8,8), ylim=c(-8,8))
+plotpolyf(hexagon, f, xlim = c(-8,8), ylim = c(-8,8))
+
+
+### Product Gauss cubature
+
+## show nodes (nGQ = 3)
+polyCub.SV(hexagon, f, nGQ = 3, plot = TRUE)
+
+## use an increasing number of nodes
+for (nGQ in c(1:5, 10, 20, 60))
+    cat(sprintf("nGQ = %2i: %.16f\n", nGQ,
+                polyCub.SV(hexagon, f, nGQ = nGQ)))
+
+
+### Line integration along the boundary for *isotropic* functions
+
+polyCub.iso(hexagon, f, center = c(0,0))   # see also ?polyCub.iso
 
 
 ### Two-dimensional midpoint rule
 
-testmidpoint <- function (eps, main=paste("2D midpoint rule with eps =",eps))
-{
-    plotpolyf(octagon, f, xlim=c(-8,8), ylim=c(-8,8), use.lattice=FALSE)
-    ## add evaluation points to plot
-    with(spatstat::as.mask(octagon, eps=eps),
-         points(expand.grid(xcol, yrow), col=m, pch=20))
-    polyCub.midpoint(octagon, f, eps=eps)
+if (require("spatstat")) {
+    hexagon.owin <- owin(poly = hexagon)
+
+    show_midpoint <- function (eps)
+    {
+        plotpolyf(hexagon.owin, f, xlim = c(-8,8), ylim = c(-8,8),
+                  use.lattice = FALSE)
+        ## add evaluation points to plot
+        with(as.mask(hexagon.owin, eps = eps),
+             points(expand.grid(xcol, yrow), col = t(m), pch = 20))
+        title(main = paste("2D midpoint rule with eps =", eps))
+    }
+
+    ## show nodes (eps = 0.5)
+    show_midpoint(0.5)
+
+    ## show pixel image (eps = 0.5)
+    polyCub.midpoint(hexagon.owin, f, eps = 0.5, plot = TRUE)
+
+    ## use a decreasing pixel size (increasing number of nodes)
+    for (eps in c(5, 3, 1, 0.5, 0.3, 0.1))
+        cat(sprintf("eps = %.1f: %.7f\n", eps,
+                    polyCub.midpoint(hexagon.owin, f, eps = eps)))
 }
-testmidpoint(5)
-testmidpoint(3)
-testmidpoint(0.5)
-testmidpoint(0.2)
-
-
-### Product Gauss cubature using an increasing number of nodes
-
-for (nGQ in c(1:5,10,20,60)) {
-    cat("nGQ =", sprintf("%2i",nGQ), ": ",
-        format(polyCub.SV(octagon, f, nGQ=nGQ), digits=16),
-        "\n")
-}
-
-## 'rotation' affects location of nodes
-opar <- par(mfrow=c(1,2))
-polyCub.SV(octagon, f, nGQ=2, rotation=FALSE, plot=TRUE)
-polyCub.SV(octagon, f, nGQ=2, rotation=TRUE, plot=TRUE)
-par(opar)
-
-
-### Line integration along the boundary for isotropic functions
-
-polyCub.iso(octagon, f, center=c(0,0))   # see ?polyCub.iso
 
 
 ### Quasi-exact cubature of the bivariate Gaussian density
 ### using gpclib::tristrip and mvtnorm::pmvnorm()
 
 if (requireNamespace("mvtnorm") && gpclibPermit()) {
-    print(polyCub.exact.Gauss(octagon, mean=c(0,0), Sigma=5^2*diag(2),
-                              plot=TRUE), digits=16)
+    hexagon.gpc <- new("gpc.poly", pts = lapply(hexagon, c, list(hole = FALSE)))
+    print(polyCub.exact.Gauss(hexagon.gpc, mean = c(0,0), Sigma = 5^2*diag(2),
+                              plot = TRUE), digits = 16)
 }
