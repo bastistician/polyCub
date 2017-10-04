@@ -40,11 +40,10 @@
 #' \emph{Journal of Statistical Software}, \bold{12} (6), 1-42.
 #' @keywords math spatial
 #' @family polyCub-methods
-#' @import sp
+#' @importFrom sp plot
 #' @importFrom grDevices gray
 #' @examples # see example(polyCub)
 #' @export
-## NOTE: we don't import graphics::plot since it is already imported via sp
 
 polyCub.midpoint <- function (polyregion, f, ...,
                               eps = NULL, dimyx = NULL, plot = FALSE)

@@ -59,9 +59,8 @@ isScalar <- function (x) {
 ##' @inheritParams plotpolyf
 ##' @param add logical. Add to existing plot?
 ##' @import methods
-##' @import sp
+##' @importFrom sp Polygons SpatialPolygons plot
 ##' @importFrom graphics polygon
-## NOTE: we don't import graphics::plot since it is already imported via sp
 plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
 {
     if (is.vector(polyregion, mode="list")) { # internal xylist object

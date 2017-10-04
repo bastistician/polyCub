@@ -63,11 +63,10 @@
 #' @family polyCub-methods
 #' @examples # see example(polyCub)
 #' @import methods
-#' @import sp
+#' @importFrom sp plot
 #' @importFrom stats cov2cor
 #' @importFrom graphics lines
 #' @export
-## NOTE: we don't import graphics::plot since it is already imported via sp
 
 polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
                                  plot = FALSE)
