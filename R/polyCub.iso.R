@@ -72,7 +72,7 @@
 #' supplied as a C-routine. An example can be found in the package tests.
 #' @keywords math spatial
 #' @family polyCub-methods
-#' @example inst/examples/polyCub.iso.R
+#' @example examples/polyCub.iso.R
 #' @importFrom stats integrate
 #' @export
 

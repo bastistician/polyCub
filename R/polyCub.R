@@ -32,7 +32,7 @@
 #' @param plot logical indicating if an illustrative plot of the numerical
 #' integration should be produced.
 #' @return The approximated integral of \code{f} over \code{polyregion}.
-#' @example inst/examples/polyCub.R
+#' @example examples/polyCub.R
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @export

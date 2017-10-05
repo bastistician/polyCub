@@ -42,7 +42,7 @@
 ##' explicit \code{print}ing if \code{print.args} is not a list.
 ##' @author Sebastian Meyer
 ##' @keywords hplot
-##' @example inst/examples/plotpolyf.R
+##' @example examples/plotpolyf.R
 ##' @importFrom grDevices extendrange heat.colors
 ##' @importFrom graphics image
 ##' @export

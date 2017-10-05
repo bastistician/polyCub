@@ -1,8 +1,8 @@
-^devel
-^polyCub_[0-9\.-]+\.tar\.gz
-^polyCub-Ex\.R
+^devel$
+^examples$
+^.*\.tar\.gz$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^Makefile
-^manual.pdf
-^NEWS.html
+^Makefile$
+^manual.pdf$
+^NEWS.html$
