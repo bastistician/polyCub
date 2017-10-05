@@ -52,8 +52,14 @@ manual.pdf: DESCRIPTION document
 
 ## make NEWS page
 NEWS.html: inst/NEWS.Rd
-	$R --vanilla --slave -e 'tools::Rd2HTML("$<", out = "$@", stylesheet = "https://CRAN.R-project.org/web/CRAN_web.css")'
+	$R --vanilla --slave -e \
+	'tools::Rd2HTML("$<", out="$@", stylesheet="https://CRAN.R-project.org/web/CRAN_web.css")'
 	[ `uname -s` = "Darwin" ] && open "$@" || xdg-open "$@"
+
+## report code coverage
+covr:
+	$R --vanilla --slave -e \
+	'covr::report(covr::package_coverage(type="all"), file="/tmp/covr.html", browse=TRUE)'
 
 ## cleanup
 clean:
@@ -61,4 +67,4 @@ clean:
 	rm -f ./*/.Rhistory
 
 ## almost all targets are "phony"
-.PHONY: document build install check checkUsage clean
+.PHONY: document build install check checkUsage covr clean
