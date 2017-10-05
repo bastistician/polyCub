@@ -30,7 +30,7 @@
 ##' in each dimension.
 ##' @param cuts number of cut points in the \eqn{z} dimension.
 ##' The range of function values will be divided into \code{cuts+1} levels.
-##' @param col colour vector used for the function levels.
+##' @param col color vector used for the function levels.
 ##' @param lwd line width of the polygon edges.
 ##' @param xlim,ylim numeric vectors of length 2 setting the axis limits.
 ##' \code{NULL} means using the bounding box of \code{polyregion}.

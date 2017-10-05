@@ -29,7 +29,7 @@ in each dimension.}
 \item{cuts}{number of cut points in the \eqn{z} dimension.
 The range of function values will be divided into \code{cuts+1} levels.}
 
-\item{col}{colour vector used for the function levels.}
+\item{col}{color vector used for the function levels.}
 
 \item{lwd}{line width of the polygon edges.}
 
