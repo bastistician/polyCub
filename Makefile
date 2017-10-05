@@ -61,10 +61,15 @@ covr:
 	$R --vanilla --slave -e \
 	'covr::report(covr::package_coverage(type="all"), file="/tmp/covr.html", browse=TRUE)'
 
+## spell check
+spelling:
+	$R --vanilla --slave -e \
+	'spelling::spell_check_package(lang = "en_US")'
+
 ## cleanup
 clean:
 	cd pkg/src; rm -f *.o *.so *.dll symbols.rds
 	rm -f ./*/.Rhistory
 
 ## almost all targets are "phony"
-.PHONY: document build install check checkUsage covr clean
+.PHONY: document build install check checkUsage covr spelling clean
