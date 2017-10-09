@@ -8,7 +8,7 @@
 \title{News for Package 'polyCub'}
 
 
-\section{Changes in polyCub version 0.6.2 (2017-10-04)}{
+\section{Changes in polyCub version 0.6.1.9000 (UNRELEASED)}{
 
   \itemize{
     \item Package \pkg{polyCub} no longer attaches package \CRANpkg{sp}
