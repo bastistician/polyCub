@@ -47,9 +47,10 @@
 ##' @importFrom graphics image
 ##' @export
 
-plotpolyf <- function (polyregion, f, ...,
-                       npixel=100, cuts=15, col=rev(heat.colors(cuts+1)), lwd=3,
-                       xlim=NULL, ylim=NULL, use.lattice=TRUE, print.args=list())
+plotpolyf <- function (polyregion, f, ..., npixel = 100, cuts = 15,
+                       col = rev(heat.colors(cuts+1)), lwd = 3,
+                       xlim = NULL, ylim = NULL,
+                       use.lattice = TRUE, print.args = list())
 {
     polys <- xylist(polyregion)
     npixel <- rep(npixel, length.out=2)

@@ -41,11 +41,11 @@ polyCub <- function (polyregion, f,
                      method = c("SV", "midpoint", "iso", "exact.Gauss"), ...,
                      plot = FALSE)
 {
-	method <- match.arg(method)
-	cl <- match.call()
-	cl$method <- NULL
-	cl[[1]] <- as.name(paste("polyCub", method, sep="."))
-	if (method == "exact.Gauss") cl$f <- NULL
-	int <- eval(cl, parent.frame())
-	int  #structure(int, method = method)
+    method <- match.arg(method)
+    cl <- match.call()
+    cl$method <- NULL
+    cl[[1]] <- as.name(paste("polyCub", method, sep="."))
+    if (method == "exact.Gauss") cl$f <- NULL
+    int <- eval(cl, parent.frame())
+    int  #structure(int, method = method)
 }

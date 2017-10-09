@@ -180,7 +180,8 @@ polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE, engine = "C")
             stopifnot(any(P != Q))
             rotation <- TRUE
         } else {
-            stop("'rotation' must be logical or a list of points \"P\" and \"Q\"")
+            stop("'rotation' must be logical or a list of points ",
+                 "\"P\" and \"Q\"")
         }
         rotmat <- rotmatPQ(P,Q)
         angle <- attr(rotmat, "angle")
@@ -280,9 +281,11 @@ polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE, engine = "C")
     ## A COUPLE WITH THE SAME INDEX IS A POINT, i.e. P_i=(x(k),y(k)).
     ## Return in an unnamed list of nodes_x, nodes_y, weights
     ## (there is no need for c(nodes_x) and c(weights))
-    list(alpha + tcrossprod(scaling_fact_minus, s_N + 1), # degree_loc x N
-         rep.int(y_gauss_side, length(s_N)),              # length: degree_loc*N
-         tcrossprod(half_length_y*scaling_fact_minus*w_loc, w_N)) # degree_loc x N
+    list(
+        alpha + tcrossprod(scaling_fact_minus, s_N + 1), # degree_loc x N
+        rep.int(y_gauss_side, length(s_N)),              # length: degree_loc*N
+        tcrossprod(half_length_y*scaling_fact_minus*w_loc, w_N) # degree_loc x N
+    )
 }
 
 ## NOTE: The above .polygauss.side() function is already efficient R code.
@@ -331,16 +334,14 @@ rotmatPQ <- function (P, Q)
 {
     direction_axis <- (Q-P) / sqrt(sum((Q-P)^2))
 
-    ## determine rotation angle
+    ## determine rotation angle [radian]
     rot_angle_x <- acos(direction_axis[1L])
     rot_angle_y <- acos(direction_axis[2L])
-
     rot_angle <- if (rot_angle_y <= pi/2) {
         if (rot_angle_x <= pi/2) -rot_angle_y else rot_angle_y
     } else {
         if (rot_angle_x <= pi/2) pi-rot_angle_y else rot_angle_y
     }
-    ## cat(sprintf(' [ANGLE CLOCKWISE (IN DEGREES)]: %5.5f\n', rot_angle*180/pi))
 
     ## rotation matrix
     rot_matrix <- diag(cos(rot_angle), nrow=2L)

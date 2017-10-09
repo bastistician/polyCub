@@ -38,9 +38,13 @@ Rcmd <- function (args, env = character(), ...) {
 }
 
 message("compiling polyiso_powerlaw.c using R CMD SHLIB")
-shlib_error <- Rcmd(args = c("SHLIB", "--clean", "polyiso_powerlaw.c"),
-                    env = c("PKG_CPPFLAGS" = paste0("-I", system.file("include", package="polyCub")),
-                            "R_TESTS" = ""))
+shlib_error <- Rcmd(
+    args = c("SHLIB", "--clean", "polyiso_powerlaw.c"),
+    env = c("PKG_CPPFLAGS" = paste0(
+                "-I", system.file("include", package="polyCub")
+            ),
+            "R_TESTS" = "")
+)
 if (shlib_error)
     skip("failed to build the shared object/DLL for the polyCub_iso example")
 
@@ -51,7 +55,8 @@ dyn.load(myDLL)
 
 ## R function calling C_polyiso_powerlaw
 polyiso_powerlaw <- function (xypoly, logpars, center,
-                              subdivisions = 100L, rel.tol = .Machine$double.eps^0.25,
+                              subdivisions = 100L,
+                              rel.tol = .Machine$double.eps^0.25,
                               abs.tol = rel.tol, stop.on.error = TRUE)
 {
     .C("C_polyiso_powerlaw",
@@ -60,7 +65,8 @@ polyiso_powerlaw <- function (xypoly, logpars, center,
        as.double(center[1L]), as.double(center[2L]),
        as.integer(subdivisions), as.double(abs.tol), as.double(rel.tol),
        as.integer(stop.on.error),
-       value = double(1L), abserr = double(1L), neval = integer(1L))[c("value", "abserr", "neval")]
+       value = double(1L), abserr = double(1L), neval = integer(1L)
+       )[c("value", "abserr", "neval")]
 }
 
 
@@ -71,7 +77,9 @@ hidx <- grDevices::chull(xy)
 xypoly <- lapply(xy, "[", rev(hidx))  # anticlockwise vertex order
 logpars <- log(c(0.5, 1))
 
-(res <- polyiso_powerlaw(xypoly, logpars, center = c(0,0)))
+(res <- polyiso_powerlaw(xypoly = xypoly,
+                         logpars = logpars,
+                         center = c(0,0)))
 
 
 ## compare with R implementation
@@ -87,17 +95,22 @@ intrfr.powerlaw <- function (R, logpars)
         (R*(R+sigma)^(1-d) - ((R+sigma)^(2-d) - sigma^(2-d))/(2-d)) / (1-d)
     }
 }
-(orig <- polyCub:::polyCub1.iso(xypoly, intrfr.powerlaw, logpars, center = c(0,0)))
+(orig <- polyCub:::polyCub1.iso(poly = xypoly,
+                                intrfr = intrfr.powerlaw,
+                                logpars = logpars,
+                                center = c(0,0)))
 
 
 test_that("C and R implementations give equal results", {
-    expect_equal(res$value, orig[1])
-    expect_equal(res$abserr, orig[2])
+    expect_equal(res$value, orig[1L])
+    expect_equal(res$abserr, orig[2L])
 })
 
 ## microbenchmark::microbenchmark(
-##     polyCub:::polyCub1.iso(xypoly, intrfr.powerlaw, logpars, center = c(0,0)), # 250 mus
-##     polyiso_powerlaw(xypoly, logpars, center = c(0,0)), times = 1000)          #  50 mus
+##     polyCub:::polyCub1.iso(xypoly, intrfr.powerlaw, logpars, center=c(0,0)),
+##     polyiso_powerlaw(xypoly, logpars, center=c(0,0)),
+##     times = 1000)
+## ## 240 mus vs. 60 mus
 
 dyn.unload(myDLL)
 file.remove(myDLL)
