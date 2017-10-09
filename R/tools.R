@@ -58,7 +58,6 @@ isScalar <- function (x) {
 ##'
 ##' @inheritParams plotpolyf
 ##' @param add logical. Add to existing plot?
-##' @import methods
 ##' @importFrom sp Polygons SpatialPolygons plot
 ##' @importFrom graphics polygon
 plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
