@@ -1,7 +1,7 @@
 ################################################################################
 ## Useful rules to build, check and install an R source package
 ##
-## Copyright (C) 2012,2014-2017 Sebastian Meyer
+## Copyright (C) 2012,2014-2018 Sebastian Meyer
 ################################################################################
 
 ## define variable for R to enable 'make check R=R-devel'
@@ -50,10 +50,15 @@ checkUsage: install
 manual.pdf: DESCRIPTION document
 	$R CMD Rd2pdf --batch --force --output="$@" .
 
-## make NEWS page
-NEWS.html: inst/NEWS.Rd
-	$R --vanilla --slave -e \
-	'tools::Rd2HTML("$<", out="$@", stylesheet="https://CRAN.R-project.org/web/CRAN_web.css")'
+## generate HTML page from NEWS.Rd
+# NEWS.html: inst/NEWS.Rd
+# 	$R --vanilla --slave -e \
+# 	'tools::Rd2HTML("$<", out="$@", stylesheet="https://CRAN.R-project.org/web/CRAN_web.css")'
+# 	[ `uname -s` = "Darwin" ] && open "$@" || xdg-open "$@"
+
+## generate HTML page from NEWS.md
+NEWS.html: NEWS.md
+	pandoc --quiet --from=commonmark --to=html --output="$@" --standalone --css "https://CRAN.R-project.org/web/CRAN_web.css" "$<"
 	[ `uname -s` = "Darwin" ] && open "$@" || xdg-open "$@"
 
 ## report code coverage
