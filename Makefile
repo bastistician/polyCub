@@ -11,12 +11,16 @@ R := R
 PKG := $(strip $(shell grep "^Package:" DESCRIPTION | cut -f 2 -d ":"))
 VERSION := $(strip $(shell grep "^Version:" DESCRIPTION | cut -f 2 -d ":"))
 
+## render README.md
+README.md: README.Rmd
+	$R --slave --no-save --no-restore -e 'rmarkdown::render("$<")'
+
 ## roxygenise (update NAMESPACE and Rd files)
 document:
 	$R --no-restore --no-save --no-init-file --slave -e "devtools::document()"
 
 ## build the package
-build: document
+build: README.md document
 	$R CMD build .
 
 ## package installation
