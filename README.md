@@ -1,53 +1,112 @@
-The R package polyCub ([CRAN](https://CRAN.R-project.org/package=polyCub))
-=====================
+# polyCub
 
-An R package providing methods for **cubature** (numerical integration) **over
-polygonal domains**. Note that for cubature over simple hypercubes, the packages
-[`cubature`](https://CRAN.R-project.org/package=cubature)
-and [`R2Cuba`](https://CRAN.R-project.org/package=R2Cuba)
-might be more appropriate (cf.
+The R package **polyCub** implements *cubature* over *polygonal* domains
+to approximate
+
+$$ \iint_W f(x,y) \: dx dy $$
+
+where $W \subset \mathbb{R}^2$ is a simple closed polygonal domain
+and $f$ is a continuously differentiable function.
+
+For the special case where $W$ is a rectangular domain with sides parallel
+to the axes (such as a bounding box), the packages
+[**cubature**](https://CRAN.R-project.org/package=cubature)
+and [**R2Cuba**](https://CRAN.R-project.org/package=R2Cuba)
+are more appropriate (cf.
 [`CRAN Task View: Numerical Mathematics`](https://CRAN.R-project.org/view=NumericalMathematics)).
 
-The function `polyCub()` is the main entry point of the package. It is a
-wrapper around the following specific cubature methods.
 
-#### General-purpose cubature rules:
-* `polyCub.midpoint()`: Two-dimensional midpoint rule (a simple wrapper around
-  [`spatstat`](https://CRAN.R-project.org/package=spatstat)'s `as.im.function()`)
-* `polyCub.SV()`: Product Gauss cubature as proposed by
-  [Sommariva and Vianello (2007, *BIT Numerical Mathematics*)](https://doi.org/10.1007/s10543-007-0131-2)
+## Installation
 
-#### Cubature rules for specific types of functions:
+You can install [polyCub from CRAN](https://CRAN.R-project.org/package=polyCub) via:
+
+```R
+install.packages("polyCub")
+```
+
+To install the development version from the GitHub repository, use:
+
+```R
+## install.packages("remotes")
+remotes::install_github("bastistician/polyCub")
+```
+
+
+## Motivation
+
+The **polyCub** package evolved from the need to evaluate integrals of
+so-called spatial interaction functions (e.g., a Gaussian or power-law
+kernel) over the observation region of a spatio-temporal point process
+(Meyer et al, 2012, *Biometrics*, <https://doi.org/10.1111/j.1541-0420.2011.01684.x>).
+Such an observation region is described by a polygonal boundary,
+representing, for example, the shape of a country or administrative
+district.
+
+The integration task could be simplified by either assuming a trivial
+kernel, such as $f(x,y) = 1$, or by simply replacing the polygonal with a
+rectangular domain, such as the bounding box of the polygon.
+However, these crude approximations can be avoided by using efficient
+numerical integration methods for polygonal domains:
+
+* A starting point is the simple *two-dimensional midpoint rule* via
+  `as.im.function()` from the
+  [**spatstat**](https://CRAN.R-project.org/package=spatstat) package.
+
+* Sommariva and Vianello (2007, *BIT Numerical Mathematics*,
+  <https://doi.org/10.1007/s10543-007-0131-2>) proposed so-called *product
+  Gauss cubature* and provided a reference implementation in Matlab.
+  
+* For *bivariate Gaussian densities*, integrals over polygons can be
+  solved accurately using combinations of standard evaluations of Gaussian
+  cumulative density functions (Abramowitz and Stegun, 1972, Section 26.9,
+  Example 9).
+
+* For *radially symmetric functions* $f(x,y) \equiv f_r(||(x-x_0,y-y_0)||)$,
+  numerical integration can be made much more efficient via line
+  `integrate()` along the boundary of the polygonal domain
+  (Meyer and Held, 2014, *The Annals of Applied Statistics*,
+  <https://doi.org/10.1214/14-AOAS743>, Supplement B, Section 2.4).
+
+The dedicated R package **polyCub** was born in 2013 to provide
+implementations of these cubature methods and facilitate their
+use in different projects.
+For example, **polyCub** is now used for epidemic models in
+[**surveillance**](https://CRAN.R-project.org/package=surveillance),
+and for phylogeographic analyses in
+[**rase**](https://CRAN.R-project.org/package=rase).
+
+<!--
+* [**surveillance**](https://CRAN.R-project.org/package=surveillance)
+  uses **polyCub** to evaluate the likelihood of self-exciting
+  spatio-temporal point process models for infectious disease spread.
+
+* [**rase**](https://CRAN.R-project.org/package=rase) uses **polyCub** to
+  integrate bivariate Gaussian densities for phylogeographic analyses.
+-->
+  
+
+<!--
+
+## Examples
+
+#### General-purpose cubature rules
+
+* `polyCub.midpoint()`: Two-dimensional midpoint rule
+
+* `polyCub.SV()`: product Gauss cubature
+
+#### Cubature rules for specific types of functions
+
 * `polyCub.iso()`: Efficient adaptive cubature for *isotropic* functions via
-  line `integrate()` along the polygon boundary, as described in Supplement B of
-  [Meyer and Held (2014, *The Annals of Applied Statistics*)](https://doi.org/10.1214/14-AOAS743)
+  line `integrate()` along the polygon boundary
+
 * `polyCub.exact.Gauss()` and `circleCub.Gauss()`:
   Quasi-exact methods specific to the integration of the
   *bivariate Gaussian density* over polygonal and circular domains, respectively
 
+-->
 
-A Short History of the Package
-------------------------------
 
-For any spatio-temporal point process model, the likelihood contains an integral
-of the conditional intensity function over the observation region. If this is a
-polygon, analytical solutions are only available for trivial cases of the
-intensity function - thus the need of a cubature method over polygonal domains.
+## License
 
-My Master's Thesis (2010) on
-["Spatio-Temporal Infectious Disease Epidemiology based on Point Processes"](http://epub.ub.uni-muenchen.de/11703/)
-is the origin of this package. Section 3.2 therein offers a more detailed
-description and benchmark experiment of some of the above cubature methods (and
-others).
-
-The implementation then went into the
-[`surveillance`](https://CRAN.R-project.org/package=surveillance) package, where
-it is used to fit `twinstim()`, self-exciting two-component spatio-temporal
-point process models, described in
-[Meyer et al (2012, *Biometrics*)](https://doi.org/10.1111/j.1541-0420.2011.01684.x).
-In May 2013, I decided to move the cubature functionality into a stand-alone
-package, since it might be useful for other projects as well.
-Subsequently, I developed the isotropic cubature method `polyCub.iso()` to
-efficiently estimate point process models with a power-law distance decay of
-interaction
-([Meyer and Held, 2014, *The Annals of Applied Statistics*](https://doi.org/10.1214/14-AOAS743)).
+The **polyCub** package is free and open source software, licensed under the GPLv2.
