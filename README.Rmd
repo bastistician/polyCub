@@ -1,7 +1,3 @@
----
-output: github_document
----
-
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -10,18 +6,13 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-
 # polyCub
 
-The R package **polyCub** implements *cubature* over *polygonal* domains
-to approximate
+The R package **polyCub** implements *cubature* over *polygonal* domains.
+The goal is to approximate the integral of a continuously differentiable
+function f(x,y) over a simple closed polygonal domain.
 
-$$ \iint_W f(x,y) \: dx dy $$
-
-where $W \subset \mathbb{R}^2$ is a simple closed polygonal domain
-and $f$ is a continuously differentiable function.
-
-For the special case where $W$ is a rectangular domain with sides parallel
+For the special case where the domain is rectangular with sides parallel
 to the axes (such as a bounding box), the packages
 [**cubature**](https://CRAN.R-project.org/package=cubature)
 and [**R2Cuba**](https://CRAN.R-project.org/package=R2Cuba)
@@ -56,7 +47,7 @@ representing, for example, the shape of a country or administrative
 district.
 
 The integration task could be simplified by either assuming a trivial
-kernel, such as $f(x,y) = 1$, or by simply replacing the polygonal with a
+kernel, such as f(x,y)=1, or by simply replacing the polygonal with a
 rectangular domain, such as the bounding box of the polygon.
 However, these crude approximations can be avoided by using efficient
 numerical integration methods for polygonal domains:
@@ -74,7 +65,7 @@ numerical integration methods for polygonal domains:
   cumulative density functions (Abramowitz and Stegun, 1972, Section 26.9,
   Example 9).
 
-* For *radially symmetric functions* $f(x,y) \equiv f_r(||(x-x_0,y-y_0)||)$,
+* For *radially symmetric functions* f(x,y) = f_r(||(x-x_0,y-y_0)||),
   numerical integration can be made much more efficient via line
   `integrate()` along the boundary of the polygonal domain
   (Meyer and Held, 2014, *The Annals of Applied Statistics*,

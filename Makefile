@@ -13,7 +13,7 @@ VERSION := $(strip $(shell grep "^Version:" DESCRIPTION | cut -f 2 -d ":"))
 
 ## render README.md
 README.md: README.Rmd
-	$R --slave --no-save --no-restore -e 'rmarkdown::render("$<")'
+	$R --slave --no-save --no-restore -e 'knitr::knit("$<")'
 
 ## roxygenise (update NAMESPACE and Rd files)
 document:
