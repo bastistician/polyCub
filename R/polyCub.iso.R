@@ -159,6 +159,7 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
 }
 
 
+##' @description
 ##' \code{.polyCub.iso} is a \dQuote{bare-bone} version of \code{polyCub.iso}.
 ##' @rdname polyCub.iso
 ##' @param polys something like \code{owin$bdry}, but see \code{\link{xylist}}.
