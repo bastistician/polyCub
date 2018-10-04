@@ -4,8 +4,8 @@
 \alias{polyCub}
 \title{Wrapper Function for the Various Cubature Methods}
 \usage{
-polyCub(polyregion, f, method = c("SV", "midpoint", "iso", "exact.Gauss"),
-  ..., plot = FALSE)
+polyCub(polyregion, f, method = c("SV", "midpoint", "iso",
+  "exact.Gauss"), ..., plot = FALSE)
 }
 \arguments{
 \item{polyregion}{a polygonal integration domain.
@@ -134,5 +134,6 @@ Other polyCub-methods: \code{\link{polyCub.SV}},
   \code{\link{polyCub.exact.Gauss}},
   \code{\link{polyCub.iso}}, \code{\link{polyCub.midpoint}}
 }
+\concept{polyCub-methods}
 \keyword{math}
 \keyword{spatial}

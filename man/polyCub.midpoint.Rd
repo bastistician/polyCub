@@ -57,5 +57,6 @@ Other polyCub-methods: \code{\link{polyCub.SV}},
   \code{\link{polyCub.exact.Gauss}},
   \code{\link{polyCub.iso}}, \code{\link{polyCub}}
 }
+\concept{polyCub-methods}
 \keyword{math}
 \keyword{spatial}
