@@ -13,8 +13,9 @@ Authors@R: c(
            email = "hoehle@math.su.se",
            role = "ths")
     )
-Description: The following methods for cubature (numerical integration)
-    over polygonal domains are currently implemented:
+Description: The goal is to approximate the integral of a continuously
+    differentiable function f(x,y) over a simple closed polygonal domain.
+    'polyCub' currently implements the following cubature methods:
     the two-dimensional midpoint rule via
     as.im.function() from package 'spatstat' <http://spatstat.org/>,
     product Gauss cubature following Sommariva and Vianello (2007)
@@ -22,7 +23,7 @@ Description: The following methods for cubature (numerical integration)
     adaptive cubature for isotropic functions via line integrate()
     along the boundary as described in Meyer and Held (2014, Supplement B)
     <doi:10.1214/14-AOAS743>,
-    and a method specific to the bivariate Gaussian density.
+    and numerical integration of the bivariate Gaussian density.
     For cubature over simple hypercubes, the packages 'cubature' and
     'R2Cuba' are more appropriate.
 License: GPL-2
