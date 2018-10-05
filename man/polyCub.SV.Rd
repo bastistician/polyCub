@@ -4,8 +4,8 @@
 \alias{polyCub.SV}
 \title{Product Gauss Cubature over Polygonal Domains}
 \usage{
-polyCub.SV(polyregion, f, ..., nGQ = 20, alpha = NULL, rotation = FALSE,
-  engine = "C", plot = FALSE)
+polyCub.SV(polyregion, f, ..., nGQ = 20, alpha = NULL,
+  rotation = FALSE, engine = "C", plot = FALSE)
 }
 \arguments{
 \item{polyregion}{a polygonal domain.
@@ -94,5 +94,6 @@ original \acronym{MATLAB} implementation \code{polygauss} by Sommariva and
 Vianello (2007), which is available under the GNU GPL (>=2) license from
 \url{http://www.math.unipd.it/~alvise/software.html}.
 }
+\concept{polyCub-methods}
 \keyword{math}
 \keyword{spatial}

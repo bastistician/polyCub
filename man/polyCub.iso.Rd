@@ -132,5 +132,6 @@ The basic mathematical formulation of this efficient integration for radially
 symmetric functions was ascertained with great support by
 Emil Hedevang (2013), Dept. of Mathematics, Aarhus University, Denmark.
 }
+\concept{polyCub-methods}
 \keyword{math}
 \keyword{spatial}

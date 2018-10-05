@@ -5,8 +5,8 @@
 \title{Plot Polygonal Domain on Image of Bivariate Function}
 \usage{
 plotpolyf(polyregion, f, ..., npixel = 100, cuts = 15,
-  col = rev(heat.colors(cuts + 1)), lwd = 3, xlim = NULL, ylim = NULL,
-  use.lattice = TRUE, print.args = list())
+  col = rev(heat.colors(cuts + 1)), lwd = 3, xlim = NULL,
+  ylim = NULL, use.lattice = TRUE, print.args = list())
 }
 \arguments{
 \item{polyregion}{a polygonal domain.
