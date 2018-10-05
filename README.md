@@ -1,5 +1,8 @@
 
-# polyCub
+
+
+
+# polyCub <img src="figures/logo-1.png" align="right" />
 
 The R package **polyCub** implements *cubature* over *polygonal* domains.
 The goal is to approximate the integral of a continuously differentiable
@@ -65,11 +68,11 @@ numerical integration methods for polygonal domains:
   <https://doi.org/10.1214/14-AOAS743>, Supplement B, Section 2.4).
 
 The dedicated R package **polyCub** was born in 2013 to provide
-implementations of these cubature methods and facilitate their
+implementations of the above cubature methods and facilitate their
 use in different projects.
-For example, **polyCub** is now used for epidemic models in
-[**surveillance**](https://CRAN.R-project.org/package=surveillance),
-and for phylogeographic analyses in
+For example, **polyCub** powers epidemic models in
+[**surveillance**](https://CRAN.R-project.org/package=surveillance)
+and phylogeographic analyses in
 [**rase**](https://CRAN.R-project.org/package=rase).
 
 <!--

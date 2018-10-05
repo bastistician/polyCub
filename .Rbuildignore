@@ -1,4 +1,5 @@
 ^README\.Rmd$
+^figures$
 ^devel$
 ^examples$
 ^.*\.tar\.gz$

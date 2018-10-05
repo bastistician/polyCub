@@ -1,12 +1,39 @@
 ```{r setup, include = FALSE}
+## Storing figures in man/figures would inflate the package.
+## Instead we .Rbuildignore the generated figures and use the full GitHub path
+## when referencing the figures in the resulting markdown file
+knitr::opts_knit$set(
+  base.url = "https://raw.githubusercontent.com/bastistician/polyCub/master/"
+)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  fig.path = "figures/", dev = "png", dpi = 96, fig.width = 7, fig.height = 5
 )
 ```
-# polyCub
+```{R example-setup, include = FALSE}
+## function to integrate (here: isotropic zero-mean Gaussian density)
+f <- function (s, sigma = 5)
+    exp(-rowSums(s^2)/2/sigma^2) / (2*pi*sigma^2)
+
+## simple polygonal integration domain
+hexagon <- list(
+    list(x = c(7.33, 7.33, 3, -1.33, -1.33, 3),
+         y = c(-0.5, 4.5, 7, 4.5, -0.5, -3))
+)
+```
+```{R logo, fig.width = 1.3, fig.height = 1.5, include = FALSE}
+.f_inside_hexagon <- function (s, ...) {
+    inside <- sp::point.in.polygon(s[,1], s[,2], hexagon[[1]]$x, hexagon[[1]]$y)
+    ifelse(inside, f(s, ...), NA_real_)
+}
+par(bg = "transparent", ann = FALSE, bty = "n", xaxt = "n", yaxt = "n", mar = c(0,0,0,0))
+polyCub::plotpolyf(hexagon, .f_inside_hexagon, use.lattice = FALSE,
+                   xlim = range(hexagon[[1]]$x), ylim = range(hexagon[[1]]$y))
+text(3, 2, labels = "\u222B", cex = 4)  # Unicode integral symbol
+```
+
+# polyCub <img src="figures/logo-1.png" align="right" />
 
 The R package **polyCub** implements *cubature* over *polygonal* domains.
 The goal is to approximate the integral of a continuously differentiable
@@ -72,11 +99,11 @@ numerical integration methods for polygonal domains:
   <https://doi.org/10.1214/14-AOAS743>, Supplement B, Section 2.4).
 
 The dedicated R package **polyCub** was born in 2013 to provide
-implementations of these cubature methods and facilitate their
+implementations of the above cubature methods and facilitate their
 use in different projects.
-For example, **polyCub** is now used for epidemic models in
-[**surveillance**](https://CRAN.R-project.org/package=surveillance),
-and for phylogeographic analyses in
+For example, **polyCub** powers epidemic models in
+[**surveillance**](https://CRAN.R-project.org/package=surveillance)
+and phylogeographic analyses in
 [**rase**](https://CRAN.R-project.org/package=rase).
 
 <!--
