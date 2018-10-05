@@ -2,6 +2,7 @@
 
 
 
+
 # polyCub <img src="https://raw.githubusercontent.com/bastistician/polyCub/master/figures/logo-1.png" align="right" />
 
 The R package **polyCub** implements *cubature* over *polygonal* domains.
@@ -85,9 +86,62 @@ and phylogeographic analyses in
 -->
 
 
-<!--
+## Example
 
-## Examples
+For this example, we consider a function f(x,y) which all of the above
+cubature methods can handle: an isotropic zero-mean Gaussian density.
+**polyCub** expects the function's implementation `f` to take a two-column
+coordinate matrix as its first argument (as opposed to separate arguments
+for the x and y coordinates):
+
+
+```r
+f <- function (s, sigma = 5)
+{
+    exp(-rowSums(s^2)/2/sigma^2) / (2*pi*sigma^2)
+}
+```
+
+We define a simple polygonal integration domain consisting of a single
+hexagon:
+
+
+```r
+hexagon <- list(
+    list(x = c(7.33, 7.33, 3, -1.33, -1.33, 3),
+         y = c(-0.5, 4.5, 7, 4.5, -0.5, -3))
+)
+```
+
+The **polyCub** package provides a rudimentary plotting utility to
+produce an image of the function and the integration domain:
+
+
+```r
+polyCub::plotpolyf(hexagon, f, xlim = c(-8,8), ylim = c(-8,8))
+```
+
+![Example](https://raw.githubusercontent.com/bastistician/polyCub/master/figures/example-1.png)
+
+#### Polygon representation
+
+Instead of using a simple `"xylist"` as above, the integration domain is
+typically represented using a dedicated class for polygons, such as
+`"owin"` from package **spatstat**:
+
+
+```r
+library("spatstat")
+hexagon.owin <- owin(poly = hexagon)
+```
+
+All of **polyCub**'s cubature methods as well as `plotpolyf()` understand
+
+* `"owin"` from **spatstat**,
+
+* `"gpc.poly"` from package **rgeos** (or **gpclib**), and
+
+* `"SpatialPolygons"` from package **sp**.
 
 #### General-purpose cubature rules
 
@@ -103,8 +157,6 @@ and phylogeographic analyses in
 * `polyCub.exact.Gauss()` and `circleCub.Gauss()`:
   Quasi-exact methods specific to the integration of the
   *bivariate Gaussian density* over polygonal and circular domains, respectively
-
--->
 
 
 ## License
