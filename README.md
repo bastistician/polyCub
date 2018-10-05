@@ -2,7 +2,7 @@
 
 
 
-# polyCub <img src="figures/logo-1.png" align="right" />
+# polyCub <img src="https://raw.githubusercontent.com/bastistician/polyCub/master/figures/logo-1.png" align="right" />
 
 The R package **polyCub** implements *cubature* over *polygonal* domains.
 The goal is to approximate the integral of a continuously differentiable
