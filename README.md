@@ -76,19 +76,15 @@ For example, **polyCub** powers epidemic models in
 and phylogeographic analyses in
 [**rase**](https://CRAN.R-project.org/package=rase).
 
-<!--
-* [**surveillance**](https://CRAN.R-project.org/package=surveillance)
-  uses **polyCub** to evaluate the likelihood of self-exciting
-  spatio-temporal point process models for infectious disease spread.
-
-* [**rase**](https://CRAN.R-project.org/package=rase) uses **polyCub** to
-  integrate bivariate Gaussian densities for phylogeographic analyses.
--->
-
 
 ## Example
 
-For this example, we consider a function f(x,y) which all of the above
+
+```r
+library("polyCub")
+```
+
+We consider a function f(x,y) which all of the above
 cubature methods can handle: an isotropic zero-mean Gaussian density.
 **polyCub** expects the function's implementation `f` to take a two-column
 coordinate matrix as its first argument (as opposed to separate arguments
@@ -102,8 +98,8 @@ f <- function (s, sigma = 5)
 }
 ```
 
-We define a simple polygonal integration domain consisting of a single
-hexagon:
+We use a simple hexagon as polygonal integration domain,
+here specified via an `"xylist"` of vertex coordinates:
 
 
 ```r
@@ -113,21 +109,20 @@ hexagon <- list(
 )
 ```
 
-The **polyCub** package provides a rudimentary plotting utility to
-produce an image of the function and the integration domain:
+An image of the function and the integration domain can be produced using
+**polyCub**'s rudimentary (but convenient) plotting utility:
 
 
 ```r
-polyCub::plotpolyf(hexagon, f, xlim = c(-8,8), ylim = c(-8,8))
+plotpolyf(hexagon, f, xlim = c(-8,8), ylim = c(-8,8))
 ```
 
 ![Example](https://raw.githubusercontent.com/bastistician/polyCub/master/figures/example-1.png)
 
-#### Polygon representation
+#### Supported polygon representations
 
-Instead of using a simple `"xylist"` as above, the integration domain is
-typically represented using a dedicated class for polygons, such as
-`"owin"` from package **spatstat**:
+The integration domain is typically represented using a dedicated class
+for polygons, such as `"owin"` from package **spatstat**:
 
 
 ```r
@@ -143,20 +138,106 @@ All of **polyCub**'s cubature methods as well as `plotpolyf()` understand
 
 * `"SpatialPolygons"` from package **sp**.
 
-#### General-purpose cubature rules
+Note that the integration domain may consist of more than one polygon
+(including holes).
 
-* `polyCub.midpoint()`: Two-dimensional midpoint rule
 
-* `polyCub.SV()`: product Gauss cubature
+### `polyCub.SV()`: Product Gauss cubature
 
-#### Cubature rules for specific types of functions
+The **polyCub** package provides an R-interfaced C-translation of
+"polygauss: Matlab code for Gauss-like cubature over polygons"
+(Sommariva and Vianello, 2013, <http://www.math.unipd.it/~alvise/software.html>).
+The cubature rule is based on Green's theorem and incorporates
+appropriately transformed weights and nodes of one-dimensional
+Gauss-Legendre quadrature in both dimensions,
+thus the name "product Gauss cubature".
+It is exact for all bivariate polynomials if the number of cubature nodes
+is sufficiently large (depending on the degree of the polynomial).
 
-* `polyCub.iso()`: Efficient adaptive cubature for *isotropic* functions via
-  line `integrate()` along the polygon boundary
+For the above example, a reasonable approximation is already obtained
+with degree `nGQ = 3` of the one-dimensional Gauss-Legendre quadrature:
 
-* `polyCub.exact.Gauss()` and `circleCub.Gauss()`:
-  Quasi-exact methods specific to the integration of the
-  *bivariate Gaussian density* over polygonal and circular domains, respectively
+
+```r
+polyCub.SV(hexagon, f, nGQ = 3, plot = TRUE)
+#> [1] 0.2741456
+```
+
+![Product Gauss cubature](https://raw.githubusercontent.com/bastistician/polyCub/master/figures/product-Gauss-1.png)
+
+The involved nodes (displayed in the figure above) and weights can be
+extracted by calling `polyCub.SV()` with `f = NULL`, e.g., to determine
+the number of nodes:
+
+```r
+nrow(polyCub.SV(hexagon, f = NULL, nGQ = 3)[[1]]$nodes)
+#> [1] 72
+```
+
+For illustration, we create a variant of `polyCub.SV()`,
+which returns the number of function evaluations as an attribute:
+
+
+```r
+polyCub.SVn <- function (polyregion, f, ..., nGQ = 20) {
+    nw <- polyCub.SV(polyregion, f = NULL, ..., nGQ = nGQ)
+    ## nw is a list with one element per polygon of 'polyregion'
+    res <- sapply(nw, function (x)
+        c(result = sum(x$weights * f(x$nodes, ...)), nEval = nrow(x$nodes)))
+    structure(sum(res["result",]), nEval = sum(res["nEval",]))
+}
+polyCub.SVn(hexagon, f, nGQ = 3)
+#> [1] 0.2741456
+#> attr(,"nEval")
+#> [1] 72
+```
+
+We can use this function to investigate how the accuracy of the
+approximation depends on the degree `nGQ` and the associated number of
+cubature nodes:
+
+
+```r
+for (nGQ in c(1:5, 10, 20)) {
+    result <- polyCub.SVn(hexagon, f, nGQ = nGQ)
+    cat(sprintf("nGQ = %2i: %.12f (n=%i)\n", nGQ, result, attr(result, "nEval")))
+}
+#> nGQ =  1: 0.285265369245 (n=12)
+#> nGQ =  2: 0.274027610314 (n=36)
+#> nGQ =  3: 0.274145638288 (n=72)
+#> nGQ =  4: 0.274144768964 (n=120)
+#> nGQ =  5: 0.274144773834 (n=180)
+#> nGQ = 10: 0.274144773813 (n=660)
+#> nGQ = 20: 0.274144773813 (n=2520)
+```
+
+
+### `polyCub.midpoint()`: Two-dimensional midpoint rule
+
+The two-dimensional midpoint rule in **polyCub** is a simple wrapper
+around `as.im.function()` and `integral.im()` from package **spatstat**.
+
+Using a pixel size of `eps = 0.5` (here yielding 270 pixels), we obtain:
+
+
+```r
+polyCub.midpoint(hexagon.owin, f, eps = 0.5, plot = TRUE)
+#> [1] 0.2736067
+```
+
+![Midpoint rule](https://raw.githubusercontent.com/bastistician/polyCub/master/figures/midpoint-1.png)
+
+
+### `polyCub.iso()`: Adaptive cubature for *isotropic* functions
+
+Efficient adaptive cubature for *isotropic* functions via
+line `integrate()` along the polygon boundary.
+
+
+### `polyCub.exact.Gauss()`: Integration of the *bivariate Gaussian density*
+
+Note: There is also a function `circleCub.Gauss()` to calculate the
+integral of the bivariate Gaussian density over a *circular* domain.
 
 
 ## License
