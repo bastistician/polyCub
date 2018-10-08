@@ -81,18 +81,18 @@ rectangular domain, such as the bounding box of the polygon.
 However, these crude approximations can be avoided by using efficient
 numerical integration methods for polygonal domains:
 
-* A starting point is the simple *two-dimensional midpoint rule* via
-  `as.im.function()` from the
-  [**spatstat**](https://CRAN.R-project.org/package=spatstat) package.
-
 * Sommariva and Vianello (2007, *BIT Numerical Mathematics*,
   <https://doi.org/10.1007/s10543-007-0131-2>) proposed so-called *product
-  Gauss cubature* and provided a reference implementation in Matlab.
+  Gauss cubature*.
+
+* The simple *two-dimensional midpoint rule* is available via
+  `as.im.function()` from the
+  [**spatstat**](https://CRAN.R-project.org/package=spatstat) package.
   
 * For *bivariate Gaussian densities*, integrals over polygons can be
-  solved accurately using combinations of standard evaluations of Gaussian
-  cumulative density functions (Abramowitz and Stegun, 1972, Section 26.9,
-  Example 9).
+  solved accurately using combinations of Gaussian cumulative densities
+  via `pmvnorm()` from the
+  [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm) package.
 
 * For *radially symmetric functions* f(x,y) = f_r(||(x-x_0,y-y_0)||),
   numerical integration can be made much more efficient via line
@@ -265,6 +265,21 @@ for an example.
 
 
 ### `polyCub.exact.Gauss()`: Integration of the *bivariate Gaussian density*
+
+Abramowitz and Stegun (1972, Section 26.9, Example 9) offer a formula for
+the integral of the bivariate Gaussian density over a triangle with one
+vertex at the origin. This formula can be used after triangulation of
+the polygonal domain via `tripstrip()` from the **gpclib** package.
+The core of the formula is an integral of the bivariate Gaussian density
+with zero mean, unit variance and some correlation over an infinite
+rectangle [h, Inf] x [0, Inf], which can be computed accurately using
+`pmvnorm()` from the **mvtnorm** package. However, calculating this
+integral is also the computational bottleneck of this cubature rule.
+
+```{R}
+gpclibPermit()  # accept gpclib license (prohibits commercial use)
+polyCub.exact.Gauss(hexagon.owin, mean = c(0,0), Sigma = 5^2*diag(2))
+```
 
 Note: There is also a function `circleCub.Gauss()` to calculate the
 integral of the bivariate Gaussian density over a *circular* domain.
