@@ -227,8 +227,41 @@ polyCub.midpoint(hexagon.owin, f, eps = 0.5, plot = TRUE)
 
 ### `polyCub.iso()`: Adaptive cubature for *isotropic* functions
 
-Efficient adaptive cubature for *isotropic* functions via
-line `integrate()` along the polygon boundary.
+A radially symmetric function f(x,y) = f(r) can be expressed in terms of
+the distance r from its point of symmetry.
+If the antiderivative of r times f(r), called `intrfr()`, is
+analytically available, Green's theorem leads to a cubature rule
+which only needs one-dimensional numerical integration.
+More specifically, `intrfr()` will be `integrate()`d along the edges of
+the polygon. The mathematical details are given in Meyer and Held (2014,
+<https://doi.org/10.1214/14-AOAS743SUPPB>, Section 2.4).
+
+For the bivariate Gaussian density `f` defined above,
+the integral from 0 to R of `r*f(r)` is analytically available as:
+```{R}
+intrfr <- function (R, sigma = 5)
+{
+    (1 - exp(-R^2/2/sigma^2))/2/pi
+}
+```
+
+With this information, we can apply the cubature rule as follows:
+
+```{R}
+polyCub.iso(hexagon, intrfr = intrfr, center = c(0,0))
+```
+
+Note that we do not even need the original function `f`.
+
+If `intrfr()` is missing, it can be approximated numerically using
+`integrate()` for `r*f(r)` as well, but the overall integration will then
+be much less efficient than product Gauss cubature.
+
+Package **polyCub** exposes the backbone of `polyCub.iso()` as C function
+`polyCub_iso()` for use by other R packages (notably **surveillance**) via
+`LinkingTo: polyCub` and `#include <polyCubAPI.h>`. See
+<https://github.com/bastistician/polyCub/blob/master/tests/testthat/polyiso_powerlaw.c>
+for an example.
 
 
 ### `polyCub.exact.Gauss()`: Integration of the *bivariate Gaussian density*
