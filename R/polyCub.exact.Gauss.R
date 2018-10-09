@@ -1,7 +1,7 @@
 ################################################################################
 ### polyCub.exact.Gauss: Quasi-Exact Cubature of the Bivariate Normal Density
 ###
-### Copyright (C) 2009-2017 Sebastian Meyer
+### Copyright (C) 2009-2018 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -168,7 +168,7 @@ transform_pts <- function (pts, mean, Sigma)
 .intTriangleAS0 <- function (A, B)
 {
     BmA <- B - A
-    d <- sqrt(sum(BmA^2))
+    d <- vecnorm(BmA)
     h <- abs(B[2L]*A[1L] - A[2L]*B[1L]) / d   # distance of AB to the origin
     if (d == 0 || h == 0) # degenerate triangle: A == B or 0, A, B on a line
         return(structure(0, error = 0))

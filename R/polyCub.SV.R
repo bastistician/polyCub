@@ -1,7 +1,7 @@
 ################################################################################
 ### polyCub.SV: Product Gauss Cubature over Polygonal Domains
 ###
-### Copyright (C) 2009-2014,2017 Sebastian Meyer
+### Copyright (C) 2009-2014,2017-2018 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -332,7 +332,7 @@ vertexpairmaxdist <- function (xy)
 
 rotmatPQ <- function (P, Q)
 {
-    direction_axis <- (Q-P) / sqrt(sum((Q-P)^2))
+    direction_axis <- (Q-P) / vecnorm(Q-P)
 
     ## determine rotation angle [radian]
     rot_angle_x <- acos(direction_axis[1L])
