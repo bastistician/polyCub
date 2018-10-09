@@ -259,9 +259,10 @@ If `intrfr()` is missing, it can be approximated numerically using
 `integrate()` for `r*f(r)` as well, but the overall integration will then
 be much less efficient than product Gauss cubature.
 
-Package **polyCub** exposes the backbone of `polyCub.iso()` as C function
-`polyCub_iso()` for use by other R packages (notably **surveillance**) via
-`LinkingTo: polyCub` and `#include <polyCubAPI.h>`. See
+Package **polyCub** exposes a C-version of `polyCub.iso()`
+for use by other R packages (notably **surveillance**) via
+`LinkingTo: polyCub` and `#include <polyCubAPI.h>`.
+This requires the `intrfr()` function to be implemented in C as well. See
 <https://github.com/bastistician/polyCub/blob/master/tests/testthat/polyiso_powerlaw.c>
 for an example.
 
