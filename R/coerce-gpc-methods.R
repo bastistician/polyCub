@@ -46,6 +46,8 @@
 ##'     letterR  # a simple "xylist"
 ##'     letterR.owin <- owin(poly = letterR)
 ##'     letterR.gpc_from_owin <- owin2gpc(letterR.owin)
+##'     letterR.xylist_from_gpc <- xylist(letterR.gpc_from_owin)
+##'     stopifnot(all.equal(letterR, lapply(letterR.xylist_from_gpc, "[", 1:2)))
 ##'     letterR.owin_from_gpc <- as.owin(letterR.gpc_from_owin)
 ##'     stopifnot(all.equal(letterR.owin, letterR.owin_from_gpc))
 ##' }
