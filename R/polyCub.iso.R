@@ -232,22 +232,3 @@ lineInt <- function (v0, v1, intrfr, ..., control = list())
         integrate(integrand, 0, 1)
     }
 }
-
-## equally fast method _only_ for convex polygonal domains including the origin
-## (formula obtained via polar coordinate representation)
-lineInt2 <- function (v0, v1, intrfr, ..., control = list())
-{
-    d <- v1 - v0
-    ld <- vecnorm(d)
-    l0 <- vecnorm(v0)
-    l1 <- vecnorm(v1)
-    dp <- dotprod(v0,v1)
-    theta <- acos((l0 - dp/l0) / ld)
-    num <- sin(theta) * l0
-    phispan <- acos(dp / l0 / l1)
-    integrand <- function (phi, ...) {
-        r <- num / sin(theta+phi)
-        intrfr(r, ...)
-    }
-    do.call("integrate", c(list(integrand, 0, phispan, ...), control))
-}
