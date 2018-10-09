@@ -14,3 +14,12 @@ test_that("polyCub.SV() can fetch nodes and weights from 'statmod'", {
     nw <- polyCub.SV(diamond, f = NULL, nGQ = 83)
     expect_type(nw, "list")
 })
+
+test_that("polyCub.SV() can reduce nodes with zero weight", {
+    rectangle <- list(list(x = c(-1,1,1,-1), y = c(1,1,2,2)))
+    ##nw0 <- polyCub.SV(rectangle, f = NULL, nGQ = 3, engine = "C")[[1]]  # has 0s
+    nw <- polyCub.SV(rectangle, f = NULL, nGQ = 3, engine = "C+reduce")[[1]]
+    expect_true(all(nw$weights != 0))
+    ##f <- function (s) 1  # => calculate area (= 2)
+    expect_equal(sum(nw$weights), 2)
+})
