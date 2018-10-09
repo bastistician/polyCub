@@ -42,6 +42,18 @@ It will produce vertices ordered according to the \pkg{sp} convention,
 i.e. clockwise for normal boundaries and anticlockwise for holes, where,
 however, the first vertex is \emph{not} repeated!
 }
+\examples{
+if (gpclibPermit() && require("spatstat")) {
+    ## use example polygons from
+    example(plotpolyf, ask = FALSE)
+
+    letterR  # a simple "xylist"
+    letterR.owin <- owin(poly = letterR)
+    letterR.gpc_from_owin <- owin2gpc(letterR.owin)
+    letterR.owin_from_gpc <- as.owin(letterR.gpc_from_owin)
+    stopifnot(all.equal(letterR.owin, letterR.owin_from_gpc))
+}
+}
 \seealso{
 \code{\link{xylist}}, and the package \pkg{rgeos} for
 conversions of \code{"gpc.poly"} objects from and to \pkg{sp}'s

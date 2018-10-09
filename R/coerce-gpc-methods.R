@@ -1,7 +1,7 @@
 ################################################################################
 ### Conversion between polygonal "owin" and "gpc.poly"
 ###
-### Copyright (C) 2012-2015,2017 Sebastian Meyer
+### Copyright (C) 2012-2015,2017-2018 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -38,6 +38,17 @@
 ##' @keywords spatial methods
 ##' @import methods
 ##' @export
+##' @examples
+##' if (gpclibPermit() && require("spatstat")) {
+##'     ## use example polygons from
+##'     example(plotpolyf, ask = FALSE)
+##'
+##'     letterR  # a simple "xylist"
+##'     letterR.owin <- owin(poly = letterR)
+##'     letterR.gpc_from_owin <- owin2gpc(letterR.owin)
+##'     letterR.owin_from_gpc <- as.owin(letterR.gpc_from_owin)
+##'     stopifnot(all.equal(letterR.owin, letterR.owin_from_gpc))
+##' }
 owin2gpc <- function (object)
 {
     object <- spatstat::as.polygonal(object)
