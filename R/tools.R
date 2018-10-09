@@ -80,16 +80,3 @@ plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
         plot(polyregion, lwd=lwd, axes=TRUE, main="", add=add)
     }
 }
-
-
-##' Constructs Equally-Spaced Grid
-##'
-##' Construct an equally-spaced grid given a range and the number of cut points
-##' (one more than the number of resulting bins).
-##' This is nothing else than \code{seq(range[1], range[2], length.out=n)}.
-##' @param range numeric vector of length 2.
-##' @param n length of the desired grid, i.e. number of bins + 1.
-##' @return the desired grid, a numeric vector of length \code{n} covering
-##' \code{range}.
-##' @keywords internal
-makegrid <- function(range, n) seq(range[1], range[2], length.out=n)

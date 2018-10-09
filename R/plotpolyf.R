@@ -1,7 +1,7 @@
 ################################################################################
 ### plotpolyf: Plot Polygonal Domain on Image of Bivariate Function
 ###
-### Copyright (C) 2013-2014 Sebastian Meyer
+### Copyright (C) 2013-2014,2018 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -53,15 +53,15 @@ plotpolyf <- function (polyregion, f, ..., npixel = 100, cuts = 15,
                        use.lattice = TRUE, print.args = list())
 {
     polys <- xylist(polyregion)
-    npixel <- rep(npixel, length.out=2)
+    npixel <- rep(npixel, length.out = 2L)
 
     ## make two-dimensional grid
     if (is.null(xlim))
         xlim <- extendrange(unlist(lapply(polys, "[[", "x"), use.names=FALSE))
     if (is.null(ylim))
         ylim <- extendrange(unlist(lapply(polys, "[[", "y"), use.names=FALSE))
-    xgrid <- makegrid(xlim, npixel[1])
-    ygrid <- makegrid(ylim, npixel[2])
+    xgrid <- seq(xlim[1L], xlim[2L], length.out = npixel[1L])
+    ygrid <- seq(ylim[1L], ylim[2L], length.out = npixel[2L])
     xygrid <- expand.grid(x=xgrid, y=ygrid, KEEP.OUT.ATTRS=FALSE)
 
     ## compute function values on the grid
@@ -79,8 +79,8 @@ plotpolyf <- function (polyregion, f, ..., npixel = 100, cuts = 15,
             do.call("print", c(alist(x=trobj), print.args))
         } else trobj
     } else {
-        image(xgrid, ygrid, matrix(xygrid$fval, npixel[1], npixel[2]), col=col,
-              xlab="x", ylab="y", asp=1)
+        image(xgrid, ygrid, matrix(xygrid$fval, npixel[1L], npixel[2L]),
+              col=col, xlab="x", ylab="y", asp=1)
         plot_polyregion(polyregion, lwd=lwd, add=TRUE)
     }
 }
