@@ -38,6 +38,21 @@ and \R will use the S4 \code{coerce}-method that was loaded last,
 and prefer the \code{as.owin.SpatialPolygons} S3-method exported from
 \pkg{maptools} if attached.
 }
+\examples{
+if (require("spatstat") && require("sp")) {
+    diamond <- list(x = c(1,2,1,0), y = c(1,2,3,2))
+    diamond.owin <- owin(poly = diamond)
+    diamond.sp <- Polygon(diamond, hole = FALSE)
+    diamond.owin_from_sp <- as(diamond.sp, "owin")
+    stopifnot(all.equal(diamond.owin, diamond.owin_from_sp))
+
+    ## similarly works for Polygons and SpatialPolygons
+    diamond.Ps <- as(diamond.sp, "Polygons")
+    stopifnot(identical(diamond.owin, as.owin(diamond.Ps)))
+    diamond.SpPs <- SpatialPolygons(list(diamond.Ps))
+    stopifnot(identical(diamond.owin, as.owin(diamond.SpPs)))
+}
+}
 \author{
 Sebastian Meyer
 }
