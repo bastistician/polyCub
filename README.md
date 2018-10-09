@@ -49,32 +49,34 @@ rectangular domain, such as the bounding box of the polygon.
 However, these crude approximations can be avoided by using efficient
 numerical integration methods for polygonal domains:
 
-* Sommariva and Vianello (2007, *BIT Numerical Mathematics*,
-  <https://doi.org/10.1007/s10543-007-0131-2>) proposed so-called *product
-  Gauss cubature*.
+1. Sommariva and Vianello (2007, *BIT Numerical Mathematics*,
+   <https://doi.org/10.1007/s10543-007-0131-2>) proposed so-called *product
+   Gauss cubature*.
 
-* The simple *two-dimensional midpoint rule* is available via
-  `as.im.function()` from the
-  [**spatstat**](https://CRAN.R-project.org/package=spatstat) package.
+2. The simple *two-dimensional midpoint rule* is available via
+   `as.im.function()` from the
+   [**spatstat**](https://CRAN.R-project.org/package=spatstat) package.
   
-* For *bivariate Gaussian densities*, integrals over polygons can be
-  solved accurately using combinations of Gaussian cumulative densities
-  via `pmvnorm()` from the
-  [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm) package.
+3. For *radially symmetric functions* f(x,y) = f_r(||(x-x_0,y-y_0)||),
+   numerical integration can be made much more efficient via line
+   `integrate()` along the boundary of the polygonal domain
+   (Meyer and Held, 2014, *The Annals of Applied Statistics*,
+   <https://doi.org/10.1214/14-AOAS743>, Supplement B, Section 2.4).
 
-* For *radially symmetric functions* f(x,y) = f_r(||(x-x_0,y-y_0)||),
-  numerical integration can be made much more efficient via line
-  `integrate()` along the boundary of the polygonal domain
-  (Meyer and Held, 2014, *The Annals of Applied Statistics*,
-  <https://doi.org/10.1214/14-AOAS743>, Supplement B, Section 2.4).
+4. For *bivariate Gaussian densities*, integrals over polygons can be
+   solved accurately using combinations of Gaussian cumulative densities
+   via `pmvnorm()` from the
+   [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm) package.
 
-The dedicated R package **polyCub** was born in 2013 to provide
+The dedicated R package **polyCub** was established in 2013 to provide
 implementations of the above cubature methods and facilitate their
 use in different projects.
 For example, **polyCub** powers epidemic models in
 [**surveillance**](https://CRAN.R-project.org/package=surveillance)
 and phylogeographic analyses in
 [**rase**](https://CRAN.R-project.org/package=rase).
+
+The four different cubature rules are exemplified below.
 
 
 ## Example
@@ -142,7 +144,7 @@ Note that the integration domain may consist of more than one polygon
 (including holes).
 
 
-### `polyCub.SV()`: Product Gauss cubature
+### 1. Product Gauss cubature: `polyCub.SV()`
 
 The **polyCub** package provides an R-interfaced C-translation of
 "polygauss: Matlab code for Gauss-like cubature over polygons"
@@ -212,7 +214,7 @@ for (nGQ in c(1:5, 10, 20)) {
 ```
 
 
-### `polyCub.midpoint()`: Two-dimensional midpoint rule
+### 2. Two-dimensional midpoint rule: `polyCub.midpoint()`
 
 The two-dimensional midpoint rule in **polyCub** is a simple wrapper
 around `as.im.function()` and `integral.im()` from package **spatstat**.
@@ -228,16 +230,16 @@ polyCub.midpoint(hexagon.owin, f, eps = 0.5, plot = TRUE)
 ![Midpoint rule](https://raw.githubusercontent.com/bastistician/polyCub/master/figures/midpoint-1.png)
 
 
-### `polyCub.iso()`: Adaptive cubature for *isotropic* functions
+### 3. Adaptive cubature for *isotropic* functions: `polyCub.iso()`
 
-A radially symmetric function f(x,y) = f(r) can be expressed in terms of
-the distance r from its point of symmetry.
+A radially symmetric function can be expressed in terms of
+the distance r from its point of symmetry: f(r).
 If the antiderivative of r times f(r), called `intrfr()`, is
-analytically available, Green's theorem leads to a cubature rule
+analytically available, Green's theorem leads us to a cubature rule
 which only needs one-dimensional numerical integration.
 More specifically, `intrfr()` will be `integrate()`d along the edges of
-the polygon. The mathematical details are given in Meyer and Held (2014,
-<https://doi.org/10.1214/14-AOAS743SUPPB>, Section 2.4).
+the polygon. The mathematical details are given in
+<https://doi.org/10.1214/14-AOAS743SUPPB> (Section 2.4).
 
 For the bivariate Gaussian density `f` defined above,
 the integral from 0 to R of `r*f(r)` is analytically available as:
@@ -272,7 +274,7 @@ Package **polyCub** exposes the backbone of `polyCub.iso()` as C function
 for an example.
 
 
-### `polyCub.exact.Gauss()`: Integration of the *bivariate Gaussian density*
+### 4. Integration of the *bivariate Gaussian density*: `polyCub.exact.Gauss()`
 
 Abramowitz and Stegun (1972, Section 26.9, Example 9) offer a formula for
 the integral of the bivariate Gaussian density over a triangle with one
@@ -281,8 +283,9 @@ the polygonal domain via `tripstrip()` from the **gpclib** package.
 The core of the formula is an integral of the bivariate Gaussian density
 with zero mean, unit variance and some correlation over an infinite
 rectangle [h, Inf] x [0, Inf], which can be computed accurately using
-`pmvnorm()` from the **mvtnorm** package. However, calculating this
-integral is also the computational bottleneck of this cubature rule.
+`pmvnorm()` from the **mvtnorm** package.
+
+For the above example, we obtain:
 
 
 ```r
@@ -297,8 +300,14 @@ polyCub.exact.Gauss(hexagon.owin, mean = c(0,0), Sigma = 5^2*diag(2))
 #> [1] 4.6e-14
 ```
 
+The required triangulation as well as the numerous calls of `pmvnorm()`
+make this integration algorithm quiet cumbersome. For large-scale
+integration tasks, it is thus advisable to resort to the general-purpose
+product Gauss cubature rule `polyCub.SV()`.
+
 Note: There is also a function `circleCub.Gauss()` to calculate the
-integral of the bivariate Gaussian density over a *circular* domain.
+integral of the bivariate Gaussian density over a *circular* domain
+(which requires nothing more than a single call of `pchisq()`).
 
 
 ## License
