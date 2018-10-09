@@ -16,8 +16,15 @@ disc.owin <- spatstat::disc(radius=r, centre=center, npoly=npoly)
 m <- c(1,1)
 sd <- 3
 
-## exact value of the integral over the _polygonal_ circle
+## target value of the integral over the _polygonal_ circle
 intExact <- 0.65844436
+
+## taken from exact.Gauss cubature
+test_that("gpclibCheck() fails without prior license agreement", {
+    if (gpclibPermitStatus())
+        skip("gpclib license has already been accepted")
+    expect_error(polyCub:::gpclibCheck())
+})
 if (requireNamespace("mvtnorm") && gpclibPermit()) {
     ## run this conditionally since gpclib might not be available on all
     ## platforms (as pointed out by Uwe Ligges, 2014-04-20)
