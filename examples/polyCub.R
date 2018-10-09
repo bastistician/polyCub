@@ -82,11 +82,14 @@ if (requireNamespace("mvtnorm") && gpclibPermit()) {
 rectangle <- list(list(x = c(-1, 7, 7, -1), y = c(-3, -3, 7, 7)))
 
 ## polyCub.SV 'rotation' (may improve accuracy)
-opar <- par(mfrow = c(1,2))
+opar <- par(mfrow = c(1,3))
 polyCub.SV(rectangle, f, nGQ = 4, rotation = FALSE, plot = TRUE)
            title(main = "without rotation")
 polyCub.SV(rectangle, f, nGQ = 4, rotation = TRUE,  plot = TRUE)
-           title(main = "with rotation")
+           title(main = "default rotation")
+polyCub.SV(rectangle, f, nGQ = 4,
+           rotation = list(P = c(0,0), Q = c(2,-3)), plot = TRUE)
+           title(main = "custom rotation")
 par(opar)
 
 ## cubature::adaptIntegrate
