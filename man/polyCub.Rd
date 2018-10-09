@@ -56,8 +56,15 @@ plotpolyf(hexagon, f, xlim = c(-8,8), ylim = c(-8,8))
 
 ### Product Gauss cubature
 
-## show nodes (nGQ = 3)
+## use a degree of nGQ = 3 and show the corresponding nodes
 polyCub.SV(hexagon, f, nGQ = 3, plot = TRUE)
+
+## extract nodes and weights
+nw <- polyCub.SV(hexagon, f = NULL, nGQ = 3)[[1]]
+nrow(nw$nodes)
+
+## manually apply the cubature rule
+sum(nw$weights * f(nw$nodes))
 
 ## use an increasing number of nodes
 for (nGQ in c(1:5, 10, 20, 60))
