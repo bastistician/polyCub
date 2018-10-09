@@ -71,15 +71,13 @@ polyiso_powerlaw <- function (xypoly, logpars, center,
 
 
 ## example polygon and function parameters
-set.seed(1)
-xy <- list(x = stats::rnorm(10), y = stats::rnorm(10))
-hidx <- grDevices::chull(xy)
-xypoly <- lapply(xy, "[", rev(hidx))  # anticlockwise vertex order
+diamond <- list(x = c(1,2,1,0), y = c(1,2,3,2))
 logpars <- log(c(0.5, 1))
+center <- c(0.5,2.5)  # lies on an edge (to cover that case as well)
 
-(res <- polyiso_powerlaw(xypoly = xypoly,
+(res <- polyiso_powerlaw(xypoly = diamond,
                          logpars = logpars,
-                         center = c(0,0)))
+                         center = center))
 
 
 ## compare with R implementation
@@ -95,10 +93,10 @@ intrfr.powerlaw <- function (R, logpars)
         (R*(R+sigma)^(1-d) - ((R+sigma)^(2-d) - sigma^(2-d))/(2-d)) / (1-d)
     }
 }
-(orig <- polyCub:::polyCub1.iso(poly = xypoly,
+(orig <- polyCub:::polyCub1.iso(poly = diamond,
                                 intrfr = intrfr.powerlaw,
                                 logpars = logpars,
-                                center = c(0,0)))
+                                center = center))
 
 
 test_that("C and R implementations give equal results", {
@@ -107,10 +105,10 @@ test_that("C and R implementations give equal results", {
 })
 
 ## microbenchmark::microbenchmark(
-##     polyCub:::polyCub1.iso(xypoly, intrfr.powerlaw, logpars, center=c(0,0)),
-##     polyiso_powerlaw(xypoly, logpars, center=c(0,0)),
+##     polyCub:::polyCub1.iso(diamond, intrfr.powerlaw, logpars, center=center),
+##     polyiso_powerlaw(diamond, logpars, center=center),
 ##     times = 1000)
-## ## 240 mus vs. 60 mus
+## ## 140 mus vs. 35 mus
 
 dyn.unload(myDLL)
 file.remove(myDLL)
