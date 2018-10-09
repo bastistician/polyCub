@@ -1,13 +1,15 @@
 ## we use the example polygon and f (exponential decay) from
 example(plotpolyf)
 
-## numerical approximation of 'intrfr'
+## numerical approximation of 'intrfr' (not recommended)
 (intISOnum <- polyCub.iso(letterR, f, center = fcenter))
 
 ## analytical 'intrfr'
 ## intrfr(R) = int_0^R r*f(r) dr, for f(r) = dexp(r), gives
 intrfr <- function (R, rate = 1) pgamma(R, 2, rate) / rate
-(intISOana <- polyCub.iso(letterR, intrfr = intrfr, center = fcenter))
+(intISOana <- polyCub.iso(letterR, f, intrfr = intrfr, center = fcenter,
+                          check.intrfr = TRUE))
+## f is only used to check 'intrfr' against a numerical approximation
 
 stopifnot(all.equal(intISOana, intISOnum, check.attributes = FALSE))
 
