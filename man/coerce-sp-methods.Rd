@@ -40,9 +40,9 @@ and prefer the \code{as.owin.SpatialPolygons} S3-method exported from
 }
 \examples{
 if (require("spatstat") && require("sp")) {
-    diamond <- list(x = c(1,2,1,0), y = c(1,2,3,2))
+    diamond <- list(x = c(1,2,1,0), y = c(1,2,3,2))  # anti-clockwise
     diamond.owin <- owin(poly = diamond)
-    diamond.sp <- Polygon(diamond, hole = FALSE)
+    diamond.sp <- Polygon(lapply(diamond, rev))      # clockwise
     diamond.owin_from_sp <- as(diamond.sp, "owin")
     stopifnot(all.equal(diamond.owin, diamond.owin_from_sp))
 
