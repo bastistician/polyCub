@@ -5,7 +5,11 @@ polyCub 0.6.1.9000 (UNRELEASED)
   [**sp**](https://CRAN.R-project.org/package=sp)
   (moved from "Depends" to "Imports").
 
-* Added a README file illustrating the four different cubature rules.
+* The R code of the examples is no longer installed by default.
+  Use the `--example` flag of R CMD INSTALL to achieve that.
+
+* A README file now introduces the package and
+  illustrates the four different cubature rules.
 
 
 polyCub 0.6.1 (2017-10-02)
