@@ -1,5 +1,5 @@
-polyCub 0.6.1.9000 (UNRELEASED)
-===============================
+polyCub 0.7.0 (2018-10-10)
+==========================
 
 * Package **polyCub** no longer attaches package
   [**sp**](https://CRAN.R-project.org/package=sp)
