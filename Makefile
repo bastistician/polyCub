@@ -73,7 +73,7 @@ covr:
 ## spell check
 spelling:
 	$R --vanilla --slave -e \
-	'spelling::spell_check_package(lang = "en_US")'
+	'spelling::spell_check_package()'
 
 ## cleanup
 clean:
