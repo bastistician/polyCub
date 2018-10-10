@@ -17,7 +17,7 @@ test_that("polyCub.SV() can fetch nodes and weights from 'statmod'", {
 
 test_that("polyCub.SV() can reduce nodes with zero weight", {
     rectangle <- list(list(x = c(-1,1,1,-1), y = c(1,1,2,2)))
-    ##nw0 <- polyCub.SV(rectangle, f = NULL, nGQ = 3, engine = "C")[[1]]  # has 0s
+    ##nw0 <- polyCub.SV(rectangle, f = NULL, nGQ = 3, engine = "C")[[1]]  # 0s
     nw <- polyCub.SV(rectangle, f = NULL, nGQ = 3, engine = "C+reduce")[[1]]
     expect_true(all(nw$weights != 0))
     ##f <- function (s) 1  # => calculate area (= 2)
