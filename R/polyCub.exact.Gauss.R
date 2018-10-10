@@ -11,8 +11,8 @@
 
 #' Quasi-Exact Cubature of the Bivariate Normal Density
 #'
-#' Integration is based on triangulation of the (transformed) polygonal domain
-#' and formulae from the
+#' The bivariate Gaussian density can be integrated based on a triangulation of
+#' the (transformed) polygonal domain, using formulae from the
 #' Abramowitz and Stegun (1972) handbook (Section 26.9, Example 9, pp. 956f.).
 #' This method is quite cumbersome because the A&S formula is only for triangles
 #' where one vertex is the origin (0,0). For each triangle of the
