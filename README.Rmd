@@ -303,6 +303,16 @@ integral of an *isotropic* Gaussian density over a *circular* domain
 (which requires nothing more than a single call of `pchisq()`).
 
 
+## Feedback
+
+Contributions are welcome!
+Please submit suggestions or report bugs at
+<https://github.com/bastistician/polyCub/issues>.
+You can also reach me via e-mail (seb.meyer@fau.de).
+Note that pull requests should only be submitted
+after a discussion of the underlying issue.
+
+
 ## License
 
 The **polyCub** package is free and open source software, licensed under the GPLv2.
