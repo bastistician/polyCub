@@ -21,7 +21,7 @@
 ##' \code{"\linkS4class{SpatialPolygons}"}, \code{"\linkS4class{Polygons}"},
 ##' and \code{"\linkS4class{Polygon}"}
 ##' (for these we have an internal \code{\link{xylist}} method).
-##' @param f a two-dimensional real function.
+##' @param f a two-dimensional real-valued function.
 ##' As its first argument it must take a coordinate matrix, i.e., a
 ##' numeric matrix with two columns, and it must return a numeric vector of
 ##' length the number of coordinates.

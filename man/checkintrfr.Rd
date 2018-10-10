@@ -17,7 +17,7 @@ r * f(cbind(x0 + r, y0), ...), 0, R, ..., control=control)},
 where \code{c(x0, y0)} is the \code{center} of isotropy.
 Note that \code{f} will \emph{not} be checked for isotropy.}
 
-\item{f}{a two-dimensional real function.
+\item{f}{a two-dimensional real-valued function.
 As its first argument it must take a coordinate matrix, i.e., a
 numeric matrix with two columns, and it must return a numeric vector of
 length the number of coordinates.}

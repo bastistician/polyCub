@@ -15,8 +15,8 @@ The following classes are supported: \code{"\link[spatstat]{owin}"},
 and \code{"\linkS4class{Polygon}"}
 (for these we have an internal \code{\link{xylist}} method).}
 
-\item{f}{a two-dimensional real function (or \code{NULL} to only compute
-nodes and weights).
+\item{f}{a two-dimensional real-valued function to be integrated over
+\code{polyregion} (or \code{NULL} to only compute nodes and weights).
 As its first argument it must take a coordinate matrix, i.e., a
 numeric matrix with two columns, and it must return a numeric vector of
 length the number of coordinates.}

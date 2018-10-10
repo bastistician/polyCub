@@ -15,8 +15,8 @@
 ##' Sommariva and Vianello (2007).
 ##'
 ##' @inheritParams plotpolyf
-##' @param f a two-dimensional real function (or \code{NULL} to only compute
-##' nodes and weights).
+##' @param f a two-dimensional real-valued function to be integrated over
+##' \code{polyregion} (or \code{NULL} to only compute nodes and weights).
 ##' As its first argument it must take a coordinate matrix, i.e., a
 ##' numeric matrix with two columns, and it must return a numeric vector of
 ##' length the number of coordinates.
