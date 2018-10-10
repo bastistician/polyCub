@@ -8,10 +8,14 @@ checkintrfr(intrfr, f, ..., center, control = list(), rs = numeric(0L),
   tolerance = control$rel.tol)
 }
 \arguments{
-\item{intrfr}{analytical antiderivative of \eqn{r f_r(r)} from 0 to \code{R}
-(first argument, not necessarily named \code{"R"}, must be vectorized).
-If missing, \code{intrfr} is approximated numerically using
-\code{\link{integrate}} configured with \code{control}.}
+\item{intrfr}{a \code{function(R, ...)}, which implements the (analytical)
+antiderivative of \eqn{r f_r(r)} from 0 to \code{R}. The first argument
+must be vectorized but not necessarily named \code{R}.\cr
+If \code{intrfr} is missing, it will be approximated numerically via
+\code{\link{integrate}(function(r, ...)
+r * f(cbind(x0 + r, y0), ...), 0, R, ..., control=control)},
+where \code{c(x0, y0)} is the \code{center} of isotropy.
+Note that \code{f} will \emph{not} be checked for isotropy.}
 
 \item{f}{a two-dimensional real function.
 As its first argument it must take a coordinate matrix, i.e., a
@@ -26,7 +30,7 @@ length the number of coordinates.}
 quadrature rule used for the line integral along the polygon boundary.}
 
 \item{rs}{numeric vector of upper bounds for which to check the validity of
-\code{intrfr}. If it has length 0, no checks are performed.}
+\code{intrfr}. If it has length 0 (default), no checks are performed.}
 
 \item{tolerance}{of \code{\link{all.equal.numeric}} when comparing
 \code{intrfr} results with numerical integration. Defaults to the

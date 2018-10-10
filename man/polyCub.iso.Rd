@@ -24,10 +24,14 @@ As its first argument it must take a coordinate matrix, i.e., a
 numeric matrix with two columns, and it must return a numeric vector of
 length the number of coordinates.}
 
-\item{intrfr}{analytical antiderivative of \eqn{r f_r(r)} from 0 to \code{R}
-(first argument, not necessarily named \code{"R"}, must be vectorized).
-If missing, \code{intrfr} is approximated numerically using
-\code{\link{integrate}} configured with \code{control}.}
+\item{intrfr}{a \code{function(R, ...)}, which implements the (analytical)
+antiderivative of \eqn{r f_r(r)} from 0 to \code{R}. The first argument
+must be vectorized but not necessarily named \code{R}.\cr
+If \code{intrfr} is missing, it will be approximated numerically via
+\code{\link{integrate}(function(r, ...)
+r * f(cbind(x0 + r, y0), ...), 0, R, ..., control=control)},
+where \code{c(x0, y0)} is the \code{center} of isotropy.
+Note that \code{f} will \emph{not} be checked for isotropy.}
 
 \item{...}{further arguments for \code{f} or \code{intrfr}.}
 
@@ -62,15 +66,19 @@ reported by all \code{\link{integrate}} calls
 (there is one for each edge of \code{polyregion}).
 }
 \description{
-Conducts numerical integration of a two-dimensional isotropic function
+\code{polyCub.iso} numerically integrates a radially symmetric function
 \eqn{f(x,y) = f_r(||(x,y)-\boldsymbol{\mu}||)}{f(x,y) = f_r(||(x,y)-\mu||)},
 with \eqn{\mu} being the center of isotropy, over a polygonal domain.
-It internally solves a line integral along the polygon boundary using
-\code{\link{integrate}} where the integrand requires the antiderivative of
-\eqn{r f_r(r)}), which ideally is analytically available and supplied to the
-function as argument \code{intrfr}.
+It internally approximates a line integral along the polygon boundary using
+\code{\link{integrate}}. The integrand requires the antiderivative of
+\eqn{r f_r(r)}), which should be supplied as argument \code{intrfr}
+(\code{f} itself is only required if \code{check.intrfr=TRUE}).
 The two-dimensional integration problem thereby reduces to an efficient
 adaptive quadrature in one dimension.
+If \code{intrfr} is not available analytically, \code{polyCub.iso} can use a
+numerical approximation (meaning \code{integrate} within \code{integrate}),
+but the general-purpose cubature method \code{\link{polyCub.SV}} might be
+more efficient in this case.
 See Meyer and Held (2014, Supplement B, Section 2.4) for mathematical
 details.
 
