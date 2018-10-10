@@ -8,8 +8,7 @@ polyCub 0.7.0 (2018-10-10)
 * The R code of the examples is no longer installed by default.
   Use the `--example` flag of R CMD INSTALL to achieve that.
 
-* A README file now introduces the package and
-  illustrates the four different cubature rules.
+* The README now exemplifies the four different cubature rules.
 
 
 polyCub 0.6.1 (2017-10-02)
