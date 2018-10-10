@@ -12,7 +12,7 @@ test_that("statmod::gauss.quad() still gives the same result", {
 test_that("polyCub.SV() can fetch nodes and weights from 'statmod'", {
     diamond <- list(list(x = c(1,2,1,0), y = c(1,2,3,2)))
     nw <- polyCub.SV(diamond, f = NULL, nGQ = 83)
-    expect_type(nw, "list")
+    expect_is(nw, "list")
 })
 
 test_that("polyCub.SV() can reduce nodes with zero weight", {
