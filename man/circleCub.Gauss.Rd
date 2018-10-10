@@ -22,10 +22,9 @@ The integral value (one for each supplied radius).
 }
 \description{
 This function calculates the integral of the bivariate, isotropic Gaussian
-density (i.e. \eqn{\Sigma} = \code{sd^2*diag(2)}) over circular domains via
-the cumulative distribution function of the (non-central) Chi-Squared
-distribution (\code{pchisq}), cp. Formula 26.3.24 in Abramowitz and Stegun
-(1972).
+density (i.e., \eqn{\Sigma} = \code{sd^2*diag(2)}) over a circular domain
+via the cumulative distribution function \code{pchisq} of the (non-central)
+Chi-Squared distribution (Abramowitz and Stegun, 1972, Formula 26.3.24).
 }
 \note{
 The non-centrality parameter of the evaluated chi-squared distribution
