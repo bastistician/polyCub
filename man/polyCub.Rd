@@ -14,9 +14,11 @@ The supported classes depend on the specific method, however, the
 all methods, as well should a \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"}
 polygon (but see the comments in \code{help("\link{coerce-methods}")}).}
 
-\item{f}{two-dimensional function to be integrated.
-As its first argument the function must take a coordinate matrix, i.e. a
-numeric matrix with two columns. For the \code{"exact.Gauss"} \code{method},
+\item{f}{a two-dimensional real-valued function to be integrated over
+\code{polyregion}. As its first argument it must take a coordinate matrix,
+i.e., a numeric matrix with two columns, and it must return a numeric vector
+of length the number of coordinates.\cr
+For the \code{"exact.Gauss"} \code{method},
 \code{f} is ignored since it is specific to the bivariate normal density.}
 
 \item{method}{choose one of the implemented cubature methods (partial
