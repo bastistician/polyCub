@@ -52,6 +52,11 @@ NULL
 ##' @param ... further arguments passed to \code{\link[spatstat]{owin}}.
 ##' @rdname coerce-sp-methods
 ##' @export
+##' @rawNamespace if(getRversion() >= "3.6.0") {  # delayed registration
+##'     S3method(spatstat::as.owin, SpatialPolygons)
+##'     S3method(spatstat::as.owin, Polygons)
+##'     S3method(spatstat::as.owin, Polygon)
+##' }
 as.owin.SpatialPolygons <- function (W, ...)
     spatstat::owin(poly = xylist.SpatialPolygons(W), ...)
 

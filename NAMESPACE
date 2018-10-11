@@ -25,6 +25,14 @@ export(polyCub.iso)
 export(polyCub.midpoint)
 export(xylist)
 exportMethods(coerce)
+if(getRversion() >= "3.6.0") {  # delayed registration
+    S3method(spatstat::as.owin, SpatialPolygons)
+    S3method(spatstat::as.owin, Polygons)
+    S3method(spatstat::as.owin, Polygon)
+}
+if(getRversion() >= "3.6.0") {  # delayed registration
+    S3method(spatstat::as.owin, gpc.poly)
+}
 import(methods)
 importClassesFrom(sp,Polygon)
 importClassesFrom(sp,Polygons)

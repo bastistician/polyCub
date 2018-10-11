@@ -108,6 +108,9 @@ gpc2owin <- function (object, ...)
 ##' @param W an object of class \code{"gpc.poly"}.
 ##' @rdname coerce-gpc-methods
 ##' @export
+##' @rawNamespace if(getRversion() >= "3.6.0") {  # delayed registration
+##'     S3method(spatstat::as.owin, gpc.poly)
+##' }
 as.owin.gpc.poly <- function (W, ...)
 {
     gpc2owin(W, ...)
