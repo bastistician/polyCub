@@ -1,4 +1,4 @@
-polyCub 0.7.0 (2018-10-10)
+polyCub 0.7.0 (2018-10-11)
 ==========================
 
 * Package **polyCub** no longer attaches package
