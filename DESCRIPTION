@@ -1,7 +1,7 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
 Version: 0.7.0
-Date: 2018-10-10
+Date: 2018-10-11
 Authors@R: c(
     person("Sebastian", "Meyer",
            email = "seb.meyer@fau.de",
@@ -14,19 +14,20 @@ Authors@R: c(
            email = "hoehle@math.su.se",
            role = "ths")
     )
-Description: The goal is to approximate the integral of a continuously
-    differentiable function f(x,y) over a simple closed polygonal domain.
-    'polyCub' currently implements the following cubature methods:
-    the two-dimensional midpoint rule via
-    as.im.function() from package 'spatstat' <http://spatstat.org/>,
-    product Gauss cubature following Sommariva and Vianello (2007)
-    <doi:10.1007/s10543-007-0131-2>,
-    adaptive cubature for isotropic functions via line integrate()
-    along the boundary as described in Meyer and Held (2014, Supplement B)
-    <doi:10.1214/14-AOAS743>,
-    and numerical integration of the bivariate Gaussian density.
-    For cubature over simple hypercubes, the packages 'cubature' and
-    'R2Cuba' are more appropriate.
+Description: Numerical integration of continuously differentiable
+    functions f(x,y) over simple closed polygonal domains.
+    The following cubature methods are implemented:
+    product Gauss cubature (Sommariva and Vianello, 2007,
+    <doi:10.1007/s10543-007-0131-2>),
+    the simple two-dimensional midpoint rule
+    (wrapping 'spatstat' functions),
+    adaptive cubature for radially symmetric functions via line
+    integrate() along the polygon boundary (Meyer and Held, 2014,
+    <doi:10.1214/14-AOAS743>, Supplement B),
+    and integration of the bivariate Gaussian density based on a
+    triangulation of the polygonal domain.
+    For simple integration along the axes, the packages 'cubature'
+    and 'R2Cuba' are more appropriate.
 License: GPL-2
 URL: https://github.com/bastistician/polyCub
 BugReports: https://github.com/bastistician/polyCub/issues
