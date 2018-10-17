@@ -3,6 +3,7 @@
 ^figures$
 ^devel$
 ^examples$
+^paper$
 ^.*\.tar\.gz$
 ^.*\.Rproj$
 ^\.Rproj\.user$
