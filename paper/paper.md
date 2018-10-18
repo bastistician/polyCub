@@ -61,8 +61,7 @@ numerical integration over polygons:
     
 * Accurate (but slow) integration of the *bivariate Gaussian density*
   based on polygon triangulation
-  [@Abramowitz.Stegun1972, Section 26.9, Example 9]
-  and Gaussian cumulative densities from `mvtnorm` [@R:mvtnorm].
+  [@Abramowitz.Stegun1972, Section 26.9, Example 9].
 
 
 # Usage
