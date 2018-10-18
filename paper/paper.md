@@ -8,7 +8,7 @@ affiliations:
  - name: "Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU),
      Erlangen, Germany"
    index: 1
-date: "15 October 2018"
+date: "18 October 2018"
 tags:
   - R
   - numerical integration
@@ -81,7 +81,6 @@ in `surveillance`, to evaluate the likelihood of self-exciting
 spatio-temporal point process models for infectious disease spread
 [@meyer.etal2017], and in `rase`, to integrate bivariate Gaussian densities
 for phylogeographic analyses [@quintero.etal2015].
-
 
 
 # References
