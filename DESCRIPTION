@@ -1,7 +1,7 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
-Version: 0.7.0
-Date: 2018-10-11
+Version: 0.7.0.9000
+Date: 2018-11-23
 Authors@R: c(
     person("Sebastian", "Meyer",
            email = "seb.meyer@fau.de",
@@ -26,8 +26,8 @@ Description: Numerical integration of continuously differentiable
     <doi:10.1214/14-AOAS743>, Supplement B),
     and integration of the bivariate Gaussian density based on a
     triangulation of the polygonal domain.
-    For simple integration along the axes, the packages 'cubature'
-    and 'R2Cuba' are more appropriate.
+    For simple integration along the axes, the 'cubature' package
+    is more appropriate.
 License: GPL-2
 URL: https://github.com/bastistician/polyCub
 BugReports: https://github.com/bastistician/polyCub/issues
