@@ -1,7 +1,7 @@
 ################################################################################
 ## Useful rules to build, check and install an R source package
 ##
-## Copyright (C) 2012,2014-2018 Sebastian Meyer
+## Copyright (C) 2012,2014-2019 Sebastian Meyer
 ################################################################################
 
 ## define variable for R to enable 'make check R=R-devel'
@@ -78,7 +78,7 @@ spelling:
 
 ## cleanup
 clean:
-	cd pkg/src; rm -f *.o *.so *.dll symbols.rds
+	cd src; rm -f *.o *.so *.dll symbols.rds
 	rm -f ./*/.Rhistory
 
 ## almost all targets are "phony"
