@@ -11,17 +11,12 @@ R := R
 PKG := $(strip $(shell grep "^Package:" DESCRIPTION | cut -f 2 -d ":"))
 VERSION := $(strip $(shell grep "^Version:" DESCRIPTION | cut -f 2 -d ":"))
 
-## render README.md
-README.md: README.Rmd
-	$R --vanilla --slave -e \
-	'pkgload::load_all(export_all=FALSE, helpers=FALSE, attach_testthat=FALSE); knitr::knit("$<")'
-
 ## roxygenise (update NAMESPACE and Rd files)
 document:
 	$R --no-restore --no-save --no-init-file --slave -e "devtools::document()"
 
 ## build the package
-build: README.md document
+build: document
 	$R CMD build .
 
 ## package installation
