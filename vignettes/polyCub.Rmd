@@ -1,41 +1,18 @@
-```{r setup, include = FALSE}
-## Storing figures in man/figures would inflate the package.
-## Instead we .Rbuildignore the generated figures and use the full GitHub path
-## when referencing the figures in the resulting markdown file
-knitr::opts_knit$set(
-  base.url = "https://raw.githubusercontent.com/bastistician/polyCub/master/"
-)
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "figures/", dev = "png", dpi = 96,
-  fig.width = 4.5, fig.height = 3.75, dev.args = list(pointsize = 10)
-)
-```
-```{R example-f, include = FALSE}
-f <- function (s, sigma = 5)
-{
-    exp(-rowSums(s^2)/2/sigma^2) / (2*pi*sigma^2)
-}
-```
-```{R example-polygon, include = FALSE}
-hexagon <- list(
-    list(x = c(7.33, 7.33, 3, -1.33, -1.33, 3),
-         y = c(-0.5, 4.5, 7, 4.5, -0.5, -3))
-)
-```
-```{R logo, fig.width = 1.3, fig.height = 1.5, include = FALSE}
-.f_inside_hexagon <- function (s, ...) {
-    inside <- sp::point.in.polygon(s[,1], s[,2], hexagon[[1]]$x, hexagon[[1]]$y)
-    ifelse(inside, f(s, ...), NA_real_)
-}
-par(bg = "transparent", ann = FALSE, bty = "n", xaxt = "n", yaxt = "n", mar = c(0,0,0,0))
-polyCub::plotpolyf(hexagon, .f_inside_hexagon, use.lattice = FALSE,
-                   xlim = range(hexagon[[1]]$x), ylim = range(hexagon[[1]]$y))
-text(3, 2, labels = "\u222B", cex = 5)  # Unicode integral symbol
+---
+title: "Getting started with polyCub"
+author: "Sebastian Meyer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with polyCub}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{R setup, include = FALSE, purl = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
-# polyCub <img src="`r paste0(knitr::opts_knit$get("base.url"), "figures/logo-1.png")`" align="right" />
+<img src="../man/figures/logo.png" align="right" alt="" width="120" />
 
 The R package **polyCub** implements *cubature* (numerical integration)
 over *polygonal* domains.
@@ -43,29 +20,10 @@ It solves the problem of integrating a continuously differentiable
 function f(x,y) over simple closed polygons.
 
 For the special case where the domain is rectangular with sides parallel
-to the axes (such as a bounding box), the packages
+to the axes (such as a bounding box), the package
 [**cubature**](https://CRAN.R-project.org/package=cubature)
-and [**R2Cuba**](https://CRAN.R-project.org/package=R2Cuba)
-are more appropriate (cf.
+is more appropriate (cf.
 [`CRAN Task View: Numerical Mathematics`](https://CRAN.R-project.org/view=NumericalMathematics)).
-
-
-## Installation
-
-You can install
-[polyCub from CRAN](https://CRAN.R-project.org/package=polyCub)
-via:
-
-```R
-install.packages("polyCub")
-```
-
-To install the development version from the GitHub repository, use:
-
-```R
-## install.packages("remotes")
-remotes::install_github("bastistician/polyCub")
-```
 
 
 ## Motivation
@@ -79,44 +37,49 @@ Such an observation region is described by a polygonal boundary,
 representing, for example, the shape of a country or administrative
 district.
 
-The integration task could be simplified by either assuming a trivial
-kernel, such as f(x,y)=1, or by simply replacing the polygonal with a
-rectangular domain, such as the bounding box of the polygon.
-However, these crude approximations can be avoided by using efficient
-numerical integration methods for polygonal domains:
 
-1. *Product Gauss cubature* as proposed by Sommariva and Vianello
+## Polygon representations
+
+All of **polyCub**'s cubature methods understand
+
+* `"owin"` from **spatstat**,
+
+* `"gpc.poly"` from package **rgeos** (or **gpclib**), and
+
+* `"SpatialPolygons"` from package **sp**.
+
+Some also support a plain list of lists of vertex coordinates (`"xylist"`).
+
+Note that the integration domain may consist of more than one polygon
+(including holes).
+
+
+## Cubature methods
+
+The following cubature methods are implemented in **polyCub**:
+
+1. **Product Gauss cubature** as proposed by Sommariva and Vianello
    (2007, *BIT Numerical Mathematics*,
    <https://doi.org/10.1007/s10543-007-0131-2>).
 
-2. The simple *two-dimensional midpoint rule* via `as.im.function()` from
+2. The simple **two-dimensional midpoint rule** via `as.im.function()` from
    the [**spatstat**](https://CRAN.R-project.org/package=spatstat) package.
   
-3. For *radially symmetric functions* f(x,y) = f_r(||(x-x_0,y-y_0)||),
+3. For **radially symmetric functions** $f(x,y) = f_r(\lVert(x-x_0,y-y_0)\rVert)$,
    numerical integration can be made much more efficient via line
    `integrate()` along the boundary of the polygonal domain
    (Meyer and Held, 2014, *The Annals of Applied Statistics*,
    <https://doi.org/10.1214/14-AOAS743>, Supplement B, Section 2.4).
 
-4. For *bivariate Gaussian densities*, integrals over polygons can be
+4. For **bivariate Gaussian densities**, integrals over polygons can be
    solved accurately (but slowly) based on a triangulation of the domain
    (via `tristrip()` from the
    [**gpclib**](https://CRAN.R-project.org/package=gpclib) package)
    and combinations of Gaussian cumulative densities (via `pmvnorm()` from
    the [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm) package).
 
-The dedicated R package **polyCub** was established in 2013 to provide
-implementations of the above cubature methods and facilitate their
-use in different projects.
-For example, **polyCub** powers epidemic models in
-[**surveillance**](https://CRAN.R-project.org/package=surveillance)
-and phylogeographic analyses in
-[**rase**](https://CRAN.R-project.org/package=rase).
 
-The four different cubature rules are exemplified below.
-
-
-## Example
+## Illustration
 
 ```{R}
 library("polyCub")
@@ -128,42 +91,29 @@ cubature methods can handle: an isotropic zero-mean Gaussian density.
 coordinate matrix as its first argument (as opposed to separate arguments
 for the x and y coordinates):
 
-```{R, ref.label = "example-f", eval = FALSE}
+```{R example-f}
+f <- function (s, sigma = 5)
+{
+    exp(-rowSums(s^2)/2/sigma^2) / (2*pi*sigma^2)
+}
 ```
 
 We use a simple hexagon as polygonal integration domain,
 here specified via an `"xylist"` of vertex coordinates:
 
-```{R, ref.label = "example-polygon", eval = FALSE}
+```{R example-polygon}
+hexagon <- list(
+    list(x = c(7.33, 7.33, 3, -1.33, -1.33, 3),
+         y = c(-0.5, 4.5, 7, 4.5, -0.5, -3))
+)
 ```
 
 An image of the function and the integration domain can be produced using
 **polyCub**'s rudimentary (but convenient) plotting utility:
 
-```{R example, fig.cap = "Example"}
+```{R example, fig.width = 3, fig.height = 2.5}
 plotpolyf(hexagon, f, xlim = c(-8,8), ylim = c(-8,8))
 ```
-
-#### Supported polygon representations
-
-The integration domain is typically represented using a dedicated class
-for polygons, such as `"owin"` from package **spatstat**:
-
-```{R, message = FALSE}
-library("spatstat")
-hexagon.owin <- owin(poly = hexagon)
-```
-
-All of **polyCub**'s cubature methods as well as `plotpolyf()` understand
-
-* `"owin"` from **spatstat**,
-
-* `"gpc.poly"` from package **rgeos** (or **gpclib**), and
-
-* `"SpatialPolygons"` from package **sp**.
-
-Note that the integration domain may consist of more than one polygon
-(including holes).
 
 
 ### 1. Product Gauss cubature: `polyCub.SV()`
@@ -181,7 +131,7 @@ is sufficiently large (depending on the degree of the polynomial).
 For the above example, a reasonable approximation is already obtained
 with degree `nGQ = 3` of the one-dimensional Gauss-Legendre quadrature:
 
-```{R product-Gauss, echo = -1, fig.cap = "Product Gauss cubature", fig.show = "hold"}
+```{R product-Gauss, echo = -1, fig.show = "hold"}
 par(mar = c(3,3,1,2))
 polyCub.SV(hexagon, f, nGQ = 3, plot = TRUE)
 ```
@@ -223,13 +173,21 @@ for (nGQ in c(1:5, 10, 20)) {
 
 The two-dimensional midpoint rule in **polyCub** is a simple wrapper
 around `as.im.function()` and `integral.im()` from package **spatstat**.
-The polygon is converted to a binary pixel image and the integral is
-approximated as the sum of (pixel area * f(pixel midpoint)) over all
-pixels whose midpoint is part of the polygon.
+In other words, the polygon is represented by a binary pixel image and
+the integral is approximated as the sum of (pixel area * f(pixel midpoint))
+over all pixels whose midpoint is part of the polygon.
+
+To use `polyCub.midpoint()`, we need to convert our polygon to
+**spatstat**'s "owin" class:
+
+```{R, message = FALSE}
+library("spatstat")
+hexagon.owin <- owin(poly = hexagon)
+```
 
 Using a pixel size of `eps = 0.5` (here yielding 270 pixels), we obtain:
 
-```{R midpoint, echo = -1, fig.cap = "Midpoint rule", fig.show = "hold"}
+```{R midpoint, echo = -1, fig.show = "hold"}
 par(mar = c(3,3,1,3), xaxs = "i", yaxs = "i")
 polyCub.midpoint(hexagon.owin, f, eps = 0.5, plot = TRUE)
 ```
@@ -301,18 +259,3 @@ product Gauss cubature rule `polyCub.SV()`.
 Note: There is also a function `circleCub.Gauss()` to calculate the
 integral of an *isotropic* Gaussian density over a *circular* domain
 (which requires nothing more than a single call of `pchisq()`).
-
-
-## Feedback
-
-Contributions are welcome!
-Please submit suggestions or report bugs at
-<https://github.com/bastistician/polyCub/issues>.
-You can also reach me via e-mail (seb.meyer@fau.de).
-Note that pull requests should only be submitted
-after a discussion of the underlying issue.
-
-
-## License
-
-The **polyCub** package is free and open source software, licensed under the GPLv2.
