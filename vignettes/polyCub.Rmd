@@ -252,7 +252,7 @@ calculate the integral of an *isotropic* Gaussian density over a *circular*
 domain (which requires nothing more than a single call of `pchisq()`).
 
 
-## Bechmark
+## Benchmark
 
 We use the last result from `polyCub.exact.Gauss()` as a reference value and
 tune the number of cubature nodes in `polyCub.SV()` and `polyCub.midpoint()`
