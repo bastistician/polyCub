@@ -49,6 +49,7 @@ Suggests:
     gpclib,
     cubature,
     knitr,
-    rmarkdown
+    rmarkdown,
+    microbenchmark
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr, rmarkdown
