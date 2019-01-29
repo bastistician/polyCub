@@ -32,7 +32,7 @@ remotes::install_github("bastistician/polyCub")
 
 ## Cubature methods
 
-1. General-purpose **product Gauss cubature** (Sommariva and Vianello, 2007,
+1. General-purpose **Product Gauss cubature** (Sommariva and Vianello, 2007,
    *BIT Numerical Mathematics*, <https://doi.org/10.1007/s10543-007-0131-2>)
 
 2. Simple **two-dimensional midpoint rule**
@@ -49,13 +49,36 @@ remotes::install_github("bastistician/polyCub")
    [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm)`::pmvnorm()`
 
 
-## Details and illustrations
+## Usage
 
-See the `vignette("polyCub")` in the installed package or
+The basic usage is:
+
+```r
+library("polyCub")
+polyCub(polyregion, f)
+```
+
+* `polyregion` represents the integration domain as an object of class
+`"owin"` (from **spatstat**), "`gpc.poly`" (from **gpclib** or **rgeos**),
+or `"SpatialPolygons"` (from **sp**),
+or even as a plain list of lists of vertex coordinates (`"xylist"`).
+
+* `f` is the integrand and needs to take a two-column coordinate matrix
+as its first argument.
+
+The `polyCub()` function by default uses Product Gauss cubature.
+Specific methods can also be called directly:
+
+1. `polyCub.SV()`
+2. `polyCub.midpoint()`
+3. `polyCub.iso()`
+4. `polyCub.exact.Gauss()`
+
+For details and illustrations see the `vignette("polyCub")` in the installed package or
 [on CRAN](https://CRAN.R-project.org/web/packages/polyCub/vignettes/polyCub.html).
 
 
-## Use cases
+## Applications
 
 The **polyCub** package evolved from the need to integrate
 so-called spatial interaction functions (Gaussian or power-law kernels)
