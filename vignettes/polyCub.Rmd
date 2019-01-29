@@ -19,77 +19,63 @@ over *polygonal* domains.
 It solves the problem of integrating a continuously differentiable
 function f(x,y) over simple closed polygons.
 
-For the special case where the domain is rectangular with sides parallel
-to the axes (such as a bounding box), the package
+For the special case of a rectangular domain along the axes, the package
 [**cubature**](https://CRAN.R-project.org/package=cubature)
 is more appropriate (cf.
 [`CRAN Task View: Numerical Mathematics`](https://CRAN.R-project.org/view=NumericalMathematics)).
 
 
-## Motivation
-
-The **polyCub** package evolved from the need to evaluate integrals of
-so-called spatial interaction functions (e.g., a Gaussian or power-law
-kernel) over the observation region of a spatio-temporal point process
-(Meyer et al, 2012, *Biometrics*,
-<https://doi.org/10.1111/j.1541-0420.2011.01684.x>).
-Such an observation region is described by a polygonal boundary,
-representing, for example, the shape of a country or administrative
-district.
-
-
 ## Polygon representations
+
+The integration domain is described by a polygonal boundary
+(or multiple polygons, including holes).
+Various R packages for spatial data analysis provide classes for polygons.
+The implementations differ in vertex order (which direction represents a hole)
+and if the first vertex is repeated.
 
 All of **polyCub**'s cubature methods understand
 
-* `"owin"` from **spatstat**,
+* `"owin"` from package [**spatstat**](https://CRAN.R-project.org/package=spatstat),
 
-* `"gpc.poly"` from package **rgeos** (or **gpclib**), and
+* `"gpc.poly"` from [**rgeos**](https://CRAN.R-project.org/package=rgeos)
+  (or [**gpclib**](https://CRAN.R-project.org/package=gpclib)), and
 
-* `"SpatialPolygons"` from package **sp**.
+* `"SpatialPolygons"` from package [**sp**](https://CRAN.R-project.org/package=sp).
 
-Some also support a plain list of lists of vertex coordinates (`"xylist"`).
-
-Note that the integration domain may consist of more than one polygon
-(including holes).
+Internally, **polyCub** uses its auxiliary `xylist()` function to extract
+a plain list of lists of vertex coordinates from these classes,
+such that vertices are ordered anticlockwise and the first vertex is not
+repeated (i.e., the `"owin"` convention).
 
 
 ## Cubature methods
 
 The following cubature methods are implemented in **polyCub**:
 
-1. **Product Gauss cubature** as proposed by Sommariva and Vianello
-   (2007, *BIT Numerical Mathematics*,
-   <https://doi.org/10.1007/s10543-007-0131-2>).
+1. `polyCub.SV()`: Product Gauss cubature
 
-2. The simple **two-dimensional midpoint rule** via `as.im.function()` from
-   the [**spatstat**](https://CRAN.R-project.org/package=spatstat) package.
+2. `polyCub.midpoint()`: Two-dimensional midpoint rule
   
-3. For **radially symmetric functions** $f(x,y) = f_r(\lVert(x-x_0,y-y_0)\rVert)$,
-   numerical integration can be made much more efficient via line
-   `integrate()` along the boundary of the polygonal domain
-   (Meyer and Held, 2014, *The Annals of Applied Statistics*,
-   <https://doi.org/10.1214/14-AOAS743>, Supplement B, Section 2.4).
+3. `polyCub.iso()`: Efficient integration of radially symmetric functions
+   $f(x,y) = f_r(\lVert(x-x_0,y-y_0)\rVert)$
 
-4. For **bivariate Gaussian densities**, integrals over polygons can be
-   solved accurately (but slowly) based on a triangulation of the domain
-   (via `tristrip()` from the
-   [**gpclib**](https://CRAN.R-project.org/package=gpclib) package)
-   and combinations of Gaussian cumulative densities (via `pmvnorm()` from
-   the [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm) package).
+4. `polyCub.exact.Gauss()`: Quasi-exact (but slow) cubature of the
+   bivariate Gaussian density
+
+The following section details and illustrates the different cubature methods.
 
 
-## Illustration
+## Illustrations
 
 ```{R}
 library("polyCub")
 ```
 
-We consider a function f(x,y) which all of the above
+We consider the integration of a function f(x,y) which all of the above
 cubature methods can handle: an isotropic zero-mean Gaussian density.
-**polyCub** expects the function's implementation `f` to take a two-column
+**polyCub** expects the integrand f to take a two-column
 coordinate matrix as its first argument (as opposed to separate arguments
-for the x and y coordinates):
+for the x and y coordinates), so:
 
 ```{R example-f}
 f <- function (s, sigma = 5)
@@ -120,7 +106,9 @@ plotpolyf(hexagon, f, xlim = c(-8,8), ylim = c(-8,8))
 
 The **polyCub** package provides an R-interfaced C-translation of
 "polygauss: Matlab code for Gauss-like cubature over polygons"
-(Sommariva and Vianello, 2013, <http://www.math.unipd.it/~alvise/software.html>).
+(Sommariva and Vianello, 2013, <http://www.math.unipd.it/~alvise/software.html>),
+an algorithm described in Sommariva and Vianello (2007,
+*BIT Numerical Mathematics*, <https://doi.org/10.1007/s10543-007-0131-2>).
 The cubature rule is based on Green's theorem and incorporates
 appropriately transformed weights and nodes of one-dimensional
 Gauss-Legendre quadrature in both dimensions,
@@ -199,10 +187,11 @@ A radially symmetric function can be expressed in terms of
 the distance r from its point of symmetry: f(r).
 If the antiderivative of r times f(r), called `intrfr()`, is
 analytically available, Green's theorem leads us to a cubature rule
-which only needs one-dimensional numerical integration.
+which only needs *one-dimensional* numerical integration.
 More specifically, `intrfr()` will be `integrate()`d along the edges of
 the polygon. The mathematical details are given in
-<https://doi.org/10.1214/14-AOAS743SUPPB> (Section 2.4).
+Meyer and Held (2014, *The Annals of Applied Statistics*,
+<https://doi.org/10.1214/14-AOAS743>, Supplement B, Section 2.4).
 
 For the bivariate Gaussian density `f` defined above,
 the integral from 0 to R of `r*f(r)` is analytically available as:
@@ -226,7 +215,8 @@ If `intrfr()` is missing, it can be approximated numerically using
 be much less efficient than product Gauss cubature.
 
 Package **polyCub** exposes a C-version of `polyCub.iso()`
-for use by other R packages (notably **surveillance**) via
+for use by other R packages (notably
+[**surveillance**](https://CRAN.R-project.org/package=surveillance)) via
 `LinkingTo: polyCub` and `#include <polyCubAPI.h>`.
 This requires the `intrfr()` function to be implemented in C as well. See
 <https://github.com/bastistician/polyCub/blob/master/tests/testthat/polyiso_powerlaw.c>
@@ -238,11 +228,12 @@ for an example.
 Abramowitz and Stegun (1972, Section 26.9, Example 9) offer a formula for
 the integral of the bivariate Gaussian density over a triangle with one
 vertex at the origin. This formula can be used after triangulation of
-the polygonal domain via `tripstrip()` from the **gpclib** package.
+the polygonal domain (**polyCub** currently uses `tristrip()`
+from the [**gpclib**](https://CRAN.R-project.org/package=gpclib) package).
 The core of the formula is an integral of the bivariate Gaussian density
-with zero mean, unit variance and some correlation over an infinite
-rectangle [h, Inf] x [0, Inf], which can be computed accurately using
-`pmvnorm()` from the **mvtnorm** package.
+with zero mean, unit variance and some correlation over an infinite rectangle
+[h, Inf] x [0, Inf], which can be computed accurately using `pmvnorm()`
+from the [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm) package.
 
 For the above example, we obtain:
 
@@ -256,6 +247,10 @@ make this integration algorithm quiet cumbersome. For large-scale
 integration tasks, it is thus advisable to resort to the general-purpose
 product Gauss cubature rule `polyCub.SV()`.
 
-Note: There is also a function `circleCub.Gauss()` to calculate the
-integral of an *isotropic* Gaussian density over a *circular* domain
-(which requires nothing more than a single call of `pchisq()`).
+Note: **polyCub** provides an auxiliary function `circleCub.Gauss()` to
+calculate the integral of an *isotropic* Gaussian density over a *circular*
+domain (which requires nothing more than a single call of `pchisq()`).
+
+
+## Bechmark
+
