@@ -257,8 +257,8 @@ domain (which requires nothing more than a single call of `pchisq()`).
 We use the last result from `polyCub.exact.Gauss()` as a reference value and
 tune the number of cubature nodes in `polyCub.SV()` and `polyCub.midpoint()`
 until the absolute error is below 10^-8.
-This leads to `nGQ = 4` for the SV-method and a 1200 x 1200 pixel image
-required for the midpoint rule.
+This leads to `nGQ = 4` for product Gauss cubature
+and a 1200 x 1200 pixel image for the midpoint rule.
 For `polyCub.iso()`, we keep the default tolerance levels of `integrate()`.
 For comparison, we also run `polyCub.iso()` without the analytically derived
 `intrfr` function, which leads to a double-`integrate` approximation.
@@ -283,8 +283,8 @@ knitr::kable(summary(benchmark, unit = "ms")[c("expr", "median")], digits = 2)
 ```
 
 The general-purpose SV-method is the clear winner of this small competition.
-A disadvantage is that the number of cubature nodes needs to be tuned
-manually. This also holds for the midpoint rule, which is by far the
+A disadvantage of that method is that the number of cubature nodes needs to be
+tuned manually. This also holds for the midpoint rule, which is by far the
 slowest option. In contrast, the "iso"-method for radially symmetric functions
 is based on R's `integrate()` function, which implements automatic tolerance
 levels. Furthermore, the "iso"-method can also be used with "spiky" integrands,
