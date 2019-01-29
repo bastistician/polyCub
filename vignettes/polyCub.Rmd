@@ -56,10 +56,10 @@ The following cubature methods are implemented in **polyCub**:
 
 2. `polyCub.midpoint()`: Two-dimensional midpoint rule
   
-3. `polyCub.iso()`: Efficient integration of radially symmetric functions
+3. `polyCub.iso()`: Adaptive cubature for radially symmetric functions
    $f(x,y) = f_r(\lVert(x-x_0,y-y_0)\rVert)$
 
-4. `polyCub.exact.Gauss()`: Quasi-exact (but slow) cubature of the
+4. `polyCub.exact.Gauss()`: Accurate (but slow) integration of the
    bivariate Gaussian density
 
 The following section details and illustrates the different cubature methods.
@@ -254,3 +254,38 @@ domain (which requires nothing more than a single call of `pchisq()`).
 
 ## Bechmark
 
+We use the last result from `polyCub.exact.Gauss()` as a reference value and
+tune the number of cubature nodes in `polyCub.SV()` and `polyCub.midpoint()`
+until the absolute error is below 10^-8.
+This leads to `nGQ = 4` for the SV-method and a 1200 x 1200 pixel image
+required for the midpoint rule.
+For `polyCub.iso()`, we keep the default tolerance levels of `integrate()`.
+For comparison, we also run `polyCub.iso()` without the analytically derived
+`intrfr` function, which leads to a double-`integrate` approximation.
+
+The median runtimes of the different cubature methods are given below.
+
+```{r benchmark, purl = FALSE, eval = identical(Sys.getenv("NOT_CRAN"), "true")}
+benchmark <- microbenchmark::microbenchmark(
+  SV = polyCub.SV(hexagon.owin, f, nGQ = 4),
+  midpoint = polyCub.midpoint(hexagon.owin, f, dimyx = 1200),
+  iso = polyCub.iso(hexagon.owin, intrfr = intrfr, center = c(0,0)),
+  iso_double_approx = polyCub.iso(hexagon.owin, f, center = c(0,0)),
+  exact = polyCub.exact.Gauss(hexagon.owin, mean = c(0,0), Sigma = 5^2*diag(2)),
+  times = 6,
+  check = function (values) all(abs(unlist(values) - 0.274144773813434) < 1e-8))
+```
+```{r, purl = FALSE, eval = FALSE}
+summary(benchmark, unit = "ms")[c("expr", "median")]
+```
+```{r, purl = FALSE, echo = FALSE, eval = identical(Sys.getenv("NOT_CRAN"), "true")}
+knitr::kable(summary(benchmark, unit = "ms")[c("expr", "median")], digits = 2)
+```
+
+The general-purpose SV-method is the clear winner of this small competition.
+A disadvantage is that the number of cubature nodes needs to be tuned
+manually. This also holds for the midpoint rule, which is by far the
+slowest option. In contrast, the "iso"-method for radially symmetric functions
+is based on R's `integrate()` function, which implements automatic tolerance
+levels. Furthermore, the "iso"-method can also be used with "spiky" integrands,
+such as a heavy-tailed power-law kernel $f(r) = (r+1)^{-2}$.

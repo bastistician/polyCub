@@ -21,7 +21,7 @@ man/figures/logo.png: devel/logo.R
 
 ## build the package
 build: document man/figures/logo.png
-	$R CMD build .
+	NOT_CRAN=true $R CMD build .
 
 ## package installation
 install: build
