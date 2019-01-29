@@ -74,8 +74,9 @@ Specific methods can also be called directly:
 3. `polyCub.iso()`
 4. `polyCub.exact.Gauss()`
 
-For details and illustrations see the `vignette("polyCub")` in the installed package or
-[on CRAN](https://CRAN.R-project.org/web/packages/polyCub/vignettes/polyCub.html).
+For details and illustrations see the `vignette("polyCub")`
+in the installed package or
+[on CRAN](https://CRAN.R-project.org/package=polyCub/vignettes/polyCub.html).
 
 
 ## Applications
