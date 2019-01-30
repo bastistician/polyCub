@@ -109,7 +109,7 @@ The **polyCub** package provides an R-interfaced C-translation of
 (Sommariva and Vianello, 2013, <http://www.math.unipd.it/~alvise/software.html>),
 an algorithm described in Sommariva and Vianello (2007,
 *BIT Numerical Mathematics*, <https://doi.org/10.1007/s10543-007-0131-2>).
-The cubature rule is based on Green's theorem and incorporates
+The cubature rule is based on Green's integration formula and incorporates
 appropriately transformed weights and nodes of one-dimensional
 Gauss-Legendre quadrature in both dimensions,
 thus the name "product Gauss cubature".
