@@ -46,7 +46,6 @@ is given by its logo (see below).
 
 ![`polyCub`: Cubature over polygonal domains.](polyCub-logo.png)
 
-<!-- As of version 0.7.0, -->
 `polyCub` implements the following methods for
 numerical integration over polygons:
 
