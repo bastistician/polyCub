@@ -63,7 +63,7 @@ The various implemented cubature methods can also be called directly.
    [**spatstat**](https://CRAN.R-project.org/package=spatstat)`::as.im.function()`
    
 3. `polyCub.iso()`:
-   Adaptive cubature for **radially symmetric functions**
+   Adaptive **cubature for radially symmetric functions**
    via line `integrate()` along the polygon boundary
    (Meyer and Held, 2014, *The Annals of Applied Statistics*,
    <https://doi.org/10.1214/14-AOAS743>, Supplement B, Section 2.4)
