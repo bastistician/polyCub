@@ -1,7 +1,7 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
-Version: 0.7.0.9000
-Date: 2018-01-24
+Version: 0.7.1
+Date: 2018-01-30
 Authors@R: c(
     person("Sebastian", "Meyer",
            email = "seb.meyer@fau.de",
@@ -24,8 +24,8 @@ Description: Numerical integration of continuously differentiable
     adaptive cubature for radially symmetric functions via line
     integrate() along the polygon boundary (Meyer and Held, 2014,
     <doi:10.1214/14-AOAS743>, Supplement B),
-    and integration of the bivariate Gaussian density based on a
-    triangulation of the polygonal domain.
+    and integration of the bivariate Gaussian density based on
+    polygon triangulation.
     For simple integration along the axes, the 'cubature' package
     is more appropriate.
 License: GPL-2
