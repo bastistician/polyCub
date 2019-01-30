@@ -8,7 +8,7 @@ affiliations:
  - name: "Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU),
      Erlangen, Germany"
    index: 1
-date: "18 October 2018"
+date: "30 January 2019"
 tags:
   - R
   - numerical integration
@@ -50,18 +50,18 @@ is given by its logo (see below).
 `polyCub` implements the following methods for
 numerical integration over polygons:
 
-* *Product Gauss cubature* [@sommariva.vianello2007].
+* General-purpose *product Gauss cubature* [@sommariva.vianello2007]
 
-* The *two-dimensional midpoint rule* via `spatstat` [@baddeley.turner2005].
+* Simple *two-dimensional midpoint rule* via `spatstat` [@baddeley.turner2005]
 
 * Adaptive cubature for *radially symmetric functions*
-  $f(x,y) = f_r(||(x-x_0,y-y_0)||)$
+  $f(x,y) = f_r(\lVert(x-x_0,y-y_0)\rVert)$
   via integration along the polygon boundary
-  [@meyer.held2014, Supplement B].
-    
+  [@meyer.held2014, Supplement B]
+
 * Accurate (but slow) integration of the *bivariate Gaussian density*
   based on polygon triangulation
-  [@Abramowitz.Stegun1972, Section 26.9, Example 9].
+  [@Abramowitz.Stegun1972, Section 26.9, Example 9]
 
 
 # Usage
@@ -69,11 +69,18 @@ numerical integration over polygons:
 The R package `polyCub` is released on the Comprehensive R Archive Network
 ([CRAN](https://CRAN.R-project.org/package=polyCub)) and can thus be
 easily installed using `install.packages("polyCub")` in R.
-
-The README file contained in the package
-(see the [repository](https://github.com/bastistician/polyCub))
-exemplifies the above cubature methods by solving the integral displayed
-in the package logo.
+After that, the basic usage is
+```r
+library("polyCub")
+polyCub(polyregion, f)
+```
+where `polyregion` is the integration domain and `f` is the integrand.
+Details are given in
+```r
+vignette("polyCub")
+```
+which exemplifies the implemented cubature methods by solving the integral
+displayed in the package logo.
 
 `polyCub` is currently used by at least two other R packages:
 in `surveillance`, to evaluate the likelihood of self-exciting
