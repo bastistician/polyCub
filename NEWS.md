@@ -1,3 +1,10 @@
+polyCub 0.7.1 (2019-01-30)
+==========================
+
+* Added a *getting started* `vignette("polyCub")`
+  (suggested by @wrathematics in openjournals/joss-reviews#1056).
+
+
 polyCub 0.7.0 (2018-10-11)
 ==========================
 
