@@ -30,25 +30,6 @@ remotes::install_github("bastistician/polyCub")
 ```
 
 
-## Cubature methods
-
-1. General-purpose **Product Gauss cubature** (Sommariva and Vianello, 2007,
-   *BIT Numerical Mathematics*, <https://doi.org/10.1007/s10543-007-0131-2>)
-
-2. Simple **two-dimensional midpoint rule**
-   (via [**spatstat**](https://CRAN.R-project.org/package=spatstat))
-  
-3. **Adaptive cubature for radially symmetric functions**
-   f(x,y) = f_r(||(x-x_0,y-y_0)||)
-   via line `integrate()` along the polygon boundary
-   (Meyer and Held, 2014, *The Annals of Applied Statistics*,
-   <https://doi.org/10.1214/14-AOAS743>, Supplement B, Section 2.4)
-
-4. Accurate (but slow) **integration of the bivariate Gaussian density**
-   based on polygon triangulation and
-   [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm)`::pmvnorm()`
-
-
 ## Usage
 
 The basic usage is:
@@ -66,13 +47,32 @@ or even as a plain list of lists of vertex coordinates (`"xylist"`).
 * `f` is the integrand and needs to take a two-column coordinate matrix
 as its first argument.
 
-The `polyCub()` function by default uses Product Gauss cubature.
-Specific methods can also be called directly:
+The `polyCub()` function by default uses `polyCub.SV()`,
+a C-implementation of *product Gauss cubature*.
+The specific cubature methods listed below can also be called directly.
 
-1. `polyCub.SV()`
-2. `polyCub.midpoint()`
-3. `polyCub.iso()`
-4. `polyCub.exact.Gauss()`
+
+### Implemented cubature methods
+
+1. `polyCub.SV()`:
+   General-purpose **product Gauss cubature**
+   (Sommariva and Vianello, 2007, *BIT Numerical Mathematics*,
+   <https://doi.org/10.1007/s10543-007-0131-2>)
+   
+2. `polyCub.midpoint()`:
+   Simple **two-dimensional midpoint rule** based on
+   [**spatstat**](https://CRAN.R-project.org/package=spatstat)`::as.im.function()`
+   
+3. `polyCub.iso()`:
+   Adaptive cubature for **radially symmetric functions**
+   via line `integrate()` along the polygon boundary
+   (Meyer and Held, 2014, *The Annals of Applied Statistics*,
+   <https://doi.org/10.1214/14-AOAS743>, Supplement B, Section 2.4)
+   
+4. `polyCub.exact.Gauss()`:
+   Accurate (but slow) **integration of the bivariate Gaussian density**
+   based on polygon triangulation and
+   [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm)`::pmvnorm()`
 
 For details and illustrations see the `vignette("polyCub")`
 in the installed package or
