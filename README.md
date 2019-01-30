@@ -47,10 +47,9 @@ or even as a plain list of lists of vertex coordinates (`"xylist"`).
 * `f` is the integrand and needs to take a two-column coordinate matrix
 as its first argument.
 
-The `polyCub()` function by default uses `polyCub.SV()`,
+The `polyCub()` function by default calls `polyCub.SV()`,
 a C-implementation of *product Gauss cubature*.
-The specific cubature methods listed below can also be called directly.
-
+The various implemented cubature methods can also be called directly.
 
 ### Implemented cubature methods
 
