@@ -1,8 +1,12 @@
-polyCub 0.7.1 (2019-01-30)
+polyCub 0.7.1 (2019-01-31)
 ==========================
 
 * Added a *getting started* `vignette("polyCub")`
-  (suggested by @wrathematics in openjournals/joss-reviews#1056).
+  (suggested by @wrathematics in
+  [openjournals/joss-reviews#1056](https://github.com/openjournals/joss-reviews/issues/1056)).
+
+* fix minor compiler warning about missing `types` field in `R_CMethodDef`
+  (@wrathematics, #1).
 
 
 polyCub 0.7.0 (2018-10-11)
