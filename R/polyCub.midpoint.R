@@ -42,7 +42,8 @@
 #' @family polyCub-methods
 #' @importFrom sp plot
 #' @importFrom grDevices gray
-#' @examples # see example(polyCub)
+#' @example examples/setting.R
+#' @example examples/polyCub.midpoint.R
 #' @export
 
 polyCub.midpoint <- function (polyregion, f, ...,

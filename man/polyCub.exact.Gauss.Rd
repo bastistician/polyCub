@@ -58,7 +58,23 @@ has to be accepted explicitly via
 \code{\link{gpclibPermit}()} prior to using \code{polyCub.exact.Gauss}.
 }
 \examples{
-# see example(polyCub)
+## a function to integrate (here: isotropic zero-mean Gaussian density)
+f <- function (s, sigma = 5)
+    exp(-rowSums(s^2)/2/sigma^2) / (2*pi*sigma^2)
+
+## a simple polygon as integration domain
+hexagon <- list(
+    list(x = c(7.33, 7.33, 3, -1.33, -1.33, 3),
+         y = c(-0.5, 4.5, 7, 4.5, -0.5, -3))
+)
+
+## quasi-exact integration based on gpclib::tristrip() and mvtnorm::pmvnorm()
+if (requireNamespace("mvtnorm") && gpclibPermit()) {
+    hexagon.gpc <- new("gpc.poly", pts = lapply(hexagon, c, list(hole = FALSE)))
+    plotpolyf(hexagon.gpc, f, xlim = c(-8,8), ylim = c(-8,8))
+    print(polyCub.exact.Gauss(hexagon.gpc, mean = c(0,0), Sigma = 5^2*diag(2),
+                              plot = TRUE), digits = 16)
+}
 }
 \references{
 Abramowitz, M. and Stegun, I. A. (1972).

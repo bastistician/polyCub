@@ -72,7 +72,8 @@
 ##' @keywords math spatial
 ##' @family polyCub-methods
 ##' @importFrom graphics points
-##' @examples # see example(polyCub)
+##' @example examples/setting.R
+##' @example examples/polyCub.SV.R
 ##' @export
 
 polyCub.SV <- function (polyregion, f, ...,

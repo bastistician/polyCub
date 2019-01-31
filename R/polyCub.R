@@ -30,8 +30,8 @@
 #' @param plot logical indicating if an illustrative plot of the numerical
 #' integration should be produced.
 #' @return The approximated integral of \code{f} over \code{polyregion}.
-#' @example examples/polyCub.R
-#' @seealso Details and illustrations in \code{vignette("polyCub")}.
+#' @seealso Details and examples in the \code{vignette("polyCub")}
+#' and on the method-specific help pages.
 #' @family polyCub-methods
 #' @keywords math spatial
 #' @export

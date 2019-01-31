@@ -61,7 +61,8 @@
 #' @seealso \code{\link{circleCub.Gauss}} for quasi-exact cubature of the
 #' isotropic Gaussian density over a circular domain.
 #' @family polyCub-methods
-#' @examples # see example(polyCub)
+#' @example examples/setting.R
+#' @example examples/polyCub.exact.Gauss.R
 #' @import methods
 #' @importFrom sp plot
 #' @importFrom stats cov2cor
