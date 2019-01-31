@@ -1,7 +1,7 @@
 ################################################################################
 ### polyCub: Wrapper Function for the Various Cubature Methods
 ###
-### Copyright (C) 2009-2013 Sebastian Meyer
+### Copyright (C) 2009-2013,2019 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -46,8 +46,9 @@ polyCub <- function (polyregion, f,
     method <- match.arg(method)
     cl <- match.call()
     cl$method <- NULL
-    cl[[1]] <- as.name(paste("polyCub", method, sep="."))
+    cl[[1]] <- call("::", as.name("polyCub"),
+                    as.name(paste("polyCub", method, sep=".")))
     if (method == "exact.Gauss") cl$f <- NULL
     int <- eval(cl, parent.frame())
-    int  #structure(int, method = method)
+    int
 }
