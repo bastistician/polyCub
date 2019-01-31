@@ -11,15 +11,11 @@
 
 #' Wrapper Function for the Various Cubature Methods
 #'
-#' Instead of calling one of the specific cubature methods of this package, the
-#' wrapper function \code{polyCub} may be used together with the \code{method}
-#' argument.
+#' The wrapper function \code{polyCub} can be used to call specific cubature
+#' methods via its \code{method} argument. It calls \code{\link{polyCub.SV}}
+#' by default, which implements general-purpose product Gauss cubature.
 #'
-#' @param polyregion a polygonal integration domain.
-#' The supported classes depend on the specific method, however, the
-#' \code{"\link[spatstat]{owin}"} class from package \pkg{spatstat} works for
-#' all methods, as well should a \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"}
-#' polygon (but see the comments in \code{help("\link{coerce-methods}")}).
+#' @inheritParams plotpolyf
 #' @param f a two-dimensional real-valued function to be integrated over
 #' \code{polyregion}. As its first argument it must take a coordinate matrix,
 #' i.e., a numeric matrix with two columns, and it must return a numeric vector
@@ -28,15 +24,16 @@
 #' \code{f} is ignored since it is specific to the bivariate normal density.
 #' @param method choose one of the implemented cubature methods (partial
 #' argument matching is applied), see \code{help("\link{polyCub-package}")}
-#' for an overview. Defaults to using the product Gauss cubature
+#' for an overview. Defaults to using product Gauss cubature
 #' implemented in \code{\link{polyCub.SV}}.
 #' @param ... arguments of \code{f} or of the specific \code{method}.
 #' @param plot logical indicating if an illustrative plot of the numerical
 #' integration should be produced.
 #' @return The approximated integral of \code{f} over \code{polyregion}.
 #' @example examples/polyCub.R
-#' @keywords math spatial
+#' @seealso Details and illustrations in \code{vignette("polyCub")}.
 #' @family polyCub-methods
+#' @keywords math spatial
 #' @export
 
 polyCub <- function (polyregion, f,

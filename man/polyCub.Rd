@@ -8,11 +8,14 @@ polyCub(polyregion, f, method = c("SV", "midpoint", "iso",
   "exact.Gauss"), ..., plot = FALSE)
 }
 \arguments{
-\item{polyregion}{a polygonal integration domain.
-The supported classes depend on the specific method, however, the
-\code{"\link[spatstat]{owin}"} class from package \pkg{spatstat} works for
-all methods, as well should a \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"}
-polygon (but see the comments in \code{help("\link{coerce-methods}")}).}
+\item{polyregion}{a polygonal domain.
+The following classes are supported:
+\code{"\link[spatstat]{owin}"} from package \pkg{spatstat},
+\code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from \pkg{rgeos} (or
+\pkg{gpclib}), as well as
+\code{"\linkS4class{SpatialPolygons}"}, \code{"\linkS4class{Polygons}"},
+and \code{"\linkS4class{Polygon}"} from package \pkg{sp}.
+(For these classes, \pkg{polyCub} knows how to get an \code{\link{xylist}}.)}
 
 \item{f}{a two-dimensional real-valued function to be integrated over
 \code{polyregion}. As its first argument it must take a coordinate matrix,
@@ -23,7 +26,7 @@ For the \code{"exact.Gauss"} \code{method},
 
 \item{method}{choose one of the implemented cubature methods (partial
 argument matching is applied), see \code{help("\link{polyCub-package}")}
-for an overview. Defaults to using the product Gauss cubature
+for an overview. Defaults to using product Gauss cubature
 implemented in \code{\link{polyCub.SV}}.}
 
 \item{...}{arguments of \code{f} or of the specific \code{method}.}
@@ -35,9 +38,9 @@ integration should be produced.}
 The approximated integral of \code{f} over \code{polyregion}.
 }
 \description{
-Instead of calling one of the specific cubature methods of this package, the
-wrapper function \code{polyCub} may be used together with the \code{method}
-argument.
+The wrapper function \code{polyCub} can be used to call specific cubature
+methods via its \code{method} argument. It calls \code{\link{polyCub.SV}}
+by default, which implements general-purpose product Gauss cubature.
 }
 \examples{
 ## a function to integrate (here: isotropic zero-mean Gaussian density)
@@ -143,6 +146,8 @@ if (require("cubature")) {
 }
 }
 \seealso{
+Details and illustrations in \code{vignette("polyCub")}.
+
 Other polyCub-methods: \code{\link{polyCub.SV}},
   \code{\link{polyCub.exact.Gauss}},
   \code{\link{polyCub.iso}}, \code{\link{polyCub.midpoint}}
