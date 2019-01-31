@@ -16,24 +16,22 @@ which can either be called explicitly or via the generic
 \code{\link{polyCub}} function:
 \describe{
 \item{\code{\link{polyCub.SV}}:}{
-\emph{Product Gauss cubature} as proposed by Sommariva and Vianello (2007).
+General-purpose \emph{product Gauss cubature} (Sommariva and Vianello, 2007)
 }
 \item{\code{\link{polyCub.midpoint}}:}{
-The simple \emph{two-dimensional midpoint rule} via
-\code{\link[spatstat]{as.im.function}} from the \pkg{spatstat} package
-(Baddeley and Turner, 2005).
+Simple \emph{two-dimensional midpoint rule} based on
+\code{\link[spatstat]{as.im.function}} from \pkg{spatstat}
+(Baddeley and Turner, 2005)
 }
 \item{\code{\link{polyCub.iso}}:}{
-Efficient adaptive cubature for \emph{radially symmetric} functions
+Adaptive cubature for \emph{radially symmetric functions}
 via line \code{\link{integrate}()} along the polygon boundary
 (Meyer and Held, 2014, Supplement B, Section 2.4).
 }
 \item{\code{\link{polyCub.exact.Gauss}}:}{
-A quasi-exact method to integrate the \emph{bivariate Gaussian density}
-over polygons. It is based on formulae from Chapter 26 of
-the Abramowitz and Stegun (1972) handbook and requires a triangulation
-of the polygonal domain (using \code{\link[gpclib]{tristrip}} from package
-\pkg{gpclib}) and (numerous) evaluations of cumulative densities (using
+Accurate (but slow) integration of the \emph{bivariate Gaussian density}
+based on polygon triangulation (via \code{\link[gpclib]{tristrip}} from
+\pkg{gpclib}) and (numerous) evaluations of cumulative densities (via
 \code{\link[mvtnorm]{pmvnorm}} from package \pkg{mvtnorm}).
 Note that there is also a function \code{\link{circleCub.Gauss}}
 to integrate the \emph{isotropic} Gaussian density over a
@@ -41,7 +39,7 @@ to integrate the \emph{isotropic} Gaussian density over a
 }
 }
 A more detailed description and benchmark experiment of the above cubature
-methods (except for the newer \code{polyCub.iso}) can be found in
+methods can be found in the \code{vignette("polyCub")} and in
 Meyer (2010, Section 3.2).
 }
 \references{
@@ -70,7 +68,6 @@ Product Gauss cubature over polygons based on Green's integration formula.
 DOI-Link: \url{https://doi.org/10.1007/s10543-007-0131-2}
 }
 \seealso{
-For the special case where the domain is rectangular with sides parallel
-to the axes (such as a bounding box),
-the packages \pkg{cubature} and \pkg{R2Cuba} are more appropriate.
+For the special case of a rectangular domain along the axes
+(e.g., a bounding box), the \pkg{cubature} package is more appropriate.
 }
