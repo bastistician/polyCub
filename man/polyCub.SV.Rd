@@ -9,11 +9,13 @@ polyCub.SV(polyregion, f, ..., nGQ = 20, alpha = NULL,
 }
 \arguments{
 \item{polyregion}{a polygonal domain.
-The following classes are supported: \code{"\link[spatstat]{owin}"},
-\code{"\link[rgeos:gpc.poly-class]{gpc.poly}"},
+The following classes are supported:
+\code{"\link[spatstat]{owin}"} from package \pkg{spatstat},
+\code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from \pkg{rgeos} (or
+\pkg{gpclib}), as well as
 \code{"\linkS4class{SpatialPolygons}"}, \code{"\linkS4class{Polygons}"},
-and \code{"\linkS4class{Polygon}"}
-(for these we have an internal \code{\link{xylist}} method).}
+and \code{"\linkS4class{Polygon}"} from package \pkg{sp}.
+(For these classes, \pkg{polyCub} knows how to get an \code{\link{xylist}}.)}
 
 \item{f}{a two-dimensional real-valued function to be integrated over
 \code{polyregion} (or \code{NULL} to only compute nodes and weights).
