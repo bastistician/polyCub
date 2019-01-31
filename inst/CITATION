@@ -1,22 +1,11 @@
-
-### Outer header
-
-citHeader("To cite", sQuote("polyCub"),
-          "in publications refer to Supplement B (Section 2.4) of:")
-
-
-### power-law paper
+citHeader("To cite", sQuote("polyCub"), "in publications, please refer to:")
 
 bibentry(
-    bibtype = "Article", key = "Meyer+Held_2014",
-    author = "Sebastian Meyer and Leonhard Held",
-    title = "Power-law models for infectious disease spread",
-    journal = "The Annals of Applied Statistics",
-    issn = "1932-6157",
-    year = "2014",
-    volume = "8",
-    number = "3",
-    pages = "1612--1639",
-    doi = "10.1214/14-AOAS743",
-    eprint = "http://arxiv.org/abs/1308.5115"
+    bibtype = "Article", key = "R:polyCub",
+    author = "Sebastian Meyer",
+    title = "{polyCub}: An {R} package for Integration over Polygons",
+    journal = "Journal of Open Source Software",
+    issn = "2475-9066",
+    year = "2019",
+    doi = "10.21105/joss.01056"
 )
