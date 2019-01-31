@@ -74,6 +74,8 @@
 #' @docType package
 #' @name polyCub-package
 #' @seealso
+#' \code{vignette("polyCub")}
+#'
 #' For the special case of a rectangular domain along the axes
 #' (e.g., a bounding box), the \pkg{cubature} package is more appropriate.
 NULL

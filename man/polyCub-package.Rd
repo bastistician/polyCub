@@ -68,6 +68,8 @@ Product Gauss cubature over polygons based on Green's integration formula.
 DOI-Link: \url{https://doi.org/10.1007/s10543-007-0131-2}
 }
 \seealso{
+\code{vignette("polyCub")}
+
 For the special case of a rectangular domain along the axes
 (e.g., a bounding box), the \pkg{cubature} package is more appropriate.
 }
