@@ -44,7 +44,7 @@ domains requires specialized cubature methods, thus the R package
 `polyCub`. A simple graphical summary of the purpose of `polyCub`
 is given by its logo (see below).
 
-![`polyCub`: Cubature over polygonal domains.](polyCub-logo.png)
+![`polyCub`: cubature over polygonal domains.](polyCub-logo.png)
 
 `polyCub` implements the following methods for
 numerical integration over polygons:
