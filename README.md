@@ -1,8 +1,8 @@
 
 # polyCub <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
-The R package **polyCub** implements *cubature* (numerical integration)
-over *polygonal* domains.
+The [R](https://www.r-project.org/) package **polyCub** implements
+*cubature* (numerical integration) over *polygonal* domains.
 It solves the problem of integrating a continuously differentiable
 function f(x,y) over simple closed polygons.
 
