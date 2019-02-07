@@ -263,7 +263,7 @@ For `polyCub.iso()`, we keep the default tolerance levels of `integrate()`.
 For comparison, we also run `polyCub.iso()` without the analytically derived
 `intrfr` function, which leads to a double-`integrate` approximation.
 
-The median runtimes of the different cubature methods are given below.
+The median runtimes [ms] of the different cubature methods are given below.
 
 ```{r benchmark, purl = FALSE, eval = identical(Sys.getenv("NOT_CRAN"), "true")}
 benchmark <- microbenchmark::microbenchmark(
