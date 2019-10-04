@@ -76,9 +76,8 @@ owin2gpc <- function (object)
     }
 }
 
-##' @inheritParams owin2gpc
-##' @param ... further arguments passed to \code{\link[spatstat]{owin}}.
 ##' @rdname coerce-gpc-methods
+##' @param ... further arguments passed to \code{\link[spatstat]{owin}}.
 ##' @export
 gpc2owin <- function (object, ...)
 {
@@ -104,9 +103,8 @@ gpc2owin <- function (object, ...)
     spatstat::owin(poly = bdry, ...)
 }
 
-##' @inheritParams gpc2owin
-##' @param W an object of class \code{"gpc.poly"}.
 ##' @rdname coerce-gpc-methods
+##' @param W an object of class \code{"gpc.poly"}.
 ##' @export
 ##' @rawNamespace if(getRversion() >= "3.6.0") {  # delayed registration
 ##'     S3method(spatstat::as.owin, gpc.poly)

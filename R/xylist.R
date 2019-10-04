@@ -77,7 +77,6 @@ xylist.gpc.poly <- function (object, ...)
 }
 
 ##' @rdname xylist
-##' @inheritParams xylist.Polygons
 ##' @export
 xylist.SpatialPolygons <- function (object, reverse = TRUE, ...)
 {
