@@ -4,8 +4,7 @@
 \alias{polyCub.exact.Gauss}
 \title{Quasi-Exact Cubature of the Bivariate Normal Density}
 \usage{
-polyCub.exact.Gauss(polyregion, mean = c(0, 0), Sigma = diag(2),
-  plot = FALSE)
+polyCub.exact.Gauss(polyregion, mean = c(0, 0), Sigma = diag(2), plot = FALSE)
 }
 \arguments{
 \item{polyregion}{a \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} polygon or
@@ -85,9 +84,11 @@ Tables. New York: Dover Publications.
 \code{\link{circleCub.Gauss}} for quasi-exact cubature of the
 isotropic Gaussian density over a circular domain.
 
-Other polyCub-methods: \code{\link{polyCub.SV}},
-  \code{\link{polyCub.iso}},
-  \code{\link{polyCub.midpoint}}, \code{\link{polyCub}}
+Other polyCub-methods: 
+\code{\link{polyCub.SV}()},
+\code{\link{polyCub.iso}()},
+\code{\link{polyCub.midpoint}()},
+\code{\link{polyCub}()}
 }
 \concept{polyCub-methods}
 \keyword{math}

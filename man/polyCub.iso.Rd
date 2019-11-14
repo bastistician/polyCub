@@ -8,8 +8,7 @@
 polyCub.iso(polyregion, f, intrfr, ..., center, control = list(),
   check.intrfr = FALSE, plot = FALSE)
 
-.polyCub.iso(polys, intrfr, ..., center, control = list(),
-  .witherror = FALSE)
+.polyCub.iso(polys, intrfr, ..., center, control = list(), .witherror = FALSE)
 }
 \arguments{
 \item{polyregion}{a polygonal domain.
@@ -133,9 +132,11 @@ other \R packages, notably \pkg{surveillance}, via \samp{LinkingTo: polyCub}
 \file{/src} files). Note that the \code{intrfr} function must then also be
 supplied as a C-routine. An example can be found in the package tests.
 
-Other polyCub-methods: \code{\link{polyCub.SV}},
-  \code{\link{polyCub.exact.Gauss}},
-  \code{\link{polyCub.midpoint}}, \code{\link{polyCub}}
+Other polyCub-methods: 
+\code{\link{polyCub.SV}()},
+\code{\link{polyCub.exact.Gauss}()},
+\code{\link{polyCub.midpoint}()},
+\code{\link{polyCub}()}
 }
 \author{
 Sebastian Meyer

@@ -51,5 +51,6 @@ Suggests:
     knitr,
     rmarkdown,
     microbenchmark
-RoxygenNote: 6.1.1
 VignetteBuilder: knitr, rmarkdown
+Roxygen: list(old_usage = TRUE)
+RoxygenNote: 7.0.0

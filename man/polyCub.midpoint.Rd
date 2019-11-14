@@ -4,8 +4,7 @@
 \alias{polyCub.midpoint}
 \title{Two-Dimensional Midpoint Rule}
 \usage{
-polyCub.midpoint(polyregion, f, ..., eps = NULL, dimyx = NULL,
-  plot = FALSE)
+polyCub.midpoint(polyregion, f, ..., eps = NULL, dimyx = NULL, plot = FALSE)
 }
 \arguments{
 \item{polyregion}{a polygonal integration domain.
@@ -86,9 +85,11 @@ Baddeley, A. and Turner, R. (2005).
 \emph{Journal of Statistical Software}, \bold{12} (6), 1-42.
 }
 \seealso{
-Other polyCub-methods: \code{\link{polyCub.SV}},
-  \code{\link{polyCub.exact.Gauss}},
-  \code{\link{polyCub.iso}}, \code{\link{polyCub}}
+Other polyCub-methods: 
+\code{\link{polyCub.SV}()},
+\code{\link{polyCub.exact.Gauss}()},
+\code{\link{polyCub.iso}()},
+\code{\link{polyCub}()}
 }
 \concept{polyCub-methods}
 \keyword{math}

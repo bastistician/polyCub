@@ -4,8 +4,8 @@
 \alias{polyCub}
 \title{Wrapper Function for the Various Cubature Methods}
 \usage{
-polyCub(polyregion, f, method = c("SV", "midpoint", "iso",
-  "exact.Gauss"), ..., plot = FALSE)
+polyCub(polyregion, f, method = c("SV", "midpoint", "iso", "exact.Gauss"),
+  ..., plot = FALSE)
 }
 \arguments{
 \item{polyregion}{a polygonal domain.
@@ -46,9 +46,11 @@ by default, which implements general-purpose product Gauss cubature.
 Details and examples in the \code{vignette("polyCub")}
 and on the method-specific help pages.
 
-Other polyCub-methods: \code{\link{polyCub.SV}},
-  \code{\link{polyCub.exact.Gauss}},
-  \code{\link{polyCub.iso}}, \code{\link{polyCub.midpoint}}
+Other polyCub-methods: 
+\code{\link{polyCub.SV}()},
+\code{\link{polyCub.exact.Gauss}()},
+\code{\link{polyCub.iso}()},
+\code{\link{polyCub.midpoint}()}
 }
 \concept{polyCub-methods}
 \keyword{math}

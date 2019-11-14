@@ -4,8 +4,8 @@
 \alias{polyCub.SV}
 \title{Product Gauss Cubature over Polygonal Domains}
 \usage{
-polyCub.SV(polyregion, f, ..., nGQ = 20, alpha = NULL,
-  rotation = FALSE, engine = "C", plot = FALSE)
+polyCub.SV(polyregion, f, ..., nGQ = 20, alpha = NULL, rotation = FALSE,
+  engine = "C", plot = FALSE)
 }
 \arguments{
 \item{polyregion}{a polygonal domain.
@@ -137,9 +137,11 @@ Product Gauss cubature over polygons based on Green's integration formula.
 DOI-Link: \url{https://doi.org/10.1007/s10543-007-0131-2}
 }
 \seealso{
-Other polyCub-methods: \code{\link{polyCub.exact.Gauss}},
-  \code{\link{polyCub.iso}},
-  \code{\link{polyCub.midpoint}}, \code{\link{polyCub}}
+Other polyCub-methods: 
+\code{\link{polyCub.exact.Gauss}()},
+\code{\link{polyCub.iso}()},
+\code{\link{polyCub.midpoint}()},
+\code{\link{polyCub}()}
 }
 \author{
 Sebastian Meyer\cr
