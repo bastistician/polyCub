@@ -75,7 +75,7 @@ if (require("spatstat")) {
 
     ## use a decreasing pixel size (increasing number of nodes)
     for (eps in c(5, 3, 1, 0.5, 0.3, 0.1))
-        cat(sprintf("eps = \%.1f: \%.7f\\n", eps,
+        cat(sprintf("eps = \%.1f: \%.7f\n", eps,
                     polyCub.midpoint(hexagon.owin, f, eps = eps)))
 }
 }

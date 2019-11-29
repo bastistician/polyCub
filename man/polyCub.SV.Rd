@@ -101,7 +101,7 @@ sum(nw$weights * f(nw$nodes))
 
 ## use an increasing number of nodes
 for (nGQ in c(1:5, 10, 20, 60))
-    cat(sprintf("nGQ = \%2i: \%.16f\\n", nGQ,
+    cat(sprintf("nGQ = \%2i: \%.16f\n", nGQ,
                 polyCub.SV(hexagon, f, nGQ = nGQ)))
 
 ## polyCub.SV() is the default method used by the polyCub() wrapper

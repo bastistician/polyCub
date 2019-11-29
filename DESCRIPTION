@@ -53,4 +53,4 @@ Suggests:
     microbenchmark
 VignetteBuilder: knitr, rmarkdown
 Roxygen: list(old_usage = TRUE)
-RoxygenNote: 7.0.0
+RoxygenNote: 7.0.1
