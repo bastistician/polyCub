@@ -87,7 +87,7 @@ hexagon <- list(
 )
 
 ## image of the function and integration domain
-plotpolyf(hexagon, f, xlim = c(-8,8), ylim = c(-8,8))
+plotpolyf(hexagon, f)
 
 ## use a degree of nGQ = 3 and show the corresponding nodes
 polyCub.SV(hexagon, f, nGQ = 3, plot = TRUE)
@@ -111,23 +111,24 @@ polyCub(hexagon, f, nGQ = 3)  # calls polyCub.SV()
 ### now using a simple *rectangular* integration domain
 
 rectangle <- list(list(x = c(-1, 7, 7, -1), y = c(-3, -3, 7, 7)))
+polyCub.SV(rectangle, f, plot = TRUE)
 
-## try rotation (may improve accuracy)
+## effect of rotation given a very low nGQ
 opar <- par(mfrow = c(1,3))
 polyCub.SV(rectangle, f, nGQ = 4, rotation = FALSE, plot = TRUE)
-           title(main = "without rotation")
+           title(main = "without rotation (default)")
 polyCub.SV(rectangle, f, nGQ = 4, rotation = TRUE,  plot = TRUE)
-           title(main = "default rotation")
+           title(main = "standard rotation")
 polyCub.SV(rectangle, f, nGQ = 4,
            rotation = list(P = c(0,0), Q = c(2,-3)), plot = TRUE)
            title(main = "custom rotation")
 par(opar)
 
-## comparison with cubature::adaptIntegrate()
-if (require("cubature")) {
-    fc <- function (s, sigma = 5)
+## comparison with the "cubature" package
+if (requireNamespace("cubature")) {
+    fc <- function (s, sigma = 5)  # non-vectorized version of f
         exp(-sum(s^2)/2/sigma^2) / (2*pi*sigma^2)
-    adaptIntegrate(f = fc, lowerLimit = c(-1, -3), upperLimit = c(7, 7))
+    cubature::hcubature(fc, lowerLimit = c(-1, -3), upperLimit = c(7, 7))
 }
 }
 \references{
