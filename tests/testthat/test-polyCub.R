@@ -1,5 +1,3 @@
-context("Correctness of cubature methods")
-
 ### set up test case
 
 ## bivariate, isotropic Gaussian density

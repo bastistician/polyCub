@@ -1,4 +1,4 @@
-context("Regression tests")
+### Regression tests
 
 hexagon <- list(
     list(x = c(7.33, 7.33, 3, -1.33, -1.33, 3),

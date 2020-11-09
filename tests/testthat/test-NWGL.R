@@ -1,4 +1,4 @@
-context("Validation of cached Gauss-Legendre nodes/weights")
+### Validation of cached Gauss-Legendre nodes/weights
 
 test_that("statmod::gauss.quad() still gives the same result", {
     new.NWGL <- lapply(
