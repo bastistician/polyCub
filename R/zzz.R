@@ -1,7 +1,7 @@
 ################################################################################
 ### Package Setup
 ###
-### Copyright (C) 2009-2014,2018-2019 Sebastian Meyer
+### Copyright (C) 2009-2014,2018-2020 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -91,11 +91,9 @@ NULL
 gpclibCheck <- function (fatal = TRUE)
 {
     gpclibOK <- .Options$gpclib
-    if (!gpclibOK && fatal) {
-        message("Note: The gpclib license is accepted by ",
-                sQuote("gpclibPermit()"), ".")
-        stop("acceptance of the gpclib license is required")
-    }
+    if (!gpclibOK && fatal)
+        stop("acceptance of the gpclib license is required; see ",
+             sQuote("help(gpclibPermit)"))
     gpclibOK
 }
 
