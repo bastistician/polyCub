@@ -1,7 +1,7 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
-Version: 0.7.1
-Date: 2019-02-07
+Version: 0.7.1.9000
+Date: 2020-11-09
 Authors@R: c(
     person("Sebastian", "Meyer",
            email = "seb.meyer@fau.de",
@@ -53,4 +53,4 @@ Suggests:
     microbenchmark
 VignetteBuilder: knitr, rmarkdown
 Roxygen: list(old_usage = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
