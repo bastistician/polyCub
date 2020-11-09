@@ -219,7 +219,7 @@ for use by other R packages (notably
 [**surveillance**](https://CRAN.R-project.org/package=surveillance)) via
 `LinkingTo: polyCub` and `#include <polyCubAPI.h>`.
 This requires the `intrfr()` function to be implemented in C as well. See
-<https://github.com/bastistician/polyCub/blob/master/tests/testthat/polyiso_powerlaw.c>
+<https://github.com/bastistician/polyCub/blob/master/tests/polyiso_powerlaw.c>
 for an example.
 
 

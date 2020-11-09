@@ -42,7 +42,6 @@ Imports:
 Suggests:
     spatstat,
     lattice,
-    testthat,
     mvtnorm,
     statmod,
     rgeos,

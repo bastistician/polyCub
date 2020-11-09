@@ -1,14 +1,4 @@
-### polyCub_iso C-routine (API)
-
-## CAVE (as of R-3.4.0 with testthat 1.0.2):
-## During R CMD check, tools:::.runPackageTests() sets R_TESTS=startup.Rs,
-## a file which is created in the parent directory "tests", see
-## file.path(R.home("share"), "R", "tests-startup.R")
-## for its contents. However, testthat tests are run with the working directory
-## set to here, so auxiliary R sessions initiated here would fail when trying
-## to source() the R_TESTS file on startup, see the system Rprofile file
-## file.path(R.home("library"), "base", "R", "Rprofile")
-## for what happens. Solution: unset R_TESTS (or set to "") for sub-R processes.
+library("polyCub")
 
 ## function to call an R CMD with environment variables
 ## 'env' specified as a named character vector
@@ -37,6 +27,7 @@ Rcmd <- function (args, env = character(), ...) {
     }
 }
 
+## test compilation with #include <polyCubAPI.h> for the polyCub_iso C-routine
 message("compiling polyiso_powerlaw.c using R CMD SHLIB")
 shlib_error <- Rcmd(
     args = c("SHLIB", "--clean", "polyiso_powerlaw.c"),
@@ -45,8 +36,10 @@ shlib_error <- Rcmd(
             ),
             "R_TESTS" = "")
 )
-if (shlib_error)
-    skip("failed to build the shared object/DLL for the polyCub_iso example")
+if (shlib_error) {
+    warning("failed to build the shared object/DLL for the polyCub_iso example")
+    q("no")
+}
 
 ## load shared object/DLL
 myDLL <- paste0("polyiso_powerlaw", .Platform$dynlib.ext)
@@ -98,17 +91,14 @@ intrfr.powerlaw <- function (R, logpars)
                                 logpars = logpars,
                                 center = center))
 
-
-test_that("C and R implementations give equal results", {
-    expect_equal(res$value, orig[1L])
-    expect_equal(res$abserr, orig[2L])
-})
+stopifnot(all.equal(res$value, orig[1L]))
+stopifnot(all.equal(res$abserr, orig[2L]))
 
 ## microbenchmark::microbenchmark(
 ##     polyCub:::polyCub1.iso(diamond, intrfr.powerlaw, logpars, center=center),
 ##     polyiso_powerlaw(diamond, logpars, center=center),
 ##     times = 1000)
-## ## 140 mus vs. 35 mus
+## ## 150 mus vs. 20 mus
 
 dyn.unload(myDLL)
 file.remove(myDLL)
