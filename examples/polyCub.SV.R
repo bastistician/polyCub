@@ -36,9 +36,9 @@ polyCub.SV(rectangle, f, nGQ = 4,
            title(main = "custom rotation")
 par(opar)
 
-## comparison with cubature::adaptIntegrate()
-if (require("cubature")) {
-    fc <- function (s, sigma = 5)
+## comparison with the "cubature" package
+if (requireNamespace("cubature")) {
+    fc <- function (s, sigma = 5)  # non-vectorized version of f
         exp(-sum(s^2)/2/sigma^2) / (2*pi*sigma^2)
-    adaptIntegrate(f = fc, lowerLimit = c(-1, -3), upperLimit = c(7, 7))
+    cubature::hcubature(fc, lowerLimit = c(-1, -3), upperLimit = c(7, 7))
 }
