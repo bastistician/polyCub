@@ -8,7 +8,7 @@ f <- function (s, mean, sd)
 r <- 5
 center <- c(3,2)
 npoly <- 128
-disc.owin <- spatstat::disc(radius=r, centre=center, npoly=npoly)
+disc.owin <- spatstat.geom::disc(radius=r, centre=center, npoly=npoly)
 
 ## parameters for f
 m <- c(1,1)

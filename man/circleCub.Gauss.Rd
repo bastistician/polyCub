@@ -35,9 +35,9 @@ equals the squared distance between the \code{mean} and the
 \examples{
 circleCub.Gauss(center=c(1,2), r=3, mean=c(4,5), sd=6)
 
-if (requireNamespace("mvtnorm") && gpclibPermit() && requireNamespace("spatstat")) {
+if (requireNamespace("mvtnorm") && gpclibPermit() && requireNamespace("spatstat.geom")) {
   ## compare with cubature over a polygonal approximation of a circle
-  disc.poly <- spatstat::disc(radius=3, centre=c(1,2), npoly=32)
+  disc.poly <- spatstat.geom::disc(radius=3, centre=c(1,2), npoly=32)
   polyCub.exact.Gauss(disc.poly, mean=c(4,5), Sigma=6^2*diag(2))
 }
 }

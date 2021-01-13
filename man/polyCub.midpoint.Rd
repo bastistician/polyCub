@@ -8,9 +8,9 @@ polyCub.midpoint(polyregion, f, ..., eps = NULL, dimyx = NULL, plot = FALSE)
 }
 \arguments{
 \item{polyregion}{a polygonal integration domain.
-It can be any object coercible to the \pkg{spatstat} class
-\code{"\link[spatstat]{owin}"} via a corresponding
-\code{\link[spatstat]{as.owin}}-method.
+It can be any object coercible to the \pkg{spatstat.geom} class
+\code{"\link[spatstat.geom]{owin}"} via a corresponding
+\code{\link[spatstat.geom]{as.owin}}-method.
 Note that this includes polygons of the classes \code{"gpc.poly"} and
 \code{"\linkS4class{SpatialPolygons}"}, because \pkg{polyCub} defines
 methods \code{\link{as.owin.gpc.poly}} and
@@ -24,10 +24,10 @@ length the number of coordinates.}
 \item{...}{further arguments for \code{f}.}
 
 \item{eps}{width and height of the pixels (squares),
-see \code{\link[spatstat]{as.mask}}.}
+see \code{\link[spatstat.geom]{as.mask}}.}
 
 \item{dimyx}{number of subdivisions in each dimension,
-see \code{\link[spatstat]{as.mask}}.}
+see \code{\link[spatstat.geom]{as.mask}}.}
 
 \item{plot}{logical indicating if an illustrative plot of the numerical
 integration should be produced.}
@@ -38,8 +38,8 @@ The approximated value of the integral of \code{f} over
 }
 \description{
 The surface is converted to a binary pixel image
-using the \code{\link[spatstat]{as.im.function}} method from package
-\pkg{spatstat} (Baddeley and Turner, 2005).
+using the \code{\link[spatstat.geom]{as.im.function}} method from package
+\pkg{spatstat.geom} (Baddeley et al., 2015).
 The integral under the surface is then approximated as the
 sum over (pixel area * f(pixel midpoint)).
 }
@@ -54,7 +54,7 @@ hexagon <- list(
          y = c(-0.5, 4.5, 7, 4.5, -0.5, -3))
 )
 
-if (require("spatstat")) {
+if (require("spatstat.geom")) {
     hexagon.owin <- owin(poly = hexagon)
 
     show_midpoint <- function (eps)
@@ -80,9 +80,9 @@ if (require("spatstat")) {
 }
 }
 \references{
-Baddeley, A. and Turner, R. (2005).
-\pkg{spatstat}: an \R package for analyzing spatial point patterns.
-\emph{Journal of Statistical Software}, \bold{12} (6), 1-42.
+Baddeley A, Rubak E, Turner R (2015).
+\emph{Spatial Point Patterns: Methodology and Applications with R}.
+Chapman and Hall/CRC Press, London.
 }
 \seealso{
 Other polyCub-methods: 

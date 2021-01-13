@@ -36,7 +36,7 @@ convention.}
 \value{
 Applying \code{xylist} to a polygon object, one gets a simple list,
 where each component (polygon) is a list of \code{"x"} and \code{"y"}
-coordinates. These represent vertex coordinates following \pkg{spatstat}'s
+coordinates. These represent vertex coordinates following \pkg{spatstat.geom}'s
 \code{"owin"} convention (anticlockwise order without repeating any vertex).
 The opposite vertex order can be retained for the \pkg{sp}-classes
 by the non-default use with \code{reverse=FALSE}.
@@ -51,7 +51,7 @@ polygons by their core feature only, a list of lists of vertex coordinates
 The generic function \code{xylist} can deal with the
 following polygon classes:
 \itemize{
-\item{\code{"\link[spatstat:owin.object]{owin}"} from package \pkg{spatstat}}
+\item{\code{"\link[spatstat.geom:owin.object]{owin}"} from package \pkg{spatstat.geom}}
 \item{\code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from package
 \pkg{rgeos} (or \pkg{gpclib})}
 \item{\code{"\linkS4class{Polygons}"} from package \pkg{sp}
@@ -73,7 +73,7 @@ Package overview:
 \describe{
 \item{\pkg{sp}:}{\emph{Repeat} first vertex at the end (closed),
 anticlockwise = hole, clockwise = normal boundary}
-\item{\pkg{spatstat}:}{do \emph{not repeat} first vertex,
+\item{\pkg{spatstat.geom}:}{do \emph{not repeat} first vertex,
 anticlockwise = normal boundary, clockwise = hole. This convention is also
 used in \code{xylist}.}
 \item{\pkg{gpclib}:}{Unfortunately, there seems to be no convention

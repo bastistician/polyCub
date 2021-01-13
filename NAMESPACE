@@ -26,12 +26,12 @@ export(polyCub.midpoint)
 export(xylist)
 exportMethods(coerce)
 if(getRversion() >= "3.6.0") {  # delayed registration
-    S3method(spatstat::as.owin, SpatialPolygons)
-    S3method(spatstat::as.owin, Polygons)
-    S3method(spatstat::as.owin, Polygon)
+    S3method(spatstat.geom::as.owin, SpatialPolygons)
+    S3method(spatstat.geom::as.owin, Polygons)
+    S3method(spatstat.geom::as.owin, Polygon)
 }
 if(getRversion() >= "3.6.0") {  # delayed registration
-    S3method(spatstat::as.owin, gpc.poly)
+    S3method(spatstat.geom::as.owin, gpc.poly)
 }
 import(methods)
 importClassesFrom(sp,Polygon)

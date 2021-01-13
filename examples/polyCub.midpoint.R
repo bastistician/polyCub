@@ -1,4 +1,4 @@
-if (require("spatstat")) {
+if (require("spatstat.geom")) {
     hexagon.owin <- owin(poly = hexagon)
 
     show_midpoint <- function (eps)

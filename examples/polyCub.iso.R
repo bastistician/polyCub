@@ -20,7 +20,7 @@ stopifnot(all.equal(intISOana, intISOnum, check.attributes = FALSE))
 intrfr.const <- function (R) R^2/2
 (area.ISO <- polyCub.iso(letterR, intrfr = intrfr.const, center = c(0,0)))
 
-if (require("spatstat")) { # check against area.owin()
+if (require("spatstat.geom")) { # check against area.owin()
     stopifnot(all.equal(area.owin(owin(poly = letterR)),
                         area.ISO, check.attributes = FALSE))
 }

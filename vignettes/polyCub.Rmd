@@ -35,7 +35,7 @@ and if the first vertex is repeated.
 
 All of **polyCub**'s cubature methods understand
 
-* `"owin"` from package [**spatstat**](https://CRAN.R-project.org/package=spatstat),
+* `"owin"` from package [**spatstat.geom**](https://CRAN.R-project.org/package=spatstat.geom),
 
 * `"gpc.poly"` from [**rgeos**](https://CRAN.R-project.org/package=rgeos)
   (or [**gpclib**](https://CRAN.R-project.org/package=gpclib)), and
@@ -160,16 +160,16 @@ for (nGQ in c(1:5, 10, 20)) {
 ### 2. Two-dimensional midpoint rule: `polyCub.midpoint()`
 
 The two-dimensional midpoint rule in **polyCub** is a simple wrapper
-around `as.im.function()` and `integral.im()` from package **spatstat**.
+around `as.im.function()` and `integral.im()` from package **spatstat.geom**.
 In other words, the polygon is represented by a binary pixel image and
 the integral is approximated as the sum of (pixel area * f(pixel midpoint))
 over all pixels whose midpoint is part of the polygon.
 
 To use `polyCub.midpoint()`, we need to convert our polygon to
-**spatstat**'s "owin" class:
+**spatstat.geom**'s "owin" class:
 
 ```{R, message = FALSE}
-library("spatstat")
+library("spatstat.geom")
 hexagon.owin <- owin(poly = hexagon)
 ```
 

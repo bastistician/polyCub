@@ -9,7 +9,7 @@ plot_polyregion(polyregion, lwd = 2, add = FALSE)
 \arguments{
 \item{polyregion}{a polygonal domain.
 The following classes are supported:
-\code{"\link[spatstat]{owin}"} from package \pkg{spatstat},
+\code{"\link[spatstat.geom]{owin}"} from package \pkg{spatstat.geom},
 \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from \pkg{rgeos} (or
 \pkg{gpclib}), as well as
 \code{"\linkS4class{SpatialPolygons}"}, \code{"\linkS4class{Polygons}"},

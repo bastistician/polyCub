@@ -1,7 +1,7 @@
 ################################################################################
 ### Internal Functions
 ###
-### Copyright (C) 2009-2015,2017 Sebastian Meyer
+### Copyright (C) 2009-2015,2017,2021 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -73,9 +73,6 @@ plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
             polyregion <- Polygons(list(polyregion), "ID")
         if (inherits(polyregion, "Polygons"))
             polyregion <- SpatialPolygons(list(polyregion))
-        if (inherits(polyregion, "owin"))
-            ## && ! "plot.owin" %in% getNamespaceInfo("spatstat", "S3methods")
-            plot <- spatstat::plot.owin  # spatstat <1.33-0 has no registration
         ## plot call which works for "SpatialPolygons" and "owin"
         plot(polyregion, lwd=lwd, axes=TRUE, main="", add=add)
     }

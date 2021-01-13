@@ -1,7 +1,7 @@
 ################################################################################
 ### Package Setup
 ###
-### Copyright (C) 2009-2014,2018-2020 Sebastian Meyer
+### Copyright (C) 2009-2014,2018-2021 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -25,8 +25,8 @@
 #' }
 #' \item{\code{\link{polyCub.midpoint}}:}{
 #' Simple \emph{two-dimensional midpoint rule} based on
-#' \code{\link[spatstat]{as.im.function}} from \pkg{spatstat}
-#' (Baddeley and Turner, 2005)
+#' \code{\link[spatstat.geom]{as.im.function}} from \pkg{spatstat.geom}
+#' (Baddeley et al., 2015)
 #' }
 #' \item{\code{\link{polyCub.iso}}:}{
 #' Adaptive cubature for \emph{radially symmetric functions}
@@ -49,16 +49,16 @@
 #'
 #' @references
 #' Abramowitz, M. and Stegun, I. A. (1972).
-#' Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical
-#' Tables. New York: Dover Publications.
+#' \emph{Handbook of Mathematical Functions with Formulas, Graphs, and
+#' Mathematical Tables}. New York: Dover Publications.
 #'
-#' Baddeley, A. and Turner, R. (2005).
-#' \pkg{spatstat}: an \R package for analyzing spatial point patterns.
-#' \emph{Journal of Statistical Software}, \bold{12} (6), 1-42.
+#' Baddeley, A., Rubak, E. and Turner, R. (2015).
+#' \emph{Spatial Point Patterns: Methodology and Applications with R}.
+#' Chapman and Hall/CRC Press, London.
 #'
 #' Meyer, S. (2010).
-#' Spatio-Temporal Infectious Disease Epidemiology based on Point Processes.
-#' Master's Thesis, LMU Munich.
+#' \emph{Spatio-Temporal Infectious Disease Epidemiology based on Point
+#' Processes}. Master's Thesis, LMU Munich.
 #' Available as \url{http://epub.ub.uni-muenchen.de/11703/}.
 #'
 #' Meyer, S. and Held, L. (2014).

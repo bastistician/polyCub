@@ -1,3 +1,11 @@
+polyCub 0.7.2 (UNRELEASED)
+==========================
+
+* The suggested package **spatstat** was split into several packages.
+  Package **polyCub** now only suggests **spatstat.geom** (to handle
+  `"owin"` polygons).
+
+
 polyCub 0.7.1 (2019-02-07)
 ==========================
 

@@ -40,7 +40,7 @@ polyCub(polyregion, f)
 ```
 
 * `polyregion` represents the integration domain as an object of class
-`"owin"` (from **spatstat**), "`gpc.poly`" (from **gpclib** or **rgeos**),
+`"owin"` (from **spatstat.geom**), "`gpc.poly`" (from **gpclib** or **rgeos**),
 or `"SpatialPolygons"` (from **sp**),
 or even as a plain list of lists of vertex coordinates (`"xylist"`).
 
@@ -60,7 +60,7 @@ The various implemented cubature methods can also be called directly.
    
 2. `polyCub.midpoint()`:
    Simple **two-dimensional midpoint rule** based on
-   [**spatstat**](https://CRAN.R-project.org/package=spatstat)`::as.im.function()`
+   [**spatstat.geom**](https://CRAN.R-project.org/package=spatstat.geom)`::as.im.function()`
    
 3. `polyCub.iso()`:
    Adaptive **cubature for radially symmetric functions**
@@ -87,8 +87,10 @@ of a spatio-temporal point process.
 Such epidemic models are implemented in
 [**surveillance**](https://CRAN.R-project.org/package=surveillance).
 
+<!--
 **polyCub** also powers phylogeographic analyses in
 [**rase**](https://CRAN.R-project.org/package=rase).
+-->
 
 
 ## Feedback
