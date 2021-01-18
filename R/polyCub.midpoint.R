@@ -26,6 +26,8 @@
 #' \code{"\linkS4class{SpatialPolygons}"}, because \pkg{polyCub} defines
 #' methods \code{\link{as.owin.gpc.poly}} and
 #' \code{\link{as.owin.SpatialPolygons}}, respectively.
+#' \pkg{sf} also registers suitable \code{as.owin} methods for its
+#' \code{"\link[sf:st_polygon]{(MULTI)POLYGON}"} classes.
 #' @param eps width and height of the pixels (squares),
 #' see \code{\link[spatstat.geom]{as.mask}}.
 #' @param dimyx number of subdivisions in each dimension,

@@ -38,14 +38,16 @@ All of **polyCub**'s cubature methods understand
 * `"owin"` from package [**spatstat.geom**](https://CRAN.R-project.org/package=spatstat.geom),
 
 * `"gpc.poly"` from [**rgeos**](https://CRAN.R-project.org/package=rgeos)
-  (or [**gpclib**](https://CRAN.R-project.org/package=gpclib)), and
+  (or [**gpclib**](https://CRAN.R-project.org/package=gpclib)),
 
-* `"SpatialPolygons"` from package [**sp**](https://CRAN.R-project.org/package=sp).
+* `"SpatialPolygons"` from package [**sp**](https://CRAN.R-project.org/package=sp), and
+
+* `"(MULTI)POLYGON"` from package [**sf**](https://CRAN.R-project.org/package=sf).
 
 Internally, **polyCub** uses its auxiliary `xylist()` function to extract
 a plain list of lists of vertex coordinates from these classes,
-such that vertices are ordered anticlockwise and the first vertex is not
-repeated (i.e., the `"owin"` convention).
+such that vertices are ordered anticlockwise (for exterior boundaries)
+and the first vertex is not repeated (i.e., the `"owin"` convention).
 
 
 ## Cubature methods

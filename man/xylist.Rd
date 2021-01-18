@@ -3,6 +3,7 @@
 \name{xylist}
 \alias{xylist}
 \alias{xylist.owin}
+\alias{xylist.sfg}
 \alias{xylist.gpc.poly}
 \alias{xylist.SpatialPolygons}
 \alias{xylist.Polygons}
@@ -13,6 +14,8 @@
 xylist(object, ...)
 
 \method{xylist}{owin}(object, ...)
+
+\method{xylist}{sfg}(object, ...)
 
 \method{xylist}{gpc.poly}(object, ...)
 
@@ -51,12 +54,13 @@ polygons by their core feature only, a list of lists of vertex coordinates
 The generic function \code{xylist} can deal with the
 following polygon classes:
 \itemize{
-\item{\code{"\link[spatstat.geom:owin.object]{owin}"} from package \pkg{spatstat.geom}}
-\item{\code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from package
-\pkg{rgeos} (or \pkg{gpclib})}
-\item{\code{"\linkS4class{Polygons}"} from package \pkg{sp}
+\item \code{"\link[spatstat.geom:owin.object]{owin}"} from package \pkg{spatstat.geom}
+\item \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from package
+\pkg{rgeos} (or \pkg{gpclib})
+\item \code{"\linkS4class{Polygons}"} from package \pkg{sp}
 (as well as \code{"\linkS4class{Polygon}"} and
-\code{"\linkS4class{SpatialPolygons}"})}
+\code{"\linkS4class{SpatialPolygons}"})
+\item \code{"\link[sf:st_polygon]{(MULTI)POLYGON}"} from package \pkg{sf}
 }
 The (somehow useless) default \code{xylist}-method
 does not perform any transformation but only ensures that the polygons are
@@ -71,6 +75,9 @@ specifications with respect to:
 }
 Package overview:
 \describe{
+\item{\pkg{sf}:}{\emph{Repeat} first vertex at the end (closed),
+clockwise = hole, anticlockwise = normal boundary;
+however, the ring direction is not checked by default}
 \item{\pkg{sp}:}{\emph{Repeat} first vertex at the end (closed),
 anticlockwise = hole, clockwise = normal boundary}
 \item{\pkg{spatstat.geom}:}{do \emph{not repeat} first vertex,

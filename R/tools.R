@@ -73,7 +73,7 @@ plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
             polyregion <- Polygons(list(polyregion), "ID")
         if (inherits(polyregion, "Polygons"))
             polyregion <- SpatialPolygons(list(polyregion))
-        ## plot call which works for "SpatialPolygons" and "owin"
+        ## plot call which works for "SpatialPolygons", "owin", and "sfg"
         plot(polyregion, lwd=lwd, axes=TRUE, main="", add=add)
     }
 }

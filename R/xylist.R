@@ -1,7 +1,7 @@
 ################################################################################
 ### xylist: Convert Various Polygon Classes to a Simple List of Vertices
 ###
-### Copyright (C) 2012-2014,2017 Sebastian Meyer
+### Copyright (C) 2012-2014,2017,2021 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -20,12 +20,13 @@
 ##' The generic function \code{xylist} can deal with the
 ##' following polygon classes:
 ##' \itemize{
-##' \item{\code{"\link[spatstat.geom:owin.object]{owin}"} from package \pkg{spatstat.geom}}
-##' \item{\code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from package
-##' \pkg{rgeos} (or \pkg{gpclib})}
-##' \item{\code{"\linkS4class{Polygons}"} from package \pkg{sp}
+##' \item \code{"\link[spatstat.geom:owin.object]{owin}"} from package \pkg{spatstat.geom}
+##' \item \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from package
+##' \pkg{rgeos} (or \pkg{gpclib})
+##' \item \code{"\linkS4class{Polygons}"} from package \pkg{sp}
 ##' (as well as \code{"\linkS4class{Polygon}"} and
-##' \code{"\linkS4class{SpatialPolygons}"})}
+##' \code{"\linkS4class{SpatialPolygons}"})
+##' \item \code{"\link[sf:st_polygon]{(MULTI)POLYGON}"} from package \pkg{sf}
 ##' }
 ##' The (somehow useless) default \code{xylist}-method
 ##' does not perform any transformation but only ensures that the polygons are
@@ -39,6 +40,9 @@
 ##' }
 ##' Package overview:
 ##' \describe{
+##' \item{\pkg{sf}:}{\emph{Repeat} first vertex at the end (closed),
+##' clockwise = hole, anticlockwise = normal boundary;
+##' however, the ring direction is not checked by default}
 ##' \item{\pkg{sp}:}{\emph{Repeat} first vertex at the end (closed),
 ##' anticlockwise = hole, clockwise = normal boundary}
 ##' \item{\pkg{spatstat.geom}:}{do \emph{not repeat} first vertex,
@@ -67,6 +71,22 @@ xylist <- function (object, ...) UseMethod("xylist")
 xylist.owin <- function (object, ...)
 {
     spatstat.geom::as.polygonal(object)$bdry
+}
+
+##' @rdname xylist
+##' @export
+xylist.sfg <- function (object, ...)
+{
+    if (!inherits(object, c("POLYGON", "MULTIPOLYGON")))
+        stop("only *polygonal* SF geometries are supported")
+    obj <- sf::st_sfc(object, check_ring_dir = TRUE)[[1L]]
+    ## it would be more efficient to use sf's check_ring_dir() directly
+    ## unfortunately, that function is not exported from sf (0.9-7)
+    if (inherits(obj, "MULTIPOLYGON"))
+        obj <- unlist(obj, recursive = FALSE)
+    lapply(obj, function (coords) {
+        list(x = coords[-1L, 1L], y = coords[-1L, 2L])
+    })
 }
 
 ##' @rdname xylist

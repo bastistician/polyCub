@@ -46,6 +46,7 @@ Suggests:
     statmod,
     rgeos,
     gpclib,
+    sf,
     cubature,
     knitr,
     rmarkdown,

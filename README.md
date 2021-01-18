@@ -41,7 +41,7 @@ polyCub(polyregion, f)
 
 * `polyregion` represents the integration domain as an object of class
 `"owin"` (from **spatstat.geom**), "`gpc.poly`" (from **gpclib** or **rgeos**),
-or `"SpatialPolygons"` (from **sp**),
+`"SpatialPolygons"` (from **sp**), or `"(MULTI)POLYGON"` (from **sf**),
 or even as a plain list of lists of vertex coordinates (`"xylist"`).
 
 * `f` is the integrand and needs to take a two-column coordinate matrix
