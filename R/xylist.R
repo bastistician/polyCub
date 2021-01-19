@@ -86,7 +86,8 @@ xylist.sfg <- function (object, ...)
     if (inherits(obj, "MULTIPOLYGON"))
         obj <- unlist(obj, recursive = FALSE)
     lapply(obj, function (coords) {
-        list(x = coords[-1L, 1L], y = coords[-1L, 2L])
+        idx <- seq_len(nrow(coords) - 1L)
+        list(x = coords[idx, 1L], y = coords[idx, 2L])
     })
 }
 

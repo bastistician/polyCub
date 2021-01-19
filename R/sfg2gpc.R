@@ -30,15 +30,23 @@
 #' @import methods
 #' @export
 #' @examples
-#' if (gpclibPermit() && require("sf")) {
+#' if (require("rgeos") && require("sf")) {
 #'     ## use example polygons from
 #'     example(plotpolyf, ask = FALSE)
 #'
 #'     letterR  # a simple "xylist"
 #'     letterR.sfg <- st_polygon(lapply(letterR, function(xy)
 #'         rbind(cbind(xy$x, xy$y), c(xy$x[1], xy$y[1]))))
+#'     print(letterR.sfg)
+#'     stopifnot(identical(letterR, xylist(letterR.sfg)))
+#'     \dontshow{
+#'     stopifnot(identical(rep(letterR, 2),
+#'         xylist(st_multipolygon(list(letterR.sfg, letterR.sfg)))))
+#'     }
+#'     ## convert sf "POLYGON" to a "gpc.poly"
 #'     letterR.gpc_from_sfg <- sfg2gpc(letterR.sfg)
-#'     letterR.xylist_from_gpc <- xylist(letterR.gpc_from_sfg)
+#'     print(letterR.gpc_from_sfg)
+#'     letterR.xylist_from_gpc <- xylist(letterR.gpc_from_sfg) # with hole info
 #'     stopifnot(identical(letterR, lapply(letterR.xylist_from_gpc, "[", 1:2)))
 #' }
 sfg2gpc <- function (object)
@@ -52,7 +60,7 @@ sfg2gpc <- function (object)
     } else {
         hole <- seq_along(object) > 1L
     }
-    
+
     pts <- mapply(
         FUN = function (coords, hole) {
             idx <- seq_len(nrow(coords) - 1L)
