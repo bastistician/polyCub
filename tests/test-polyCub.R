@@ -1,7 +1,5 @@
-if (!requireNamespace("spatstat.geom")) {
-    warning("skipping as these tests require the 'spatstat.geom' package")
+if (!requireNamespace("spatstat.geom"))
     q("no")
-}
 library("polyCub")
 
 ## bivariate, isotropic Gaussian density
