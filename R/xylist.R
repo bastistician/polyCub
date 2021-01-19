@@ -79,8 +79,7 @@ xylist.owin <- function (object, ...)
 ##' @export
 xylist.sfg <- function (object, ...)
 {
-    if (!inherits(object, c("POLYGON", "MULTIPOLYGON")))
-        stop("only *polygonal* SF geometries are supported")
+    assert_polygonal_sfg(object)
     obj <- sf::st_sfc(object, check_ring_dir = TRUE)[[1L]]
     ## it would be more efficient to use sf's check_ring_dir() directly
     ## unfortunately, that function is not exported from sf (0.9-7)

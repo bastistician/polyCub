@@ -24,6 +24,7 @@ export(polyCub.SV)
 export(polyCub.exact.Gauss)
 export(polyCub.iso)
 export(polyCub.midpoint)
+export(sfg2gpc)
 export(xylist)
 exportMethods(coerce)
 if(getRversion() >= "3.6.0") {  # delayed registration

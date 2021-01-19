@@ -9,8 +9,9 @@ polyCub.exact.Gauss(polyregion, mean = c(0, 0), Sigma = diag(2), plot = FALSE)
 \arguments{
 \item{polyregion}{a \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} polygon or
 something that can be coerced to this class, e.g., an \code{"owin"} polygon
-(converted via \code{\link{owin2gpc}} and -- given \pkg{rgeos} is available
--- \code{"SpatialPolygons"} also work.}
+(via \code{\link{owin2gpc}}), an \code{"sfg"} polygon (via
+\code{\link{sfg2gpc}}), or -- given \pkg{rgeos} is available
+-- a \code{"SpatialPolygons"} object.}
 
 \item{mean, Sigma}{mean and covariance matrix of the bivariate normal density
 to be integrated.}

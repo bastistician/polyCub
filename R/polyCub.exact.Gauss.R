@@ -1,7 +1,7 @@
 ################################################################################
 ### polyCub.exact.Gauss: Quasi-Exact Cubature of the Bivariate Normal Density
 ###
-### Copyright (C) 2009-2018 Sebastian Meyer
+### Copyright (C) 2009-2018,2021 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -32,8 +32,9 @@
 #'
 #' @param polyregion a \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} polygon or
 #' something that can be coerced to this class, e.g., an \code{"owin"} polygon
-#' (converted via \code{\link{owin2gpc}} and -- given \pkg{rgeos} is available
-#' -- \code{"SpatialPolygons"} also work.
+#' (via \code{\link{owin2gpc}}), an \code{"sfg"} polygon (via
+#' \code{\link{sfg2gpc}}), or -- given \pkg{rgeos} is available
+#' -- a \code{"SpatialPolygons"} object.
 #' @param mean,Sigma mean and covariance matrix of the bivariate normal density
 #' to be integrated.
 #' @param plot logical indicating if an illustrative plot of the numerical
@@ -75,6 +76,8 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
     gpclibCheck(fatal=TRUE)
     if (inherits(polyregion, "owin")) {
         polyregion <- owin2gpc(polyregion)
+    } else if (inherits(polyregion, "sfg")) {
+        polyregion <- sfg2gpc(polyregion)
     } else if (!inherits(polyregion, "gpc.poly")) {
         if (inherits(polyregion, "SpatialPolygons") &&
             !requireNamespace("rgeos")) {
