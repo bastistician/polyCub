@@ -1,7 +1,7 @@
 ################################################################################
 ### plotpolyf: Plot Polygonal Domain on Image of Bivariate Function
 ###
-### Copyright (C) 2013-2014,2018 Sebastian Meyer
+### Copyright (C) 2013-2014,2018,2021 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -55,7 +55,9 @@ plotpolyf <- function (polyregion, f, ..., npixel = 100, cuts = 15,
                        xlim = NULL, ylim = NULL,
                        use.lattice = TRUE, print.args = list())
 {
-    polys <- xylist(polyregion)
+    polys <- if (inherits(polyregion, "gpc.poly")) { # avoid xylist.gpc.poly
+                 polyregion@pts  # ring direction is irrelevant for plotting
+             } else xylist(polyregion)
     npixel <- rep(npixel, length.out = 2L)
 
     ## make two-dimensional grid
