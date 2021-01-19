@@ -37,7 +37,7 @@
 #' @import methods
 #' @export
 #' @examples
-#' if (gpclibPermit() && require("spatstat.geom")) {
+#' if (require("rgeos") && require("spatstat.geom")) {
 #'     ## use example polygons from
 #'     example(plotpolyf, ask = FALSE)
 #'
