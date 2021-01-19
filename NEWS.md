@@ -2,12 +2,14 @@ polyCub 0.8.0 (UNRELEASED)
 ==========================
 
 * Support `"(MULTI)POLYGON"` geometries from package
-  [**sf**](https://CRAN.R-project.org/package=sf)
+  [**sf**](https://CRAN.R-project.org/package=sf) as integration domains
   ([#3](https://github.com/bastistician/polyCub/issues/3)).
   Since these classes do not strictly enforce a particular ring direction,
   the vertex order is checked when the polygon coordinates are extracted for
-  cubature. `"POLYGON"` objects already worked in previous versions but
-  this was undocumented and didn't check vertex order.
+  cubature. Thus, **sf** polygons are a less efficient choice for
+  **polyCub** input than polygons from **sp** or **spatstat.geom**.
+  Note that `"POLYGON"` objects were already accepted in previous versions of
+  **polyCub** but this was undocumented and didn't check the vertex order.
 
 * The suggested package **spatstat** was split into several packages.
   Package **polyCub** now only suggests **spatstat.geom** (to handle

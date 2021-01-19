@@ -14,9 +14,9 @@
 ##' Different packages concerned with spatial data use different polygon
 ##' specifications, which sometimes becomes very confusing (see Details below).
 ##' To be compatible with the various polygon classes, package \pkg{polyCub}
-##' uses an S3 class \code{"xylist"}, which represents
-##' polygons by their core feature only, a list of lists of vertex coordinates
-##' (see the "Value" section below).
+##' uses an S3 class \code{"xylist"}, which represents a polygonal domain
+##' (of potentially multiple polygons) by its core feature only: a list of lists
+##' of vertex coordinates (see the "Value" section below).
 ##' The generic function \code{xylist} can deal with the
 ##' following polygon classes:
 ##' \itemize{
@@ -32,34 +32,36 @@
 ##' does not perform any transformation but only ensures that the polygons are
 ##' not closed (first vertex not repeated).
 ##'
-##' Different packages concerned with spatial data use different polygon
-##' specifications with respect to:
+##' Polygon specifications differ with respect to:
 ##' \itemize{
-##' \item{do we repeat the first vertex?}
-##' \item{which direction represents holes?}
+##' \item is the first vertex repeated?
+##' \item which ring direction represents holes?
 ##' }
 ##' Package overview:
 ##' \describe{
-##' \item{\pkg{sf}:}{\emph{Repeat} first vertex at the end (closed),
-##' clockwise = hole, anticlockwise = normal boundary;
-##' however, the ring direction is not checked by default}
+##' \item{\pkg{spatstat.geom}:}{\code{"owin"} does \emph{not repeat} the
+##' first vertex, and anticlockwise = normal boundary, clockwise = hole.
+##' This convention is also used for the return value of \code{xylist}.}
 ##' \item{\pkg{sp}:}{\emph{Repeat} first vertex at the end (closed),
 ##' anticlockwise = hole, clockwise = normal boundary}
-##' \item{\pkg{spatstat.geom}:}{do \emph{not repeat} first vertex,
-##' anticlockwise = normal boundary, clockwise = hole. This convention is also
-##' used in \code{xylist}.}
-##' \item{\pkg{gpclib}:}{Unfortunately, there seems to be no convention
-##' for the specification of polygons of class \code{"gpc.poly"}.}
+##' \item{\pkg{sf}:}{\emph{Repeat} first vertex at the end (closed),
+##' clockwise = hole, anticlockwise = normal boundary;
+##' \emph{however}, \pkg{sf} does not check the ring direction by default, so
+##' it cannot be relied upon.}
+##' \item{\pkg{gpclib}:}{There seem to be no such conventions
+##' for polygons of class \code{"gpc.poly"}.}
 ##' }
+##' Thus, for polygons from \pkg{sf} and \pkg{gpclib}, \code{xylist} needs
+##' to check the ring direction, which makes these two formats the least
+##' efficient for integration domains in \pkg{polyCub}.
 ##'
 ##' @param object an object of one of the supported spatial classes.
 ##' @param ... (unused) argument of the generic.
 ##' @return Applying \code{xylist} to a polygon object, one gets a simple list,
 ##' where each component (polygon) is a list of \code{"x"} and \code{"y"}
 ##' coordinates. These represent vertex coordinates following \pkg{spatstat.geom}'s
-##' \code{"owin"} convention (anticlockwise order without repeating any vertex).
-##' The opposite vertex order can be retained for the \pkg{sp}-classes
-##' by the non-default use with \code{reverse=FALSE}.
+##' \code{"owin"} convention (anticlockwise order for exterior boundaries,
+##' without repeating any vertex).
 ##' @author Sebastian Meyer
 ##' @name xylist
 ##' @keywords spatial methods
