@@ -113,24 +113,24 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
 }
 
 
-##' Check the Integral of \eqn{r f_r(r)}
-##'
-##' This function is auxiliary to \code{\link{polyCub.iso}}.
-##' The (analytical) integral of \eqn{r f_r(r)} from 0 to \eqn{R} is checked
-##' against a numeric approximation using \code{\link{integrate}} for various
-##' values of the upper bound \eqn{R}. A warning is issued if inconsistencies
-##' are found.
-##'
-##' @inheritParams polyCub.iso
-##' @param rs numeric vector of upper bounds for which to check the validity of
-##' \code{intrfr}. If it has length 0 (default), no checks are performed.
-##' @param tolerance of \code{\link{all.equal.numeric}} when comparing
-##' \code{intrfr} results with numerical integration. Defaults to the
-##' relative tolerance used for \code{integrate}.
-##' @return The \code{intrfr} function. If it was not supplied, its quadrature
-##' version using \code{integrate} is returned.
-##' @importFrom stats integrate
-##' @export
+#' Check the Integral of \eqn{r f_r(r)}
+#'
+#' This function is auxiliary to \code{\link{polyCub.iso}}.
+#' The (analytical) integral of \eqn{r f_r(r)} from 0 to \eqn{R} is checked
+#' against a numeric approximation using \code{\link{integrate}} for various
+#' values of the upper bound \eqn{R}. A warning is issued if inconsistencies
+#' are found.
+#'
+#' @inheritParams polyCub.iso
+#' @param rs numeric vector of upper bounds for which to check the validity of
+#' \code{intrfr}. If it has length 0 (default), no checks are performed.
+#' @param tolerance of \code{\link{all.equal.numeric}} when comparing
+#' \code{intrfr} results with numerical integration. Defaults to the
+#' relative tolerance used for \code{integrate}.
+#' @return The \code{intrfr} function. If it was not supplied, its quadrature
+#' version using \code{integrate} is returned.
+#' @importFrom stats integrate
+#' @export
 checkintrfr <- function (intrfr, f, ..., center, control = list(),
                          rs = numeric(0L), tolerance = control$rel.tol)
 {
@@ -167,13 +167,13 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
 }
 
 
-##' @description
-##' \code{.polyCub.iso} is a \dQuote{bare-bone} version of \code{polyCub.iso}.
-##' @rdname polyCub.iso
-##' @param polys something like \code{owin$bdry}, but see \code{\link{xylist}}.
-##' @param .witherror logical indicating if an upper bound for the absolute
-##' integration error should be attached as an attribute to the result?
-##' @export
+#' @description
+#' \code{.polyCub.iso} is a \dQuote{bare-bone} version of \code{polyCub.iso}.
+#' @rdname polyCub.iso
+#' @param polys something like \code{owin$bdry}, but see \code{\link{xylist}}.
+#' @param .witherror logical indicating if an upper bound for the absolute
+#' integration error should be attached as an attribute to the result?
+#' @export
 .polyCub.iso <- function (polys, intrfr, ..., center,
                           control = list(), .witherror = FALSE)
 {
@@ -217,7 +217,7 @@ polyCub1.iso <- function (poly, intrfr, ..., center,
 }
 
 ## line integral for one edge
-##' @importFrom stats integrate
+#' @importFrom stats integrate
 lineInt <- function (v0, v1, intrfr, ..., control = list())
 {
     d <- v1 - v0

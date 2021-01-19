@@ -9,46 +9,46 @@
 ################################################################################
 
 
-##' Plot Polygonal Domain on Image of Bivariate Function
-##'
-##' Produces a combined plot of a polygonal domain and an image of a bivariate
-##' function, using either \code{\link[lattice:levelplot]{lattice::levelplot}}
-##' or \code{\link{image}}.
-##'
-##' @param polyregion a polygonal domain.
-##' The following classes are supported:
-##' \code{"\link[spatstat.geom]{owin}"} from package \pkg{spatstat.geom},
-##' \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from \pkg{rgeos} (or
-##' \pkg{gpclib}),
-##' \code{"\linkS4class{SpatialPolygons}"}, \code{"\linkS4class{Polygons}"},
-##' and \code{"\linkS4class{Polygon}"} from package \pkg{sp}, as well as
-##' \code{"\link[sf:st_polygon]{(MULTI)POLYGON}"} from package \pkg{sf}.
-##' (For these classes, \pkg{polyCub} knows how to get an \code{\link{xylist}}.)
-##' @param f a two-dimensional real-valued function.
-##' As its first argument it must take a coordinate matrix, i.e., a
-##' numeric matrix with two columns, and it must return a numeric vector of
-##' length the number of coordinates.
-##' @param ... further arguments for \code{f}.
-##' @param npixel numeric vector of length 1 or 2 setting the number of pixels
-##' in each dimension.
-##' @param cuts number of cut points in the \eqn{z} dimension.
-##' The range of function values will be divided into \code{cuts+1} levels.
-##' @param col color vector used for the function levels.
-##' @param lwd line width of the polygon edges.
-##' @param xlim,ylim numeric vectors of length 2 setting the axis limits.
-##' \code{NULL} means using the bounding box of \code{polyregion}.
-##' @param use.lattice logical indicating if \pkg{lattice} graphics
-##' (\code{\link[lattice]{levelplot}}) should be used.
-##' @param print.args a list of arguments passed to \code{\link{print.trellis}}
-##' for plotting the produced \code{\link[lattice:trellis.object]{"trellis"}} object
-##' (given \code{use.lattice = TRUE}). The latter will be returned without
-##' explicit \code{print}ing if \code{print.args} is not a list.
-##' @author Sebastian Meyer
-##' @keywords hplot
-##' @example examples/plotpolyf.R
-##' @importFrom grDevices extendrange heat.colors
-##' @importFrom graphics image
-##' @export
+#' Plot Polygonal Domain on Image of Bivariate Function
+#'
+#' Produces a combined plot of a polygonal domain and an image of a bivariate
+#' function, using either \code{\link[lattice:levelplot]{lattice::levelplot}}
+#' or \code{\link{image}}.
+#'
+#' @param polyregion a polygonal domain.
+#' The following classes are supported:
+#' \code{"\link[spatstat.geom]{owin}"} from package \pkg{spatstat.geom},
+#' \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from \pkg{rgeos} (or
+#' \pkg{gpclib}),
+#' \code{"\linkS4class{SpatialPolygons}"}, \code{"\linkS4class{Polygons}"},
+#' and \code{"\linkS4class{Polygon}"} from package \pkg{sp}, as well as
+#' \code{"\link[sf:st_polygon]{(MULTI)POLYGON}"} from package \pkg{sf}.
+#' (For these classes, \pkg{polyCub} knows how to get an \code{\link{xylist}}.)
+#' @param f a two-dimensional real-valued function.
+#' As its first argument it must take a coordinate matrix, i.e., a
+#' numeric matrix with two columns, and it must return a numeric vector of
+#' length the number of coordinates.
+#' @param ... further arguments for \code{f}.
+#' @param npixel numeric vector of length 1 or 2 setting the number of pixels
+#' in each dimension.
+#' @param cuts number of cut points in the \eqn{z} dimension.
+#' The range of function values will be divided into \code{cuts+1} levels.
+#' @param col color vector used for the function levels.
+#' @param lwd line width of the polygon edges.
+#' @param xlim,ylim numeric vectors of length 2 setting the axis limits.
+#' \code{NULL} means using the bounding box of \code{polyregion}.
+#' @param use.lattice logical indicating if \pkg{lattice} graphics
+#' (\code{\link[lattice]{levelplot}}) should be used.
+#' @param print.args a list of arguments passed to \code{\link{print.trellis}}
+#' for plotting the produced \code{\link[lattice:trellis.object]{"trellis"}} object
+#' (given \code{use.lattice = TRUE}). The latter will be returned without
+#' explicit \code{print}ing if \code{print.args} is not a list.
+#' @author Sebastian Meyer
+#' @keywords hplot
+#' @example examples/plotpolyf.R
+#' @importFrom grDevices extendrange heat.colors
+#' @importFrom graphics image
+#' @export
 
 plotpolyf <- function (polyregion, f, ..., npixel = 100, cuts = 15,
                        col = rev(heat.colors(cuts+1)), lwd = 3,

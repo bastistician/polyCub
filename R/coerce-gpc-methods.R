@@ -9,46 +9,46 @@
 ################################################################################
 
 
-##' Conversion between polygonal \code{"owin"} and \code{"gpc.poly"}
-##'
-##' Package \pkg{polyCub} implements converters between the classes
-##' \code{"\link[spatstat.geom:owin.object]{owin}"} of package \pkg{spatstat.geom} and
-##' \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} of package \pkg{rgeos}
-##' (originally from \pkg{gpclib}).
-##'
-##' @param object an object of class \code{"gpc.poly"} or \code{"owin"},
-##' respectively.
-##' @return The converted polygon of class \code{"gpc.poly"} or \code{"owin"},
-##' respectively. If neither package \pkg{rgeos} nor \pkg{gpclib} are available,
-##' \code{owin2gpc} will just return the \code{pts} slot of the
-##' \code{"gpc.poly"} (no formal class) with a warning.
-##' @author Sebastian Meyer
-##' @note The converter \code{owin2gpc} requires the package \pkg{rgeos} (or
-##' \pkg{gpclib}) for the formal class definition of a \code{"gpc.poly"}.
-##' It will produce vertices ordered according to the \pkg{sp} convention,
-##' i.e. clockwise for normal boundaries and anticlockwise for holes, where,
-##' however, the first vertex is \emph{not} repeated!
-##' @seealso \code{\link{xylist}}, and the package \pkg{rgeos} for
-##' conversions of \code{"gpc.poly"} objects from and to \pkg{sp}'s
-##' \code{"\linkS4class{SpatialPolygons}"} class.
-##' @name coerce-gpc-methods
-##' @rdname coerce-gpc-methods
-##' @keywords spatial methods
-##' @import methods
-##' @export
-##' @examples
-##' if (gpclibPermit() && require("spatstat.geom")) {
-##'     ## use example polygons from
-##'     example(plotpolyf, ask = FALSE)
-##'
-##'     letterR  # a simple "xylist"
-##'     letterR.owin <- owin(poly = letterR)
-##'     letterR.gpc_from_owin <- owin2gpc(letterR.owin)
-##'     letterR.xylist_from_gpc <- xylist(letterR.gpc_from_owin)
-##'     stopifnot(all.equal(letterR, lapply(letterR.xylist_from_gpc, "[", 1:2)))
-##'     letterR.owin_from_gpc <- as.owin(letterR.gpc_from_owin)
-##'     stopifnot(all.equal(letterR.owin, letterR.owin_from_gpc))
-##' }
+#' Conversion between polygonal \code{"owin"} and \code{"gpc.poly"}
+#'
+#' Package \pkg{polyCub} implements converters between the classes
+#' \code{"\link[spatstat.geom:owin.object]{owin}"} of package \pkg{spatstat.geom} and
+#' \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} of package \pkg{rgeos}
+#' (originally from \pkg{gpclib}).
+#'
+#' @param object an object of class \code{"gpc.poly"} or \code{"owin"},
+#' respectively.
+#' @return The converted polygon of class \code{"gpc.poly"} or \code{"owin"},
+#' respectively. If neither package \pkg{rgeos} nor \pkg{gpclib} are available,
+#' \code{owin2gpc} will just return the \code{pts} slot of the
+#' \code{"gpc.poly"} (no formal class) with a warning.
+#' @author Sebastian Meyer
+#' @note The converter \code{owin2gpc} requires the package \pkg{rgeos} (or
+#' \pkg{gpclib}) for the formal class definition of a \code{"gpc.poly"}.
+#' It will produce vertices ordered according to the \pkg{sp} convention,
+#' i.e. clockwise for normal boundaries and anticlockwise for holes, where,
+#' however, the first vertex is \emph{not} repeated!
+#' @seealso \code{\link{xylist}}, and the package \pkg{rgeos} for
+#' conversions of \code{"gpc.poly"} objects from and to \pkg{sp}'s
+#' \code{"\linkS4class{SpatialPolygons}"} class.
+#' @name coerce-gpc-methods
+#' @rdname coerce-gpc-methods
+#' @keywords spatial methods
+#' @import methods
+#' @export
+#' @examples
+#' if (gpclibPermit() && require("spatstat.geom")) {
+#'     ## use example polygons from
+#'     example(plotpolyf, ask = FALSE)
+#'
+#'     letterR  # a simple "xylist"
+#'     letterR.owin <- owin(poly = letterR)
+#'     letterR.gpc_from_owin <- owin2gpc(letterR.owin)
+#'     letterR.xylist_from_gpc <- xylist(letterR.gpc_from_owin)
+#'     stopifnot(all.equal(letterR, lapply(letterR.xylist_from_gpc, "[", 1:2)))
+#'     letterR.owin_from_gpc <- as.owin(letterR.gpc_from_owin)
+#'     stopifnot(all.equal(letterR.owin, letterR.owin_from_gpc))
+#' }
 owin2gpc <- function (object)
 {
     object <- spatstat.geom::as.polygonal(object)
@@ -74,9 +74,9 @@ owin2gpc <- function (object)
     }
 }
 
-##' @rdname coerce-gpc-methods
-##' @param ... further arguments passed to \code{\link[spatstat.geom]{owin}}.
-##' @export
+#' @rdname coerce-gpc-methods
+#' @param ... further arguments passed to \code{\link[spatstat.geom]{owin}}.
+#' @export
 gpc2owin <- function (object, ...)
 {
     ## first convert to an "owin" without checking areas etc.
@@ -101,12 +101,12 @@ gpc2owin <- function (object, ...)
     spatstat.geom::owin(poly = bdry, ...)
 }
 
-##' @rdname coerce-gpc-methods
-##' @param W an object of class \code{"gpc.poly"}.
-##' @export
-##' @rawNamespace if(getRversion() >= "3.6.0") {  # delayed registration
-##'     S3method(spatstat.geom::as.owin, gpc.poly)
-##' }
+#' @rdname coerce-gpc-methods
+#' @param W an object of class \code{"gpc.poly"}.
+#' @export
+#' @rawNamespace if(getRversion() >= "3.6.0") {  # delayed registration
+#'     S3method(spatstat.geom::as.owin, gpc.poly)
+#' }
 as.owin.gpc.poly <- function (W, ...)
 {
     gpc2owin(W, ...)
@@ -114,7 +114,7 @@ as.owin.gpc.poly <- function (W, ...)
 
 
 ## check for the formal class "gpc.poly" (loading rgeos or gpclib if necessary)
-##' @import methods
+#' @import methods
 know_gpc.poly <- function ()
 {
     isClass("gpc.poly") ||

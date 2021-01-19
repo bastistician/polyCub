@@ -202,7 +202,7 @@ transform_pts <- function (pts, mean, Sigma)
 
 ## calculates the integral of the standard bivariat normal
 ## over a triangle bounded by y=0, y=ax, x=h (cf. formula 26.3.23)
-##' @importFrom stats pnorm
+#' @importFrom stats pnorm
 .V <- function(h,k) {
     if (k == 0) # degenerate triangle
         return(structure(0, error = 0))

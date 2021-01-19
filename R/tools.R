@@ -9,15 +9,15 @@
 ################################################################################
 
 
-##' Check if Polygon is Closed
-##'
-##' Check if the first and last coordinates of a coordinate matrix are
-##' identical.
-##' @param coords numeric coordinate matrix. It is interpreted by
-##' \code{\link{xy.coords}}.
-##' @return logical
-##' @keywords spatial internal
-##' @importFrom grDevices xy.coords
+#' Check if Polygon is Closed
+#'
+#' Check if the first and last coordinates of a coordinate matrix are
+#' identical.
+#' @param coords numeric coordinate matrix. It is interpreted by
+#' \code{\link{xy.coords}}.
+#' @return logical
+#' @keywords spatial internal
+#' @importFrom grDevices xy.coords
 isClosed <- function (coords)
 {
     xycoords <- xy.coords(coords)[c("x","y")]
@@ -27,39 +27,39 @@ isClosed <- function (coords)
 }
 
 
-##' Dot/Scalar Product of Two Vectors
-##'
-##' This is nothing else than \code{sum(x*y)}.
-##' @param x,y numeric vectors (of compatible lengths).
-##' @return \code{sum(x*y)}
-##' @keywords math internal
+#' Dot/Scalar Product of Two Vectors
+#'
+#' This is nothing else than \code{sum(x*y)}.
+#' @param x,y numeric vectors (of compatible lengths).
+#' @return \code{sum(x*y)}
+#' @keywords math internal
 dotprod <- function (x,y) sum(x*y)
 
-##' Euclidean Vector Norm (Length)
-##'
-##' This is nothing else than \code{sqrt(sum(x^2))}.
-##' @param x numeric vector.
-##' @return \code{sqrt(sum(x^2))}
-##' @keywords math internal
+#' Euclidean Vector Norm (Length)
+#'
+#' This is nothing else than \code{sqrt(sum(x^2))}.
+#' @param x numeric vector.
+#' @return \code{sqrt(sum(x^2))}
+#' @keywords math internal
 vecnorm <- function (x) sqrt(sum(x^2))
 
-##' Checks if Argument is Scalar
-##'
-##' Check if the argument is scalar, i.e. a numeric vector of length 1.
-##' @param x any object
-##' @return logical
-##' @keywords internal
+#' Checks if Argument is Scalar
+#'
+#' Check if the argument is scalar, i.e. a numeric vector of length 1.
+#' @param x any object
+#' @return logical
+#' @keywords internal
 isScalar <- function (x) {
     length(x) == 1L && is.vector(x, mode = "numeric")
 }
 
 
-##' Plots a Polygonal Domain (of Various Classes)
-##'
-##' @inheritParams plotpolyf
-##' @param add logical. Add to existing plot?
-##' @importFrom sp Polygons SpatialPolygons plot
-##' @importFrom graphics polygon
+#' Plots a Polygonal Domain (of Various Classes)
+#'
+#' @inheritParams plotpolyf
+#' @param add logical. Add to existing plot?
+#' @importFrom sp Polygons SpatialPolygons plot
+#' @importFrom graphics polygon
 plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
 {
     if (is.vector(polyregion, mode="list")) { # internal xylist object
