@@ -15,12 +15,8 @@ VERSION := $(strip $(shell grep "^Version:" DESCRIPTION | cut -f 2 -d ":"))
 document:
 	$R --no-restore --no-save --no-init-file --slave -e "devtools::document()"
 
-## create package logo
-man/figures/logo.png: devel/logo.R
-	$R --no-restore --no-save --no-init-file --slave -f $<
-
 ## build the package
-build: document man/figures/logo.png
+build: document
 	NOT_CRAN=true $R CMD build .
 
 ## package installation
