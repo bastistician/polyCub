@@ -67,9 +67,8 @@
 #'
 #' Meyer, S. and Held, L. (2014).
 #' Power-law models for infectious disease spread.
-#' \emph{The Annals of Applied Statistics}, \bold{8} (3), 1612-1639.\cr
-#' DOI-Link: \url{https://doi.org/10.1214/14-AOAS743},
-#' \href{https://arxiv.org/abs/1308.5115}{arXiv:1308.5115}
+#' \emph{The Annals of Applied Statistics}, \bold{8} (3), 1612-1639.
+#' \doi{10.1214/14-AOAS743}
 #' @seealso
 #' \code{system.file("include", "polyCubAPI.h", package = "polyCub")}
 #' for a full C-implementation of this cubature method (for a \emph{single}

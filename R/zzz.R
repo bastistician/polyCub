@@ -63,14 +63,13 @@
 #'
 #' Meyer, S. and Held, L. (2014).
 #' Power-law models for infectious disease spread.
-#' \emph{The Annals of Applied Statistics}, \bold{8} (3), 1612-1639.\cr
-#' DOI-Link: \url{https://doi.org/10.1214/14-AOAS743},
-#' \href{https://arxiv.org/abs/1308.5115}{arXiv:1308.5115}
+#' \emph{The Annals of Applied Statistics}, \bold{8} (3), 1612-1639.
+#' \doi{10.1214/14-AOAS743}
 #'
 #' Sommariva, A. and Vianello, M. (2007).
 #' Product Gauss cubature over polygons based on Green's integration formula.
-#' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.\cr
-#' DOI-Link: \url{https://doi.org/10.1007/s10543-007-0131-2}
+#' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
+#' \doi{10.1007/s10543-007-0131-2}
 #' @docType package
 #' @name polyCub-package
 #' @seealso

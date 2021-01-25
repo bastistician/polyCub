@@ -67,8 +67,8 @@
 #' @references
 #' Sommariva, A. and Vianello, M. (2007):
 #' Product Gauss cubature over polygons based on Green's integration formula.
-#' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.\cr
-#' DOI-Link: \url{https://doi.org/10.1007/s10543-007-0131-2}
+#' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
+#' \doi{10.1007/s10543-007-0131-2}
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @importFrom graphics points
