@@ -63,7 +63,7 @@
 #' These R and C implementations of product Gauss cubature are based on the
 #' original \acronym{MATLAB} implementation \code{polygauss} by Sommariva and
 #' Vianello (2007), which is available under the GNU GPL (>=2) license from
-#' \url{http://www.math.unipd.it/~alvise/software.html}.
+#' \url{https://www.math.unipd.it/~alvise/software.html}.
 #' @references
 #' Sommariva, A. and Vianello, M. (2007):
 #' Product Gauss cubature over polygons based on Green's integration formula.

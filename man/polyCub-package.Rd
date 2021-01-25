@@ -54,7 +54,7 @@ Chapman and Hall/CRC Press, London.
 Meyer, S. (2010).
 \emph{Spatio-Temporal Infectious Disease Epidemiology based on Point
 Processes}. Master's Thesis, LMU Munich.
-Available as \url{http://epub.ub.uni-muenchen.de/11703/}.
+Available as \url{https://epub.ub.uni-muenchen.de/11703/}.
 
 Meyer, S. and Held, L. (2014).
 Power-law models for infectious disease spread.
