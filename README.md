@@ -1,7 +1,7 @@
 
 # polyCub <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
-The [R](https://www.r-project.org/) package **polyCub** implements
+The [R](https://www.R-project.org/) package **polyCub** implements
 *cubature* (numerical integration) over *polygonal* domains.
 It solves the problem of integrating a continuously differentiable
 function f(x,y) over simple closed polygons.
@@ -82,8 +82,7 @@ in the installed package or
 
 The **polyCub** package evolved from the need to integrate
 so-called spatial interaction functions (Gaussian or power-law kernels)
-over the observation region (an administrative shapefile)
-of a spatio-temporal point process.
+over the observation region of a spatio-temporal point process.
 Such epidemic models are implemented in
 [**surveillance**](https://CRAN.R-project.org/package=surveillance).
 
@@ -99,8 +98,6 @@ Contributions are welcome!
 Please submit suggestions or report bugs at
 <https://github.com/bastistician/polyCub/issues>
 or via e-mail to `maintainer("polyCub")`.
-Note that pull requests should only be submitted
-after discussion of the underlying issue.
 
 
 ## License
