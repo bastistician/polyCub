@@ -1,3 +1,4 @@
+if (!requireNamespace("statmod")) q("no")
 library("polyCub")
 
 ## statmod::gauss.quad() gives cached Gauss-Legendre nodes/weights
