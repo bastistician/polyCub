@@ -1,4 +1,4 @@
-polyCub 0.8.0 (UNRELEASED)
+polyCub 0.8.0 (2021-01-26)
 ==========================
 
 * Support `"(MULTI)POLYGON"` geometries from package
