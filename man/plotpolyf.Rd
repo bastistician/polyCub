@@ -42,7 +42,7 @@ The range of function values will be divided into \code{cuts+1} levels.}
 \item{use.lattice}{logical indicating if \pkg{lattice} graphics
 (\code{\link[lattice]{levelplot}}) should be used.}
 
-\item{print.args}{a list of arguments passed to \code{\link{print.trellis}}
+\item{print.args}{a list of arguments passed to \code{\link[lattice]{print.trellis}}
 for plotting the produced \code{\link[lattice:trellis.object]{"trellis"}} object
 (given \code{use.lattice = TRUE}). The latter will be returned without
 explicit \code{print}ing if \code{print.args} is not a list.}
