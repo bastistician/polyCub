@@ -31,6 +31,7 @@
 #' @export
 #' @examples
 #' if (require("rgeos") && require("sf")) withAutoprint({
+#'
 #'     ## use example polygons from
 #'     example(plotpolyf, ask = FALSE)
 #'
