@@ -27,14 +27,14 @@ Package \pkg{rgeos} (or \pkg{gpclib}) is required for the formal class
 definition of a \code{"gpc.poly"}.
 }
 \examples{
-if (require("rgeos") && require("sf")) {
+if (require("rgeos") && require("sf")) withAutoprint({
     ## use example polygons from
     example(plotpolyf, ask = FALSE)
 
     letterR  # a simple "xylist"
     letterR.sfg <- st_polygon(lapply(letterR, function(xy)
         rbind(cbind(xy$x, xy$y), c(xy$x[1], xy$y[1]))))
-    print(letterR.sfg)
+    letterR.sfg
     stopifnot(identical(letterR, xylist(letterR.sfg)))
     \dontshow{
     stopifnot(identical(rep(letterR, 2),
@@ -42,10 +42,12 @@ if (require("rgeos") && require("sf")) {
     }
     ## convert sf "POLYGON" to a "gpc.poly"
     letterR.gpc_from_sfg <- sfg2gpc(letterR.sfg)
-    print(letterR.gpc_from_sfg)
-    letterR.xylist_from_gpc <- xylist(letterR.gpc_from_sfg) # with hole info
-    stopifnot(identical(letterR, lapply(letterR.xylist_from_gpc, "[", 1:2)))
-}
+    letterR.gpc_from_sfg
+    \dontshow{if (requireNamespace("spatstat.geom")) {
+        letterR.xylist_from_gpc <- xylist(letterR.gpc_from_sfg) # with hole info
+        stopifnot(identical(letterR, lapply(letterR.xylist_from_gpc, "[", 1:2)))
+    }}
+})
 }
 \seealso{
 \code{\link{xylist}}
