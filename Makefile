@@ -1,7 +1,7 @@
 ################################################################################
 ## Useful rules to build, check and install an R source package
 ##
-## Copyright (C) 2012,2014-2019 Sebastian Meyer
+## Copyright (C) 2012,2014-2019,2022 Sebastian Meyer
 ################################################################################
 
 ## define variable for R to enable 'make check R=R-devel'
@@ -11,12 +11,16 @@ R := R
 PKG := $(strip $(shell grep "^Package:" DESCRIPTION | cut -f 2 -d ":"))
 VERSION := $(strip $(shell grep "^Version:" DESCRIPTION | cut -f 2 -d ":"))
 
+## non-commercial use of gpclib granted when building the package vignette
+export R_GPCLIBPERMIT := true
+
 ## roxygenise (update NAMESPACE and Rd files)
 document:
-	$R --no-restore --no-save --no-init-file --slave -e "devtools::document()"
+	$R --no-restore --no-save --no-init-file -s -e "devtools::document()"
 
-## build the package
+## build the package (ensuring that soft vignette dependencies are available)
 build: document
+	@$R --vanilla -s -e 'invisible(loadNamespace("spatstat.geom"))'
 	NOT_CRAN=true $R CMD build .
 
 ## package installation
@@ -44,7 +48,7 @@ checkUsage: install
 	echo "library('${PKG}'); library('codetools'); \
 	checkUsagePackage('${PKG}', all = TRUE, \
             suppressParamAssigns = TRUE, suppressParamUnused = TRUE)" \
-	| $R --slave --no-save --no-restore
+	| $R -s --no-save --no-restore
 
 ## make pdf manual
 manual.pdf: DESCRIPTION document
@@ -52,7 +56,7 @@ manual.pdf: DESCRIPTION document
 
 ## generate HTML page from NEWS.Rd
 # NEWS.html: inst/NEWS.Rd
-# 	$R --vanilla --slave -e \
+# 	$R --vanilla -s -e \
 # 	'tools::Rd2HTML("$<", out="$@", stylesheet="https://CRAN.R-project.org/web/CRAN_web.css")'
 # 	[ `uname -s` = "Darwin" ] && open "$@" || xdg-open "$@"
 
@@ -63,12 +67,12 @@ NEWS.html: NEWS.md
 
 ## report code coverage
 covr:
-	$R --vanilla --slave -e \
+	$R --vanilla -s -e \
 	'covr::report(covr::package_coverage(type="all"), file="/tmp/covr.html", browse=TRUE)'
 
 ## spell check
 spelling:
-	$R --vanilla --slave -e \
+	$R --vanilla -s -e \
 	'spelling::spell_check_package()'
 
 ## cleanup

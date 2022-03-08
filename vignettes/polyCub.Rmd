@@ -10,6 +10,13 @@ vignette: >
 
 ```{R setup, include = FALSE, purl = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+## accommodate to _R_CHECK_DEPENDS_ONLY_VIGNETTES_=TRUE
+HAVE_SPATSTAT <- requireNamespace("spatstat.geom", quietly = TRUE)
+## conditionally accept gpclib license (prohibits commercial use)
+if (USE_GPCLIB <- identical(Sys.getenv("R_GPCLIBPERMIT"), "true"))
+    polyCub::gpclibPermit()
+## skip benchmark in regular checks
+DO_BENCHMARK <- HAVE_SPATSTAT && identical(Sys.getenv("NOT_CRAN"), "true")
 ```
 
 <img src="../man/figures/logo.png" align="right" alt="" width="120" />
@@ -170,14 +177,14 @@ over all pixels whose midpoint is part of the polygon.
 To use `polyCub.midpoint()`, we need to convert our polygon to
 **spatstat.geom**'s "owin" class:
 
-```{R, message = FALSE}
+```{R, message = FALSE, purl = FALSE, eval = HAVE_SPATSTAT}
 library("spatstat.geom")
 hexagon.owin <- owin(poly = hexagon)
 ```
 
 Using a pixel size of `eps = 0.5` (here yielding 270 pixels), we obtain:
 
-```{R midpoint, echo = -1, fig.show = "hold"}
+```{R midpoint, echo = -1, fig.show = "hold", purl = FALSE, eval = HAVE_SPATSTAT}
 par(mar = c(3,3,1,3), xaxs = "i", yaxs = "i")
 polyCub.midpoint(hexagon.owin, f, eps = 0.5, plot = TRUE)
 ```
@@ -239,8 +246,7 @@ from the [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm) package.
 
 For the above example, we obtain:
 
-```{R}
-gpclibPermit()  # accept gpclib license (prohibits commercial use)
+```{R, purl = FALSE, eval = HAVE_SPATSTAT && USE_GPCLIB}
 polyCub.exact.Gauss(hexagon.owin, mean = c(0,0), Sigma = 5^2*diag(2))
 ```
 
@@ -267,20 +273,20 @@ For comparison, we also run `polyCub.iso()` without the analytically derived
 
 The median runtimes [ms] of the different cubature methods are given below.
 
-```{r benchmark, purl = FALSE, eval = identical(Sys.getenv("NOT_CRAN"), "true")}
+```{r benchmark, purl = FALSE, eval = DO_BENCHMARK}
 benchmark <- microbenchmark::microbenchmark(
   SV = polyCub.SV(hexagon.owin, f, nGQ = 4),
   midpoint = polyCub.midpoint(hexagon.owin, f, dimyx = 1200),
   iso = polyCub.iso(hexagon.owin, intrfr = intrfr, center = c(0,0)),
   iso_double_approx = polyCub.iso(hexagon.owin, f, center = c(0,0)),
   exact = polyCub.exact.Gauss(hexagon.owin, mean = c(0,0), Sigma = 5^2*diag(2)),
-  times = 6,
+  times = 9,
   check = function (values) all(abs(unlist(values) - 0.274144773813434) < 1e-8))
 ```
 ```{r, purl = FALSE, eval = FALSE}
 summary(benchmark, unit = "ms")[c("expr", "median")]
 ```
-```{r, purl = FALSE, echo = FALSE, eval = identical(Sys.getenv("NOT_CRAN"), "true")}
+```{r, purl = FALSE, echo = FALSE, eval = DO_BENCHMARK}
 knitr::kable(summary(benchmark, unit = "ms")[c("expr", "median")], digits = 2)
 ```
 
