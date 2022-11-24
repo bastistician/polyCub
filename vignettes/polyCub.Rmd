@@ -6,17 +6,19 @@ output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Getting started with polyCub}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteDepends{polyCub, spatstat.geom}
 ---
 
 ```{R setup, include = FALSE, purl = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
-## accommodate to _R_CHECK_DEPENDS_ONLY_VIGNETTES_=TRUE
-HAVE_SPATSTAT <- requireNamespace("spatstat.geom", quietly = TRUE)
-## conditionally accept gpclib license (prohibits commercial use)
-if (USE_GPCLIB <- identical(Sys.getenv("R_GPCLIBPERMIT"), "true"))
+
+## maintainer-mode options for building the vignette:
+if (USE_GPCLIB <- identical(Sys.getenv("R_GPCLIBPERMIT"), "true")) {
+    stopifnot(requireNamespace("gpclib"))
     polyCub::gpclibPermit()
-## skip benchmark in regular checks
-DO_BENCHMARK <- HAVE_SPATSTAT && identical(Sys.getenv("NOT_CRAN"), "true")
+}
+if (DO_BENCHMARK <- USE_GPCLIB && identical(Sys.getenv("NOT_CRAN"), "true"))
+    stopifnot(requireNamespace("microbenchmark"))
 ```
 
 <img src="../man/figures/logo.png" align="right" alt="" width="120" />
@@ -177,14 +179,14 @@ over all pixels whose midpoint is part of the polygon.
 To use `polyCub.midpoint()`, we need to convert our polygon to
 **spatstat.geom**'s "owin" class:
 
-```{R, message = FALSE, purl = FALSE, eval = HAVE_SPATSTAT}
+```{R, message = FALSE}
 library("spatstat.geom")
 hexagon.owin <- owin(poly = hexagon)
 ```
 
 Using a pixel size of `eps = 0.5` (here yielding 270 pixels), we obtain:
 
-```{R midpoint, echo = -1, fig.show = "hold", purl = FALSE, eval = HAVE_SPATSTAT}
+```{R midpoint, echo = -1, fig.show = "hold"}
 par(mar = c(3,3,1,3), xaxs = "i", yaxs = "i")
 polyCub.midpoint(hexagon.owin, f, eps = 0.5, plot = TRUE)
 ```
@@ -246,7 +248,7 @@ from the [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm) package.
 
 For the above example, we obtain:
 
-```{R, purl = FALSE, eval = HAVE_SPATSTAT && USE_GPCLIB}
+```{R, purl = FALSE, eval = USE_GPCLIB}
 polyCub.exact.Gauss(hexagon.owin, mean = c(0,0), Sigma = 5^2*diag(2))
 ```
 

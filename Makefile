@@ -18,9 +18,8 @@ export R_GPCLIBPERMIT := true
 document:
 	$R --no-restore --no-save --no-init-file -s -e "devtools::document()"
 
-## build the package (ensuring that soft vignette dependencies are available)
+## build the package
 build: document
-	@$R --vanilla -s -e 'invisible(loadNamespace("spatstat.geom"))'
 	NOT_CRAN=true $R CMD build .
 
 ## package installation
