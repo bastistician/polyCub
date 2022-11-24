@@ -4,7 +4,8 @@
 \alias{polyCub.exact.Gauss}
 \title{Quasi-Exact Cubature of the Bivariate Normal Density}
 \usage{
-polyCub.exact.Gauss(polyregion, mean = c(0, 0), Sigma = diag(2), plot = FALSE)
+polyCub.exact.Gauss(polyregion, mean = c(0, 0), Sigma = diag(2),
+  plot = FALSE)
 }
 \arguments{
 \item{polyregion}{a \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} polygon or

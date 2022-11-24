@@ -8,7 +8,8 @@
 polyCub.iso(polyregion, f, intrfr, ..., center, control = list(),
   check.intrfr = FALSE, plot = FALSE)
 
-.polyCub.iso(polys, intrfr, ..., center, control = list(), .witherror = FALSE)
+.polyCub.iso(polys, intrfr, ..., center, control = list(),
+  .witherror = FALSE)
 }
 \arguments{
 \item{polyregion}{a polygonal domain.

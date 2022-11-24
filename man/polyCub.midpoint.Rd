@@ -4,7 +4,8 @@
 \alias{polyCub.midpoint}
 \title{Two-Dimensional Midpoint Rule}
 \usage{
-polyCub.midpoint(polyregion, f, ..., eps = NULL, dimyx = NULL, plot = FALSE)
+polyCub.midpoint(polyregion, f, ..., eps = NULL, dimyx = NULL,
+  plot = FALSE)
 }
 \arguments{
 \item{polyregion}{a polygonal integration domain.
