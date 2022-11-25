@@ -12,6 +12,7 @@ PKG := $(strip $(shell grep "^Package:" DESCRIPTION | cut -f 2 -d ":"))
 VERSION := $(strip $(shell grep "^Version:" DESCRIPTION | cut -f 2 -d ":"))
 
 ## non-commercial use of gpclib granted when building the package vignette
+## and checking locally
 export R_GPCLIBPERMIT := true
 
 ## roxygenise (update NAMESPACE and Rd files)
@@ -38,7 +39,7 @@ endef
 
 ## standard --as-cran check with remote checks disabled
 check: build
-	_R_CHECK_CRAN_INCOMING_REMOTE_=FALSE _R_CHECK_EXAMPLE_TIMING_THRESHOLD_=2 $R CMD check --as-cran --timings ${PKG}_${VERSION}.tar.gz
+	_R_CHECK_CRAN_INCOMING_REMOTE_=FALSE _R_CHECK_EXAMPLE_TIMING_THRESHOLD_=2 $R CMD check --as-cran --run-dontrun --timings ${PKG}_${VERSION}.tar.gz
 ## further option: --use-gct (for better detection of memory bugs/segfaults)
 	@$(check-report-warnings-in-examples)
 
