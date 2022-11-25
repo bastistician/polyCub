@@ -27,12 +27,10 @@ stopIfDiff <- function(int, ...)
 ## reproduce saved reference value
 if (!gpclibPermitStatus()) # fails without prior license agreement
     stopifnot(inherits(try(polyCub:::gpclibCheck(), silent=TRUE), "try-error"))
-if (requireNamespace("mvtnorm") && gpclibPermit()) {
-    ## run this conditionally since gpclib might not be available on all
-    ## platforms (as pointed out by Uwe Ligges, 2014-04-20)
+if (identical(Sys.getenv("R_GPCLIBPERMIT"), "true") && gpclibPermit() &&
+    requireNamespace("mvtnorm"))
     stopIfDiff(polyCub.exact.Gauss(disc.owin, mean=m, Sigma=sd^2*diag(2)),
                tolerance = 1e-8)
-}
 
 ## exact value of the integral over the _real_ circle
 stopIfDiff(circleCub.Gauss(center=center, r=r, mean=m, sd=sd),
