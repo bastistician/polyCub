@@ -1,3 +1,9 @@
+polyCub 0.8.1 (2022-11-25)
+==========================
+
+* Accommodate CRAN checks with `_R_CHECK_DEPENDS_ONLY_=true`.
+
+
 polyCub 0.8.0 (2021-01-26)
 ==========================
 
