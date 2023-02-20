@@ -1,3 +1,4 @@
+## ~standard header, redundant only for R >= 4.2.0
 citHeader("To cite", sQuote("polyCub"), "in publications, please refer to:")
 
 bibentry(
