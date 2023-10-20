@@ -46,8 +46,7 @@ All of **polyCub**'s cubature methods understand
 
 * `"owin"` from package [**spatstat.geom**](https://CRAN.R-project.org/package=spatstat.geom),
 
-* `"gpc.poly"` from [**rgeos**](https://CRAN.R-project.org/package=rgeos)
-  (or [**gpclib**](https://CRAN.R-project.org/package=gpclib)),
+* `"gpc.poly"` from [**gpclib**](https://CRAN.R-project.org/package=gpclib),
 
 * `"SpatialPolygons"` from package [**sp**](https://CRAN.R-project.org/package=sp), and
 

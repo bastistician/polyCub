@@ -21,8 +21,7 @@
 #' following polygon classes:
 #' \itemize{
 #' \item \code{"\link[spatstat.geom:owin.object]{owin}"} from package \pkg{spatstat.geom}
-#' \item \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} from package
-#' \pkg{rgeos} (or \pkg{gpclib})
+#' \item \code{"\link[gpclib:gpc.poly-class]{gpc.poly}"} from package \pkg{gpclib}
 #' \item \code{"\linkS4class{Polygons}"} from package \pkg{sp}
 #' (as well as \code{"\linkS4class{Polygon}"} and
 #' \code{"\linkS4class{SpatialPolygons}"})

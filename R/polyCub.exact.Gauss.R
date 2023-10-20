@@ -23,18 +23,15 @@
 #' However, the most time consuming step is the
 #' evaluation of \code{\link[mvtnorm]{pmvnorm}}.
 #'
-#' @note The package \pkg{gpclib} is required to produce the
-#' \code{tristrip}, since this is not implemented in \pkg{rgeos}
-#' (as of version 0.3-25).
+#' @note Package \pkg{gpclib} is required to produce the \code{tristrip}.
 #' The restricted license of \pkg{gpclib} (commercial use prohibited)
 #' has to be accepted explicitly via
 #' \code{\link{gpclibPermit}()} prior to using \code{polyCub.exact.Gauss}.
 #'
-#' @param polyregion a \code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} polygon or
+#' @param polyregion a \code{"\link[gpclib:gpc.poly-class]{gpc.poly}"} polygon or
 #' something that can be coerced to this class, e.g., an \code{"owin"} polygon
-#' (via \code{\link{owin2gpc}}), an \code{"sfg"} polygon (via
-#' \code{\link{sfg2gpc}}), or -- given \pkg{rgeos} is available
-#' -- a \code{"SpatialPolygons"} object.
+#' (via \code{\link{owin2gpc}}), or an \code{"sfg"} polygon (via
+#' \code{\link{sfg2gpc}}).
 #' @param mean,Sigma mean and covariance matrix of the bivariate normal density
 #' to be integrated.
 #' @param plot logical indicating if an illustrative plot of the numerical
@@ -87,11 +84,6 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
     } else if (inherits(polyregion, "sfg")) {
         polyregion <- sfg2gpc(polyregion)
     } else if (!inherits(polyregion, "gpc.poly")) {
-        if (inherits(polyregion, "SpatialPolygons") &&
-            !requireNamespace("rgeos")) {
-            stop("package ", sQuote("rgeos"), " is required to handle ",
-                 "\"SpatialPolygons\" input")
-        }
         polyregion <- as(polyregion, "gpc.poly")
     }
 

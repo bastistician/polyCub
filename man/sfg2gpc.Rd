@@ -11,23 +11,23 @@ sfg2gpc(object)
 }
 \value{
 The converted polygon of class \code{"gpc.poly"}.
-If neither package \pkg{rgeos} nor \pkg{gpclib} are available,
+If package \pkg{gpclib} is not available,
 \code{sfg2gpc} will just return the \code{pts} slot of the
 \code{"gpc.poly"} (no formal class) with a warning.
 }
 \description{
 Package \pkg{polyCub} implements a converter from class
 \code{"\link[sf:st_polygon]{(MULTI)POLYGON}"} of package \pkg{sf} to
-\code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} of package \pkg{rgeos}
-(originally from \pkg{gpclib}) such that \code{\link{polyCub.exact.Gauss}}
+\code{"\link[gpclib:gpc.poly-class]{gpc.poly}"} of package
+\pkg{gpclib} such that \code{\link{polyCub.exact.Gauss}}
 can be used with simple feature polygons.
 }
 \note{
-Package \pkg{rgeos} (or \pkg{gpclib}) is required for the formal class
+Package \pkg{gpclib} is required for the formal class
 definition of a \code{"gpc.poly"}.
 }
 \examples{
-if (require("rgeos") && require("sf")) withAutoprint({
+if (require("gpclib") && require("sf")) withAutoprint({
 
     ## use example polygons from
     example(plotpolyf, ask = FALSE)

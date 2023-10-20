@@ -1,7 +1,7 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
-Version: 0.8.1
-Date: 2022-11-25
+Version: 0.8.2
+Date: 2023-10-20
 Authors@R: c(
     person("Sebastian", "Meyer",
            email = "seb.meyer@fau.de",
@@ -44,7 +44,6 @@ Suggests:
     lattice,
     mvtnorm,
     statmod,
-    rgeos,
     gpclib,
     sf,
     cubature,
@@ -53,4 +52,4 @@ Suggests:
     microbenchmark
 VignetteBuilder: knitr, rmarkdown
 Roxygen: list(old_usage = TRUE)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3

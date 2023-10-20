@@ -23,25 +23,24 @@ respectively.}
 }
 \value{
 The converted polygon of class \code{"gpc.poly"} or \code{"owin"},
-respectively. If neither package \pkg{rgeos} nor \pkg{gpclib} are available,
+respectively. If package \pkg{gpclib} is not available,
 \code{owin2gpc} will just return the \code{pts} slot of the
 \code{"gpc.poly"} (no formal class) with a warning.
 }
 \description{
 Package \pkg{polyCub} implements converters between the classes
 \code{"\link[spatstat.geom:owin.object]{owin}"} of package \pkg{spatstat.geom} and
-\code{"\link[rgeos:gpc.poly-class]{gpc.poly}"} of package \pkg{rgeos}
-(originally from \pkg{gpclib}).
+\code{"\link[gpclib:gpc.poly-class]{gpc.poly}"} of package \pkg{gpclib}.
 }
 \note{
-The converter \code{owin2gpc} requires the package \pkg{rgeos} (or
-\pkg{gpclib}) for the formal class definition of a \code{"gpc.poly"}.
+The converter \code{owin2gpc} requires the package
+\pkg{gpclib} for the formal class definition of a \code{"gpc.poly"}.
 It will produce vertices ordered according to the \pkg{sp} convention,
 i.e. clockwise for normal boundaries and anticlockwise for holes, where,
 however, the first vertex is \emph{not} repeated!
 }
 \examples{
-if (require("rgeos") && require("spatstat.geom")) {
+if (require("gpclib") && require("spatstat.geom")) {
     ## use example polygons from
     example(plotpolyf, ask = FALSE)
 
@@ -55,9 +54,7 @@ if (require("rgeos") && require("spatstat.geom")) {
 }
 }
 \seealso{
-\code{\link{xylist}}, and the package \pkg{rgeos} for
-conversions of \code{"gpc.poly"} objects from and to \pkg{sp}'s
-\code{"\linkS4class{SpatialPolygons}"} class.
+\code{\link{xylist}}
 }
 \author{
 Sebastian Meyer
