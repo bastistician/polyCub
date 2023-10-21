@@ -252,7 +252,7 @@ polyCub.exact.Gauss(hexagon.owin, mean = c(0,0), Sigma = 5^2*diag(2))
 ```
 
 The required triangulation as well as the numerous calls of `pmvnorm()`
-make this integration algorithm quiet cumbersome. For large-scale
+make this integration algorithm quite cumbersome. For large-scale
 integration tasks, it is thus advisable to resort to the general-purpose
 product Gauss cubature rule `polyCub.SV()`.
 
