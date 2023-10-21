@@ -1,7 +1,7 @@
 ################################################################################
 ### polyCub.exact.Gauss: Quasi-Exact Cubature of the Bivariate Normal Density
 ###
-### Copyright (C) 2009-2018,2021 Sebastian Meyer
+### Copyright (C) 2009-2018,2021-2023 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -87,6 +87,10 @@ polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
         polyregion <- as(polyregion, "gpc.poly")
     }
 
+    stopifnot(is.numeric(mean), length(mean) == 2L, !is.na(mean),
+              is.matrix(Sigma), identical(dim(Sigma), c(2L, 2L)),
+              is.numeric(Sigma), diag(Sigma) > 0, !is.na(Sigma))
+
     ## coordinate transformation so that the standard bivariat normal density
     ## can be used in integrations (cf. formula 26.3.22)
     polyregion@pts <- transform_pts(polyregion@pts, mean = mean, Sigma = Sigma)
@@ -133,7 +137,7 @@ transform_pts <- function (pts, mean, Sigma)
 {
     mx <- mean[1L]
     my <- mean[2L]
-    rho <- cov2cor(Sigma)[1L,2L]
+    stopifnot(abs(rho <- cov2cor(Sigma)[1L,2L]) < 1)
     sdx <- sqrt(Sigma[1L,1L])
     sdy <- sqrt(Sigma[2L,2L])
     lapply(pts, function (poly) {
