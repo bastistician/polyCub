@@ -51,9 +51,6 @@ evaluation of \code{\link[mvtnorm]{pmvnorm}}.
 }
 \note{
 Package \pkg{gpclib} is required to produce the \code{tristrip}.
-The restricted license of \pkg{gpclib} (commercial use prohibited)
-has to be accepted explicitly via
-\code{\link{gpclibPermit}()} prior to using \code{polyCub.exact.Gauss}.
 }
 \examples{
 ## a function to integrate (here: isotropic zero-mean Gaussian density)
@@ -67,8 +64,7 @@ hexagon <- list(
 )
 
 ## quasi-exact integration based on gpclib::tristrip() and mvtnorm::pmvnorm()
-\dontrun{## (this example requires gpclib and acceptance of its license)
-gpclibPermit()
+\dontrun{## (this example requires gpclib)
 hexagon.gpc <- new("gpc.poly", pts = lapply(hexagon, c, list(hole = FALSE)))
 plotpolyf(hexagon.gpc, f, xlim = c(-8,8), ylim = c(-8,8))
 print(polyCub.exact.Gauss(hexagon.gpc, mean = c(0,0), Sigma = 5^2*diag(2),

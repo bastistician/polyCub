@@ -24,9 +24,6 @@
 #' evaluation of \code{\link[mvtnorm]{pmvnorm}}.
 #'
 #' @note Package \pkg{gpclib} is required to produce the \code{tristrip}.
-#' The restricted license of \pkg{gpclib} (commercial use prohibited)
-#' has to be accepted explicitly via
-#' \code{\link{gpclibPermit}()} prior to using \code{polyCub.exact.Gauss}.
 #'
 #' @param polyregion a \code{"\link[gpclib:gpc.poly-class]{gpc.poly}"} polygon or
 #' something that can be coerced to this class, e.g., an \code{"owin"} polygon
@@ -62,8 +59,7 @@
 #' @example examples/setting.R
 #' @examples
 #' ## quasi-exact integration based on gpclib::tristrip() and mvtnorm::pmvnorm()
-#' \dontrun{## (this example requires gpclib and acceptance of its license)
-#' gpclibPermit()
+#' \dontrun{## (this example requires gpclib)
 #' hexagon.gpc <- new("gpc.poly", pts = lapply(hexagon, c, list(hole = FALSE)))
 #' plotpolyf(hexagon.gpc, f, xlim = c(-8,8), ylim = c(-8,8))
 #' print(polyCub.exact.Gauss(hexagon.gpc, mean = c(0,0), Sigma = 5^2*diag(2),
@@ -78,7 +74,6 @@
 polyCub.exact.Gauss <- function (polyregion, mean = c(0,0), Sigma = diag(2),
                                  plot = FALSE)
 {
-    gpclibCheck(fatal=TRUE)
     if (inherits(polyregion, "owin")) {
         polyregion <- owin2gpc(polyregion)
     } else if (inherits(polyregion, "sfg")) {

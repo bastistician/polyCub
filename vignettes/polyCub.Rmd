@@ -15,7 +15,6 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ## maintainer-mode options for building the vignette:
 if (USE_GPCLIB <- identical(Sys.getenv("R_GPCLIBPERMIT"), "true")) {
     stopifnot(requireNamespace("gpclib"))
-    polyCub::gpclibPermit()
 }
 if (DO_BENCHMARK <- USE_GPCLIB && identical(Sys.getenv("NOT_CRAN"), "true"))
     stopifnot(requireNamespace("microbenchmark"))

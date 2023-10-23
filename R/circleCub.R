@@ -38,8 +38,7 @@
 #' circleCub.Gauss(center=c(1,2), r=3, mean=c(4,5), sd=6)
 #'
 #' ## compare with cubature over a polygonal approximation of a circle
-#' \dontrun{## (this example requires gpclib and acceptance of its license)
-#' gpclibPermit()
+#' \dontrun{## (this example requires gpclib)
 #' disc.poly <- spatstat.geom::disc(radius=3, centre=c(1,2), npoly=32)
 #' polyCub.exact.Gauss(disc.poly, mean=c(4,5), Sigma=6^2*diag(2))
 #' }

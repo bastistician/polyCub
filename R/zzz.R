@@ -79,36 +79,21 @@
 #' (e.g., a bounding box), the \pkg{cubature} package is more appropriate.
 NULL
 
-
-.Options <- new.env()
-
-.onLoad <- function (libname, pkgname)
-{
-    .Options$gpclib <- FALSE
-}
-
-gpclibCheck <- function (fatal = TRUE)
-{
-    gpclibOK <- .Options$gpclib
-    if (!gpclibOK && fatal)
-        stop("acceptance of the gpclib license is required; see ",
-             sQuote("help(gpclibPermit)"))
-    gpclibOK
-}
-
-#' \pkg{gpclib} License Acceptance
+#' \pkg{gpclib} License Acceptance (OBSOLETE)
 #'
-#' Similar to the handling in package \pkg{maptools}, these functions
-#' explicitly accept the restricted \pkg{gpclib} license (commercial use
-#' prohibited) and report its acceptance status, respectively.
+#' Previous versions of package \pkg{gpclib} had a restricted license
+#' (commercial use prohibited) and these functions were used as a blocker.
+#' They now always return \code{TRUE}.
+#'
 #' \pkg{gpclib} functionality is only required for
 #' \code{\link{polyCub.exact.Gauss}}.
+#' @keywords internal
 #' @export
 gpclibPermit <- function ()
 {
-    if (requireNamespace("gpclib")) .Options$gpclib <- TRUE
+    ##requireNamespace("gpclib")
     gpclibPermitStatus()
 }
 #' @rdname gpclibPermit
 #' @export
-gpclibPermitStatus <- function () gpclibCheck(fatal=FALSE)
+gpclibPermitStatus <- function () TRUE

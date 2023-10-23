@@ -3,16 +3,19 @@
 \name{gpclibPermit}
 \alias{gpclibPermit}
 \alias{gpclibPermitStatus}
-\title{\pkg{gpclib} License Acceptance}
+\title{\pkg{gpclib} License Acceptance (OBSOLETE)}
 \usage{
 gpclibPermit()
 
 gpclibPermitStatus()
 }
 \description{
-Similar to the handling in package \pkg{maptools}, these functions
-explicitly accept the restricted \pkg{gpclib} license (commercial use
-prohibited) and report its acceptance status, respectively.
+Previous versions of package \pkg{gpclib} had a restricted license
+(commercial use prohibited) and these functions were used as a blocker.
+They now always return \code{TRUE}.
+}
+\details{
 \pkg{gpclib} functionality is only required for
 \code{\link{polyCub.exact.Gauss}}.
 }
+\keyword{internal}

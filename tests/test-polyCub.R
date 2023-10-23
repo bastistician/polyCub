@@ -25,9 +25,7 @@ stopIfDiff <- function(int, ...)
     }
 
 ## reproduce saved reference value
-if (!gpclibPermitStatus()) # fails without prior license agreement
-    stopifnot(inherits(try(polyCub:::gpclibCheck(), silent=TRUE), "try-error"))
-if (identical(Sys.getenv("R_GPCLIBPERMIT"), "true") && gpclibPermit() &&
+if (requireNamespace("gpclib") &&
     requireNamespace("mvtnorm"))
     stopIfDiff(polyCub.exact.Gauss(disc.owin, mean=m, Sigma=sd^2*diag(2)),
                tolerance = 1e-8)
