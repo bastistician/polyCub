@@ -12,8 +12,8 @@
 #' Conversion between polygonal \code{"owin"} and \code{"gpc.poly"}
 #'
 #' Package \pkg{polyCub} implements converters between the classes
-#' \code{"\link[spatstat.geom:owin.object]{owin}"} of package \pkg{spatstat.geom} and
-#' \code{"\link[gpclib:gpc.poly-class]{gpc.poly}"} of package \pkg{gpclib}.
+#' \code{"\link[spatstat.geom:owin.object]{owin}"} of package \CRANpkg{spatstat.geom}
+#' and \code{"gpc.poly"} of package \CRANpkg{gpclib}.
 #'
 #' @param object an object of class \code{"gpc.poly"} or \code{"owin"},
 #' respectively.
@@ -33,18 +33,20 @@
 #' @keywords spatial methods
 #' @import methods
 #' @export
-#' @examples
-#' if (require("gpclib") && require("spatstat.geom")) {
-#'     ## use example polygons from
-#'     example(plotpolyf, ask = FALSE)
+#' @examplesIf requireNamespace("spatstat.geom")
+#' ## use example polygons from
+#' example(plotpolyf, ask = FALSE)
+#' letterR  # a simple "xylist"
 #'
-#'     letterR  # a simple "xylist"
-#'     letterR.owin <- owin(poly = letterR)
-#'     letterR.gpc_from_owin <- owin2gpc(letterR.owin)
-#'     letterR.xylist_from_gpc <- xylist(letterR.gpc_from_owin)
-#'     stopifnot(all.equal(letterR, lapply(letterR.xylist_from_gpc, "[", 1:2)))
-#'     letterR.owin_from_gpc <- as.owin(letterR.gpc_from_owin)
-#'     stopifnot(all.equal(letterR.owin, letterR.owin_from_gpc))
+#' letterR.owin <- spatstat.geom::owin(poly = letterR)
+#' letterR.gpc_from_owin <- owin2gpc(letterR.owin)
+#' ## warns if "gpclib" is unavailable
+#'
+#' if (is(letterR.gpc_from_owin, "gpc.poly")) {
+#'   letterR.xylist_from_gpc <- xylist(letterR.gpc_from_owin)
+#'   stopifnot(all.equal(letterR, lapply(letterR.xylist_from_gpc, `[`, 1:2)))
+#'   letterR.owin_from_gpc <- gpc2owin(letterR.gpc_from_owin)
+#'   stopifnot(all.equal(letterR.owin, letterR.owin_from_gpc))
 #' }
 owin2gpc <- function (object)
 {
@@ -110,10 +112,9 @@ as.owin.gpc.poly <- function (W, ...)
 }
 
 
-## check for the formal class "gpc.poly" (loading gpclib if necessary)
+## check for the formal class "gpc.poly"
 #' @import methods
 know_gpc.poly <- function ()
 {
-    isClass("gpc.poly") ||
-        requireNamespace("gpclib", quietly = TRUE)
+    isClass("gpc.poly") #|| requireNamespace("gpclib", quietly = TRUE)
 }

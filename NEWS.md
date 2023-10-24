@@ -1,7 +1,12 @@
-polyCub 0.8.2 (UNRELEASED)
+polyCub 0.9.0 (2023-10-25)
 ==========================
 
-* Removed remaining references to archived package
+* `polyCub.exact.Gauss()` is defunct. It may be resurrected in future
+  versions, when a reliable replacement for `gpclib::tristrip()` is
+  implemented ([#2](https://github.com/bastistician/polyCub/issues/2)).
+
+* Removed remaining references to archived packages
+  [**gpclib**](https://CRAN.R-project.org/package=gpclib) and
   [**rgeos**](https://CRAN.R-project.org/package=rgeos).
 
 * **polyCub** now requires R >= 3.2.0.

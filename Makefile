@@ -39,7 +39,7 @@ endef
 
 ## standard --as-cran check with remote checks disabled
 check: build
-	_R_CHECK_CRAN_INCOMING_REMOTE_=FALSE _R_CHECK_EXAMPLE_TIMING_THRESHOLD_=2 $R CMD check --as-cran --run-dontrun --timings ${PKG}_${VERSION}.tar.gz
+	_R_CHECK_CRAN_INCOMING_REMOTE_=FALSE _R_CHECK_EXAMPLE_TIMING_THRESHOLD_=2 $R CMD check --as-cran --timings ${PKG}_${VERSION}.tar.gz
 ## further option: --use-gct (for better detection of memory bugs/segfaults)
 	@$(check-report-warnings-in-examples)
 

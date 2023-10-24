@@ -1,7 +1,7 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
-Version: 0.8.2
-Date: 2023-10-20
+Version: 0.9.0
+Date: 2023-10-25
 Authors@R: c(
     person("Sebastian", "Meyer",
            email = "seb.meyer@fau.de",
@@ -20,12 +20,10 @@ Description: Numerical integration of continuously differentiable
     product Gauss cubature (Sommariva and Vianello, 2007,
     <doi:10.1007/s10543-007-0131-2>),
     the simple two-dimensional midpoint rule
-    (wrapping 'spatstat.geom' functions),
+    (wrapping 'spatstat.geom' functions), and
     adaptive cubature for radially symmetric functions via line
     integrate() along the polygon boundary (Meyer and Held, 2014,
-    <doi:10.1214/14-AOAS743>, Supplement B),
-    and integration of the bivariate Gaussian density based on
-    polygon triangulation.
+    <doi:10.1214/14-AOAS743>, Supplement B).
     For simple integration along the axes, the 'cubature' package
     is more appropriate.
 License: GPL-2
@@ -44,7 +42,6 @@ Suggests:
     lattice,
     mvtnorm,
     statmod,
-    gpclib,
     sf,
     cubature,
     knitr,

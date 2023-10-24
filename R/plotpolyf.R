@@ -18,7 +18,7 @@
 #' @param polyregion a polygonal domain.
 #' The following classes are supported:
 #' \code{"\link[spatstat.geom]{owin}"} from package \pkg{spatstat.geom},
-#' \code{"\link[gpclib:gpc.poly-class]{gpc.poly}"} from \pkg{gpclib},
+#' \code{"gpc.poly"} from \pkg{gpclib},
 #' \code{"\linkS4class{SpatialPolygons}"}, \code{"\linkS4class{Polygons}"},
 #' and \code{"\linkS4class{Polygon}"} from package \pkg{sp}, as well as
 #' \code{"\link[sf:st_polygon]{(MULTI)POLYGON}"} from package \pkg{sf}.

@@ -28,25 +28,17 @@ Adaptive cubature for \emph{radially symmetric functions}
 via line \code{\link{integrate}()} along the polygon boundary
 (Meyer and Held, 2014, Supplement B, Section 2.4).
 }
-\item{\code{\link{polyCub.exact.Gauss}}:}{
-Accurate (but slow) integration of the \emph{bivariate Gaussian density}
-based on polygon triangulation (via \code{\link[gpclib]{tristrip}} from
-\pkg{gpclib}) and (numerous) evaluations of cumulative densities (via
-\code{\link[mvtnorm]{pmvnorm}} from package \pkg{mvtnorm}).
-Note that there is also a function \code{\link{circleCub.Gauss}}
-to integrate the \emph{isotropic} Gaussian density over a
-\emph{circular domain}.
 }
-}
-A more detailed description and benchmark experiment of the above cubature
-methods can be found in the \code{vignette("polyCub")} and in
-Meyer (2010, Section 3.2).
+A brief description and benchmark experiment of the above cubature
+methods can be found in the \code{vignette("polyCub")}.
+
+There is also \code{\link{polyCub.exact.Gauss}}, intended to
+accurately (but slowly) integrate the \emph{bivariate Gaussian density};
+however, this implementation is disabled as of \pkg{polyCub} 0.9.0:
+it needs a reliable implementation of polygon triangulation.
+Meyer (2010, Section 3.2) discusses and compares some of these methods.
 }
 \references{
-Abramowitz, M. and Stegun, I. A. (1972).
-\emph{Handbook of Mathematical Functions with Formulas, Graphs, and
-Mathematical Tables}. New York: Dover Publications.
-
 Baddeley, A., Rubak, E. and Turner, R. (2015).
 \emph{Spatial Point Patterns: Methodology and Applications with R}.
 Chapman and Hall/CRC Press, London.

@@ -12,9 +12,9 @@
 #' Convert polygonal \code{"sfg"} to \code{"gpc.poly"}
 #'
 #' Package \pkg{polyCub} implements a converter from class
-#' \code{"\link[sf:st_polygon]{(MULTI)POLYGON}"} of package \pkg{sf} to
-#' \code{"\link[gpclib:gpc.poly-class]{gpc.poly}"} of package
-#' \pkg{gpclib} such that \code{\link{polyCub.exact.Gauss}}
+#' \code{"\link[sf:st_polygon]{(MULTI)POLYGON}"} of package \CRANpkg{sf}
+#' to \code{"gpc.poly"} of package \CRANpkg{gpclib}
+#' such that \code{\link{polyCub.exact.Gauss}}
 #' can be used with simple feature polygons.
 #'
 #' @param object a \code{"POLYGON"} or \code{"MULTIPOLYGON"} \code{"sfg"} object.
@@ -29,29 +29,27 @@
 #' @keywords spatial methods
 #' @import methods
 #' @export
-#' @examples
-#' if (require("gpclib") && require("sf")) withAutoprint({
+#' @examplesIf requireNamespace("sf")
+#' ## use example polygons from
+#' example(plotpolyf, ask = FALSE)
+#' letterR  # a simple "xylist"
 #'
-#'     ## use example polygons from
-#'     example(plotpolyf, ask = FALSE)
-#'
-#'     letterR  # a simple "xylist"
-#'     letterR.sfg <- st_polygon(lapply(letterR, function(xy)
-#'         rbind(cbind(xy$x, xy$y), c(xy$x[1], xy$y[1]))))
-#'     letterR.sfg
-#'     stopifnot(identical(letterR, xylist(letterR.sfg)))
-#'     \dontshow{
-#'     stopifnot(identical(rep(letterR, 2),
-#'         xylist(st_multipolygon(list(letterR.sfg, letterR.sfg)))))
-#'     }
-#'     ## convert sf "POLYGON" to a "gpc.poly"
-#'     letterR.gpc_from_sfg <- sfg2gpc(letterR.sfg)
-#'     letterR.gpc_from_sfg
-#'     \dontshow{if (requireNamespace("spatstat.geom")) {
-#'         letterR.xylist_from_gpc <- xylist(letterR.gpc_from_sfg) # with hole info
-#'         stopifnot(identical(letterR, lapply(letterR.xylist_from_gpc, "[", 1:2)))
-#'     }}
-#' })
+#' letterR.sfg <- sf::st_polygon(lapply(letterR, function(xy)
+#'     rbind(cbind(xy$x, xy$y), c(xy$x[1], xy$y[1]))))
+#' letterR.sfg
+#' stopifnot(identical(letterR, xylist(letterR.sfg)))
+#' \dontshow{
+#' stopifnot(identical(rep(letterR, 2),
+#'     xylist(sf::st_multipolygon(list(letterR.sfg, letterR.sfg)))))
+#' }
+#' ## convert sf "POLYGON" to a "gpc.poly"
+#' letterR.gpc_from_sfg <- sfg2gpc(letterR.sfg)
+#' letterR.gpc_from_sfg
+#' \dontshow{
+#' if (is(letterR.gpc_from_sfg, "gpc.poly") && requireNamespace("spatstat.geom")) {
+#'     letterR.xylist_from_gpc <- xylist(letterR.gpc_from_sfg) # with hole info
+#'     stopifnot(identical(letterR, lapply(letterR.xylist_from_gpc, `[`, 1:2)))
+#' }}
 sfg2gpc <- function (object)
 {
     assert_polygonal_sfg(object)

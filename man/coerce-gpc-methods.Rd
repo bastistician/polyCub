@@ -29,8 +29,8 @@ respectively. If package \pkg{gpclib} is not available,
 }
 \description{
 Package \pkg{polyCub} implements converters between the classes
-\code{"\link[spatstat.geom:owin.object]{owin}"} of package \pkg{spatstat.geom} and
-\code{"\link[gpclib:gpc.poly-class]{gpc.poly}"} of package \pkg{gpclib}.
+\code{"\link[spatstat.geom:owin.object]{owin}"} of package \CRANpkg{spatstat.geom}
+and \code{"gpc.poly"} of package \CRANpkg{gpclib}.
 }
 \note{
 The converter \code{owin2gpc} requires the package
@@ -40,18 +40,22 @@ i.e. clockwise for normal boundaries and anticlockwise for holes, where,
 however, the first vertex is \emph{not} repeated!
 }
 \examples{
-if (require("gpclib") && require("spatstat.geom")) {
-    ## use example polygons from
-    example(plotpolyf, ask = FALSE)
+\dontshow{if (requireNamespace("spatstat.geom")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+## use example polygons from
+example(plotpolyf, ask = FALSE)
+letterR  # a simple "xylist"
 
-    letterR  # a simple "xylist"
-    letterR.owin <- owin(poly = letterR)
-    letterR.gpc_from_owin <- owin2gpc(letterR.owin)
-    letterR.xylist_from_gpc <- xylist(letterR.gpc_from_owin)
-    stopifnot(all.equal(letterR, lapply(letterR.xylist_from_gpc, "[", 1:2)))
-    letterR.owin_from_gpc <- as.owin(letterR.gpc_from_owin)
-    stopifnot(all.equal(letterR.owin, letterR.owin_from_gpc))
+letterR.owin <- spatstat.geom::owin(poly = letterR)
+letterR.gpc_from_owin <- owin2gpc(letterR.owin)
+## warns if "gpclib" is unavailable
+
+if (is(letterR.gpc_from_owin, "gpc.poly")) {
+  letterR.xylist_from_gpc <- xylist(letterR.gpc_from_owin)
+  stopifnot(all.equal(letterR, lapply(letterR.xylist_from_gpc, `[`, 1:2)))
+  letterR.owin_from_gpc <- gpc2owin(letterR.gpc_from_owin)
+  stopifnot(all.equal(letterR.owin, letterR.owin_from_gpc))
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{xylist}}

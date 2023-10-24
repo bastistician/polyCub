@@ -2,13 +2,13 @@
 % Please edit documentation in R/polyCub.exact.Gauss.R
 \name{polyCub.exact.Gauss}
 \alias{polyCub.exact.Gauss}
-\title{Quasi-Exact Cubature of the Bivariate Normal Density}
+\title{Quasi-Exact Cubature of the Bivariate Normal Density (DEFUNCT)}
 \usage{
 polyCub.exact.Gauss(polyregion, mean = c(0, 0), Sigma = diag(2),
   plot = FALSE)
 }
 \arguments{
-\item{polyregion}{a \code{"\link[gpclib:gpc.poly-class]{gpc.poly}"} polygon or
+\item{polyregion}{a \code{"gpc.poly"} polygon or
 something that can be coerced to this class, e.g., an \code{"owin"} polygon
 (via \code{\link{owin2gpc}}), or an \code{"sfg"} polygon (via
 \code{\link{sfg2gpc}}).}
@@ -37,20 +37,26 @@ quasi-exact (as is the \code{pmvnorm} function).
 }
 }
 \description{
+This cubature method is defunct as of \pkg{polyCub} version 0.9.0.
+It relied on \code{tristrip()} from package \CRANpkg{gpclib} for polygon
+triangulation, but that package did not have a \acronym{FOSS} license and
+was no longer maintained on a mainstream repository.\cr
+Contributions to resurrect this cubature method are welcome: an alternative
+implementation for constrained polygon triangulation is needed, see
+\url{https://github.com/bastistician/polyCub/issues/2}.
+}
+\details{
 The bivariate Gaussian density can be integrated based on a triangulation of
 the (transformed) polygonal domain, using formulae from the
 Abramowitz and Stegun (1972) handbook (Section 26.9, Example 9, pp. 956f.).
 This method is quite cumbersome because the A&S formula is only for triangles
-where one vertex is the origin (0,0). For each triangle of the
-\code{\link[gpclib]{tristrip}} we have to check in which of the 6 outer
+where one vertex is the origin (0,0). For each triangle
+we have to check in which of the 6 outer
 regions of the triangle the origin (0,0) lies and adapt the signs in the
 formula appropriately: \eqn{(AOB+BOC-AOC)} or \eqn{(AOB-AOC-BOC)} or
 \eqn{(AOB+AOC-BOC)} or \eqn{(AOC+BOC-AOB)} or \ldots.
 However, the most time consuming step is the
 evaluation of \code{\link[mvtnorm]{pmvnorm}}.
-}
-\note{
-Package \pkg{gpclib} is required to produce the \code{tristrip}.
 }
 \examples{
 ## a function to integrate (here: isotropic zero-mean Gaussian density)
