@@ -14,12 +14,11 @@
 #' Package \pkg{polyCub} implements \code{coerce}-methods
 #' (\code{as(object, Class)}) to convert \code{"\linkS4class{SpatialPolygons}"}
 #' (or \code{"\linkS4class{Polygons}"} or \code{"\linkS4class{Polygon}"})
-#' to \code{"\link[spatstat.geom:owin.object]{owin}"}.
+#' of package \CRANpkg{sp}
+#' to \code{"\link[spatstat.geom:owin.object]{owin}"}
+#' of package \CRANpkg{spatstat.geom}.
 #' They are also available as \code{as.owin.*} functions to support
 #' \code{\link{polyCub.midpoint}}.
-#' Note that the \pkg{maptools} package contains an alternative implementation
-#' of coercion from \code{"SpatialPolygons"} to \code{"owin"} (and reverse);
-#' \R will use the method that was loaded last.
 #' @author Sebastian Meyer
 #' @seealso \code{\link{xylist}}
 #' @keywords spatial methods
