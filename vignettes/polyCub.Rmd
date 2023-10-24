@@ -46,7 +46,7 @@ All of **polyCub**'s cubature methods understand
 
 * `"owin"` from package [**spatstat.geom**](https://CRAN.R-project.org/package=spatstat.geom),
 
-* `"gpc.poly"` from [**gpclib**](https://CRAN.R-project.org/package=gpclib),
+* `"gpc.poly"` from [**gpclib**](https://github.com/rdpeng/gpclib/),
 
 * `"SpatialPolygons"` from package [**sp**](https://CRAN.R-project.org/package=sp), and
 
@@ -69,7 +69,7 @@ The following cubature methods are implemented in **polyCub**:
 3. `polyCub.iso()`: Adaptive cubature for radially symmetric functions
    $f(x,y) = f_r(\lVert(x-x_0,y-y_0)\rVert)$
 
-4. `polyCub.exact.Gauss()`: Accurate (but slow) integration of the
+4. `polyCub.exact.Gauss()` (*currently disabled*): Accurate integration of the
    bivariate Gaussian density
 
 The following section details and illustrates the different cubature methods.
@@ -235,17 +235,22 @@ for an example.
 
 ### 4. Integration of the *bivariate Gaussian density*: `polyCub.exact.Gauss()`
 
+*This cubature method is currently disabled*
+([#2](https://github.com/bastistician/polyCub/issues/2)).
+It requires polygon triangulation originally performed using `tristrip()`
+from the [**gpclib**](https://github.com/rdpeng/gpclib/) package;
+unfortunately, it has become unavailable from mainstream repositories.
+
 Abramowitz and Stegun (1972, Section 26.9, Example 9) offer a formula for
 the integral of the bivariate Gaussian density over a triangle with one
 vertex at the origin. This formula can be used after triangulation of
-the polygonal domain (**polyCub** currently uses `tristrip()`
-from the [**gpclib**](https://CRAN.R-project.org/package=gpclib) package).
+the polygonal domain.
 The core of the formula is an integral of the bivariate Gaussian density
 with zero mean, unit variance and some correlation over an infinite rectangle
 [h, Inf] x [0, Inf], which can be computed accurately using `pmvnorm()`
 from the [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm) package.
 
-For the above example, we obtain:
+For the above example, we obtained:
 
 ```{R, purl = FALSE, eval = USE_GPCLIB}
 polyCub.exact.Gauss(hexagon.owin, mean = c(0,0), Sigma = 5^2*diag(2))

@@ -57,21 +57,23 @@ The various implemented cubature methods can also be called directly.
    General-purpose **product Gauss cubature**
    (Sommariva and Vianello, 2007, *BIT Numerical Mathematics*,
    <https://doi.org/10.1007/s10543-007-0131-2>)
-   
+
 2. `polyCub.midpoint()`:
    Simple **two-dimensional midpoint rule** based on
    [**spatstat.geom**](https://CRAN.R-project.org/package=spatstat.geom)`::as.im.function()`
-   
+
 3. `polyCub.iso()`:
    Adaptive **cubature for radially symmetric functions**
    via line `integrate()` along the polygon boundary
    (Meyer and Held, 2014, *The Annals of Applied Statistics*,
    <https://doi.org/10.1214/14-AOAS743>, Supplement B, Section 2.4)
-   
+
+<!--
 4. `polyCub.exact.Gauss()`:
    Accurate (but slow) **integration of the bivariate Gaussian density**
    based on polygon triangulation and
    [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm)`::pmvnorm()`
+-->
 
 For details and illustrations see the `vignette("polyCub")`
 in the installed package or
