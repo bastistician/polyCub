@@ -27,7 +27,7 @@ length the number of coordinates.}
 
 \item{nGQ}{degree of the one-dimensional Gauss-Legendre quadrature rule
 (default: 20) as implemented in function \code{\link[statmod]{gauss.quad}}
-of package \pkg{statmod}. Nodes and weights up to \code{nGQ=60} are cached
+of package \CRANpkg{statmod}. Nodes and weights up to \code{nGQ=60} are cached
 in \pkg{polyCub}, for larger degrees \pkg{statmod} is required.}
 
 \item{alpha}{base-line of the (rotated) polygon at \eqn{x = \alpha} (see

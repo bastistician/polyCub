@@ -10,7 +10,7 @@ gpclibPermit()
 gpclibPermitStatus()
 }
 \description{
-Previous versions of package \pkg{gpclib} had a restricted license
+Previous versions of package \CRANpkg{gpclib} had a restricted license
 (commercial use prohibited) and these functions were used as a blocker.
 They now always return \code{TRUE}.
 }

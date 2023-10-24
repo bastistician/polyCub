@@ -73,7 +73,7 @@
 #' \code{system.file("include", "polyCubAPI.h", package = "polyCub")}
 #' for a full C-implementation of this cubature method (for a \emph{single}
 #' polygon). The corresponding C-routine \code{polyCub_iso} can be used by
-#' other \R packages, notably \pkg{surveillance}, via \samp{LinkingTo: polyCub}
+#' other \R packages, notably \CRANpkg{surveillance}, via \samp{LinkingTo: polyCub}
 #' (in the \file{DESCRIPTION}) and \samp{#include <polyCubAPI.h>} (in suitable
 #' \file{/src} files). Note that the \code{intrfr} function must then also be
 #' supplied as a C-routine. An example can be found in the package tests.

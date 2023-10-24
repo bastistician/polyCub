@@ -13,7 +13,7 @@
 #'
 #' The surface is converted to a binary pixel image
 #' using the \code{\link[spatstat.geom]{as.im.function}} method from package
-#' \pkg{spatstat.geom} (Baddeley et al., 2015).
+#' \CRANpkg{spatstat.geom} (Baddeley et al., 2015).
 #' The integral under the surface is then approximated as the
 #' sum over (pixel area * f(pixel midpoint)).
 #'

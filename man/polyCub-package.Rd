@@ -70,5 +70,5 @@ Product Gauss cubature over polygons based on Green's integration formula.
 \code{vignette("polyCub")}
 
 For the special case of a rectangular domain along the axes
-(e.g., a bounding box), the \pkg{cubature} package is more appropriate.
+(e.g., a bounding box), the \CRANpkg{cubature} package is more appropriate.
 }

@@ -4,6 +4,8 @@ polyCub 0.8.2 (UNRELEASED)
 * Removed remaining references to archived package
   [**rgeos**](https://CRAN.R-project.org/package=rgeos).
 
+* **polyCub** now requires R >= 3.2.0.
+
 
 polyCub 0.8.1 (2022-11-25)
 ==========================
