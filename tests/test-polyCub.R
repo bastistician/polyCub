@@ -25,7 +25,8 @@ stopIfDiff <- function(int, ...)
     }
 
 ## reproduce saved reference value
-if (requireNamespace("gpclib") &&
+if (identical(Sys.getenv("R_GPCLIBPERMIT"), "true") &&
+    requireNamespace("gpclib") &&
     requireNamespace("mvtnorm"))
     stopIfDiff(polyCub.exact.Gauss(disc.owin, mean=m, Sigma=sd^2*diag(2)),
                tolerance = 1e-8)
