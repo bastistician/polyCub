@@ -11,7 +11,7 @@
 
 #' Quasi-Exact Cubature of the Bivariate Normal Density (DEFUNCT)
 #'
-#' This cubature method is defunct as of \pkg{polyCub} version 0.9.0.
+#' This cubature method is \strong{defunct} as of \pkg{polyCub} version 0.9.0.
 #' It relied on \code{tristrip()} from package \CRANpkg{gpclib} for polygon
 #' triangulation, but that package did not have a \acronym{FOSS} license and
 #' was no longer maintained on a mainstream repository.\cr
