@@ -88,11 +88,6 @@ over the observation region of a spatio-temporal point process.
 Such epidemic models are implemented in
 [**surveillance**](https://CRAN.R-project.org/package=surveillance).
 
-<!--
-**polyCub** also powers phylogeographic analyses in
-[**rase**](https://CRAN.R-project.org/package=rase).
--->
-
 
 ## Feedback
 
