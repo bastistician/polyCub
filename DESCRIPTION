@@ -45,8 +45,8 @@ Suggests:
     sf,
     cubature,
     knitr,
-    rmarkdown,
+    markdown,
     microbenchmark
-VignetteBuilder: knitr, rmarkdown
+VignetteBuilder: knitr
 Roxygen: list(old_usage = TRUE)
 RoxygenNote: 7.2.3

@@ -2,22 +2,36 @@
 title: "Getting started with polyCub"
 author: "Sebastian Meyer"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Getting started with polyCub}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteDepends{polyCub, spatstat.geom}
+output:
+  markdown::html_format:
+    options:
+      smartypants: false
 ---
 
+<!--
+%\VignetteIndexEntry{Getting started with polyCub}
+%\VignetteEngine{knitr::knitr}
+%\VignetteDepends{polyCub, spatstat.geom}
+-->
+
 ```{R setup, include = FALSE, purl = FALSE}
-knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>",
+                      fig.width = 4, fig.height = 3.5)
 
 ## maintainer-mode options for building the vignette:
 if (USE_GPCLIB <- identical(Sys.getenv("R_GPCLIBPERMIT"), "true")) {
     if (!requireNamespace("gpclib")) # unavailable in --as-cran checks
         USE_GPCLIB <- FALSE
 }
-if (DO_BENCHMARK <- USE_GPCLIB && identical(Sys.getenv("NOT_CRAN"), "true"))
+if (identical(Sys.getenv("NOT_CRAN"), "true")) {
+    stopifnot(nzchar(Sys.which("pngquant"))) # to notice when building
+    knitr::knit_hooks$set(pngquant = knitr::hook_pngquant)
+    knitr::opts_chunk$set(pngquant = "--speed=1")
+    DO_BENCHMARK <- USE_GPCLIB
+} else {
+    DO_BENCHMARK <- FALSE
+}
+if (DO_BENCHMARK)
     stopifnot(requireNamespace("microbenchmark"))
 ```
 
@@ -107,7 +121,7 @@ hexagon <- list(
 An image of the function and the integration domain can be produced using
 **polyCub**'s rudimentary (but convenient) plotting utility:
 
-```{R example, fig.width = 3, fig.height = 2.5}
+```{R example}
 plotpolyf(hexagon, f, xlim = c(-8,8), ylim = c(-8,8))
 ```
 
