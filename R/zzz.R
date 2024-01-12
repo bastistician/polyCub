@@ -43,6 +43,7 @@
 #' it needs a reliable implementation of polygon triangulation.
 #' Meyer (2010, Section 3.2) discusses and compares some of these methods.
 #'
+#' @author Sebastian Meyer
 #' @references
 #' Baddeley, A., Rubak, E. and Turner, R. (2015).
 #' \emph{Spatial Point Patterns: Methodology and Applications with R}.
@@ -62,14 +63,13 @@
 #' Product Gauss cubature over polygons based on Green's integration formula.
 #' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
 #' \doi{10.1007/s10543-007-0131-2}
-#' @docType package
 #' @name polyCub-package
 #' @seealso
 #' \code{vignette("polyCub")}
 #'
 #' For the special case of a rectangular domain along the axes
 #' (e.g., a bounding box), the \CRANpkg{cubature} package is more appropriate.
-NULL
+"_PACKAGE"
 
 #' \pkg{gpclib} License Acceptance (OBSOLETE)
 #'

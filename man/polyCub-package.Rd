@@ -64,3 +64,6 @@ Product Gauss cubature over polygons based on Green's integration formula.
 For the special case of a rectangular domain along the axes
 (e.g., a bounding box), the \CRANpkg{cubature} package is more appropriate.
 }
+\author{
+Sebastian Meyer
+}
