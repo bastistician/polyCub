@@ -1,7 +1,7 @@
 ################################################################################
 ## Useful rules to build, check and install an R source package
 ##
-## Copyright (C) 2012,2014-2019,2022 Sebastian Meyer
+## Copyright (C) 2012,2014-2019,2022,2024 Sebastian Meyer
 ################################################################################
 
 ## define variable for R to enable 'make check R=R-devel'
@@ -50,9 +50,14 @@ checkUsage: install
             suppressParamAssigns = TRUE, suppressParamUnused = TRUE)" \
 	| $R -s --no-save --no-restore
 
-## make pdf manual
+## manuals
 manual.pdf: DESCRIPTION document
 	$R CMD Rd2pdf --batch --force --output="$@" .
+
+manual.html: DESCRIPTION document
+	echo "tools::pkg2HTML(dir = '.', out = '$@', toc_entry = 'name')" \
+	  | $R -s --no-save --no-restore
+	xdg-open "$@"
 
 ## generate HTML page from NEWS.Rd
 # NEWS.html: inst/NEWS.Rd

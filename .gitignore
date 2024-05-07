@@ -7,6 +7,7 @@ src/*.o
 src/*.so
 *.Rproj
 .Rproj.user
+/manual.html
 /manual.pdf
 /NEWS.html
 /README.html
