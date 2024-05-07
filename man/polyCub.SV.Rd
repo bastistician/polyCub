@@ -139,10 +139,10 @@ Product Gauss cubature over polygons based on Green's integration formula.
 }
 \seealso{
 Other polyCub-methods: 
+\code{\link{polyCub}()},
 \code{\link{polyCub.exact.Gauss}()},
 \code{\link{polyCub.iso}()},
-\code{\link{polyCub.midpoint}()},
-\code{\link{polyCub}()}
+\code{\link{polyCub.midpoint}()}
 }
 \author{
 Sebastian Meyer\cr

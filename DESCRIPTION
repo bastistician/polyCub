@@ -49,4 +49,4 @@ Suggests:
     microbenchmark
 VignetteBuilder: knitr
 Roxygen: list(old_usage = TRUE)
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.1

@@ -87,10 +87,10 @@ Tables. New York: Dover Publications.
 isotropic Gaussian density over a circular domain.
 
 Other polyCub-methods: 
+\code{\link{polyCub}()},
 \code{\link{polyCub.SV}()},
 \code{\link{polyCub.iso}()},
-\code{\link{polyCub.midpoint}()},
-\code{\link{polyCub}()}
+\code{\link{polyCub.midpoint}()}
 }
 \concept{polyCub-methods}
 \keyword{math}

@@ -89,10 +89,10 @@ Chapman and Hall/CRC Press, London.
 }
 \seealso{
 Other polyCub-methods: 
+\code{\link{polyCub}()},
 \code{\link{polyCub.SV}()},
 \code{\link{polyCub.exact.Gauss}()},
-\code{\link{polyCub.iso}()},
-\code{\link{polyCub}()}
+\code{\link{polyCub.iso}()}
 }
 \concept{polyCub-methods}
 \keyword{math}
