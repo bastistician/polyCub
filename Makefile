@@ -72,8 +72,8 @@ covr:
 
 ## spell check
 spelling:
-	$R --vanilla -s -e \
-	'spelling::spell_check_package()'
+	$R --vanilla -s -e 'spelling::spell_check_package()'
+	codespell -S '*~' examples inst NEWS.md README.md R src tests vignettes
 
 ## cleanup
 clean:

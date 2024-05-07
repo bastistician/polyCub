@@ -10,7 +10,7 @@ f <- function (s) (rowSums(s^2)+1)^-2
 ##plotpolyf(hexagon, f)
 
 ## isotropic cubature can handle control list for integrate()
-## previosly, passing control arguments did not work
+## previously, passing control arguments did not work
 int1 <- polyCub.iso(hexagon, f, center=c(0,0), control=list(rel.tol=1e-3))
 int2 <- polyCub.iso(hexagon, f, center=c(0,0), control=list(rel.tol=1e-8))
 ## results are almost but not identical

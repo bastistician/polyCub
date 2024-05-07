@@ -51,7 +51,7 @@
 polyCub.midpoint <- function (polyregion, f, ...,
                               eps = NULL, dimyx = NULL, plot = FALSE)
 {
-    ## as.im needs seperate x and y arguments
+    ## as.im needs separate x and y arguments
     fxy <- function (x, y, ...) f(cbind(x,y), ...)
 
     ## calculate pixel values of fxy
