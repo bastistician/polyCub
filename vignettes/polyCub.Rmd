@@ -11,7 +11,8 @@ output:
 <!--
 %\VignetteIndexEntry{Getting started with polyCub}
 %\VignetteEngine{knitr::knitr}
-%\VignetteDepends{polyCub, spatstat.geom}
+%\VignetteDepends{polyCub, spatstat.geom, markdown}
+%%                                        ^ implied by the engine
 -->
 
 ```{R setup, include = FALSE, purl = FALSE}
