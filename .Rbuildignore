@@ -6,6 +6,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^Makefile$
-^manual\.pdf$
+^manual\.(html|pdf)$
 ^NEWS\.html$
 ^LICENSE\.md$
