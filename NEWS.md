@@ -1,3 +1,10 @@
+polyCub 0.9.1 (2024-05-21)
+==========================
+
+* `vignette("polyCub")` now uses the lightweight `"knitr::knitr"` engine
+  rather than `"knitr::rmarkdown"`.
+
+
 polyCub 0.9.0 (2023-10-25)
 ==========================
 
