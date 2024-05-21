@@ -16,9 +16,7 @@
 #' It solves the problem of integrating a continuously differentiable
 #' function \eqn{f(x,y)} over simple closed polygons.
 #'
-#' \pkg{polyCub} provides the following cubature methods,
-#' which can either be called explicitly or via the generic
-#' \code{\link{polyCub}} function:
+#' \pkg{polyCub} provides the following cubature methods:
 #' \describe{
 #' \item{\code{\link{polyCub.SV}}:}{
 #' General-purpose \emph{product Gauss cubature} (Sommariva and Vianello, 2007)
@@ -41,6 +39,7 @@
 #' accurately (but slowly) integrate the \emph{bivariate Gaussian density};
 #' however, this implementation is disabled as of \pkg{polyCub} 0.9.0:
 #' it needs a reliable implementation of polygon triangulation.
+#'
 #' Meyer (2010, Section 3.2) discusses and compares some of these methods.
 #'
 #' @author Sebastian Meyer
@@ -63,13 +62,14 @@
 #' Product Gauss cubature over polygons based on Green's integration formula.
 #' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
 #' \doi{10.1007/s10543-007-0131-2}
-#' @name polyCub-package
 #' @seealso
 #' \code{vignette("polyCub")}
 #'
 #' For the special case of a rectangular domain along the axes
 #' (e.g., a bounding box), the \CRANpkg{cubature} package is more appropriate.
 "_PACKAGE"
+
+
 
 #' \pkg{gpclib} License Acceptance (OBSOLETE)
 #'

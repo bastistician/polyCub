@@ -12,8 +12,9 @@
 #' Wrapper Function for the Various Cubature Methods
 #'
 #' The wrapper function \code{polyCub} can be used to call specific cubature
-#' methods via its \code{method} argument. It calls \code{\link{polyCub.SV}}
-#' by default, which implements general-purpose product Gauss cubature.
+#' methods via its \code{method} argument. It calls the \code{\link{polyCub.SV}}
+#' function by default, which implements general-purpose product Gauss cubature.
+#' The desired cubature function should usually be called directly.
 #'
 #' @inheritParams plotpolyf
 #' @param f a two-dimensional real-valued function to be integrated over

@@ -22,7 +22,8 @@ via:
 install.packages("polyCub")
 ```
 
-To install the development version from the GitHub repository, use:
+To install the development version from the
+[GitHub repository](https://github.com/bastistician/polyCub), use:
 
 ```R
 ## install.packages("remotes")
@@ -47,9 +48,10 @@ or even as a plain list of lists of vertex coordinates (`"xylist"`).
 * `f` is the integrand and needs to take a two-column coordinate matrix
 as its first argument.
 
-The `polyCub()` function by default calls `polyCub.SV()`,
-a C-implementation of *product Gauss cubature*.
-The various implemented cubature methods can also be called directly.
+The `polyCub()` function wraps the implemented cubature methods and
+by default calls `polyCub.SV()`, a C-implementation of *product Gauss cubature*.
+Directly calling the desired cubature function is preferable,
+see the list below.
 
 ### Implemented cubature methods
 

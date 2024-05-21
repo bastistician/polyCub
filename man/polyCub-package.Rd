@@ -11,9 +11,7 @@ It solves the problem of integrating a continuously differentiable
 function \eqn{f(x,y)} over simple closed polygons.
 }
 \details{
-\pkg{polyCub} provides the following cubature methods,
-which can either be called explicitly or via the generic
-\code{\link{polyCub}} function:
+\pkg{polyCub} provides the following cubature methods:
 \describe{
 \item{\code{\link{polyCub.SV}}:}{
 General-purpose \emph{product Gauss cubature} (Sommariva and Vianello, 2007)
@@ -36,6 +34,7 @@ There is also \code{\link{polyCub.exact.Gauss}}, intended to
 accurately (but slowly) integrate the \emph{bivariate Gaussian density};
 however, this implementation is disabled as of \pkg{polyCub} 0.9.0:
 it needs a reliable implementation of polygon triangulation.
+
 Meyer (2010, Section 3.2) discusses and compares some of these methods.
 }
 \references{

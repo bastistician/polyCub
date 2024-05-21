@@ -39,8 +39,9 @@ The approximated integral of \code{f} over \code{polyregion}.
 }
 \description{
 The wrapper function \code{polyCub} can be used to call specific cubature
-methods via its \code{method} argument. It calls \code{\link{polyCub.SV}}
-by default, which implements general-purpose product Gauss cubature.
+methods via its \code{method} argument. It calls the \code{\link{polyCub.SV}}
+function by default, which implements general-purpose product Gauss cubature.
+The desired cubature function should usually be called directly.
 }
 \seealso{
 Details and examples in the \code{vignette("polyCub")}
