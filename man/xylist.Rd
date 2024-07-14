@@ -55,9 +55,9 @@ following polygon classes:
 \itemize{
 \item \code{"\link[spatstat.geom:owin.object]{owin}"} from package \pkg{spatstat.geom}
 \item \code{"gpc.poly"} from package \pkg{gpclib}
-\item \code{"\linkS4class{Polygons}"} from package \pkg{sp}
-(as well as \code{"\linkS4class{Polygon}"} and
-\code{"\linkS4class{SpatialPolygons}"})
+\item \code{"\link[sp:Polygons-class]{Polygons}"} from package \pkg{sp}
+(as well as \code{"\link[sp:Polygon-class]{Polygon}"} and
+\code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"})
 \item \code{"\link[sf:st_polygon]{(MULTI)POLYGON}"} from package \pkg{sf}
 }
 The (somehow useless) default \code{xylist}-method

@@ -12,8 +12,10 @@
 #' Coerce \code{"SpatialPolygons"} to \code{"owin"}
 #'
 #' Package \pkg{polyCub} implements \code{coerce}-methods
-#' (\code{as(object, Class)}) to convert \code{"\linkS4class{SpatialPolygons}"}
-#' (or \code{"\linkS4class{Polygons}"} or \code{"\linkS4class{Polygon}"})
+#' (\code{as(object, Class)}) to convert
+#' \code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"}
+#' (or \code{"\link[sp:Polygons-class]{Polygons}"}
+#' or \code{"\link[sp:Polygon-class]{Polygon}"})
 #' of package \CRANpkg{sp}
 #' to \code{"\link[spatstat.geom:owin.object]{owin}"}
 #' of package \CRANpkg{spatstat.geom}.

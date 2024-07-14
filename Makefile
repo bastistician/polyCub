@@ -17,7 +17,7 @@ export R_GPCLIBPERMIT := true
 
 ## roxygenise (update NAMESPACE and Rd files)
 document:
-	$R --no-restore --no-save --no-init-file -s -e "devtools::document()"
+	$R --no-restore --no-save --no-init-file -s -e "roxygen2::roxygenise()"
 
 ## build the package
 build: document

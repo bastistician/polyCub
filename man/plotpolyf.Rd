@@ -13,8 +13,9 @@ plotpolyf(polyregion, f, ..., npixel = 100, cuts = 15,
 The following classes are supported:
 \code{"\link[spatstat.geom]{owin}"} from package \pkg{spatstat.geom},
 \code{"gpc.poly"} from \pkg{gpclib},
-\code{"\linkS4class{SpatialPolygons}"}, \code{"\linkS4class{Polygons}"},
-and \code{"\linkS4class{Polygon}"} from package \pkg{sp}, as well as
+\code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"},
+\code{"\link[sp:Polygons-class]{Polygons}"},
+and \code{"\link[sp:Polygon-class]{Polygon}"} from package \pkg{sp}, as well as
 \code{"\link[sf:st_polygon]{(MULTI)POLYGON}"} from package \pkg{sf}.
 (For these classes, \pkg{polyCub} knows how to get an \code{\link{xylist}}.)}
 

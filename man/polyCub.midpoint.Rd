@@ -13,8 +13,8 @@ It can be any object coercible to the \pkg{spatstat.geom} class
 \code{"\link[spatstat.geom]{owin}"} via a corresponding
 \code{\link[spatstat.geom]{as.owin}}-method.
 Note that this includes polygons of the classes \code{"gpc.poly"} and
-\code{"\linkS4class{SpatialPolygons}"}, because \pkg{polyCub} defines
-methods \code{\link{as.owin.gpc.poly}} and
+\code{"\link[sp:SpatialPolygons-class]{SpatialPolygons}"}, because
+\pkg{polyCub} defines methods \code{\link{as.owin.gpc.poly}} and
 \code{\link{as.owin.SpatialPolygons}}, respectively.
 \pkg{sf} also registers suitable \code{as.owin} methods for its
 \code{"\link[sf:st_polygon]{(MULTI)POLYGON}"} classes.}
