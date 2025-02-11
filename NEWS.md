@@ -1,3 +1,9 @@
+polyCub 0.9.2 (2025-02-11)
+==========================
+
+* Maintenance release, updating cross references in the documentation.
+
+
 polyCub 0.9.1 (2024-05-21)
 ==========================
 
