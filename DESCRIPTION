@@ -1,7 +1,7 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
-Version: 0.9.2
-Date: 2025-02-11
+Version: 0.9.3
+Date: 2025-06-24
 Authors@R: c(
     person("Sebastian", "Meyer",
            email = "seb.meyer@fau.de",
@@ -44,9 +44,8 @@ Suggests:
     statmod,
     sf,
     cubature,
-    knitr,
-    markdown,
+    litedown,
     microbenchmark
-VignetteBuilder: knitr
+VignetteBuilder: litedown
 Roxygen: list(old_usage = TRUE)
 RoxygenNote: 7.3.2

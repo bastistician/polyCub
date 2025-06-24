@@ -1,23 +1,21 @@
 ---
-title: "Getting started with polyCub"
+title: "Getting started with 'polyCub'"
 author: "Sebastian Meyer"
-date: "`r Sys.Date()`"
+date: "`{r} Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{Getting started with 'polyCub'}
+  %\VignetteEngine{litedown::vignette}
+  %\VignetteDepends{polyCub, spatstat.geom}
 output:
-  markdown::html_format:
-    options:
-      smartypants: false
+  html:
+    meta:
+      js: ["@center-img"]
 ---
 
-<!--
-%\VignetteIndexEntry{Getting started with polyCub}
-%\VignetteEngine{knitr::knitr}
-%\VignetteDepends{polyCub, spatstat.geom, markdown}
-%%                                        ^ implied by the engine
--->
-
-```{R setup, include = FALSE, purl = FALSE}
-knitr::opts_chunk$set(collapse = TRUE, comment = "#>",
-                      fig.width = 4, fig.height = 3.5)
+```{r, setup, include = FALSE, purl = FALSE}
+## FIXME: the chunk option 'echo = -1' is not supported by litedown (yet?)
+litedown::reactor(collapse = TRUE,
+                  fig.width = 4, fig.height = 3.5, dev.args = list(res = 72))
 
 ## maintainer-mode options for building the vignette:
 if (USE_GPCLIB <- identical(Sys.getenv("R_GPCLIBPERMIT"), "true")) {
@@ -25,9 +23,10 @@ if (USE_GPCLIB <- identical(Sys.getenv("R_GPCLIBPERMIT"), "true")) {
         USE_GPCLIB <- FALSE
 }
 if (identical(Sys.getenv("NOT_CRAN"), "true")) {
-    stopifnot(nzchar(Sys.which("pngquant"))) # to notice when building
-    knitr::knit_hooks$set(pngquant = knitr::hook_pngquant)
-    knitr::opts_chunk$set(pngquant = "--speed=1")
+    ## FIXME: replace by a custom PNG device that calls pngquant
+    ## stopifnot(nzchar(Sys.which("pngquant"))) # to notice when building
+    ## knitr::knit_hooks$set(pngquant = knitr::hook_pngquant)
+    ## knitr::opts_chunk$set(pngquant = "--speed=1")
     DO_BENCHMARK <- USE_GPCLIB
 } else {
     DO_BENCHMARK <- FALSE
@@ -92,7 +91,7 @@ The following section details and illustrates the different cubature methods.
 
 ## Illustrations
 
-```{R}
+```{r}
 library("polyCub")
 ```
 
@@ -102,7 +101,7 @@ cubature methods can handle: an isotropic zero-mean Gaussian density.
 coordinate matrix as its first argument (as opposed to separate arguments
 for the x and y coordinates), so:
 
-```{R example-f}
+```{r, example-f}
 f <- function (s, sigma = 5)
 {
     exp(-rowSums(s^2)/2/sigma^2) / (2*pi*sigma^2)
@@ -112,7 +111,7 @@ f <- function (s, sigma = 5)
 We use a simple hexagon as polygonal integration domain,
 here specified via an `"xylist"` of vertex coordinates:
 
-```{R example-polygon}
+```{r, example-polygon}
 hexagon <- list(
     list(x = c(7.33, 7.33, 3, -1.33, -1.33, 3),
          y = c(-0.5, 4.5, 7, 4.5, -0.5, -3))
@@ -122,7 +121,7 @@ hexagon <- list(
 An image of the function and the integration domain can be produced using
 **polyCub**'s rudimentary (but convenient) plotting utility:
 
-```{R example}
+```{r, example}
 plotpolyf(hexagon, f, xlim = c(-8,8), ylim = c(-8,8))
 ```
 
@@ -144,7 +143,7 @@ is sufficiently large (depending on the degree of the polynomial).
 For the above example, a reasonable approximation is already obtained
 with degree `nGQ = 3` of the one-dimensional Gauss-Legendre quadrature:
 
-```{R product-Gauss, echo = -1, fig.show = "hold"}
+```{r, product-Gauss, echo = -1}
 par(mar = c(3,3,1,2))
 polyCub.SV(hexagon, f, nGQ = 3, plot = TRUE)
 ```
@@ -152,14 +151,14 @@ polyCub.SV(hexagon, f, nGQ = 3, plot = TRUE)
 The involved nodes (displayed in the figure above) and weights can be
 extracted by calling `polyCub.SV()` with `f = NULL`, e.g., to determine
 the number of nodes:
-```{R}
+```{r}
 nrow(polyCub.SV(hexagon, f = NULL, nGQ = 3)[[1]]$nodes)
 ```
 
 For illustration, we create a variant of `polyCub.SV()`,
 which returns the number of function evaluations as an attribute:
 
-```{R}
+```{r}
 polyCub.SVn <- function (polyregion, f, ..., nGQ = 20) {
     nw <- polyCub.SV(polyregion, f = NULL, ..., nGQ = nGQ)
     ## nw is a list with one element per polygon of 'polyregion'
@@ -174,7 +173,7 @@ We can use this function to investigate how the accuracy of the
 approximation depends on the degree `nGQ` and the associated number of
 cubature nodes:
 
-```{R}
+```{r}
 for (nGQ in c(1:5, 10, 20)) {
     result <- polyCub.SVn(hexagon, f, nGQ = nGQ)
     cat(sprintf("nGQ = %2i: %.12f (n=%i)\n", nGQ, result, attr(result, "nEval")))
@@ -193,14 +192,14 @@ over all pixels whose midpoint is part of the polygon.
 To use `polyCub.midpoint()`, we need to convert our polygon to
 **spatstat.geom**'s "owin" class:
 
-```{R, message = FALSE}
+```{r, message = FALSE}
 library("spatstat.geom")
 hexagon.owin <- owin(poly = hexagon)
 ```
 
 Using a pixel size of `eps = 0.5` (here yielding 270 pixels), we obtain:
 
-```{R midpoint, echo = -1, fig.show = "hold"}
+```{r, midpoint, echo = -1}
 par(mar = c(3,3,1,3), xaxs = "i", yaxs = "i")
 polyCub.midpoint(hexagon.owin, f, eps = 0.5, plot = TRUE)
 ```
@@ -220,7 +219,7 @@ Meyer and Held (2014, *The Annals of Applied Statistics*,
 
 For the bivariate Gaussian density `f` defined above,
 the integral from 0 to R of `r*f(r)` is analytically available as:
-```{R}
+```{r}
 intrfr <- function (R, sigma = 5)
 {
     (1 - exp(-R^2/2/sigma^2))/2/pi
@@ -229,7 +228,7 @@ intrfr <- function (R, sigma = 5)
 
 With this information, we can apply the cubature rule as follows:
 
-```{R}
+```{r}
 polyCub.iso(hexagon, intrfr = intrfr, center = c(0,0))
 ```
 
@@ -267,7 +266,7 @@ from the [**mvtnorm**](https://CRAN.R-project.org/package=mvtnorm) package.
 
 For the above example, we obtained:
 
-```{R, purl = FALSE, eval = USE_GPCLIB}
+```{r, purl = FALSE, eval = USE_GPCLIB}
 polyCub.exact.Gauss(hexagon.owin, mean = c(0,0), Sigma = 5^2*diag(2))
 ```
 
@@ -294,7 +293,7 @@ For comparison, we also run `polyCub.iso()` without the analytically derived
 
 The median runtimes [ms] of the different cubature methods are given below.
 
-```{r benchmark, purl = FALSE, eval = DO_BENCHMARK}
+```{r, benchmark, purl = FALSE, eval = DO_BENCHMARK}
 benchmark <- microbenchmark::microbenchmark(
   SV = polyCub.SV(hexagon.owin, f, nGQ = 4),
   midpoint = polyCub.midpoint(hexagon.owin, f, dimyx = 1200),
@@ -304,11 +303,8 @@ benchmark <- microbenchmark::microbenchmark(
   times = 9,
   check = function (values) all(abs(unlist(values) - 0.274144773813434) < 1e-8))
 ```
-```{r, purl = FALSE, eval = FALSE}
+```{r, purl = FALSE, eval = DO_BENCHMARK, print.args = I(list(digits = 2))}
 summary(benchmark, unit = "ms")[c("expr", "median")]
-```
-```{r, purl = FALSE, echo = FALSE, eval = DO_BENCHMARK}
-knitr::kable(summary(benchmark, unit = "ms")[c("expr", "median")], digits = 2)
 ```
 
 The general-purpose SV-method is the clear winner of this small competition.

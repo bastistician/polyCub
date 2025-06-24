@@ -1,3 +1,9 @@
+polyCub 0.9.3 (2025-06-24)
+==========================
+
+* `vignette("polyCub")` now uses `vignetteEngine("litedown::vignette")`.
+
+
 polyCub 0.9.2 (2025-02-11)
 ==========================
 
