@@ -5,6 +5,7 @@ polyCub.Rcheck/
 /polyCub_*.tar.gz
 src/*.o
 src/*.so
+vignettes/*.html
 *.Rproj
 .Rproj.user
 /manual.html

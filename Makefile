@@ -1,7 +1,7 @@
 ################################################################################
 ## Useful rules to build, check and install an R source package
 ##
-## Copyright (C) 2012,2014-2019,2022,2024 Sebastian Meyer
+## Copyright (C) 2012,2014-2019,2022,2024-2025 Sebastian Meyer
 ################################################################################
 
 ## define variable for R to enable 'make check R=R-devel'
@@ -18,6 +18,10 @@ export R_GPCLIBPERMIT := true
 ## roxygenise (update NAMESPACE and Rd files)
 document:
 	$R --no-restore --no-save --no-init-file -s -e "roxygen2::roxygenise()"
+
+## build vignettes
+vignettes:
+	NOT_CRAN=true $R --vanilla -s -e 'tools::buildVignettes(dir = ".")'
 
 ## build the package
 build: document
@@ -86,4 +90,4 @@ clean:
 	rm -f ./*/.Rhistory
 
 ## almost all targets are "phony"
-.PHONY: document build install check checkUsage covr spelling clean
+.PHONY: document vignettes build install check checkUsage covr spelling clean
