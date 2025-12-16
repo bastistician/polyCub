@@ -40,7 +40,7 @@ i.e. clockwise for normal boundaries and anticlockwise for holes, where,
 however, the first vertex is \emph{not} repeated!
 }
 \examples{
-\dontshow{if (requireNamespace("spatstat.geom")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("spatstat.geom")) withAutoprint(\{ # examplesIf}
 ## use example polygons from
 example(plotpolyf, ask = FALSE)
 letterR  # a simple "xylist"

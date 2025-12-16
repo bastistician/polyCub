@@ -27,7 +27,7 @@ Package \pkg{gpclib} is required for the formal class
 definition of a \code{"gpc.poly"}.
 }
 \examples{
-\dontshow{if (requireNamespace("sf")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("sf")) withAutoprint(\{ # examplesIf}
 ## use example polygons from
 example(plotpolyf, ask = FALSE)
 letterR  # a simple "xylist"
