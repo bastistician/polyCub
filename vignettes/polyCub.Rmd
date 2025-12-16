@@ -14,25 +14,18 @@ output:
 
 ```{r, setup, include = FALSE, purl = FALSE}
 ## FIXME: the chunk option 'echo = -1' is not supported by litedown (yet?)
-litedown::reactor(collapse = TRUE,
-                  fig.width = 4, fig.height = 3.5, dev.args = list(res = 72))
+litedown::reactor(collapse = TRUE, fig.width = 4, fig.height = 3.5,
+                  dev.args = list(units = "in", res = 72))
 
 ## maintainer-mode options for building the vignette:
-if (USE_GPCLIB <- identical(Sys.getenv("R_GPCLIBPERMIT"), "true")) {
-    if (!requireNamespace("gpclib")) # unavailable in --as-cran checks
-        USE_GPCLIB <- FALSE
-}
-if (identical(Sys.getenv("NOT_CRAN"), "true")) {
-    ## FIXME: replace by a custom PNG device that calls pngquant
-    ## stopifnot(nzchar(Sys.which("pngquant"))) # to notice when building
-    ## knitr::knit_hooks$set(pngquant = knitr::hook_pngquant)
-    ## knitr::opts_chunk$set(pngquant = "--speed=1")
-    DO_BENCHMARK <- USE_GPCLIB
-} else {
-    DO_BENCHMARK <- FALSE
-}
+USE_GPCLIB <- identical(Sys.getenv("R_GPCLIBPERMIT"), "true") &&
+    requireNamespace("gpclib") # unavailable in --as-cran checks
+DO_BENCHMARK <- USE_PNGQUANT <-
+    identical(Sys.getenv("NOT_CRAN"), "true")
 if (DO_BENCHMARK)
     stopifnot(requireNamespace("microbenchmark"))
+if (USE_PNGQUANT)
+    stopifnot(nzchar(Sys.which("pngquant")))
 ```
 
 <img src="../man/figures/logo.png" align="right" alt="" width="120" />
@@ -314,3 +307,11 @@ slowest option. In contrast, the "iso"-method for radially symmetric functions
 is based on R's `integrate()` function, which implements automatic tolerance
 levels. Furthermore, the "iso"-method can also be used with "spiky" integrands,
 such as a heavy-tailed power-law kernel $f(r) = (r+1)^{-2}$.
+
+
+
+```{r, compact-PNGs, include = FALSE, purl = FALSE, eval = USE_PNGQUANT}
+system2("pngquant",
+        c("--skip-if-larger", "--speed=1", "--ext=.png", "--force",
+          "--", shQuote(litedown::get_context("plot_files"))))
+```
