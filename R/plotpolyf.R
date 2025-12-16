@@ -58,7 +58,7 @@ plotpolyf <- function (polyregion, f, ..., npixel = 100, cuts = 15,
     polys <- if (inherits(polyregion, "gpc.poly")) { # avoid xylist.gpc.poly
                  polyregion@pts  # ring direction is irrelevant for plotting
              } else xylist(polyregion)
-    npixel <- rep(npixel, length.out = 2L)
+    npixel <- rep_len(npixel, 2L)
 
     ## make two-dimensional grid
     if (is.null(xlim))
@@ -76,7 +76,7 @@ plotpolyf <- function (polyregion, f, ..., npixel = 100, cuts = 15,
     if (use.lattice && requireNamespace("lattice")) {
         mypanel <- function(...) {
             lattice::panel.levelplot(...)
-            lapply(polys, function(xy) lattice::panel.polygon(xy, lwd=lwd))
+            lapply(polys, lattice::panel.polygon, lwd=lwd)
         }
         trobj <- lattice::levelplot(fval ~ x*y, data=xygrid, aspect="iso",
                                     cuts=cuts, col.regions=col, panel=mypanel)
