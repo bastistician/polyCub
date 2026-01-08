@@ -13,9 +13,11 @@ output:
 ---
 
 ```{r, setup, include = FALSE, purl = FALSE}
-## FIXME: the chunk option 'echo = -1' is not supported by litedown (yet?)
 litedown::reactor(collapse = TRUE, fig.width = 4, fig.height = 3.5,
                   dev.args = list(units = "in", res = 72))
+## kludge: achieve 'echo = -1' by filtering a chunk's "xfun_record_results"
+source_drop1 <- function (res)
+    replace(res, 1, list(`attributes<-`(res[[1L]][-1], attributes(res[[1]]))))
 
 ## maintainer-mode options for building the vignette:
 USE_GPCLIB <- identical(Sys.getenv("R_GPCLIBPERMIT"), "true") &&
@@ -136,7 +138,7 @@ is sufficiently large (depending on the degree of the polynomial).
 For the above example, a reasonable approximation is already obtained
 with degree `nGQ = 3` of the one-dimensional Gauss-Legendre quadrature:
 
-```{r, product-Gauss, echo = -1}
+```{r, product-Gauss, filter = source_drop1}
 par(mar = c(3,3,1,2))
 polyCub.SV(hexagon, f, nGQ = 3, plot = TRUE)
 ```
@@ -192,7 +194,7 @@ hexagon.owin <- owin(poly = hexagon)
 
 Using a pixel size of `eps = 0.5` (here yielding 270 pixels), we obtain:
 
-```{r, midpoint, echo = -1}
+```{r, midpoint, filter = source_drop1}
 par(mar = c(3,3,1,3), xaxs = "i", yaxs = "i")
 polyCub.midpoint(hexagon.owin, f, eps = 0.5, plot = TRUE)
 ```
