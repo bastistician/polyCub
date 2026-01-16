@@ -42,7 +42,7 @@ The approximated value of the integral of \code{f} over
 \description{
 The surface is converted to a binary pixel image
 using the \code{\link[spatstat.geom]{as.im.function}} method from package
-\CRANpkg{spatstat.geom} (Baddeley et al., 2015).
+\CRANpkg{spatstat.geom}.% FIXME: \bibcitep{spatstat.geom::CITATION[1]}
 The integral under the surface is then approximated as the
 sum over (pixel area * f(pixel midpoint)).
 }
@@ -81,11 +81,6 @@ if (require("spatstat.geom")) {
         cat(sprintf("eps = \%.1f: \%.7f\n", eps,
                     polyCub.midpoint(hexagon.owin, f, eps = eps)))
 }
-}
-\references{
-Baddeley A, Rubak E, Turner R (2015).
-\emph{Spatial Point Patterns: Methodology and Applications with R}.
-Chapman and Hall/CRC Press, London.
 }
 \seealso{
 Other polyCub-methods: 

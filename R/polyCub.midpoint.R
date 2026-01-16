@@ -13,7 +13,7 @@
 #'
 #' The surface is converted to a binary pixel image
 #' using the \code{\link[spatstat.geom]{as.im.function}} method from package
-#' \CRANpkg{spatstat.geom} (Baddeley et al., 2015).
+#' \CRANpkg{spatstat.geom}.% FIXME: \bibcitep{spatstat.geom::CITATION[1]}
 #' The integral under the surface is then approximated as the
 #' sum over (pixel area * f(pixel midpoint)).
 #'
@@ -36,10 +36,6 @@
 #' integration should be produced.
 #' @return The approximated value of the integral of \code{f} over
 #' \code{polyregion}.
-#' @references
-#' Baddeley A, Rubak E, Turner R (2015).
-#' \emph{Spatial Point Patterns: Methodology and Applications with R}.
-#' Chapman and Hall/CRC Press, London.
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @importFrom sp plot

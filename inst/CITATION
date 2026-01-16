@@ -2,7 +2,8 @@
 citHeader("To cite", sQuote("polyCub"), "in publications, please refer to:")
 
 bibentry(
-    bibtype = "Article", key = "R:polyCub",
+    key = "CITATION",
+    bibtype = "Article",
     author = "Sebastian Meyer",
     title = "{polyCub}: An {R} package for Integration over Polygons",
     journal = "Journal of Open Source Software",

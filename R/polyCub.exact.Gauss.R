@@ -21,7 +21,7 @@
 #'
 #' The bivariate Gaussian density can be integrated based on a triangulation of
 #' the (transformed) polygonal domain, using formulae from the
-#' Abramowitz and Stegun (1972) handbook (Section 26.9, Example 9, pp. 956f.).
+#' \bibcitet{R:Abramowitz+Stegun:1972} handbook (Section 26.9, Example 9, pp. 956f.).
 #' This method is quite cumbersome because the A&S formula is only for triangles
 #' where one vertex is the origin (0,0). For each triangle
 #' we have to check in which of the 6 outer
@@ -54,10 +54,7 @@
 #' For this reason, the cubature method is in fact only
 #' quasi-exact (as is the \code{pmvnorm} function).
 #' }
-#' @references
-#' Abramowitz, M. and Stegun, I. A. (1972).
-#' Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical
-#' Tables. New York: Dover Publications.
+#' @references \bibshow{R:Abramowitz+Stegun:1972} %FIXME: \bibshow{*} shows too much
 #' @keywords math spatial
 #' @seealso \code{\link{circleCub.Gauss}} for quasi-exact cubature of the
 #' isotropic Gaussian density over a circular domain.

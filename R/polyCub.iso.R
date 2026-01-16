@@ -24,8 +24,8 @@
 #' numerical approximation (meaning \code{integrate} within \code{integrate}),
 #' but the general-purpose cubature method \code{\link{polyCub.SV}} might be
 #' more efficient in this case.
-#' See Meyer and Held (2014, Supplement B, Section 2.4) for mathematical
-#' details.
+#' \bibcitet{See|polyCub::meyer.held2014|Supplement B\\\\\\, Section 2.4} % FIXME: semicolon?
+#' for mathematical details.
 #'
 #' @inheritParams plotpolyf
 #' @param intrfr a \code{function(R, ...)}, which implements the (analytical)
@@ -60,15 +60,10 @@
 #'
 #' The basic mathematical formulation of this efficient integration for radially
 #' symmetric functions was ascertained with great support by
-#' Emil Hedevang (2013), Dept. of Mathematics, Aarhus University, Denmark.
-#' @references
-#' Hedevang, E. (2013). Personal communication at the Summer School on Topics in
+#' Emil Hedevang (Dept. of Mathematics, Aarhus University, Denmark)
+#' during the Summer School on Topics in
 #' Space-Time Modeling and Inference (May 2013, Aalborg, Denmark).
-#'
-#' Meyer, S. and Held, L. (2014).
-#' Power-law models for infectious disease spread.
-#' \emph{The Annals of Applied Statistics}, \bold{8} (3), 1612-1639.
-#' \doi{10.1214/14-AOAS743}
+#' @references \bibshow{polyCub::meyer.held2014} %FIXME: \bibshow{*} shows too much
 #' @seealso
 #' \code{system.file("include", "polyCubAPI.h", package = "polyCub")}
 #' for a full C-implementation of this cubature method (for a \emph{single}

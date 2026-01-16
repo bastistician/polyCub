@@ -1,7 +1,7 @@
 Package: polyCub
 Title: Cubature over Polygonal Domains
 Version: 0.9.3
-Date: 2026-01-08
+Date: 2026-01-16
 Authors@R: c(
     person("Sebastian", "Meyer",
            email = "seb.meyer@fau.de",
@@ -29,6 +29,7 @@ Description: Numerical integration of continuously differentiable
 License: GPL-2
 URL: https://github.com/bastistician/polyCub
 BugReports: https://github.com/bastistician/polyCub/issues
+Note: Building the package requires R >= 4.6.0 for \bibshow{} et al.
 Depends:
     R (>= 3.4.0),
     methods
