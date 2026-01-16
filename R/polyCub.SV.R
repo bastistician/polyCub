@@ -12,7 +12,7 @@
 #' Product Gauss Cubature over Polygonal Domains
 #'
 #' Product Gauss cubature over polygons as proposed by
-#' Sommariva and Vianello (2007).
+#' \bibcitet{polyCub::sommariva.vianello2007}.
 #'
 #' @inheritParams plotpolyf
 #' @param f a two-dimensional real-valued function to be integrated over
@@ -24,8 +24,9 @@
 #' (default: 20) as implemented in function \code{\link[statmod]{gauss.quad}}
 #' of package \CRANpkg{statmod}. Nodes and weights up to \code{nGQ=60} are cached
 #' in \pkg{polyCub}, for larger degrees \pkg{statmod} is required.
-#' @param alpha base-line of the (rotated) polygon at \eqn{x = \alpha} (see
-#' Sommariva and Vianello (2007) for an explication). If \code{NULL} (default),
+#' @param alpha base-line of the (rotated) polygon at \eqn{x = \alpha}
+#' \bibcitep{see|polyCub::sommariva.vianello2007|for an explication}.
+#' If \code{NULL} (default),
 #' the midpoint of the x-range of each polygon is chosen if no \code{rotation}
 #' is performed, and otherwise the \eqn{x}-coordinate of the rotated point
 #' \code{"P"} (see \code{rotation}). If \code{f} has its maximum value at the
@@ -34,8 +35,8 @@
 #' @param rotation logical (default: \code{FALSE}) or a list of points
 #' \code{"P"} and \code{"Q"} describing the preferred direction. If
 #' \code{TRUE}, the polygon is rotated according to the vertices \code{"P"} and
-#' \code{"Q"}, which are farthest apart (see Sommariva and Vianello, 2007). For
-#' convex polygons, this rotation guarantees that all nodes fall inside the
+#' \code{"Q"}, which are farthest apart \bibcitep{see|polyCub::sommariva.vianello2007|}.
+#' For convex polygons, this rotation guarantees that all nodes fall inside the
 #' polygon.
 #' @param engine character string specifying the implementation to use.
 #' Up to \pkg{polyCub} version 0.4-3, the two-dimensional nodes and weights
@@ -59,16 +60,14 @@
 #' where each component is a list with \code{nodes} (a numeric matrix with
 #' two columns), \code{weights} (a numeric vector of length
 #' \code{nrow(nodes)}), the rotation \code{angle}, and \code{alpha}.
-#' @author Sebastian Meyer\cr
+#' @author Sebastian Meyer
+#'
 #' These R and C implementations of product Gauss cubature are based on the
-#' original \acronym{MATLAB} implementation \code{polygauss} by Sommariva and
-#' Vianello (2007), which is available under the GNU GPL (>=2) license from
-#' \url{https://www.math.unipd.it/~alvise/software.html}.
-#' @references
-#' Sommariva, A. and Vianello, M. (2007):
-#' Product Gauss cubature over polygons based on Green's integration formula.
-#' \emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
-#' \doi{10.1007/s10543-007-0131-2}
+#' original MATLAB implementation \samp{polygauss} by
+#' \bibcitet{polyCub::sommariva.vianello2007}, which is available (in revised versions) at
+#' \url{https://sites.google.com/view/alvisesommarivaunipd/home-page/software/software_matlab}
+#' under the GNU GPL (>=2) license.
+#' @references \bibshow{*}
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @importFrom graphics points

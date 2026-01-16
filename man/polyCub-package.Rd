@@ -5,8 +5,8 @@
 \alias{polyCub-package}
 \title{Cubature over Polygonal Domains}
 \description{
-The \R package \pkg{polyCub} implements \emph{cubature}
-(numerical integration) over \emph{polygonal} domains.
+The \R package \pkg{polyCub} \bibcitep{polyCub::CITATION} implements
+\emph{cubature} (numerical integration) over \emph{polygonal} domains.
 It solves the problem of integrating a continuously differentiable
 function \eqn{f(x,y)} over simple closed polygons.
 }
@@ -14,17 +14,18 @@ function \eqn{f(x,y)} over simple closed polygons.
 \pkg{polyCub} provides the following cubature methods:
 \describe{
 \item{\code{\link{polyCub.SV}}:}{
-General-purpose \emph{product Gauss cubature} (Sommariva and Vianello, 2007)
+General-purpose \emph{product Gauss cubature}
+\bibcitep{polyCub::sommariva.vianello2007}
 }
 \item{\code{\link{polyCub.midpoint}}:}{
 Simple \emph{two-dimensional midpoint rule} based on
 \code{\link[spatstat.geom]{as.im.function}} from \pkg{spatstat.geom}
-(Baddeley et al., 2015)
+(Baddeley et al. 2015)
 }
 \item{\code{\link{polyCub.iso}}:}{
 Adaptive cubature for \emph{radially symmetric functions}
 via line \code{\link{integrate}()} along the polygon boundary
-(Meyer and Held, 2014, Supplement B, Section 2.4).
+\bibcitep{|polyCub::meyer.held2014|Supplement B\\\\\\, Section 2.4}
 }
 }
 A brief description and benchmark experiment of the above cubature
@@ -35,27 +36,15 @@ accurately (but slowly) integrate the \emph{bivariate Gaussian density};
 however, this implementation is disabled as of \pkg{polyCub} 0.9.0:
 it needs a reliable implementation of polygon triangulation.
 
-Meyer (2010, Section 3.2) discusses and compares some of these methods.
+\bibcitet{|polyCub::meyer2010|Section 3.2}
+discusses and compares some of these methods.
 }
 \references{
-Baddeley, A., Rubak, E. and Turner, R. (2015).
+Baddeley A., Rubak E., Turner R. (2015).
 \emph{Spatial Point Patterns: Methodology and Applications with R}.
 Chapman and Hall/CRC Press, London.
 
-Meyer, S. (2010).
-\emph{Spatio-Temporal Infectious Disease Epidemiology based on Point
-Processes}. Master's Thesis, LMU Munich.
-Available as \url{https://epub.ub.uni-muenchen.de/11703/}.
-
-Meyer, S. and Held, L. (2014).
-Power-law models for infectious disease spread.
-\emph{The Annals of Applied Statistics}, \bold{8} (3), 1612-1639.
-\doi{10.1214/14-AOAS743}
-
-Sommariva, A. and Vianello, M. (2007).
-Product Gauss cubature over polygons based on Green's integration formula.
-\emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
-\doi{10.1007/s10543-007-0131-2}
+\bibshow{*}
 }
 \seealso{
 \code{vignette("polyCub")}

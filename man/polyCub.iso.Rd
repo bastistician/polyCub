@@ -82,8 +82,8 @@ If \code{intrfr} is not available analytically, \code{polyCub.iso} can use a
 numerical approximation (meaning \code{integrate} within \code{integrate}),
 but the general-purpose cubature method \code{\link{polyCub.SV}} might be
 more efficient in this case.
-See Meyer and Held (2014, Supplement B, Section 2.4) for mathematical
-details.
+\bibcitet{See|polyCub::meyer.held2014|Supplement B\\\\\\, Section 2.4} % FIXME: semicolon?
+for mathematical details.
 
 \code{.polyCub.iso} is a \dQuote{bare-bone} version of \code{polyCub.iso}.
 }
@@ -116,13 +116,7 @@ if (require("spatstat.geom")) { # check against area.owin()
 }
 }
 \references{
-Hedevang, E. (2013). Personal communication at the Summer School on Topics in
-Space-Time Modeling and Inference (May 2013, Aalborg, Denmark).
-
-Meyer, S. and Held, L. (2014).
-Power-law models for infectious disease spread.
-\emph{The Annals of Applied Statistics}, \bold{8} (3), 1612-1639.
-\doi{10.1214/14-AOAS743}
+\bibshow{polyCub::meyer.held2014} %FIXME: \bibshow{*} shows too much
 }
 \seealso{
 \code{system.file("include", "polyCubAPI.h", package = "polyCub")}
@@ -144,7 +138,9 @@ Sebastian Meyer
 
 The basic mathematical formulation of this efficient integration for radially
 symmetric functions was ascertained with great support by
-Emil Hedevang (2013), Dept. of Mathematics, Aarhus University, Denmark.
+Emil Hedevang (Dept. of Mathematics, Aarhus University, Denmark)
+during the Summer School on Topics in
+Space-Time Modeling and Inference (May 2013, Aalborg, Denmark).
 }
 \concept{polyCub-methods}
 \keyword{math}
