@@ -78,7 +78,7 @@ print(polyCub.exact.Gauss(hexagon.gpc, mean = c(0,0), Sigma = 5^2*diag(2),
 }
 }
 \references{
-\bibshow{R:Abramowitz+Stegun:1972} %FIXME: \bibshow{*} shows too much
+\bibshow{*}
 }
 \seealso{
 \code{\link{circleCub.Gauss}} for quasi-exact cubature of the

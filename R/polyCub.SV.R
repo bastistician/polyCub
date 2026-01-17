@@ -61,13 +61,15 @@
 #' two columns), \code{weights} (a numeric vector of length
 #' \code{nrow(nodes)}), the rotation \code{angle}, and \code{alpha}.
 #' @author Sebastian Meyer
-#'
-#' These R and C implementations of product Gauss cubature are based on the
-#' original MATLAB implementation \samp{polygauss} by
-#' \bibcitet{polyCub::sommariva.vianello2007}, which is available (in revised versions) at
-#' \url{https://sites.google.com/view/alvisesommarivaunipd/home-page/software/software_matlab}
-#' under the GNU GPL (>=2) license.
-#' @references \bibshow{*}
+#' % NOTE: roxygen2 outputs author \emph{after} references in the Rd file, see
+#' % \code{roxygen2:::RoxyTopic$public_methods$format}, so do not \bibcite here
+#' @references
+#' \bibinfo{polyCub::sommariva.vianello2007}{footer}{
+#'   Their MATLAB implementation \\\\\\samp{polygauss}, on which this
+#'   R implementation was based, is available (in revised versions) at
+#'   \\\\\\url{https://sites.google.com/view/alvisesommarivaunipd/home-page/software/software_matlab}
+#'   under the GNU GPL (>=2) license.}
+#' \bibshow{*}
 #' @keywords math spatial
 #' @family polyCub-methods
 #' @importFrom graphics points

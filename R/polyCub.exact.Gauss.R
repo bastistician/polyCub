@@ -54,7 +54,7 @@
 #' For this reason, the cubature method is in fact only
 #' quasi-exact (as is the \code{pmvnorm} function).
 #' }
-#' @references \bibshow{R:Abramowitz+Stegun:1972} %FIXME: \bibshow{*} shows too much
+#' @references \bibshow{*}
 #' @keywords math spatial
 #' @seealso \code{\link{circleCub.Gauss}} for quasi-exact cubature of the
 #' isotropic Gaussian density over a circular domain.

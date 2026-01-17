@@ -116,7 +116,7 @@ if (require("spatstat.geom")) { # check against area.owin()
 }
 }
 \references{
-\bibshow{polyCub::meyer.held2014} %FIXME: \bibshow{*} shows too much
+\bibshow{*}
 }
 \seealso{
 \code{system.file("include", "polyCubAPI.h", package = "polyCub")}

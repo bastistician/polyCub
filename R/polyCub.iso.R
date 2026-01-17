@@ -63,7 +63,7 @@
 #' Emil Hedevang (Dept. of Mathematics, Aarhus University, Denmark)
 #' during the Summer School on Topics in
 #' Space-Time Modeling and Inference (May 2013, Aalborg, Denmark).
-#' @references \bibshow{polyCub::meyer.held2014} %FIXME: \bibshow{*} shows too much
+#' @references \bibshow{*}
 #' @seealso
 #' \code{system.file("include", "polyCubAPI.h", package = "polyCub")}
 #' for a full C-implementation of this cubature method (for a \emph{single}
