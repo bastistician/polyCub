@@ -42,7 +42,7 @@ The approximated value of the integral of \code{f} over
 \description{
 The surface is converted to a binary pixel image
 using the \code{\link[spatstat.geom]{as.im.function}} method from package
-\CRANpkg{spatstat.geom}.% FIXME: \bibcitep{spatstat.geom::CITATION[1]}
+\CRANpkg{spatstat.geom}.
 The integral under the surface is then approximated as the
 sum over (pixel area * f(pixel midpoint)).
 }
