@@ -50,6 +50,11 @@ implementation does not have such unset zero nodes and weights.}
 Calculate 2D Nodes and Weights of the Product Gauss Cubature
 }
 \references{
+\bibinfo{polyCub::sommariva.vianello2007}{footer}{
+  Their MATLAB implementation \\\\\\samp{polygauss}, on which this
+  R implementation was based, is available (in revised versions) at
+  \\\\\\url{https://sites.google.com/view/alvisesommarivaunipd/home-page/software/software_matlab}
+  under the GNU GPL (>=2) license.}
 \bibshow{*}
 }
 \keyword{internal}
