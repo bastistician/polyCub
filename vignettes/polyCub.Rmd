@@ -25,7 +25,7 @@ USE_GPCLIB <- identical(Sys.getenv("R_GPCLIBPERMIT"), "true") &&
 DO_BENCHMARK <- USE_PNGQUANT <-
     identical(Sys.getenv("NOT_CRAN"), "true")
 if (DO_BENCHMARK)
-    stopifnot(requireNamespace("microbenchmark"))
+    stopifnot(requireNamespace("microbenchmark"), USE_GPCLIB)
 if (USE_PNGQUANT)
     stopifnot(nzchar(Sys.which("pngquant")))
 ```
