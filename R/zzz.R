@@ -11,7 +11,7 @@
 
 #' Cubature over Polygonal Domains
 #'
-#' The \R package \pkg{polyCub} \bibcitep{polyCub::CITATION} implements
+#' The \R package \pkg{polyCub} \bibcitep{CITATION} implements
 #' \emph{cubature} (numerical integration) over \emph{polygonal} domains.
 #' It solves the problem of integrating a continuously differentiable
 #' function \eqn{f(x,y)} over simple closed polygons.
@@ -20,7 +20,7 @@
 #' \describe{
 #' \item{\code{\link{polyCub.SV}}:}{
 #' General-purpose \emph{product Gauss cubature}
-#' \bibcitep{polyCub::sommariva.vianello2007}
+#' \bibcitep{sommariva.vianello2007}
 #' }
 #' \item{\code{\link{polyCub.midpoint}}:}{
 #' Simple \emph{two-dimensional midpoint rule} based on
@@ -30,7 +30,7 @@
 #' \item{\code{\link{polyCub.iso}}:}{
 #' Adaptive cubature for \emph{radially symmetric functions}
 #' via line \code{\link{integrate}()} along the polygon boundary
-#' \bibcitep{|polyCub::meyer.held2014|Supplement B\\\\\\, Section 2.4}
+#' \bibcitep{|meyer.held2014|Supplement B\\\\\\, Section 2.4}
 #' }
 #' }
 #' A brief description and benchmark experiment of the above cubature
@@ -41,7 +41,7 @@
 #' however, this implementation is disabled as of \pkg{polyCub} 0.9.0:
 #' it needs a reliable implementation of polygon triangulation.
 #'
-#' \bibcitet{|polyCub::meyer2010|Section 3.2}
+#' \bibcitet{|meyer2010|Section 3.2}
 #' discusses and compares some of these methods.
 #'
 #' @author Sebastian Meyer

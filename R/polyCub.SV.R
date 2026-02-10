@@ -12,7 +12,7 @@
 #' Product Gauss Cubature over Polygonal Domains
 #'
 #' Product Gauss cubature over polygons as proposed by
-#' \bibcitet{polyCub::sommariva.vianello2007}.
+#' \bibcitet{sommariva.vianello2007}.
 #'
 #' @inheritParams plotpolyf
 #' @param f a two-dimensional real-valued function to be integrated over
@@ -25,7 +25,7 @@
 #' of package \CRANpkg{statmod}. Nodes and weights up to \code{nGQ=60} are cached
 #' in \pkg{polyCub}, for larger degrees \pkg{statmod} is required.
 #' @param alpha base-line of the (rotated) polygon at \eqn{x = \alpha}
-#' \bibcitep{see|polyCub::sommariva.vianello2007|for an explication}.
+#' \bibcitep{see|sommariva.vianello2007|for an explication}.
 #' If \code{NULL} (default),
 #' the midpoint of the x-range of each polygon is chosen if no \code{rotation}
 #' is performed, and otherwise the \eqn{x}-coordinate of the rotated point
@@ -35,7 +35,7 @@
 #' @param rotation logical (default: \code{FALSE}) or a list of points
 #' \code{"P"} and \code{"Q"} describing the preferred direction. If
 #' \code{TRUE}, the polygon is rotated according to the vertices \code{"P"} and
-#' \code{"Q"}, which are farthest apart \bibcitep{see|polyCub::sommariva.vianello2007|}.
+#' \code{"Q"}, which are farthest apart \bibcitep{see|sommariva.vianello2007|}.
 #' For convex polygons, this rotation guarantees that all nodes fall inside the
 #' polygon.
 #' @param engine character string specifying the implementation to use.
@@ -64,7 +64,7 @@
 #' % NOTE: roxygen2 outputs author \emph{after} references in the Rd file, see
 #' % \code{roxygen2:::RoxyTopic$public_methods$format}, so do not \bibcite here
 #' @references
-#' \bibinfo{polyCub::sommariva.vianello2007}{footer}{
+#' \bibinfo{sommariva.vianello2007}{footer}{
 #'   Their MATLAB implementation \\\\\\samp{polygauss}, on which this
 #'   R implementation was based, is available (in revised versions) at
 #'   \\\\\\url{https://sites.google.com/view/alvisesommarivaunipd/home-page/software/software_matlab}
