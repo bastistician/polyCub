@@ -25,7 +25,7 @@ Simple \emph{two-dimensional midpoint rule} based on
 \item{\code{\link{polyCub.iso}}:}{
 Adaptive cubature for \emph{radially symmetric functions}
 via line \code{\link{integrate}()} along the polygon boundary
-\bibcitep{|meyer.held2014|Supplement B\\\\\\, Section 2.4}
+\bibcitep{|meyer.held2014|Supplement B\, Section 2.4}
 }
 }
 A brief description and benchmark experiment of the above cubature

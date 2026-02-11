@@ -82,7 +82,7 @@ If \code{intrfr} is not available analytically, \code{polyCub.iso} can use a
 numerical approximation (meaning \code{integrate} within \code{integrate}),
 but the general-purpose cubature method \code{\link{polyCub.SV}} might be
 more efficient in this case.
-\bibcitet{See|meyer.held2014|Supplement B\\\\\\, Section 2.4}
+\bibcitet{See|meyer.held2014|Supplement B\, Section 2.4}
 for mathematical details.
 
 \code{.polyCub.iso} is a \dQuote{bare-bone} version of \code{polyCub.iso}.

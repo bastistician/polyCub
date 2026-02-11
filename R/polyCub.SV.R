@@ -65,9 +65,9 @@
 #' % \code{roxygen2:::RoxyTopic$public_methods$format}, so do not \bibcite here
 #' @references
 #' \bibinfo{sommariva.vianello2007}{footer}{
-#'   Their MATLAB implementation \\\\\\samp{polygauss}, on which this
+#'   Their MATLAB implementation \samp{polygauss}, on which this
 #'   R implementation was based, is available (in revised versions) at
-#'   \\\\\\url{https://sites.google.com/view/alvisesommarivaunipd/home-page/software/software_matlab}
+#'   \url{https://sites.google.com/view/alvisesommarivaunipd/home-page/software/software_matlab}
 #'   under the GNU GPL (>=2) license.}
 #' \bibshow{*}
 #' @keywords math spatial
