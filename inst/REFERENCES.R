@@ -1,4 +1,14 @@
-citation("polyCub")
+try(citation("polyCub"), silent = TRUE) # OK for R CMD build/INSTALL/check
+## NOTE: Requires installation, so is incompatible with building directly
+##       from source via `R CMD Rd2pdf pkgdir` or `tools::pkg2HTML(dir=)`.
+##       A more general approach would be:
+##   pkgdir <- tools:::Rd_macros_package_dir()
+##   if (file.exists(descfile <- file.path(pkgdir, "DESCRIPTION")) && # not for base
+##       read.dcf(descfile, "Package") == "polyCub") {
+##       readCitationFile(file.path(pkgdir, "inst", "CITATION"))
+##   } else { # foreign use of 'polyCub::CITATION': access installed package
+##       citation("polyCub")
+##   }
 
 bibentry(
     key = "meyer.held2014",
