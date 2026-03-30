@@ -40,7 +40,7 @@ it needs a reliable implementation of polygon triangulation.
 discusses and compares some of these methods.
 }
 \references{
-Baddeley A., Rubak E., Turner R. (2015).
+Baddeley A, Rubak E, Turner R (2015).
 \emph{Spatial Point Patterns: Methodology and Applications with R}.
 Chapman and Hall/CRC Press, London.
 
