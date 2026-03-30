@@ -24,7 +24,7 @@
 #' numerical approximation (meaning \code{integrate} within \code{integrate}),
 #' but the general-purpose cubature method \code{\link{polyCub.SV}} might be
 #' more efficient in this case.
-#' \bibcitet{See|meyer.held2014|Supplement B, Section 2.4}
+#' See \bibcitet{|meyer.held2014|Supplement B, Section 2.4}
 #' for mathematical details.
 #'
 #' @inheritParams plotpolyf
