@@ -146,7 +146,8 @@ transform_pts <- function (pts, mean, Sigma)
 {
     mx <- mean[1L]
     my <- mean[2L]
-    stopifnot(abs(rho <- cov2cor(Sigma)[1L,2L]) < 1)
+    rho <- cov2cor(Sigma)[1L,2L]
+    stopifnot(abs(rho) < 1)
     sdx <- sqrt(Sigma[1L,1L])
     sdy <- sqrt(Sigma[2L,2L])
     lapply(pts, function (poly) {
