@@ -1,9 +1,10 @@
-polyCub 0.9.3 (TBD)
+polyCub 0.9.3 (2026-04-10)
 ==========================
 
 * **polyCub** now requires R >= 3.4.0.
 
-* `vignette("polyCub")` now uses `vignetteEngine("litedown::vignette")`.
+* `vignette("polyCub")` now uses `vignetteEngine("litedown::vignette")`
+  (directly) rather than `"knitr::knitr"` with `markdown::html_format`.
 
 
 polyCub 0.9.2 (2025-02-11)
