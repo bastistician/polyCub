@@ -90,4 +90,4 @@ setAs(from = "Polygon", to = "owin",
 #' @name coerce,Polygon,Polygons-method
 #' @rdname coerce-sp-methods
 setAs(from = "Polygon", to = "Polygons",
-      def = function (from) Polygons(list(from), "Polygon"))
+      def = function (from) sp::Polygons(list(from), "Polygon"))

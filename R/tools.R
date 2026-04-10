@@ -1,7 +1,7 @@
 ################################################################################
 ### Internal Functions
 ###
-### Copyright (C) 2009-2015,2017,2021 Sebastian Meyer
+### Copyright (C) 2009-2015,2017,2021,2026 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -34,21 +34,20 @@ isScalar <- function (x) {
 
 
 ## Plot a Polygonal Domain (of Various Classes)
-#' @importFrom sp Polygons SpatialPolygons plot
-#' @importFrom graphics polygon
+#' @importMethodsFrom sp plot
 plot_polyregion <- function (polyregion, lwd=2, add=FALSE)
 {
     if (is.vector(polyregion, mode="list")) { # internal xylist object
         stopifnot(add)
-        lapply(polyregion, polygon, lwd=lwd)
+        lapply(polyregion, graphics::polygon, lwd=lwd)
         invisible()
     } else if (inherits(polyregion, "gpc.poly")) {
         plot(polyregion, poly.args=list(lwd=lwd), ann=FALSE, add=add)
     } else {
         if (inherits(polyregion, "Polygon"))
-            polyregion <- Polygons(list(polyregion), "ID")
+            polyregion <- sp::Polygons(list(polyregion), "ID")
         if (inherits(polyregion, "Polygons"))
-            polyregion <- SpatialPolygons(list(polyregion))
+            polyregion <- sp::SpatialPolygons(list(polyregion))
         ## plot call which works for "SpatialPolygons", "owin", and "sfg"
         plot(polyregion, lwd=lwd, axes=TRUE, main="", add=add)
     }
