@@ -7,12 +7,8 @@ Authors@R: c(
            email = "seb.meyer@fau.de",
            role = c("aut","cre","trl"),
            comment = c(ORCID = "0000-0002-1791-9449")),
-    person("Leonhard", "Held",
-           email = "Leonhard.Held@uzh.ch",
-           role = "ths"),
-    person("Michael", "Hoehle",
-           email = "hoehle@math.su.se",
-           role = "ths")
+    person("Leonhard", "Held", role = "ths"),
+    person("Michael", "Hoehle", role = "ths")
     )
 Description: Numerical integration of continuously differentiable
     functions f(x,y) over simple closed polygonal domains.
