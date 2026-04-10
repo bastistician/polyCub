@@ -150,8 +150,9 @@ gauss.quad <- function (n)
 #' quadrature rules of degrees \eqn{N} and \eqn{M=N+1} (as returned by
 #' \code{\link[statmod]{gauss.quad}}): \code{list(s_M, w_M, s_N, w_N)}.
 #' @inherit polyCub.SV params references
-#' @keywords internal
+#' @keywords math internal
 #' @useDynLib polyCub, .registration = TRUE
+#' @noRd
 
 polygauss <- function (xy, nw_MN, alpha = NULL, rotation = FALSE, engine = "C")
 {
