@@ -14,12 +14,9 @@
 #' This function calculates the integral of the bivariate, isotropic Gaussian
 #' density (i.e., \eqn{\Sigma} = \code{sd^2*diag(2)}) over a circular domain
 #' via the cumulative distribution function \code{pchisq} of the (non-central)
-#' Chi-Squared distribution (Abramowitz and Stegun, 1972, Formula 26.3.24).
+#' Chi-Squared distribution \bibcitep{|R:Abramowitz+Stegun:1972|Formula 26.3.24}.
 #'
-#' @references
-#' Abramowitz, M. and Stegun, I. A. (1972).
-#' Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical
-#' Tables. New York: Dover Publications.
+#' @references \bibshow{*}
 #' @param center numeric vector of length 2 (center of the circle).
 #' @param r numeric (radius of the circle). Several radii may be supplied.
 #' @param mean numeric vector of length 2

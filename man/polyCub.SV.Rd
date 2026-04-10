@@ -31,8 +31,9 @@ length the number of coordinates.}
 of package \CRANpkg{statmod}. Nodes and weights up to \code{nGQ=60} are cached
 in \pkg{polyCub}, for larger degrees \pkg{statmod} is required.}
 
-\item{alpha}{base-line of the (rotated) polygon at \eqn{x = \alpha} (see
-Sommariva and Vianello (2007) for an explication). If \code{NULL} (default),
+\item{alpha}{base-line of the (rotated) polygon at \eqn{x = \alpha}
+\bibcitep{see|sommariva.vianello2007|for an explication}.
+If \code{NULL} (default),
 the midpoint of the x-range of each polygon is chosen if no \code{rotation}
 is performed, and otherwise the \eqn{x}-coordinate of the rotated point
 \code{"P"} (see \code{rotation}). If \code{f} has its maximum value at the
@@ -42,8 +43,8 @@ origin \eqn{(0,0)}, e.g., the bivariate Gaussian density with zero mean,
 \item{rotation}{logical (default: \code{FALSE}) or a list of points
 \code{"P"} and \code{"Q"} describing the preferred direction. If
 \code{TRUE}, the polygon is rotated according to the vertices \code{"P"} and
-\code{"Q"}, which are farthest apart (see Sommariva and Vianello, 2007). For
-convex polygons, this rotation guarantees that all nodes fall inside the
+\code{"Q"}, which are farthest apart \bibcitep{see|sommariva.vianello2007|}.
+For convex polygons, this rotation guarantees that all nodes fall inside the
 polygon.}
 
 \item{engine}{character string specifying the implementation to use.
@@ -74,7 +75,7 @@ two columns), \code{weights} (a numeric vector of length
 }
 \description{
 Product Gauss cubature over polygons as proposed by
-Sommariva and Vianello (2007).
+\bibcitet{sommariva.vianello2007}.
 }
 \examples{
 ## a function to integrate (here: isotropic zero-mean Gaussian density)
@@ -133,10 +134,12 @@ if (requireNamespace("cubature")) {
 }
 }
 \references{
-Sommariva, A. and Vianello, M. (2007):
-Product Gauss cubature over polygons based on Green's integration formula.
-\emph{BIT Numerical Mathematics}, \bold{47} (2), 441-453.
-\doi{10.1007/s10543-007-0131-2}
+\bibinfo{sommariva.vianello2007}{footer}{
+  Their MATLAB implementation \samp{polygauss}, on which this
+  R implementation was based, is available (in revised versions) at
+  \url{https://sites.google.com/view/alvisesommarivaunipd/home-page/software/software_matlab}
+  under the GNU GPL (>=2) license.}
+\bibshow{*}
 }
 \seealso{
 Other polyCub-methods: 
@@ -146,11 +149,9 @@ Other polyCub-methods:
 \code{\link{polyCub.midpoint}()}
 }
 \author{
-Sebastian Meyer\cr
-These R and C implementations of product Gauss cubature are based on the
-original \acronym{MATLAB} implementation \code{polygauss} by Sommariva and
-Vianello (2007), which is available under the GNU GPL (>=2) license from
-\url{https://www.math.unipd.it/~alvise/software.html}.
+Sebastian Meyer
+% NOTE: roxygen2 outputs author \emph{after} references in the Rd file, see
+% \code{roxygen2:::RoxyTopic$public_methods$format}, so do not \bibcite here
 }
 \concept{polyCub-methods}
 \keyword{math}
