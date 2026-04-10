@@ -2,6 +2,8 @@
 title: "Getting started with 'polyCub'"
 author: "Sebastian Meyer"
 date: "`{r} Sys.Date()`"
+## litedown:::add_citation() does not currently support R citation files ...
+#bibliography: '`{r} system.file("REFERENCES.R", package = "polyCub", mustWork = TRUE)`'
 vignette: >
   %\VignetteIndexEntry{Getting started with 'polyCub'}
   %\VignetteEngine{litedown::vignette}
@@ -124,9 +126,7 @@ plotpolyf(hexagon, f, xlim = c(-8,8), ylim = c(-8,8))
 ### 1. Product Gauss cubature: `polyCub.SV()`
 
 The **polyCub** package provides an R-interfaced C-translation of
-"polygauss: Matlab code for Gauss-like cubature over polygons"
-(Sommariva and Vianello, 2013, <https://www.math.unipd.it/~alvise/software.html>),
-an algorithm described in Sommariva and Vianello (2007,
+`polygauss.m`, an algorithm by Sommariva and Vianello (2007,
 *BIT Numerical Mathematics*, <https://doi.org/10.1007/s10543-007-0131-2>).
 The cubature rule is based on Green's integration formula and incorporates
 appropriately transformed weights and nodes of one-dimensional
