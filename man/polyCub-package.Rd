@@ -5,7 +5,7 @@
 \alias{polyCub-package}
 \title{Cubature over Polygonal Domains}
 \description{
-The \R package \pkg{polyCub} \bibcitep{CITATION} implements
+The \R package \pkg{polyCub} implements
 \emph{cubature} (numerical integration) over \emph{polygonal} domains.
 It solves the problem of integrating a continuously differentiable
 function \eqn{f(x,y)} over simple closed polygons.
@@ -38,6 +38,12 @@ it needs a reliable implementation of polygon triangulation.
 
 \bibcitet{|meyer2010|Section 3.2}
 discusses and compares some of these methods.
+}
+\note{
+To cite package \pkg{polyCub} in publications,
+please use \code{citation("polyCub")}:
+
+\Sexpr[results=rd,stage=build]{tools::toRd(citation("polyCub"))}
 }
 \references{
 \bibshow{*}
