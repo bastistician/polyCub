@@ -36,10 +36,11 @@ equals the squared distance between the \code{mean} and the
 circleCub.Gauss(center=c(1,2), r=3, mean=c(4,5), sd=6)
 
 ## compare with cubature over a polygonal approximation of a circle
-\dontrun{## (this example requires gpclib)
-disc.poly <- spatstat.geom::disc(radius=3, centre=c(1,2), npoly=32)
-polyCub.exact.Gauss(disc.poly, mean=c(4,5), Sigma=6^2*diag(2))
-}
+npoly <- 32  # increase this for a closer match
+disc.poly <- spatstat.geom::disc(radius=3, centre=c(1,2), npoly=npoly)
+d2norm <- function (s, mean, sd)
+  dnorm(s[,1], mean=mean[1], sd=sd) * dnorm(s[,2], mean=mean[2], sd=sd)
+polyCub.iso(disc.poly, d2norm, mean=c(4,5), sd=6, center=c(4,5))
 }
 \references{
 \bibshow{*}
