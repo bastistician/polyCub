@@ -13,8 +13,8 @@ try(citation("polyCub"), silent = TRUE) # OK for R CMD build/INSTALL/check
 bibentry(
     key = "meyer.held2014",
     bibtype = "Article",
-    author = c(person(given = "Sebastian", family = "Meyer"),
-               person(given = "Leonhard", family = "Held")),
+    author = c(person("Sebastian", "Meyer"),
+               person("Leonhard", "Held")),
     title = "Power-law models for infectious disease spread",
     journal = "Annals of Applied Statistics",
     year = "2014",
@@ -41,10 +41,21 @@ bibentry(
 bibentry(
     key = "meyer2010",
     bibtype = "MastersThesis",
-    author = person(given = "Sebastian", family = "Meyer"),
+    author = "Sebastian Meyer",
     school = "Department of Statistics, LMU",
     title = "Spatio-Temporal Infectious Disease Epidemiology based on Point Processes",
     year = "2010",
     address = "Munich, Germany",
     url = "https://epub.ub.uni-muenchen.de/11703/"
+)
+
+bibentry(
+    key = "R:spatstat.geom",
+    bibtype = "Book",
+    title = "Spatial Point Patterns: Methodology and Applications with {R}",
+    author = "Adrian Baddeley and Ege Rubak and Rolf Turner",
+    year = "2015",
+    publisher = "Chapman and Hall/CRC Press",
+    address = "London",
+    isbn = "9781482210200"
 )

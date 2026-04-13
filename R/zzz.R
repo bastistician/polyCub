@@ -24,8 +24,8 @@
 #' }
 #' \item{\code{\link{polyCub.midpoint}}:}{
 #' Simple \emph{two-dimensional midpoint rule} based on
-#' \code{\link[spatstat.geom]{as.im.function}} from \pkg{spatstat.geom}
-#' (Baddeley et al. 2015)
+#' \code{\link[spatstat.geom]{as.im.function}} from \CRANpkg{spatstat.geom}
+#' \bibcitep{R:spatstat.geom}
 #' }
 #' \item{\code{\link{polyCub.iso}}:}{
 #' Adaptive cubature for \emph{radially symmetric functions}
@@ -45,12 +45,7 @@
 #' discusses and compares some of these methods.
 #'
 #' @author Sebastian Meyer
-#' @references
-#' Baddeley A, Rubak E, Turner R (2015).
-#' \emph{Spatial Point Patterns: Methodology and Applications with R}.
-#' Chapman and Hall/CRC Press, London.
-#'
-#' \bibshow{*}
+#' @references \bibshow{*}
 #' @seealso
 #' \code{vignette("polyCub")}
 #'

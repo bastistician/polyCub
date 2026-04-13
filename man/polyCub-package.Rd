@@ -19,8 +19,8 @@ General-purpose \emph{product Gauss cubature}
 }
 \item{\code{\link{polyCub.midpoint}}:}{
 Simple \emph{two-dimensional midpoint rule} based on
-\code{\link[spatstat.geom]{as.im.function}} from \pkg{spatstat.geom}
-(Baddeley et al. 2015)
+\code{\link[spatstat.geom]{as.im.function}} from \CRANpkg{spatstat.geom}
+\bibcitep{R:spatstat.geom}
 }
 \item{\code{\link{polyCub.iso}}:}{
 Adaptive cubature for \emph{radially symmetric functions}
@@ -40,10 +40,6 @@ it needs a reliable implementation of polygon triangulation.
 discusses and compares some of these methods.
 }
 \references{
-Baddeley A, Rubak E, Turner R (2015).
-\emph{Spatial Point Patterns: Methodology and Applications with R}.
-Chapman and Hall/CRC Press, London.
-
 \bibshow{*}
 }
 \seealso{
