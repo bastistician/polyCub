@@ -57,24 +57,3 @@
 #' For the special case of a rectangular domain along the axes
 #' (e.g., a bounding box), the \CRANpkg{cubature} package is more appropriate.
 "_PACKAGE"
-
-
-
-#' \pkg{gpclib} License Acceptance (OBSOLETE)
-#'
-#' Previous versions of package \CRANpkg{gpclib} had a restricted license
-#' (commercial use prohibited) and these functions were used as a blocker.
-#' They now always return \code{TRUE}.
-#'
-#' \pkg{gpclib} functionality is only required for
-#' \code{\link{polyCub.exact.Gauss}}.
-#' @keywords internal
-#' @export
-gpclibPermit <- function ()
-{
-    ##requireNamespace("gpclib")
-    gpclibPermitStatus()
-}
-#' @rdname gpclibPermit
-#' @export
-gpclibPermitStatus <- function () TRUE

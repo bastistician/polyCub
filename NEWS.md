@@ -1,3 +1,11 @@
+polyCub 0.9.4 (TBD)
+==========================
+
+* Removed obsolete `gpclibPermit()` and `gpclibPermitStatus()`:
+  package [**gpclib**](https://github.com/rdpeng/gpclib) is no longer
+  supported (and no longer has a restricted license anyway).
+
+
 polyCub 0.9.3 (2026-04-10)
 ==========================
 
