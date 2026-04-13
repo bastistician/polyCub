@@ -144,7 +144,6 @@ if (requireNamespace("cubature")) {
 \seealso{
 Other polyCub-methods: 
 \code{\link{polyCub}()},
-\code{\link{polyCub.exact.Gauss}()},
 \code{\link{polyCub.iso}()},
 \code{\link{polyCub.midpoint}()}
 }

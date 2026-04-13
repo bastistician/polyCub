@@ -50,7 +50,6 @@ and on the method-specific help pages.
 
 Other polyCub-methods: 
 \code{\link{polyCub.SV}()},
-\code{\link{polyCub.exact.Gauss}()},
 \code{\link{polyCub.iso}()},
 \code{\link{polyCub.midpoint}()}
 }

@@ -64,13 +64,6 @@ evaluation of \code{\link[mvtnorm]{pmvnorm}}.
 \seealso{
 \code{\link{circleCub.Gauss}} for quasi-exact cubature of the
 isotropic Gaussian density over a circular domain.
-
-Other polyCub-methods: 
-\code{\link{polyCub}()},
-\code{\link{polyCub.SV}()},
-\code{\link{polyCub.iso}()},
-\code{\link{polyCub.midpoint}()}
 }
-\concept{polyCub-methods}
 \keyword{math}
 \keyword{spatial}

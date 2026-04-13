@@ -86,7 +86,6 @@ if (require("spatstat.geom")) {
 Other polyCub-methods: 
 \code{\link{polyCub}()},
 \code{\link{polyCub.SV}()},
-\code{\link{polyCub.exact.Gauss}()},
 \code{\link{polyCub.iso}()}
 }
 \concept{polyCub-methods}

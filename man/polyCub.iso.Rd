@@ -130,7 +130,6 @@ supplied as a C-routine. An example can be found in the package tests.
 Other polyCub-methods: 
 \code{\link{polyCub}()},
 \code{\link{polyCub.SV}()},
-\code{\link{polyCub.exact.Gauss}()},
 \code{\link{polyCub.midpoint}()}
 }
 \author{
