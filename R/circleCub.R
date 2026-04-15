@@ -1,7 +1,7 @@
 ################################################################################
 ### Integration of the Isotropic Gaussian Density over Circular Domains
 ###
-### Copyright (C) 2013-2014 Sebastian Meyer
+### Copyright (C) 2013-2014,2026 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -35,11 +35,13 @@
 #' circleCub.Gauss(center=c(1,2), r=3, mean=c(4,5), sd=6)
 #'
 #' ## compare with cubature over a polygonal approximation of a circle
-#' npoly <- 32  # increase this for a closer match
-#' disc.poly <- spatstat.geom::disc(radius=3, centre=c(1,2), npoly=npoly)
 #' d2norm <- function (s, mean, sd)
 #'   dnorm(s[,1], mean=mean[1], sd=sd) * dnorm(s[,2], mean=mean[2], sd=sd)
-#' polyCub.iso(disc.poly, d2norm, mean=c(4,5), sd=6, center=c(4,5))
+#' if (requireNamespace("spatstat.geom")) { # for the disc()
+#'   npoly <- 32  # increase this for a closer match
+#'   disc.poly <- spatstat.geom::disc(radius=3, centre=c(1,2), npoly=npoly)
+#'   polyCub.iso(disc.poly, d2norm, mean=c(4,5), sd=6, center=c(4,5))
+#' }
 
 circleCub.Gauss <- function (center, r, mean, sd)
 {
