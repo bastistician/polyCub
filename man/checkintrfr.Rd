@@ -39,7 +39,7 @@ quadrature rule used for the line integral along the polygon boundary.}
 relative tolerance used for \code{integrate}.}
 }
 \value{
-The \code{intrfr} function. If only \code{f} was given,
+The \code{intrfr} function, invisibly. If only \code{f} was given,
 an \code{integrate}-based approximation of \code{intrfr} is returned.
 }
 \description{
