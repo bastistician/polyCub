@@ -1,7 +1,7 @@
 ################################################################################
 ## Useful rules to build, check and install an R source package
 ##
-## Copyright (C) 2012,2014-2019,2022,2024-2025 Sebastian Meyer
+## Copyright (C) 2012,2014-2019,2022,2024-2026 Sebastian Meyer
 ################################################################################
 
 ## define variable for R to enable 'make check R=R-devel'
@@ -42,8 +42,12 @@ if [ $$nwarn -gt 0 ]; then echo "\n\tWARNING: $$nwarn" \
 endef
 
 ## standard --as-cran check with remote checks disabled
+## additionally checking for undocumented return values
 check: build
-	_R_CHECK_CRAN_INCOMING_REMOTE_=FALSE _R_CHECK_EXAMPLE_TIMING_THRESHOLD_=2 $R CMD check --as-cran --timings ${PKG}_${VERSION}.tar.gz
+	_R_CHECK_CRAN_INCOMING_REMOTE_=FALSE \
+	_R_CHECK_RD_CONTENTS_VALUE_=TRUE \
+	_R_CHECK_EXAMPLE_TIMING_THRESHOLD_=2 \
+	$R CMD check --as-cran --timings ${PKG}_${VERSION}.tar.gz
 ## further option: --use-gct (for better detection of memory bugs/segfaults)
 	@$(check-report-warnings-in-examples)
 

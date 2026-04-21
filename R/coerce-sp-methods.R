@@ -50,6 +50,8 @@ NULL
 #' @param W an object of class \code{"SpatialPolygons"},
 #' \code{"Polygons"}, or \code{"Polygon"}.
 #' @param ... further arguments passed to \code{\link[spatstat.geom]{owin}}.
+#' @return The polygon(s) as an
+#' \code{"\link[spatstat.geom:owin.object]{owin}"} object.
 #' @rdname coerce-sp-methods
 #' @export
 #' @rawNamespace if(getRversion() >= "3.6.0") {  # delayed registration

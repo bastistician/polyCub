@@ -23,6 +23,10 @@ as.owin.Polygon(W, ...)
 
 \item{...}{further arguments passed to \code{\link[spatstat.geom]{owin}}.}
 }
+\value{
+The polygon(s) as an
+\code{"\link[spatstat.geom:owin.object]{owin}"} object.
+}
 \description{
 Package \pkg{polyCub} implements \code{coerce}-methods
 (\code{as(object, Class)}) to convert
