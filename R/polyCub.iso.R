@@ -148,7 +148,8 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
                 tolerance <- eval(formals(integrate)$rel.tol)
             ana <- intrfr(rs, ...)
             num <- quadrfr(rs, ...)
-            if (!isTRUE(comp <- all.equal(num, ana, tolerance=tolerance))) {
+            comp <- all.equal(num, ana, tolerance = tolerance)
+            if (!isTRUE(comp)) {
                 cat("\n->", comp, "\n")
                 warning("'intrfr' might be incorrect: ", comp)
             } else cat("OK\n")
