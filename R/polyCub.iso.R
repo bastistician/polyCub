@@ -1,7 +1,7 @@
 ################################################################################
 ### polyCub.iso: Cubature of Isotropic Functions over Polygonal Domains
 ###
-### Copyright (C) 2013-2018 Sebastian Meyer
+### Copyright (C) 2013-2018,2026 Sebastian Meyer
 ###
 ### This file is part of the R package "polyCub",
 ### free software under the terms of the GNU General Public License, version 2,
@@ -121,6 +121,11 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
 #' @param tolerance of \code{\link{all.equal.numeric}} when comparing
 #' \code{intrfr} results with numerical integration. Defaults to the
 #' relative tolerance used for \code{integrate}.
+#' @examples
+#' f_const <- function (coords) rep(1, nrow(coords))
+#' intrfr_const <- function (R) R^2/2  # = \int_0^R r f(r) dr
+#' checkintrfr(intrfr_const,  f = f_const, center = c(0,0), rs = 1:10) # OK
+#' checkintrfr(function(R) R, f = f_const, center = c(0,0), rs = 1:10) # warns
 #' @return The \code{intrfr} function. If it was not supplied, its quadrature
 #' version using \code{integrate} is returned.
 #' @importFrom stats integrate

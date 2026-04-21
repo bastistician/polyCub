@@ -47,3 +47,9 @@ against a numeric approximation using \code{\link{integrate}} for various
 values of the upper bound \eqn{R}. A warning is issued if inconsistencies
 are found.
 }
+\examples{
+f_const <- function (coords) rep(1, nrow(coords))
+intrfr_const <- function (R) R^2/2  # = \int_0^R r f(r) dr
+checkintrfr(intrfr_const,  f = f_const, center = c(0,0), rs = 1:10) # OK
+checkintrfr(function(R) R, f = f_const, center = c(0,0), rs = 1:10) # warns
+}
