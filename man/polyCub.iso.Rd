@@ -31,8 +31,10 @@ length the number of coordinates.}
 antiderivative of \eqn{r f_r(r)} from 0 to \code{R}. The first argument
 must be vectorized but not necessarily named \code{R}.\cr
 If \code{intrfr} is missing, it will be approximated numerically via
-\code{\link{integrate}(function(r, ...)
-r * f(cbind(x0 + r, y0), ...), 0, R, ..., control=control)},
+\preformatted{
+  integrate(function(r, ...) r * f(cbind(x0 + r, y0), ...),
+            0, R, ..., control = control)
+}
 where \code{c(x0, y0)} is the \code{center} of isotropy.
 Note that \code{f} will \emph{not} be checked for isotropy.}
 
@@ -45,7 +47,7 @@ quadrature rule used for the line integral along the polygon boundary.}
 
 \item{check.intrfr}{logical (or numeric vector) indicating if
 (for which \code{r}'s) the supplied \code{intrfr} function should be
-checked against a numeric approximation. This check requires \code{f}
+checked against a numerical approximation. This check requires \code{f}
 to be specified. If \code{TRUE}, the set of test
 \code{r}'s defaults to a \code{\link{seq}} of length 20 from 1 to
 the maximum absolute x or y coordinate of any edge of the \code{polyregion}.}

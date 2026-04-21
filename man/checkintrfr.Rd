@@ -12,8 +12,10 @@ checkintrfr(intrfr, f, ..., center, control = list(), rs = numeric(0L),
 antiderivative of \eqn{r f_r(r)} from 0 to \code{R}. The first argument
 must be vectorized but not necessarily named \code{R}.\cr
 If \code{intrfr} is missing, it will be approximated numerically via
-\code{\link{integrate}(function(r, ...)
-r * f(cbind(x0 + r, y0), ...), 0, R, ..., control=control)},
+\preformatted{
+  integrate(function(r, ...) r * f(cbind(x0 + r, y0), ...),
+            0, R, ..., control = control)
+}
 where \code{c(x0, y0)} is the \code{center} of isotropy.
 Note that \code{f} will \emph{not} be checked for isotropy.}
 
@@ -37,19 +39,22 @@ quadrature rule used for the line integral along the polygon boundary.}
 relative tolerance used for \code{integrate}.}
 }
 \value{
-The \code{intrfr} function. If it was not supplied, its quadrature
-version using \code{integrate} is returned.
+The \code{intrfr} function. If only \code{f} was given,
+an \code{integrate}-based approximation of \code{intrfr} is returned.
 }
 \description{
-This function is auxiliary to \code{\link{polyCub.iso}}.
-The (analytical) integral of \eqn{r f_r(r)} from 0 to \eqn{R} is checked
-against a numeric approximation using \code{\link{integrate}} for various
-values of the upper bound \eqn{R}. A warning is issued if inconsistencies
-are found.
+This function is auxiliary to \code{\link{polyCub.iso}}
+for the cubature of a radially symmetric function
+\eqn{f(x,y) = f_r(||(x,y)-\boldsymbol{\mu}||)}{f(x,y) = f_r(||(x,y)-\mu||)},
+with \eqn{\mu} being the center of isotropy, over a polygonal domain.
+The (analytical) integral of \eqn{r f_r(r)} from 0 to \eqn{R}, \code{intrfr},
+is checked against an \code{\link{integrate}}-based approximation
+for various values (\code{rs}) of the upper bound \eqn{R}.
+A warning is issued if inconsistencies are found.
 }
 \examples{
 f_const <- function (coords) rep(1, nrow(coords))
-intrfr_const <- function (R) R^2/2  # = \int_0^R r f(r) dr
+intrfr_const <- function (R) R^2/2  # = \int_0^R r f_r(r) dr
 checkintrfr(intrfr_const,  f = f_const, center = c(0,0), rs = 1:10) # OK
 checkintrfr(function(R) R, f = f_const, center = c(0,0), rs = 1:10) # warns
 }

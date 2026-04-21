@@ -32,8 +32,10 @@
 #' antiderivative of \eqn{r f_r(r)} from 0 to \code{R}. The first argument
 #' must be vectorized but not necessarily named \code{R}.\cr
 #' If \code{intrfr} is missing, it will be approximated numerically via
-#' \code{\link{integrate}(function(r, ...)
-#' r * f(cbind(x0 + r, y0), ...), 0, R, ..., control=control)},
+#' \preformatted{
+#'   integrate(function(r, ...) r * f(cbind(x0 + r, y0), ...),
+#'             0, R, ..., control = control)
+#' }
 #' where \code{c(x0, y0)} is the \code{center} of isotropy.
 #' Note that \code{f} will \emph{not} be checked for isotropy.
 #' @param ... further arguments for \code{f} or \code{intrfr}.
@@ -42,7 +44,7 @@
 #' quadrature rule used for the line integral along the polygon boundary.
 #' @param check.intrfr logical (or numeric vector) indicating if
 #' (for which \code{r}'s) the supplied \code{intrfr} function should be
-#' checked against a numeric approximation. This check requires \code{f}
+#' checked against a numerical approximation. This check requires \code{f}
 #' to be specified. If \code{TRUE}, the set of test
 #' \code{r}'s defaults to a \code{\link{seq}} of length 20 from 1 to
 #' the maximum absolute x or y coordinate of any edge of the \code{polyregion}.
@@ -109,11 +111,14 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
 
 #' Check the Integral of \eqn{r f_r(r)}
 #'
-#' This function is auxiliary to \code{\link{polyCub.iso}}.
-#' The (analytical) integral of \eqn{r f_r(r)} from 0 to \eqn{R} is checked
-#' against a numeric approximation using \code{\link{integrate}} for various
-#' values of the upper bound \eqn{R}. A warning is issued if inconsistencies
-#' are found.
+#' This function is auxiliary to \code{\link{polyCub.iso}}
+#' for the cubature of a radially symmetric function
+#' \eqn{f(x,y) = f_r(||(x,y)-\boldsymbol{\mu}||)}{f(x,y) = f_r(||(x,y)-\mu||)},
+#' with \eqn{\mu} being the center of isotropy, over a polygonal domain.
+#' The (analytical) integral of \eqn{r f_r(r)} from 0 to \eqn{R}, \code{intrfr},
+#' is checked against an \code{\link{integrate}}-based approximation
+#' for various values (\code{rs}) of the upper bound \eqn{R}.
+#' A warning is issued if inconsistencies are found.
 #'
 #' @inheritParams polyCub.iso
 #' @param rs numeric vector of upper bounds for which to check the validity of
@@ -123,11 +128,11 @@ polyCub.iso <- function (polyregion, f, intrfr, ..., center,
 #' relative tolerance used for \code{integrate}.
 #' @examples
 #' f_const <- function (coords) rep(1, nrow(coords))
-#' intrfr_const <- function (R) R^2/2  # = \int_0^R r f(r) dr
+#' intrfr_const <- function (R) R^2/2  # = \int_0^R r f_r(r) dr
 #' checkintrfr(intrfr_const,  f = f_const, center = c(0,0), rs = 1:10) # OK
 #' checkintrfr(function(R) R, f = f_const, center = c(0,0), rs = 1:10) # warns
-#' @return The \code{intrfr} function. If it was not supplied, its quadrature
-#' version using \code{integrate} is returned.
+#' @return The \code{intrfr} function. If only \code{f} was given,
+#' an \code{integrate}-based approximation of \code{intrfr} is returned.
 #' @importFrom stats integrate
 #' @export
 checkintrfr <- function (intrfr, f, ..., center, control = list(),
@@ -147,7 +152,7 @@ checkintrfr <- function (intrfr, f, ..., center, control = list(),
         if (missing(intrfr)) {
             return(quadrfr)
         } else if (doCheck) {
-            cat("Checking 'intrfr' against a numeric approximation ... ")
+            cat("Checking 'intrfr' against a numerical approximation ... ")
             stopifnot(is.vector(rs, mode="numeric"))
             if (is.null(tolerance))
                 tolerance <- eval(formals(integrate)$rel.tol)
