@@ -29,21 +29,15 @@
 #' @import methods
 #' @importClassesFrom sp Polygon Polygons SpatialPolygons owin
 #' @exportMethod coerce
+#' @example examples/diamond.R
 #' @examples
-#' if (require("spatstat.geom") && require("sp")) {
-#'     diamond <- list(x = c(1,2,1,0), y = c(1,2,3,2))  # anti-clockwise
+#' if (require("spatstat.geom")) {
 #'     diamond.owin <- owin(poly = diamond)
-#'     diamond.sp <- Polygon(lapply(diamond, rev))      # clockwise
-#'     stopifnot(identical(xylist(diamond.sp), list(diamond)))
-#'     diamond.owin_from_sp <- as.owin(diamond.sp)
-#'     stopifnot(all.equal(diamond.owin, diamond.owin_from_sp))
-#'
-#'     ## similarly works for Polygons and SpatialPolygons
-#'     diamond.Ps <- as(diamond.sp, "Polygons")
+#'     diamond.owin_from_Polygon <- as.owin(diamond.sp)
+#'     stopifnot(all.equal(diamond.owin, diamond.owin_from_Polygon))
+#'     ## also for "Polygons" and "SpatialPolygons", using S3 or S4 methods:
 #'     stopifnot(identical(diamond.owin, as.owin(diamond.Ps)))
-#'     diamond.SpPs <- SpatialPolygons(list(diamond.Ps))
-#'     stopifnot(identical(xylist(diamond.SpPs), list(diamond)))
-#'     stopifnot(identical(diamond.owin, as.owin(diamond.SpPs)))
+#'     stopifnot(identical(diamond.owin, as(diamond.SpPs, "owin")))
 #' }
 NULL
 

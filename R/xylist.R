@@ -62,7 +62,11 @@
 #' \code{"owin"} convention (anticlockwise order for exterior boundaries,
 #' without repeating any vertex).
 #' @author Sebastian Meyer
-#' @name xylist
+#' @example examples/diamond.R
+#' @examples
+#' stopifnot(identical(xylist(diamond.sp), list(diamond)))
+#' stopifnot(identical(xylist(diamond.Ps), list(diamond)))
+#' stopifnot(identical(xylist(diamond.SpPs), list(diamond)))
 #' @keywords spatial methods
 #' @export
 xylist <- function (object, ...) UseMethod("xylist")

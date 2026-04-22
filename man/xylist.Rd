@@ -88,6 +88,17 @@ Thus, for polygons from \pkg{sf} and \pkg{gpclib}, \code{xylist} needs
 to check the ring direction, which makes these two formats the least
 efficient for integration domains in \pkg{polyCub}.
 }
+\examples{
+diamond <- list(x = c(1,2,1,0), y = c(1,2,3,2))  # anti-clockwise
+diamond.sp <- sp::Polygon(lapply(diamond, rev))  # clockwise
+
+diamond.Ps <- sp::Polygons(list(diamond.sp), ID = "my diamond")
+diamond.SpPs <- sp::SpatialPolygons(list(diamond.Ps))
+
+stopifnot(identical(xylist(diamond.sp), list(diamond)))
+stopifnot(identical(xylist(diamond.Ps), list(diamond)))
+stopifnot(identical(xylist(diamond.SpPs), list(diamond)))
+}
 \author{
 Sebastian Meyer
 }

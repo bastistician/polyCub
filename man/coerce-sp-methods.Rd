@@ -40,20 +40,19 @@ They are also available as \code{as.owin.*} functions to support
 \code{\link{polyCub.midpoint}}.
 }
 \examples{
-if (require("spatstat.geom") && require("sp")) {
-    diamond <- list(x = c(1,2,1,0), y = c(1,2,3,2))  # anti-clockwise
-    diamond.owin <- owin(poly = diamond)
-    diamond.sp <- Polygon(lapply(diamond, rev))      # clockwise
-    stopifnot(identical(xylist(diamond.sp), list(diamond)))
-    diamond.owin_from_sp <- as.owin(diamond.sp)
-    stopifnot(all.equal(diamond.owin, diamond.owin_from_sp))
+diamond <- list(x = c(1,2,1,0), y = c(1,2,3,2))  # anti-clockwise
+diamond.sp <- sp::Polygon(lapply(diamond, rev))  # clockwise
 
-    ## similarly works for Polygons and SpatialPolygons
-    diamond.Ps <- as(diamond.sp, "Polygons")
+diamond.Ps <- sp::Polygons(list(diamond.sp), ID = "my diamond")
+diamond.SpPs <- sp::SpatialPolygons(list(diamond.Ps))
+
+if (require("spatstat.geom")) {
+    diamond.owin <- owin(poly = diamond)
+    diamond.owin_from_Polygon <- as.owin(diamond.sp)
+    stopifnot(all.equal(diamond.owin, diamond.owin_from_Polygon))
+    ## also for "Polygons" and "SpatialPolygons", using S3 or S4 methods:
     stopifnot(identical(diamond.owin, as.owin(diamond.Ps)))
-    diamond.SpPs <- SpatialPolygons(list(diamond.Ps))
-    stopifnot(identical(xylist(diamond.SpPs), list(diamond)))
-    stopifnot(identical(diamond.owin, as.owin(diamond.SpPs)))
+    stopifnot(identical(diamond.owin, as(diamond.SpPs, "owin")))
 }
 }
 \seealso{
