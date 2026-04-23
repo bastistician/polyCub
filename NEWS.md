@@ -1,4 +1,4 @@
-polyCub 0.9.4 (TBD)
+polyCub 0.9.4 (2026-04-24)
 ==========================
 
 * Removed obsolete `gpclibPermit()` and `gpclibPermitStatus()`:
