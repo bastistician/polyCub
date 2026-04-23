@@ -69,9 +69,7 @@ polyCub 0.8.0 (2021-01-26)
 polyCub 0.7.1 (2019-02-07)
 ==========================
 
-* Added a *getting started* `vignette("polyCub")`
-  (suggested by @wrathematics in
-  [openjournals/joss-reviews#1056](https://github.com/openjournals/joss-reviews/issues/1056)).
+* Added a *getting started* `vignette("polyCub")`.
 
 * Fix minor compiler warning about missing `types` field in `R_CMethodDef`
   (@wrathematics, [#1](https://github.com/bastistician/polyCub/issues/1)).
@@ -85,9 +83,9 @@ polyCub 0.7.0 (2018-10-11)
   (moved from "Depends" to "Imports").
 
 * The R code of the examples is no longer installed by default.
-  Use the `--example` flag of R CMD INSTALL to achieve that.
+  Use the `--example` flag of `R CMD INSTALL` to achieve that.
 
-* The README now exemplifies the four different cubature rules.
+* `README.md` now exemplifies the four different cubature rules.
 
 
 polyCub 0.6.1 (2017-10-02)
@@ -196,7 +194,7 @@ polyCub 0.4-2 (2014-02-12)
 polyCub 0.4-1 (2013-12-05)
 ==========================
 
-* This version solely fixes a missing NAMESPACE import to make
+* This version solely fixes a missing `NAMESPACE` import to make
   package **polyCub** again compatible with older versions of
   [**spatstat**](https://CRAN.R-project.org/package=spatstat) (< 1.33-0).
 
@@ -262,7 +260,7 @@ polyCub 0.3-1 (2013-08-22)
 
 * This version solely fixes a few typos and a technical note from `R CMD
   check` in the current R development version (also import packages into
-  the NAMESPACE which are listed in the "Depends" field).
+  the `NAMESPACE` which are listed in the "Depends" field).
 
 
 polyCub 0.3-0 (2013-07-06)

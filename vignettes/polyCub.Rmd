@@ -2,6 +2,7 @@
 title: "Getting started with 'polyCub'"
 author: "Sebastian Meyer"
 date: "`{r} Sys.Date()`"
+lang: "en"
 ## litedown:::add_citation() does not currently support R citation files ...
 #bibliography: '`{r} system.file("REFERENCES.R", package = "polyCub", mustWork = TRUE)`'
 vignette: >
@@ -185,7 +186,7 @@ the integral is approximated as the sum of (pixel area * f(pixel midpoint))
 over all pixels whose midpoint is part of the polygon.
 
 To use `polyCub.midpoint()`, we need to convert our polygon to
-**spatstat.geom**'s "owin" class:
+**spatstat.geom**'s `"owin"` class:
 
 ```{r, message = FALSE}
 library("spatstat.geom")

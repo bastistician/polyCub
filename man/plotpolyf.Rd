@@ -44,8 +44,8 @@ The range of function values will be divided into \code{cuts+1} levels.}
 
 \item{print.args}{a list of arguments passed to \code{\link[lattice]{print.trellis}}
 for plotting the produced \code{\link[lattice:trellis.object]{"trellis"}} object
-(given \code{use.lattice = TRUE}). The latter will be returned without
-explicit \code{print}ing if \code{print.args} is not a list.}
+(if \code{use.lattice = TRUE}). The \code{print} step is omitted
+if \code{print.args} is not a list.}
 }
 \description{
 Produces a combined plot of a polygonal domain and an image of a bivariate
