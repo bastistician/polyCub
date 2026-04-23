@@ -142,7 +142,7 @@ if (requireNamespace("cubature")) {
 \bibshow{*}
 }
 \seealso{
-Other polyCub-methods: 
+Other cubature methods: 
 \code{\link{polyCub}()},
 \code{\link{polyCub.iso}()},
 \code{\link{polyCub.midpoint}()}
@@ -152,6 +152,6 @@ Sebastian Meyer
 % NOTE: roxygen2 outputs author \emph{after} references in the Rd file, see
 % \code{roxygen2:::RoxyTopic$public_methods$format}, so do not \bibcite here
 }
-\concept{polyCub-methods}
+\concept{cubature methods}
 \keyword{math}
 \keyword{spatial}

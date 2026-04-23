@@ -33,7 +33,7 @@
 #' @return The approximated integral of \code{f} over \code{polyregion}.
 #' @seealso Details and examples in the \code{vignette("polyCub")}
 #' and on the method-specific help pages.
-#' @family polyCub-methods
+#' @family cubature methods
 #' @keywords math spatial
 #' @export
 

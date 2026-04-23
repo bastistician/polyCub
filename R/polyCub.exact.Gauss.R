@@ -58,7 +58,7 @@
 #' @keywords math spatial
 #' @seealso \code{\link{circleCub.Gauss}} for quasi-exact cubature of the
 #' isotropic Gaussian density over a circular domain.
-## #' @family polyCub-methods
+## #' @family cubature methods
 ## #' @example examples/setting.R
 ## #' @examples
 ## #' ## quasi-exact integration based on gpclib::tristrip() and mvtnorm::pmvnorm()

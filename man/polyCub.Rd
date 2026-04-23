@@ -48,11 +48,11 @@ The desired cubature function should usually be called directly.
 Details and examples in the \code{vignette("polyCub")}
 and on the method-specific help pages.
 
-Other polyCub-methods: 
+Other cubature methods: 
 \code{\link{polyCub.SV}()},
 \code{\link{polyCub.iso}()},
 \code{\link{polyCub.midpoint}()}
 }
-\concept{polyCub-methods}
+\concept{cubature methods}
 \keyword{math}
 \keyword{spatial}

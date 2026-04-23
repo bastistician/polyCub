@@ -83,11 +83,11 @@ if (require("spatstat.geom")) {
 }
 }
 \seealso{
-Other polyCub-methods: 
+Other cubature methods: 
 \code{\link{polyCub}()},
 \code{\link{polyCub.SV}()},
 \code{\link{polyCub.iso}()}
 }
-\concept{polyCub-methods}
+\concept{cubature methods}
 \keyword{math}
 \keyword{spatial}

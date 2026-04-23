@@ -37,7 +37,7 @@
 #' @return The approximated value of the integral of \code{f} over
 #' \code{polyregion}.
 #' @keywords math spatial
-#' @family polyCub-methods
+#' @family cubature methods
 #' @importFrom sp plot
 #' @importFrom grDevices gray
 #' @example examples/setting.R

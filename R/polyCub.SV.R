@@ -71,7 +71,7 @@
 #'   under the GNU GPL (>=2) license.}
 #' \bibshow{*}
 #' @keywords math spatial
-#' @family polyCub-methods
+#' @family cubature methods
 #' @importFrom graphics points
 #' @example examples/setting.R
 #' @example examples/polyCub.SV.R

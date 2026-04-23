@@ -129,7 +129,7 @@ other \R packages, notably \CRANpkg{surveillance}, via \samp{LinkingTo: polyCub}
 \file{/src} files). Note that the \code{intrfr} function must then also be
 supplied as a C-routine. An example can be found in the package tests.
 
-Other polyCub-methods: 
+Other cubature methods: 
 \code{\link{polyCub}()},
 \code{\link{polyCub.SV}()},
 \code{\link{polyCub.midpoint}()}
@@ -143,6 +143,6 @@ Emil Hedevang (Dept. of Mathematics, Aarhus University, Denmark)
 during the Summer School on Topics in
 Space-Time Modeling and Inference (May 2013, Aalborg, Denmark).
 }
-\concept{polyCub-methods}
+\concept{cubature methods}
 \keyword{math}
 \keyword{spatial}

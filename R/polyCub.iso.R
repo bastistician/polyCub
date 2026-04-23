@@ -75,7 +75,7 @@
 #' \file{/src} files). Note that the \code{intrfr} function must then also be
 #' supplied as a C-routine. An example can be found in the package tests.
 #' @keywords math spatial
-#' @family polyCub-methods
+#' @family cubature methods
 #' @example examples/polyCub.iso.R
 #' @importFrom stats integrate
 #' @export
