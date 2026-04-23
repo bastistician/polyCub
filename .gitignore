@@ -1,6 +1,5 @@
 *~
 .Rhistory
-devel/
 polyCub.Rcheck/
 /polyCub_*.tar.gz
 src/*.o

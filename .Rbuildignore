@@ -1,5 +1,5 @@
 ^README\.html$
-^devel$
+^dev$
 ^examples$
 ^paper$
 ^.*\.tar\.gz$

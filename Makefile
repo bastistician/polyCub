@@ -84,9 +84,9 @@ covr:
 	'covr::report(covr::package_coverage(type="all"), file="/tmp/covr.html", browse=TRUE)'
 
 ## spell check
-spelling:
-	$R --vanilla -s -e 'spelling::spell_check_package()'
-	codespell -S '*~' examples inst NEWS.md README.md R src tests vignettes
+spelling: dev/aspell.R
+	$R --vanilla -s -f "$<"
+	codespell -S '*~' examples inst/include NEWS.md README.md R src tests vignettes
 
 ## cleanup
 clean:
