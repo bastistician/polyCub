@@ -45,4 +45,4 @@ Suggests:
     microbenchmark
 VignetteBuilder: litedown
 Roxygen: list(old_usage = TRUE)
-RoxygenNote: 7.3.3
+Config/roxygen2/version: 8.1.0

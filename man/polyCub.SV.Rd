@@ -142,10 +142,10 @@ if (requireNamespace("cubature")) {
 \bibshow{*}
 }
 \seealso{
-Other cubature methods: 
-\code{\link{polyCub}()},
-\code{\link{polyCub.iso}()},
-\code{\link{polyCub.midpoint}()}
+Other cubature methods:
+\code{\link[=polyCub]{polyCub()}},
+\code{\link[=polyCub.iso]{polyCub.iso()}},
+\code{\link[=polyCub.midpoint]{polyCub.midpoint()}}
 }
 \author{
 Sebastian Meyer

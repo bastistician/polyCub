@@ -129,10 +129,10 @@ other \R packages, notably \CRANpkg{surveillance}, via \samp{LinkingTo: polyCub}
 \file{/src} files). Note that the \code{intrfr} function must then also be
 supplied as a C-routine. An example can be found in the package tests.
 
-Other cubature methods: 
-\code{\link{polyCub}()},
-\code{\link{polyCub.SV}()},
-\code{\link{polyCub.midpoint}()}
+Other cubature methods:
+\code{\link[=polyCub]{polyCub()}},
+\code{\link[=polyCub.SV]{polyCub.SV()}},
+\code{\link[=polyCub.midpoint]{polyCub.midpoint()}}
 }
 \author{
 Sebastian Meyer

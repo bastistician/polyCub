@@ -38,19 +38,27 @@ importClassesFrom(sp,Polygon)
 importClassesFrom(sp,Polygons)
 importClassesFrom(sp,SpatialPolygons)
 importClassesFrom(sp,owin)
-importFrom(grDevices,extendrange)
-importFrom(grDevices,gray)
-importFrom(grDevices,heat.colors)
-importFrom(grDevices,xy.coords)
-importFrom(graphics,image)
-importFrom(graphics,lines)
-importFrom(graphics,points)
-importFrom(sp,coordinates)
-importFrom(sp,plot)
-importFrom(stats,cov2cor)
-importFrom(stats,dist)
-importFrom(stats,integrate)
-importFrom(stats,pchisq)
-importFrom(stats,pnorm)
+importFrom(grDevices,
+  extendrange,
+  gray,
+  heat.colors,
+  xy.coords
+)
+importFrom(graphics,
+  image,
+  lines,
+  points
+)
+importFrom(sp,
+  coordinates,
+  plot
+)
+importFrom(stats,
+  cov2cor,
+  dist,
+  integrate,
+  pchisq,
+  pnorm
+)
 importMethodsFrom(sp,plot)
 useDynLib(polyCub, .registration = TRUE)
