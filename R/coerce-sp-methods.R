@@ -69,21 +69,27 @@ as.owin.Polygon <- function (W, ...)
 
 #' @name coerce,SpatialPolygons,owin-method
 #' @rdname coerce-sp-methods
+#' @usage
+#' ## S4 coerce method for class "[Spatial]Polygon[s]"
+#' \special{as(W, "owin")}
 setAs(from = "SpatialPolygons", to = "owin",
       def = function (from) as.owin.SpatialPolygons(from))
 
 #' @name coerce,Polygons,owin-method
 #' @rdname coerce-sp-methods
+#' @usage NULL
 setAs(from = "Polygons", to = "owin",
       def = function (from) as.owin.Polygons(from))
 
 #' @name coerce,Polygon,owin-method
 #' @rdname coerce-sp-methods
+#' @usage NULL
 setAs(from = "Polygon", to = "owin",
       def = function (from) as.owin.Polygon(from))
 
 
 #' @name coerce,Polygon,Polygons-method
 #' @rdname coerce-sp-methods
+#' @usage NULL
 setAs(from = "Polygon", to = "Polygons",
       def = function (from) sp::Polygons(list(from), "Polygon"))

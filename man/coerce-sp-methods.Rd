@@ -16,6 +16,9 @@ as.owin.SpatialPolygons(W, ...)
 as.owin.Polygons(W, ...)
 
 as.owin.Polygon(W, ...)
+
+## S4 coerce method for class "[Spatial]Polygon[s]"
+\special{as(W, "owin")}
 }
 \arguments{
 \item{W}{an object of class \code{"SpatialPolygons"},
