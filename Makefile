@@ -36,7 +36,7 @@ install: build
 define check-report-warnings-in-examples
 cd ${PKG}.Rcheck; \
 nwarn=`grep -c "^Warning" ${PKG}-Ex.Rout`; \
-if [ $$nwarn -gt 0 ]; then echo "\n\tWARNING: $$nwarn" \
+if [ $$nwarn -gt 0 ]; then echo -e "\n\tWARNING: $$nwarn" \
 	"warning(s) thrown when running examples,\n" \
 	"\t         see file ${PKG}.Rcheck/${PKG}-Ex.Rout\n"; fi
 endef
