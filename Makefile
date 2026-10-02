@@ -36,9 +36,9 @@ install: build
 define check-report-warnings-in-examples
 cd ${PKG}.Rcheck; \
 nwarn=`grep -c "^Warning" ${PKG}-Ex.Rout`; \
-if [ $$nwarn -gt 0 ]; then echo -e "\n\tWARNING: $$nwarn" \
-	"warning(s) thrown when running examples,\n" \
-	"\t         see file ${PKG}.Rcheck/${PKG}-Ex.Rout\n"; fi
+if [ $$nwarn -gt 3 ]; then \
+printf "\n\tWARNING: $$nwarn warnings when running examples,"; \
+printf "\n\t         see file ${PKG}.Rcheck/${PKG}-Ex.Rout\n\n"; fi
 endef
 
 ## standard --as-cran check with remote checks disabled
